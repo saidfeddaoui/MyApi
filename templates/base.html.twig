@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block head_title %}{{ parent() }} | {{ title }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>
+        <i class="icon-home"></i>
+        <a href="#">Home</a>
+        <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+        <span>Welcome</span>
+    </li>
+{% endblock %}
+{% block page_title %}Hello World!{% endblock %}
+{% block page_subtitle %}Welcome{% endblock %}
