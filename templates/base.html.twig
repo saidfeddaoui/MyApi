@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block head_title %}{{ parent() }} | {{ title }}{% endblock %}
+{% block head_title %}{{ parent() }} | {{ page_title }}{% endblock %}
 {% block page_breadcrumb %}
     <li>
         <i class="icon-home"></i>
@@ -11,5 +11,5 @@
         <span>Welcome</span>
     </li>
 {% endblock %}
-{% block page_title %}Hello World!{% endblock %}
-{% block page_subtitle %}Welcome{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block page_subtitle %}{{ page_subtitle }}{% endblock %}
