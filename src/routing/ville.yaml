@@ -1,0 +1,3 @@
+ville:
+    path: /index
+    controller: App\Controller\VilleController::index

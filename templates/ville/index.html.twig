@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn green"> Add New
+                                    <button id="sample_editable_1_new" class="btn green"> Ajouter Nouvelle Ville
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
@@ -57,111 +57,25 @@
                     <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th> Username </th>
-                            <th> Full Name </th>
-                            <th> Points </th>
-                            <th> Notes </th>
-                            <th> Edit </th>
-                            <th> Delete </th>
+                            <th> Ville </th>
+                            <th> Ville(ar) </th>
+                            <th> Editer </th>
+                            <th> Supprimer </th>
                         </tr>
                         </thead>
                         <tbody>
+                        {% for element in data %}
                         <tr>
-                            <td> alex </td>
-                            <td> Alex Nilson </td>
-                            <td> 1234 </td>
-                            <td class="center"> power user </td>
+                            <td> {{ element.nom }} </td>
+                            <td> {{ element.nom_ar }} </td>
                             <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
+                                <a class="edit" href="javascript:;" data-id= {{ element.id }}> Editer </a>
                             </td>
                             <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
+                                <a class="delete" href="javascript:;" data-id=" {{ element.id }}"> Supprimer </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td> lisa </td>
-                            <td> Lisa Wong </td>
-                            <td> 434 </td>
-                            <td class="center"> new user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> nick12 </td>
-                            <td> Nick Roberts </td>
-                            <td> 232 </td>
-                            <td class="center"> power user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> goldweb </td>
-                            <td> Sergio Jackson </td>
-                            <td> 132 </td>
-                            <td class="center"> elite user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> alex </td>
-                            <td> Alex Nilson </td>
-                            <td> 1234 </td>
-                            <td class="center"> power user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> webriver </td>
-                            <td> Antonio Sanches </td>
-                            <td> 462 </td>
-                            <td class="center"> new user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> gist124 </td>
-                            <td> Nick Roberts </td>
-                            <td> 62 </td>
-                            <td class="center"> new user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> alex </td>
-                            <td> Alex Nilson </td>
-                            <td> 1234 </td>
-                            <td class="center"> power user </td>
-                            <td>
-                                <a class="edit" href="javascript:;"> Edit </a>
-                            </td>
-                            <td>
-                                <a class="delete" href="javascript:;"> Delete </a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

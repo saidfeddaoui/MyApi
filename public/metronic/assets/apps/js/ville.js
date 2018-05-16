@@ -16,22 +16,22 @@ var TableDatatablesEditable = function () {
         function editRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
-            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
-            jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<a class="edit" href="">Save</a>';
-            jqTds[5].innerHTML = '<a class="cancel" href="">Cancel</a>';
+            jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
+            jqTds[1].innerHTML = '<input type="text" class="form-control input-small name_ar" value="' + aData[1] + '">';
+            //jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
+            //jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
+            jqTds[2].innerHTML = '<a class="edit" id="Save" href="">Enregister</a>';
+            jqTds[3].innerHTML = '<a class="cancel" href="">Annuler</a>';
         }
 
         function saveRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-            oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 5, false);
+            //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
+            //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
+            oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 3, false);
             oTable.fnDraw();
         }
 
@@ -39,9 +39,9 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
+            //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
+            //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
             oTable.fnDraw();
         }
 
@@ -120,9 +120,26 @@ var TableDatatablesEditable = function () {
                 return;
             }
 
+            /* delete data backend */
+            var name = $.trim($(this).closest('tr').find('td:first-child').text());
+            var DATA = {"type":'DELETE',"name":name};
+            $.ajax({
+                url: URL_AJAX_VILLES,
+                type: "POST",
+                data:DATA,
+                success: function(response) {
+
+                    toastr.success(response.message);
+                    return false;
+                },
+                error: function(e){
+                    console.log(e.responseText);
+                }
+            });
+
             var nRow = $(this).parents('tr')[0];
             oTable.fnDeleteRow(nRow);
-            alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+            //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
         });
 
         table.on('click', '.cancel', function (e) {
@@ -148,11 +165,28 @@ var TableDatatablesEditable = function () {
                 restoreRow(oTable, nEditing);
                 editRow(oTable, nRow);
                 nEditing = nRow;
-            } else if (nEditing == nRow && this.innerHTML == "Save") {
+            } else if (nEditing == nRow && this.innerHTML == "Enregister") {
+
+                /* save data backend */
+                var name = $(this).closest('tr').find('td .name').val();
+                var name_ar = $(this).closest('tr').find('td .name_ar').val();
+                var DATA = {"type":'EDIT',"name":name,"name_ar":name_ar};
+                $.ajax({
+                    url: URL_AJAX_VILLES,
+                    type: "POST",
+                    data:DATA,
+                    success: function(response) {
+                            toastr.success(response.message);
+                            return false;
+                    },
+                    error: function(e){
+                        console.log(e.responseText);
+                    }
+                });
                 /* Editing this row and want to save it */
                 saveRow(oTable, nEditing);
                 nEditing = null;
-                alert("Updated! Do not forget to do some ajax to sync with backend :)");
+               // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
                 /* No edit in progress - let's start one */
                 editRow(oTable, nRow);
