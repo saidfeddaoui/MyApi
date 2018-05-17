@@ -17,25 +17,22 @@ var TableDatatablesEditable = function () {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
-            jqTds[1].innerHTML = '<input type="text" class="form-control input-small name_ar" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<a class="edit" id="Save" href="">Enregister</a>';
-            jqTds[3].innerHTML = '<a class="cancel" href="">Annuler</a>';
+            jqTds[1].innerHTML = '<a class="edit" id="Save" href="">Enregister</a>';
+            jqTds[2].innerHTML = '<a class="cancel" href="">Annuler</a>';
         }
 
         function saveRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
-            oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 3, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 1, false);
+            oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 2, false);
             oTable.fnDraw();
         }
 
         function cancelEditRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 1, false);
             oTable.fnDraw();
         }
 
@@ -116,7 +113,7 @@ var TableDatatablesEditable = function () {
             var $this = $(this);
             var id = $this.closest('tr').data('id');
             $.ajax({
-                url: Routing.generate('delete_ville', {id: id}),
+                url: Routing.generate('delete_marque', {id: id}),
                 type: "POST",
                 success: function(response) {
                     toastr.success(response.message);
@@ -158,13 +155,12 @@ var TableDatatablesEditable = function () {
                 var tr = $this.closest('tr');
                 /* save data backend */
                 var id = tr.data('id');
-                var saveUrl = Routing.generate('add_ville');
+                var saveUrl = Routing.generate('add_marque');
                 if (id) {
-                    var saveUrl = Routing.generate('edit_ville', {id: id});
+                    var saveUrl = Routing.generate('edit_marque', {id: id});
                 }
                 var name = tr.find('td .name').val();
-                var name_ar = tr.find('td .name_ar').val();
-                var DATA = {"name":name,"name_ar":name_ar};
+                var DATA = {"name":name};
                 $.ajax({
                     url: saveUrl,
                     type: "POST",
