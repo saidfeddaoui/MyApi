@@ -18,8 +18,6 @@ var TableDatatablesEditable = function () {
             var jqTds = $('>td', nRow);
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small name_ar" value="' + aData[1] + '">';
-            //jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
-            //jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
             jqTds[2].innerHTML = '<a class="edit" id="Save" href="">Enregister</a>';
             jqTds[3].innerHTML = '<a class="cancel" href="">Annuler</a>';
         }
@@ -28,8 +26,6 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
             oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 3, false);
             oTable.fnDraw();
@@ -39,8 +35,6 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            //oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            //oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
             oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
             oTable.fnDraw();
         }
@@ -115,30 +109,25 @@ var TableDatatablesEditable = function () {
 
         table.on('click', '.delete', function (e) {
             e.preventDefault();
-
             if (confirm("Are you sure to delete this row ?") == false) {
                 return;
             }
-
             /* delete data backend */
-            var name = $.trim($(this).closest('tr').find('td:first-child').text());
-            var DATA = {"type":'DELETE',"name":name};
+            var $this = $(this);
+            var id = $this.closest('tr').data('id');
             $.ajax({
-                url: URL_AJAX_VILLES,
+                url: Routing.generate('delete_ville', {id: id}),
                 type: "POST",
-                data:DATA,
                 success: function(response) {
-
                     toastr.success(response.message);
+                    var nRow = $this.parents('tr')[0];
+                    oTable.fnDeleteRow(nRow);
                     return false;
                 },
                 error: function(e){
                     console.log(e.responseText);
                 }
             });
-
-            var nRow = $(this).parents('tr')[0];
-            oTable.fnDeleteRow(nRow);
             //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
         });
 
@@ -156,7 +145,6 @@ var TableDatatablesEditable = function () {
 
         table.on('click', '.edit', function (e) {
             e.preventDefault();
-
             /* Get the row as a parent of the link that was clicked on */
             var nRow = $(this).parents('tr')[0];
 
@@ -166,26 +154,33 @@ var TableDatatablesEditable = function () {
                 editRow(oTable, nRow);
                 nEditing = nRow;
             } else if (nEditing == nRow && this.innerHTML == "Enregister") {
-
+                var $this = $(this);
+                var tr = $this.closest('tr');
                 /* save data backend */
-                var name = $(this).closest('tr').find('td .name').val();
-                var name_ar = $(this).closest('tr').find('td .name_ar').val();
-                var DATA = {"type":'EDIT',"name":name,"name_ar":name_ar};
+                var id = tr.data('id');
+                var saveUrl = Routing.generate('add_ville');
+                if (id) {
+                    var saveUrl = Routing.generate('edit_ville', {id: id});
+                }
+                var name = tr.find('td .name').val();
+                var name_ar = tr.find('td .name_ar').val();
+                var DATA = {"name":name,"name_ar":name_ar};
                 $.ajax({
-                    url: URL_AJAX_VILLES,
+                    url: saveUrl,
                     type: "POST",
                     data:DATA,
                     success: function(response) {
-                            toastr.success(response.message);
-                            return false;
+                        toastr.success(response.message);
+                        /* Editing this row and want to save it */
+                        saveRow(oTable, nEditing);
+                        nEditing = null;
+                        tr.data('id', response.id);
+                        return false;
                     },
                     error: function(e){
                         console.log(e.responseText);
                     }
                 });
-                /* Editing this row and want to save it */
-                saveRow(oTable, nEditing);
-                nEditing = null;
                // alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
                 /* No edit in progress - let's start one */

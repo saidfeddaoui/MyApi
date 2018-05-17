@@ -12,62 +12,90 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class VilleController extends Controller
 {
 
+    /**
+     * @Route(path="/villes", name="list_ville", options={"expose"=true})
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        if ( $request->isXmlHttpRequest() ){
-
-            if($request->request->get('type') == "DELETE"){
-                $iName = $request->request->get('name');
-                $iCity = $em->getRepository('App:Ville')->findOneByNom($iName);
-                $em->remove($iCity);
-                $em->flush();
-                return  new JsonResponse(array(
-                    "message" => "Ville supprimée avec succès"
-                ));
-            }else{
-
-                $iName = $request->request->get('name');
-                $iName_ar = $request->request->get('name_ar');
-                $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-                $iCity = $em->getRepository('App:Ville')->findOneByNom($iName);
-
-                if($iCity){
-                    $iCity->setNom($iName);
-                    $repository->translate($iCity, 'nom', 'ar',$iName_ar) ;
-                    $em->persist($iCity);
-                    $em->flush();
-                    return  new JsonResponse(array(
-                        "message" => "Ville modifiée avec succès"
-                    ));
-
-                }else{
-                    $iCity = new Ville();
-                    $iCity->setNom($iName);
-                    $em->persist($iCity);
-                    $repository->translate($iCity, 'nom', 'ar',$iName_ar) ;
-                    $em->flush();
-                    return  new JsonResponse(array(
-                        "message" => "Ville ajoutée avec succès"
-                    ));
-                }
-            }
-        }
-
         $data = array();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $villes = $em->getRepository('App:Ville')->findAll();
         foreach ($villes as $key => $value){
             $translations =  $repository->findTranslations($value);
-            $data[] = array('id'=>$value->getId(),'nom'=>$value->getNom(),'nom_ar'=>@$translations['ar']["nom"]);
+            $data[] = array(
+                'id' => $value->getId(),
+                'nom' => $value->getNom(),
+                'nom_ar' => $translations['ar']["nom"] ?? '',
+            );
         }
         return $this->render('ville/index.html.twig', [
             'page_title' => 'Villes de réparation',
             'page_subtitle' => '',
             'data'=>$data
         ]);
-
-
+    }
+    /**
+     * @Route(path="/villes/add", name="add_ville", options={"expose"=true})
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addVille(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $iName = $request->request->get('name');
+        $iName_ar = $request->request->get('name_ar');
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $ville = new Ville();
+        $ville->setNom($iName);
+        $em->persist($ville);
+        $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
+        $em->flush();
+        return  new JsonResponse(array(
+            "id" => $ville->getId(),
+            "message" => "Ville ajoutée avec succès",
+        ));
+    }
+    /**
+     * @Route(path="/villes/edit/{id}", name="edit_ville", options={"expose"=true})
+     *
+     * @param Ville $ville
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editVille(Ville $ville, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $iName = $request->request->get('name');
+        $iName_ar = $request->request->get('name_ar');
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $ville->setNom($iName);
+        $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
+        $em->persist($ville);
+        $em->flush();
+        return  new JsonResponse(array(
+            "id" => $ville->getId(),
+            "message" => "Ville modifiée avec succès",
+        ));
+    }
+    /**
+     * @Route(path="/villes/delete/{id}", name="delete_ville", options={"expose"=true})
+     *
+     * @param Ville $ville
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteVille(Ville $ville, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($ville);
+        $em->flush();
+        return  new JsonResponse(array(
+            "message" => "Ville supprimée avec succès"
+        ));
     }
 }

@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 class ExampleController extends Controller
 {
     /**
-     * @Route("/example", name="example")
+     * @Route("/example", name="example", options={"expose"=true})
      */
     public function index(Request $request)
     {
