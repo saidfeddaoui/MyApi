@@ -29,3 +29,13 @@ framework:
 
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
         #app: cache.adapter.apcu
+    # app/config/config.yml
+    templating:
+            engines: ['twig', 'php']
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "jidal@mobiblanc;com"
+        sender_name: "MOBIBLANC"
