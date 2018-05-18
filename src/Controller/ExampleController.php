@@ -17,6 +17,9 @@ class ExampleController extends Controller
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('App/User')->findOneById(1);
+        $user->
 //        $ville = new Ville();
 //        $ville->setNom('TANGER');
 //        $ville->setLocale('ar')->setNom('Agadir (ru)');
