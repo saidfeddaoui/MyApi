@@ -1,3 +1,0 @@
-m_core_accaccident:
-    resource: '../src/routing/ville.yaml'
-    prefix:   /ville

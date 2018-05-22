@@ -39,3 +39,4 @@ fos_user:
     from_email:
         address: "jidal@mobiblanc;com"
         sender_name: "MOBIBLANC"
+
