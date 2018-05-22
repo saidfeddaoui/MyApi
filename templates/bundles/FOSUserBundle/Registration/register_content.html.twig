@@ -1,8 +1,131 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-red"></i>
+                    <span class="caption-subject font-red sbold uppercase">Ajouter nouveau utilisateur</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                {{ form_start(form, {'method': 'post', 'action': path('register'), 'attr': {'class': 'fos_user_registration_register', 'role':'form'}}) }}
+                <div class="form-group">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            {{ form_label(form.username) }}
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class='input-icon input-group'>
+                                <i class="icon-user"></i>
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            {{ form_label(form.email) }}
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class='input-icon input-group'>
+                                <i class="icon-envelope"></i>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            {{ form_label(form.plainPassword.first) }}
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class='input-icon input-group'>
+                                <i class="icon-lock"></i>
+                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control '}})}}
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            {{ form_label(form.plainPassword.second) }}
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class='input-icon input-group'>
+                                <i class="icon-lock"></i>
+                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            {{ form_label(form.role) }}
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class='input-icon input-group col-md-4'>
+                                {{ form_widget(form.role, {'attr': {'class': 'form-control '}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-success uppercase pull-right">Ajouter</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
     </div>
-{{ form_end(form) }}
+
+
+
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption font-dark">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject bold uppercase"> Liste des utilisateurs MAMDA</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column datatable" id="sample_1">
+                <thead>
+                <tr>
+
+                    <th> Utilisateur </th>
+                    <th> Email </th>
+                    <th> Rôle </th>
+                    <th> Actions </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for key,oUser in users %}
+                    <tr>
+                        <td>{{ oUser.username }}</td>
+                        <td>{{ oUser.email }}</td>
+                        <td class="hidden-xs hidden-sm">{{ oUser.role.nom }}</td>
+                        <td>
+                            <a href="{{ path('edit_user',{'id':oUser.id})}}" class="btn btn-xs btn-primary bs-tooltip" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn btn-xs btn-danger bs-tooltip remove" data-id= "{{oUser.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+</div>

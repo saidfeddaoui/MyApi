@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block fos_user_content %}
+        {% trans_default_domain 'FOSUserBundle' %}
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light portlet-fit ">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-settings font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase">Editer utilisateur</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_start(form, {'attr': {'class': 'fos_user_registration_register', 'role':'form'}}) }}
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    {{ form_label(form.username) }}
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class='input-icon input-group'>
+                                        <i class="icon-user"></i>
+                                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    {{ form_label(form.email) }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class='input-icon input-group'>
+                                        <i class="icon-envelope"></i>
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    {{ form_label(form.plainPassword.first) }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class='input-icon input-group'>
+                                        <i class="icon-lock"></i>
+                                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control '}})}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    {{ form_label(form.plainPassword.second) }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class='input-icon input-group'>
+                                        <i class="icon-lock"></i>
+                                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}})}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    {{ form_label(form.role) }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class='input-icon input-group col-md-4'>
+                                        {{ form_widget(form.role, {'attr': {'class': 'form-control '}})}}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-success uppercase pull-right">Editer</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    {% endblock fos_user_content %}
+
+{% endblock %}
+

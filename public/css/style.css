@@ -1,0 +1,140 @@
+/****************************************
+sweet-alert
+****************************************/
+
+.form-group  input{
+    box-shadow: none!important;
+}
+
+.sweet-alert {
+    background-color: #33414d;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 478px;
+    padding: 17px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -256px;
+    margin-top: -200px;
+    overflow: hidden;
+    display: none;
+    z-index: 99999;
+}
+
+.sweet-alert p {
+    color: #f9f9f9;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 300;
+    position: relative;
+    text-align: inherit;
+    float: none;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+.sweet-alert h2 {
+    color: #f4f8fa;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: none;
+    position: relative;
+    margin: 25px 0;
+    padding: 0;
+    line-height: 40px;
+    display: block;
+}
+
+.custom-swal {
+    background: #333;
+    padding: 15px 10px 10px!important;
+    line-height: 0px!important;
+    left: auto!important;
+    margin: auto!important;
+    right: 50px!important;
+    top: 10px;
+}
+
+.custom-swal p {
+    color: #fff;
+}
+.custom-swal h2{
+    display: none;
+}
+.sweet-overlay {
+    display: none!important;
+}
+
+.custom-swal-diffusion {
+    background-color: #33414d;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 478px;
+    padding: 17px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -256px;
+    margin-top: -200px;
+    overflow: hidden;
+    display: none;
+    z-index: 99999;
+}
+
+.custom-swal-diffusion p {
+    color: #f9f9f9;
+    font-size: 16px;
+    text-align: left;
+    font-weight: 300;
+    position: relative;
+    float: none;
+    margin-left: 60px;
+    padding: 0;
+    line-height: normal;
+}
+
+.custom-swal-diffusion h2 {
+    color: #f4f8fa;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: none;
+    position: relative;
+    margin: 25px 0;
+    padding: 0;
+    line-height: 40px;
+    display: block;
+}
+
+form .form-group label.has-error.help-block, form label.has-error.help-block {
+    display: none!important;
+}
+
+form .has-error.form-control, form .has-error.form-control:focus {
+    box-shadow: none!important;
+    border-color:#ff0000!important;
+}
+/*.has-error .form-control.has-error:focus{
+    border-color: #fcd424!important;
+}*/
+
+.has-success .form-control.has-success:focus, .form-control.has-success:focus, .has-success .form-control {
+    border-color: #ccc!important;
+    box-shadow: none!important;
+}
+
+.modal{
+    z-index: 99999;
+}
+
+.stage-left ul li:last-child {
+    border: none;
+}
+/****************************************
+            sweet-alert
+****************************************/
