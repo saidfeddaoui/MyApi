@@ -1,10 +1,10 @@
 jQuery(document).ready(function() {
 
-    $('.edit_product').on('click', function () {
+    $('.edit_type').on('click', function () {
         var $this = $(this).data('id');
 
             $.ajax({
-                url: Routing.generate('edit_produit', {id: $this}),
+                url: Routing.generate('edit_type_sinistre', {id: $this}),
                 type: "POST",
                 error: function (request, status, error) {
                     console.log(request.responseText);
@@ -14,9 +14,9 @@ jQuery(document).ready(function() {
                 statusCode: {
                     //traitement en cas de succès
                     200: function (response) {
-                        $("#edit-product-modal .modal-body").html("");
-                        $('#edit-product-modal').find('.modal-body').append(response);
-                        $("#edit-product-modal").modal();
+                        $("#edit-typeSinistre-modal .modal-body").html("");
+                        $('#edit-typeSinistre-modal').find('.modal-body').append(response);
+                        $("#edit-typeSinistre-modal").modal();
                         return false;
                     }
                 }
@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
         var $this = $(this).data('id');
         var remove_cuerrent = $(this);
         swal({
-            title: "Voulez-vous vraiement supprimer ce produit ?",
+            title: "Voulez-vous vraiement supprimer ce type ?",
             text: "",
             type: "warning",
             showCancelButton: true,
@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
 
         function DeleteAction() {
             $.ajax({
-                url: Routing.generate('delete_produit', {id: $this}),
+                url: Routing.generate('delete_type_sinistre', {id: $this}),
                 type: "POST",
                 error: function (request, status, error) {
                     console.log(request.responseText);

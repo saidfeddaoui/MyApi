@@ -8,12 +8,14 @@ use App\Entity\ItemList;
 use App\Entity\Ville;
 use App\Form\ProduitType;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\File;
 
 class ProduitController extends Controller
 {
@@ -91,39 +93,66 @@ class ProduitController extends Controller
     /**
      * @Route(path="/produits/edit/{id}", name="edit_produit", options={"expose"=true})
      *
-     * @param Ville $ville
+     * @param Item $produit
      * @param Request $request
      * @return JsonResponse
      */
-    public function editVille(Ville $ville, Request $request)
+    public function editProduit(Item $produit, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $iName = $request->request->get('name');
-        $iName_ar = $request->request->get('name_ar');
-        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-        $ville->setNom($iName);
-        $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
-        $em->persist($ville);
-        $em->flush();
-        return  new JsonResponse(array(
-            "id" => $ville->getId(),
-            "message" => "Ville modifiée avec succès",
-        ));
+        $form = $this->createForm(ProduitType::class, $produit,[
+            'action' => $this->generateUrl('edit_produit',array('id' => $produit->getId()))]);
+        $form->handleRequest($request);
+        $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
+        if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var Item $product
+             */
+            $product = $form->getData();
+            /**
+             * @var UploadedFile $_icn
+             */
+            $_icn = $form->get('_icn')->getData();
+            /**
+             * @var UploadedFile $_img
+             */
+            $_img = $form->get('_img')->getData();
+
+            if($_icn != null){
+                $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
+                $product
+                    ->setIcon(new Attachment($iconFile->getBasename()));
+            }
+            if($_img != null){
+                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $product
+                 ->setImage(new Attachment($imageFile->getBasename()));
+            }
+            ;
+
+            $product
+                ->setTitle($form->get('title')->getData());
+            $em->persist($produit);
+            $em->flush();
+            return  $this->redirect($this->generateUrl('list_produit'));
+        }
+        return  $this->render('produit/edit.html.twig',array(
+            'form'=>$form->createView() ));
     }
     /**
      * @Route(path="/produits/delete/{id}", name="delete_produit", options={"expose"=true})
      *
-     * @param Ville $ville
+     * @param Item $produit
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteVille(Ville $ville, Request $request)
+    public function deleteProduit(Item $produit, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($ville);
+        $em->remove($produit);
         $em->flush();
         return  new JsonResponse(array(
-            "message" => "Ville supprimée avec succès"
+            "message" => "Produit supprimée avec succès"
         ));
     }
 }

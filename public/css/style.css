@@ -138,3 +138,8 @@ form .has-error.form-control, form .has-error.form-control:focus {
 /****************************************
             sweet-alert
 ****************************************/
+
+img.product_img {
+    width: 60px!important;
+    min-height: 60%!important;
+}
