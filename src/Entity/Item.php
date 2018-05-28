@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +59,16 @@ class Item
      * @ORM\ManyToOne(targetEntity="App\Entity\ItemList", inversedBy="items")
      */
     private $itemList;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PhotosSinistre", mappedBy="type")
+     */
+    private $photosSinistres;
+
+    public function __construct()
+    {
+        $this->photosSinistres = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -153,6 +165,37 @@ class Item
     public function setItemList(?ItemList $itemList): self
     {
         $this->itemList = $itemList;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhotosSinistre[]
+     */
+    public function getPhotosSinistres(): Collection
+    {
+        return $this->photosSinistres;
+    }
+
+    public function addPhotosSinistre(PhotosSinistre $photosSinistre): self
+    {
+        if (!$this->photosSinistres->contains($photosSinistre)) {
+            $this->photosSinistres[] = $photosSinistre;
+            $photosSinistre->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotosSinistre(PhotosSinistre $photosSinistre): self
+    {
+        if ($this->photosSinistres->contains($photosSinistre)) {
+            $this->photosSinistres->removeElement($photosSinistre);
+            // set the owning side to null (unless already changed)
+            if ($photosSinistre->getType() === $this) {
+                $photosSinistre->setType(null);
+            }
+        }
 
         return $this;
     }
