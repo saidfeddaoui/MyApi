@@ -43,10 +43,15 @@
                             <td> {{ element.nom }} </td>
                             <td> {{ element.nom_ar }} </td>
                             <td>
-                                <a class="edit" href="javascript:;" data-id= {{ element.id }}> Editer </a>
+
+                                <a class="btn btn-xs btn-primary bs-tooltip edit" data-id= "{{ element.id }}" data-placement="top" data-original-title="Editer">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </a>
                             </td>
                             <td>
-                                <a class="delete" href="javascript:;" data-id=" {{ element.id }}"> Supprimer </a>
+                                <a class="btn btn-xs btn-danger bs-tooltip delete" data-id=" {{ element.id }}" data-placement="top" data-original-title="Supprimer">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}

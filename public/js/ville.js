@@ -18,16 +18,18 @@ var TableDatatablesEditable = function () {
             var jqTds = $('>td', nRow);
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small name_ar" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<a class="edit" id="Save" href="">Enregister</a>';
-            jqTds[3].innerHTML = '<a class="cancel" href="">Annuler</a>';
+            jqTds[2].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
+
+            jqTds[3].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
+
         }
 
         function saveRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
-            oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 3, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 2, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow, 3, false);
             oTable.fnDraw();
         }
 
@@ -35,7 +37,7 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 2, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 2, false);
             oTable.fnDraw();
         }
 
@@ -147,13 +149,12 @@ var TableDatatablesEditable = function () {
             e.preventDefault();
             /* Get the row as a parent of the link that was clicked on */
             var nRow = $(this).parents('tr')[0];
-
             if (nEditing !== null && nEditing != nRow) {
                 /* Currently editing - but not this row - restore the old before continuing to edit mode */
                 restoreRow(oTable, nEditing);
                 editRow(oTable, nRow);
                 nEditing = nRow;
-            } else if (nEditing == nRow && this.innerHTML == "Enregister") {
+            } else if (nEditing == nRow && this.innerHTML == '<i class="glyphicon glyphicon-saved"></i>') {
                 var $this = $(this);
                 var tr = $this.closest('tr');
                 /* save data backend */
