@@ -5,10 +5,9 @@
         {{ form_label(form.title) }}
     </div>
     <div class="col-md-8 ">
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}} ) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Ajouter un titre'}} ) }}
     </div>
 </div>
-
 <div class="form-group">
     <div class="col-md-4">
         {{ form_label(form._img) }}
@@ -17,21 +16,30 @@
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="input-group input-large">
                 <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                    <i class="fa fa-file-image-o fileinput-exists"></i>&nbsp;
                     <span class="fileinput-filename"> </span>
                 </div>
                 <span class="input-group-addon btn default btn-file">
-                                                                <span class="fileinput-new"> Choisir Image </span>
-                                                                <span class="fileinput-exists"> Changer </span>
-                    {{ form_widget(form._img,{'attr':{'value':'dddd'}}) }}
-                                        </span>
+                    <span class="fileinput-new"> Choisir Image </span>
+                    <span class="fileinput-exists"> Changer </span>
+                    {{ form_widget(form._img,{'attr':{'class':''}}) }}
+                </span>
             </div>
         </div>
     </div>
 </div>
+<div class="form-group">
+    <div class="col-md-4">
+        {{ form_label(form.content) }}
+    </div>
+    <div class="col-md-8">
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '3', 'placeholder': 'Ajouter un contenu'}} ) }}
+    </div>
+</div>
+
 <div class="modal-footer">
     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
-    <button type="submit" class="btn green">Modifier</button>
+    <button type="submit" class="btn green">Enregistrer</button>
 </div>
 
 {{ form_end(form) }}

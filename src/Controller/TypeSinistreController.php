@@ -38,7 +38,7 @@ class TypeSinistreController extends Controller
         return $this->render('sinistre/index.html.twig', [
             'page_title' => 'Types Sinistre',
             'page_subtitle' => '',
-            'types' => $typesList->getItems(),
+            'types' => $typesList ? $typesList->getItems() : [],
             'form' => $form->createView(),
         ]);
     }
@@ -48,7 +48,7 @@ class TypeSinistreController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function addTypeSinistre(Request $request)
+    public function add(Request $request)
     {
         $form = $this->createForm(TypeSinistreType::class);
         $form->handleRequest($request);
@@ -59,17 +59,13 @@ class TypeSinistreController extends Controller
              */
             $type_sinistre = $form->getData();
             /**
-             * @var UploadedFile $_img
+             * @var UploadedFile $_icn
              */
-            $_img = $form->get('_img')->getData();
-            if($_img){
-
+            $_icn = $form->get('_icn')->getData();
+            if($_icn) {
                 $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
-                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-
-                $type_sinistre
-                    ->setImage(new Attachment($imageFile->getBasename()))
-                ;
+                $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
+                $type_sinistre->setIcon(new Attachment($iconFile->getBasename()));
             }
             /**
              * @var ItemList $type_sinistreList
@@ -94,38 +90,35 @@ class TypeSinistreController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function editTypeSinistre(Item $typeSinistre, Request $request)
+    public function edit(Item $typeSinistre, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(TypeSinistreType::class, $typeSinistre,[
-            'action' => $this->generateUrl('edit_type_sinistre',array('id' => $typeSinistre->getId()))]);
+        $form = $this->createForm(TypeSinistreType::class, $typeSinistre, [
+            'action' => $this->generateUrl('edit_type_sinistre', ['id' => $typeSinistre->getId()])
+        ]);
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
             /**
-             * @var Item $typeSinistre
+             * @var Item $submittedSinistre
              */
-            $typeSinistre = $form->getData();
+            $submittedSinistre = $form->getData();
             /**
              * @var UploadedFile $_img
              */
-            $_img = $form->get('_img')->getData();
-
-            if($_img != null){
-                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-                $typeSinistre
-                 ->setImage(new Attachment($imageFile->getBasename()));
+            $_icn = $form->get('_icn')->getData();
+            if($_icn) {
+                $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
+                $typeSinistre->setImage(new Attachment($iconFile->getBasename()));
             }
-            ;
-
-            $typeSinistre
-                ->setTitle($form->get('title')->getData());
+            $typeSinistre->setTitle($submittedSinistre->getTitle());
             $em->persist($typeSinistre);
             $em->flush();
             return  $this->redirect($this->generateUrl('types_sinistres'));
         }
-        return  $this->render('sinistre/edit.html.twig',array(
-            'form'=>$form->createView() ));
+        return  $this->render('sinistre/form.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
     /**
      * @Route(path="/sinistre/types/delete/{id}", name="delete_type_sinistre", options={"expose"=true})
@@ -134,7 +127,7 @@ class TypeSinistreController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteTypeSinistre(Item $typeSinistre, Request $request)
+    public function delete(Item $typeSinistre, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($typeSinistre);
@@ -143,4 +136,5 @@ class TypeSinistreController extends Controller
             "message" => "Type siniste supprimé avec succès"
         ));
     }
+
 }

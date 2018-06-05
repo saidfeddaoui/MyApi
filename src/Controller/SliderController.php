@@ -21,7 +21,7 @@ class SliderController extends Controller
 {
 
     /**
-     * @Route(path="/sliders", name="list_sliders", options={"expose"=true})
+     * @Route(path="/sliders", name="list_slider", options={"expose"=true})
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -35,11 +35,11 @@ class SliderController extends Controller
         /**
          * @var ItemList $sliderList
          */
-        $sliderList = $em->getRepository('App:ItemList')->findOneByType('sliders');
+        $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
         return $this->render('slider/index.html.twig', [
-            'page_title' => 'Sliders',
+            'page_title' => 'Slider',
             'page_subtitle' => '',
-            'sliders' => $sliderList->getItems(),
+            'items' => $sliderList ? $sliderList->getItems() : [],
             'form' => $form->createView(),
         ]);
     }
@@ -49,7 +49,7 @@ class SliderController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function addSlider(Request $request)
+    public function add(Request $request)
     {
         $form = $this->createForm(SliderType::class);
         $form->handleRequest($request);
@@ -64,15 +64,14 @@ class SliderController extends Controller
              */
             $_img = $form->get('_img')->getData();
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
-            $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-
-            $slider
-                ->setImage(new Attachment($imageFile->getBasename()))
-            ;
+            if ($_img) {
+                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $slider->setImage(new Attachment($imageFile->getBasename()));
+            }
             /**
              * @var ItemList $sliderList
              */
-            $sliderList = $em->getRepository('App:ItemList')->findOneByType('sliders');
+            $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
             $sliderList->addItem($slider);
             $em->persist($sliderList);
             $em->flush();
@@ -83,47 +82,44 @@ class SliderController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('list_sliders'));
+        return  $this->redirect($this->generateUrl('list_slider'));
     }
     /**
      * @Route(path="/sliders/edit/{id}", name="edit_slider", options={"expose"=true})
      *
      * @param Item $slider
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      */
-    public function editSlider(Item $slider, Request $request)
+    public function edit(Item $slider, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(SliderType::class, $slider,[
-            'action' => $this->generateUrl('edit_slider',array('id' => $slider->getId()))]);
+        $form = $this->createForm(SliderType::class, $slider, [
+            'action' => $this->generateUrl('edit_slider', ['id' => $slider->getId()])
+        ]);
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
             /**
-             * @var Item $slider
+             * @var Item $submittedSlider
              */
-            $slider = $form->getData();
+            $submittedSlider = $form->getData();
             /**
              * @var UploadedFile $_img
              */
             $_img = $form->get('_img')->getData();
-
-            if($_img != null){
+            if($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-                $slider
-                 ->setImage(new Attachment($imageFile->getBasename()));
+                $slider->setImage(new Attachment($imageFile->getBasename()));
             }
-            ;
-
-            $slider
-                ->setTitle($form->get('title')->getData());
+            $slider->setTitle($submittedSlider->getTitle());
             $em->persist($slider);
             $em->flush();
-            return  $this->redirect($this->generateUrl('list_sliders'));
+            return  $this->redirect($this->generateUrl('list_slider'));
         }
-        return  $this->render('slider/edit.html.twig',array(
-            'form'=>$form->createView() ));
+        return  $this->render('slider/form.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
     /**
      * @Route(path="/sliders/delete/{id}", name="delete_slider", options={"expose"=true})
@@ -132,7 +128,7 @@ class SliderController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteSlider(Item $slider, Request $request)
+    public function delete(Item $slider, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($slider);
@@ -141,4 +137,5 @@ class SliderController extends Controller
             "message" => "Slider supprimée avec succès"
         ));
     }
+
 }

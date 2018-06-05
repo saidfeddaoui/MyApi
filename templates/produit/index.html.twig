@@ -43,24 +43,22 @@
                                 <td> {{ product.title }} </td>
                                 <td>
                                     {% if product.icon %}
-                                                <div>
-                                                    <img src="{{ asset('img/' ~ product.icon.path) }}" class="product_img">
-                                                </div>
+                                        <div>
+                                            <img src="{{ asset('img/' ~ product.icon.path) }}" class="product_img">
+                                        </div>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if product.image %}
-                                                <div >
-                                                    <img src="{{ asset('img/' ~ product.image.path) }}" class="product_img">
-                                                </div>
-
+                                        <div >
+                                            <img src="{{ asset('img/' ~ product.image.path) }}" class="product_img">
+                                        </div>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary bs-tooltip edit_product" data-id= "{{product.id}}" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger bs-tooltip remove" data-id= "{{product.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a class="btn btn-xs btn-primary bs-tooltip edit" data-id= "{{product.id}}" data-placement="top" data-original-title="Editer" title="Modifier"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a class="btn btn-xs btn-danger bs-tooltip delete" data-id= "{{product.id}}" data-placement="top" data-original-title="Supprimer" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
                                 </td>
-
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -70,100 +68,28 @@
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
-
-
-
     <div class="modal fade " tabindex="1" role="dialog" id="add-product-modal" data-backdrop="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Nouveau Produit : </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Ajouter un produit:</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="">
-                        {{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
-
-                        <div class="form-group">
-                            <div class="col-md-4 ">
-                                {{ form_label(form.title) }}
-                            </div>
-                            <div class="col-md-8 ">
-                                {{ form_widget(form.title, {'attr': {'class': 'form-control'}} ) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-4">
-                            {{ form_label(form._icn) }}
-                            </div>
-                            <div class="col-md-4">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="input-group input-large">
-                                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-                                            <i class="fa fa-file-image-o fileinput-exists"></i>&nbsp;
-                                            <span class="fileinput-filename"> </span>
-                                        </div>
-                                        <span class="input-group-addon btn default btn-file">
-                                                                <span class="fileinput-new"> Choisir Icône </span>
-                                                                <span class="fileinput-exists"> Changer </span>
-                                                                {{ form_widget(form._icn,{'attr':{'class':''}}) }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                {{ form_label(form._img) }}
-                            </div>
-                            <div class="col-md-4">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="input-group input-large">
-                                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-                                            <i class="fa fa-file-image-o fileinput-exists"></i>&nbsp;
-                                            <span class="fileinput-filename"> </span>
-                                        </div>
-                                        <span class="input-group-addon btn default btn-file">
-                                                                <span class="fileinput-new"> Choisir Image </span>
-                                                                <span class="fileinput-exists"> Changer </span>
-                                                               {{ form_widget(form._img,{'attr':{'class':''}}) }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn green">Enregistrer</button>
-                        </div>
-
-                        {{ form_end(form) }}
-                    </div>
+                    <div class="form">{% include 'produit/form.html.twig' with {'form': form} %}</div>
                 </div>
-
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
     <div class="modal fade " tabindex="1" role="dialog" id="edit-product-modal" data-backdrop="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Editer Produit : </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modifier ce produit:</h4>
                 </div>
-                <div class="modal-body">
-
-                </div>
+                <div class="modal-body"><div class="form"></div></div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-
 {% endblock %}

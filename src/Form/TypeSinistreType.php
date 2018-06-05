@@ -16,8 +16,8 @@ class TypeSinistreType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Titre: ',])
-            ->add('_img', FileType::class, [
-                'label' => 'Image: ',
+            ->add('_icn', FileType::class, [
+                'label' => 'Icône: ',
                 'required' => false,
                 'mapped' => false,
             ])

@@ -39,7 +39,7 @@ class ProduitController extends Controller
         return $this->render('produit/index.html.twig', [
             'page_title' => 'Produits',
             'page_subtitle' => '',
-            'products' => $productList->getItems(),
+            'products' => $productList ? $productList->getItems() : [],
             'form' => $form->createView(),
         ]);
     }
@@ -49,7 +49,7 @@ class ProduitController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function addProduit(Request $request)
+    public function add(Request $request)
     {
         $form = $this->createForm(ProduitType::class);
         $form->handleRequest($request);
@@ -67,13 +67,15 @@ class ProduitController extends Controller
              */
             $_img = $form->get('_img')->getData();
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
-            $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
-            $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+            if ($_icn) {
+                $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
+                $product->setIcon(new Attachment($iconFile->getBasename()));
+            }
+            if ($_img) {
+                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $product->setImage(new Attachment($imageFile->getBasename()));
+            }
             $em = $this->getDoctrine()->getManager();
-            $product
-                ->setIcon(new Attachment($iconFile->getBasename()))
-                ->setImage(new Attachment($imageFile->getBasename()))
-            ;
             /**
              * @var ItemList $productList
              */
@@ -97,7 +99,7 @@ class ProduitController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function editProduit(Item $produit, Request $request)
+    public function edit(Item $produit, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ProduitType::class, $produit,[
@@ -136,7 +138,7 @@ class ProduitController extends Controller
             $em->flush();
             return  $this->redirect($this->generateUrl('list_produit'));
         }
-        return  $this->render('produit/edit.html.twig',array(
+        return  $this->render('produit/form.html.twig',array(
             'form'=>$form->createView() ));
     }
     /**
@@ -146,7 +148,7 @@ class ProduitController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteProduit(Item $produit, Request $request)
+    public function delete(Item $produit, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($produit);

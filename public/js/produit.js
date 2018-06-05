@@ -1,29 +1,48 @@
 jQuery(document).ready(function() {
-
-    $('.edit_product').on('click', function () {
-        var $this = $(this).data('id');
-
-            $.ajax({
-                url: Routing.generate('edit_produit', {id: $this}),
-                type: "POST",
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                },
-                complete: function () {
-                },
-                statusCode: {
-                    //traitement en cas de succès
-                    200: function (response) {
-                        $("#edit-product-modal .modal-body").html("");
-                        $('#edit-product-modal').find('.modal-body').append(response);
-                        $("#edit-product-modal").modal();
-                        return false;
-                    }
-                }
-            });
+    $('.datatable').dataTable({
+        "columns": [
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            }
+        ],
+        "order": [
+            [0, "asc"]
+        ] // set first column as a default sort by asc
     });
-
-    $('.remove').on('click', function () {
+    $('.edit').on('click', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: Routing.generate('edit_produit', {id: id}),
+            type: "POST",
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                //traitement en cas de succès
+                200: function (response) {
+                    $("#edit-product-modal .modal-body .form").html(response);
+                    $("#edit-product-modal").modal();
+                    return false;
+                }
+            }
+        });
+    });
+    $('.delete').on('click', function () {
         var $this = $(this).data('id');
         var remove_cuerrent = $(this);
         swal({
@@ -38,47 +57,43 @@ jQuery(document).ready(function() {
             closeOnCancel: false
         }, function (isConfirm) {
             if (isConfirm) {
-                DeleteAction();
+                deleteAction();
             } else {
                 swal("Action annulée", "Aucune action n'a été exécutée", "error");
             }
         });
-
-        function DeleteAction() {
-            $.ajax({
-                url: Routing.generate('delete_produit', {id: $this}),
-                type: "POST",
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                },
-                complete: function () {
-                },
-                statusCode: {
-                    //traitement en cas de succès
-                    200: function (response) {
-
-                        /*******************************
-                         Flash Notificaiton
-                         *******************************/
-                        swal.close();
-                        setTimeout(function(){
-                            swal({
-                                title: "",
-                                text: response.message,
-                                timer: 3000,
-                                showConfirmButton: false,
-                                customClass: 'custom-swal',
-                            });
-                        }, 500);
-                        /*******************************
-                         End Flash Notificaiton
-                         *******************************/
-                        $('.datatable').DataTable().row( remove_cuerrent.parents('tr') ).remove().draw();
-                    }
-                }
-            });
-        }
-
     });
-
+    function deleteAction(id, td) {
+        $.ajax({
+            url: Routing.generate('delete_produit', {id: id}),
+            type: "POST",
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                //traitement en cas de succès
+                200: function (response) {
+                    /*******************************
+                     Flash Notification
+                     *******************************/
+                    swal.close();
+                    setTimeout(function(){
+                        swal({
+                            title: "",
+                            text: response.message,
+                            timer: 3000,
+                            showConfirmButton: false,
+                            customClass: 'custom-swal',
+                        });
+                    }, 500);
+                    /*******************************
+                     End Flash Notification
+                     *******************************/
+                    $('.datatable').DataTable().row( td.parents('tr') ).remove().draw();
+                }
+            }
+        });
+    }
 });
