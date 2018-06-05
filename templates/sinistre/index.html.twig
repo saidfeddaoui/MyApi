@@ -41,9 +41,9 @@
                             <tr data-id="{{ type.id }}">
                                 <td> {{ type.title }} </td>
                                 <td>
-                                    {% if type.image %}
+                                    {% if type.icon %}
                                         <div >
-                                            <img src="{{ asset('img/' ~ type.image.path) }}" class="product_img">
+                                            <img src="{{ asset('img/' ~ type.icon.path) }}" class="product_img">
                                         </div>
                                     {% endif %}
                                 </td>
