@@ -28,18 +28,31 @@ class SliderController extends Controller
      */
     public function index(Request $request)
     {
+
         $form = $this->createForm(SliderType::class, new Item(), [
             'action' => $this->generateUrl('add_slider'),
         ]);
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $data = array();
         /**
          * @var ItemList $sliderList
          */
         $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
+        foreach ($sliderList->getItems() as $key => $value){
+            $translations =  $repository->findTranslations($value);
+            $data[] = array(
+                'id' => $value->getId(),
+                'title' => $value->getTitle(),
+                'image' => $value->getImage(),
+                'title_ar' => $translations['ar']["title"] ?? '',
+            );
+        }
+
         return $this->render('slider/index.html.twig', [
             'page_title' => 'Slider',
             'page_subtitle' => '',
-            'items' => $sliderList ? $sliderList->getItems() : [],
+            'items' => $data ? $data : [],
             'form' => $form->createView(),
         ]);
     }
@@ -54,6 +67,7 @@ class SliderController extends Controller
         $form = $this->createForm(SliderType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
              * @var Item $slider
@@ -63,6 +77,7 @@ class SliderController extends Controller
              * @var UploadedFile $_img
              */
             $_img = $form->get('_img')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
             if ($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
@@ -74,6 +89,7 @@ class SliderController extends Controller
             $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
             $sliderList->addItem($slider);
             $em->persist($sliderList);
+            $repository->translate($slider, 'title', 'ar', $iName_ar) ;
             $em->flush();
         }
         if ($errors = $form->getErrors()) {
@@ -94,9 +110,14 @@ class SliderController extends Controller
     public function edit(Item $slider, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(SliderType::class, $slider, [
             'action' => $this->generateUrl('edit_slider', ['id' => $slider->getId()])
         ]);
+        $translations =  $repository->findTranslations($slider);
+        if($translations){
+            $form->get('title_ar')->setData($translations['ar']["title"]);
+        }
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
@@ -108,11 +129,13 @@ class SliderController extends Controller
              * @var UploadedFile $_img
              */
             $_img = $form->get('_img')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
             if($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
                 $slider->setImage(new Attachment($imageFile->getBasename()));
             }
             $slider->setTitle($submittedSlider->getTitle());
+            $repository->translate($slider, 'title', 'ar', $iName_ar) ;
             $em->persist($slider);
             $em->flush();
             return  $this->redirect($this->generateUrl('list_slider'));

@@ -17,7 +17,12 @@ class SliderType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre: ',])
             ->add('_img', FileType::class, [
-                'label' => 'Image: ',
+                'label' => 'Image ',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('title_ar', TextType::class, [
+                'label' => 'العنوان',
                 'required' => false,
                 'mapped' => false,
             ])

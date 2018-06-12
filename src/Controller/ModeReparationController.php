@@ -29,14 +29,27 @@ class ModeReparationController extends Controller
             'action' => $this->generateUrl('add_mode'),
         ]);
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $data = array();
         /**
          * @var ItemList $modeReparationList
          */
         $modeReparationList = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
+        foreach ($modeReparationList->getItems() as $key => $value){
+            $translations =  $repository->findTranslations($value);
+            $data[] = array(
+                'id' => $value->getId(),
+                'title' => $value->getTitle(),
+                'image' => $value->getImage(),
+                'content' => $value->getContent(),
+                'title_ar' => $translations['ar']["title"] ?? '',
+                'content_ar' => $translations['ar']["content"] ?? ''
+            );
+        }
         return $this->render('mode_reparation/index.html.twig', [
             'page_title' => 'Modes de réparation',
             'page_subtitle' => '',
-            'modes' => $modeReparationList ? $modeReparationList->getItems() : [],
+            'modes' => $data ? $data : [],
             'form' => $form->createView(),
         ]);
     }
@@ -50,6 +63,8 @@ class ModeReparationController extends Controller
     {
         $form = $this->createForm(ModeReparationType::class);
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
              * @var Item $mode
@@ -59,6 +74,8 @@ class ModeReparationController extends Controller
              * @var UploadedFile $_img
              */
             $_img = $form->get('_img')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
+            $iContent_ar = $form->get('content_ar')->getData();
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
             if ($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
@@ -71,6 +88,8 @@ class ModeReparationController extends Controller
             $modeReparationList = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
             $modeReparationList->addItem($mode);
             $em->persist($modeReparationList);
+            $repository->translate($mode, 'title', 'ar', $iName_ar) ;
+            $repository->translate($mode, 'content', 'ar', $iContent_ar) ;
             $em->flush();
         }
         if ($errors = $form->getErrors()) {
@@ -91,9 +110,13 @@ class ModeReparationController extends Controller
     public function edit(Item $mode, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(ModeReparationType::class, $mode, [
             'action' => $this->generateUrl('edit_mode', ['id' => $mode->getId()])
         ]);
+        $translations =  $repository->findTranslations($mode);
+        $form->get('title_ar')->setData($translations['ar']["title"]);
+        $form->get('content_ar')->setData($translations['ar']["content"]);
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
@@ -109,10 +132,14 @@ class ModeReparationController extends Controller
              * @var UploadedFile $_img
              */
             $_img = $form->get('_img')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
+            $iContent_ar = $form->get('content_ar')->getData();
             if ($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
                 $mode->setImage(new Attachment($imageFile->getBasename()));
             }
+            $repository->translate($mode, 'title', 'ar', $iName_ar) ;
+            $repository->translate($mode, 'content', 'ar', $iContent_ar) ;
             $em->persist($mode);
             $em->flush();
             return  $this->redirect($this->generateUrl('list_mode'));

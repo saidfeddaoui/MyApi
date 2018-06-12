@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ItemListRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class ItemList
 {
@@ -20,6 +23,9 @@ class ItemList
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"all"})
      */
     private $name;
 
@@ -30,6 +36,9 @@ class ItemList
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Item", mappedBy="itemList", cascade={"persist"})
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"all"})
      */
     private $items;
 

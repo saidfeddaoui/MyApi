@@ -32,6 +32,7 @@
                         <thead>
                         <tr>
                             <th> Titre </th>
+                            <th> العنوان </th>
                             <th> Image </th>
                             <th> Actions</th>
                         </tr>
@@ -40,6 +41,7 @@
                         {% for type in types %}
                             <tr data-id="{{ type.id }}">
                                 <td> {{ type.title }} </td>
+                                <td> {{ type.title_ar }} </td>
                                 <td>
                                     {% if type.image %}
                                         <div >

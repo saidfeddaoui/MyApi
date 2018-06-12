@@ -9,6 +9,14 @@
     </div>
 </div>
 <div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.title_ar) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.title_ar, {'attr': {'class': 'form-control', 'placeholder': 'Ajouter un titre en arabe'}} ) }}
+    </div>
+</div>
+<div class="form-group">
     <div class="col-md-4">
         {{ form_label(form._img) }}
     </div>
@@ -34,6 +42,15 @@
     </div>
     <div class="col-md-8">
         {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '3', 'placeholder': 'Ajouter un contenu'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4">
+        {{ form_label(form.content_ar) }}
+    </div>
+    <div class="col-md-8">
+        {{ form_widget(form.content_ar, {'attr': {'class': 'form-control', 'rows': '3', 'placeholder': 'Ajouter un contenu en arabe'}} ) }}
     </div>
 </div>
 

@@ -32,7 +32,9 @@
                         <thead>
                         <tr>
                             <th> Titre </th>
+                            <th> العنوان </th>
                             <th> Contenu </th>
+                            <th> المحتوى </th>
                             <th> Image </th>
                             <th> Actions </th>
                         </tr>
@@ -41,7 +43,9 @@
                         {% for mode in modes %}
                         <tr data-id="{{ mode.id }}">
                             <td> {{ mode.title }} </td>
+                            <td> {{ mode.title_ar }} </td>
                             <td> {{ mode.content[0:120] }} </td>
+                            <td> {{ mode.content_ar[0:120] }} </td>
                             <td>
                                 {% if mode.image %}
                                     <div class="tiles">
