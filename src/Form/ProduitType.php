@@ -17,12 +17,17 @@ class ProduitType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre: ',])
             ->add('_icn', FileType::class, [
-                'label' => 'Icône: ',
+                'label' => 'Icône ',
                 'required' => false,
                 'mapped' => false,
             ])
             ->add('_img', FileType::class, [
-                'label' => 'Image: ',
+                'label' => 'Image ',
+                'required' => false,
+                'mapped' => false,
+            ])
+            ->add('title_ar', TextType::class, [
+                'label' => 'العنوان',
                 'required' => false,
                 'mapped' => false,
             ])

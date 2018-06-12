@@ -31,15 +31,17 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th>Titre</th>
-                            <th>Icône</th>
-                            <th>Actions</th>
+                            <th> Titre </th>
+                            <th> العنوان </th>
+                            <th> Image </th>
+                            <th> Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for type in types %}
                             <tr data-id="{{ type.id }}">
                                 <td> {{ type.title }} </td>
+                                <td> {{ type.title_ar }} </td>
                                 <td>
                                     {% if type.icon %}
                                         <div >

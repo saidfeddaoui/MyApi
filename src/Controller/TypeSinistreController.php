@@ -31,14 +31,25 @@ class TypeSinistreController extends Controller
             'action' => $this->generateUrl('add_type_sinistre'),
         ]);
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $data = array();
         /**
          * @var ItemList $typesList
          */
         $typesList = $em->getRepository('App:ItemList')->findOneByType('sinistre');
+        foreach ($typesList->getItems() as $key => $value){
+            $translations =  $repository->findTranslations($value);
+            $data[] = array(
+                'id' => $value->getId(),
+                'title' => $value->getTitle(),
+                'image' => $value->getImage(),
+                'title_ar' => $translations['ar']["title"] ?? '',
+            );
+        }
         return $this->render('sinistre/index.html.twig', [
             'page_title' => 'Types Sinistre',
             'page_subtitle' => '',
-            'types' => $typesList ? $typesList->getItems() : [],
+            'types' => $data ? $data : [],
             'form' => $form->createView(),
         ]);
     }
@@ -53,6 +64,7 @@ class TypeSinistreController extends Controller
         $form = $this->createForm(TypeSinistreType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
              * @var Item $type_sinistre
@@ -62,6 +74,7 @@ class TypeSinistreController extends Controller
              * @var UploadedFile $_icn
              */
             $_icn = $form->get('_icn')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
             if($_icn) {
                 $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
                 $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
@@ -73,6 +86,7 @@ class TypeSinistreController extends Controller
             $type_sinistreList = $em->getRepository('App:ItemList')->findOneByType('sinistre');
             $type_sinistreList->addItem($type_sinistre);
             $em->persist($type_sinistre);
+            $repository->translate($type_sinistre, 'title', 'ar', $iName_ar) ;
             $em->flush();
         }
         if ($errors = $form->getErrors()) {
@@ -93,9 +107,14 @@ class TypeSinistreController extends Controller
     public function edit(Item $typeSinistre, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(TypeSinistreType::class, $typeSinistre, [
             'action' => $this->generateUrl('edit_type_sinistre', ['id' => $typeSinistre->getId()])
         ]);
+        $translations =  $repository->findTranslations($typeSinistre);
+        if($translations){
+            $form->get('title_ar')->setData($translations['ar']["title"]);
+        }
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
@@ -107,11 +126,13 @@ class TypeSinistreController extends Controller
              * @var UploadedFile $_img
              */
             $_icn = $form->get('_icn')->getData();
+            $iName_ar = $form->get('title_ar')->getData();
             if($_icn) {
                 $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
                 $typeSinistre->setImage(new Attachment($iconFile->getBasename()));
             }
             $typeSinistre->setTitle($submittedSinistre->getTitle());
+            $repository->translate($typeSinistre, 'title', 'ar', $iName_ar) ;
             $em->persist($typeSinistre);
             $em->flush();
             return  $this->redirect($this->generateUrl('types_sinistres'));
