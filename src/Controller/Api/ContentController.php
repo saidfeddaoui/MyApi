@@ -246,7 +246,7 @@ class ContentController extends FOSRestController
      *         in="query",
      *         type="string",
      *         default="fr",
-     *         description="Specify the user's language"
+     *         description="Specify the user's city"
      *     ),
      *     @SWG\Response(
      *         response=200,
