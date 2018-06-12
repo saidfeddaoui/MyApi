@@ -43,9 +43,9 @@
                                 <td> {{ type.title }} </td>
                                 <td> {{ type.title_ar }} </td>
                                 <td>
-                                    {% if type.icon %}
+                                    {% if type.image %}
                                         <div >
-                                            <img src="{{ asset('img/' ~ type.icon.path) }}" class="product_img">
+                                            <img src="{{ asset('img/' ~ type.image.path) }}" class="product_img">
                                         </div>
                                     {% endif %}
                                 </td>
@@ -72,7 +72,6 @@
                 <div class="modal-body">
                     <div class="form">{% include 'sinistre/form.html.twig' with {'form': form} %}</div>
                 </div>
-
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
