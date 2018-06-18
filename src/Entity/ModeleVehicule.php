@@ -23,11 +23,6 @@ class ModeleVehicule
      */
     private $nom;
 
-    public function __construct()
-    {
-        $this->tESTs = new ArrayCollection();
-    }
-
     public function getId()
     {
         return $this->id;

@@ -64,7 +64,7 @@ class Item implements  TranslatableInterface
      * @ORM\JoinColumn(name="icon_id", referencedColumnName="id")
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"products"})
+     * @Serializer\Groups({"products","sinistre"})
      */
     private $icon;
 

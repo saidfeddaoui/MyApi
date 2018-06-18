@@ -42,7 +42,8 @@ class TypeSinistreController extends Controller
             $data[] = array(
                 'id' => $value->getId(),
                 'title' => $value->getTitle(),
-                'image' => $value->getImage(),
+                'image' => $value->getIcon(),
+                'image_active' => $value->getImage(),
                 'title_ar' => $translations['ar']["title"] ?? '',
             );
         }
@@ -74,11 +75,17 @@ class TypeSinistreController extends Controller
              * @var UploadedFile $_icn
              */
             $_icn = $form->get('_icn')->getData();
+            $_img = $form->get('_img')->getData();
             $iName_ar = $form->get('title_ar')->getData();
             if($_icn) {
                 $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
                 $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
                 $type_sinistre->setIcon(new Attachment($iconFile->getBasename()));
+            }
+            if($_img) {
+                $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
+                $imgFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $type_sinistre->setImage(new Attachment($imgFile->getBasename()));
             }
             /**
              * @var ItemList $type_sinistreList
@@ -126,10 +133,15 @@ class TypeSinistreController extends Controller
              * @var UploadedFile $_img
              */
             $_icn = $form->get('_icn')->getData();
+            $_img = $form->get('_img')->getData();
             $iName_ar = $form->get('title_ar')->getData();
             if($_icn) {
                 $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
-                $typeSinistre->setImage(new Attachment($iconFile->getBasename()));
+                $typeSinistre->setIcon(new Attachment($iconFile->getBasename()));
+            }
+            if($_img) {
+                $imgFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $typeSinistre->setImage(new Attachment($imgFile->getBasename()));
             }
             $typeSinistre->setTitle($submittedSinistre->getTitle());
             $repository->translate($typeSinistre, 'title', 'ar', $iName_ar) ;

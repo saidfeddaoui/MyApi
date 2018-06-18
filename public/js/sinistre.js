@@ -16,6 +16,10 @@ jQuery(document).ready(function() {
             {
                 "searchable": false,
                 "orderable": false,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
             }
         ],
         "order": [
