@@ -46,21 +46,20 @@ class PathSerializerEventSubscriber implements EventSubscriberInterface
         if($event->getObject() instanceof ItemList) {
             $object  = $event->getObject();
             foreach ($object->getItems() as $key => $item){
-                $img_attachment = new Attachment();
-                $icon_attachment = new Attachment();
+
                 if($item->getImage()){
-                    $img_attachment->setPath($dirWeb.'/img/'.$item->getImage()->getPath());
+                    $img_attachment = new Attachment($dirWeb.'/img/'.$item->getImage()->getPath());
                     $item->setImage($img_attachment);
                 }
                 if($item->getIcon()){
-                    $icon_attachment->setPath($dirWeb.'/img/'.$item->getIcon()->getPath());
+                    $icon_attachment = new Attachment($dirWeb.'/img/'.$item->getIcon()->getPath());
                     $item->setIcon($icon_attachment);
                 }
 
             }
         }else{
-            $object  = $event->getObject();
-            $object->setPath( $dirWeb.'/img/'.$object->getPath() );
+//            $object  = $event->getObject();
+//            $object->setPath( $dirWeb.'/img/'.$object->getPath() );
 
         }
 

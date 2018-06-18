@@ -234,6 +234,20 @@ class ContentController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('App:ItemList')->findOneByType('sinistre');
+        /**
+         * @var \JMS\Serializer\Serializer $serialzer
+         */
+        $serialzer = $this->get('jms_serializer');
+
+        $contextSerialzer = $this->get('jms_serializer.serialization_context_factory')
+            ->createSerializationContext()
+            ->setGroups(['all', 'sinistre'])
+            ->setSerializeNull(true);
+        $products = $serialzer->toArray($products, $contextSerialzer);
+        foreach ($products['items'] as $key => &$value){
+            $value['active_icon'] = $value['image'];
+            unset($value['image']);
+        }
         return array("response"=>$products);
     }
 
