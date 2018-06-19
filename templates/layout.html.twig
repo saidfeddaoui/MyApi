@@ -138,6 +138,29 @@
     <script src="{{ asset('metronic/assets/apps/js/init.js') }}" type="text/javascript"></script>
     <!-- END APPLICATION INIT -->
 {% endblock %}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        {% if app.session.flashbag.has('success') %}
+        var $aError = Array();
+        {% for iKey, flashMessage in app.session.flashbag.get('success') %}
+        var $sError = '{{ flashMessage }}';
+        var $_aError = $sError.split(':');
+        toastr.success($_aError[1], $_aError[0], { timeOut: 10000 });
+        {% endfor %}
+        {% endif %}
+
+        {% if app.session.flashbag.has('error') %}
+        var $aError = Array();
+        {% for iKey, flashMessage in app.session.flashbag.get('error') %}
+        var $sError = '{{ flashMessage }}';
+        var $_aError = $sError.split(':');
+        toastr.error($_aError[1], $_aError[0], { timeOut: 10000 });
+        {% endfor %}
+        {% endif %}
+    });
+</script>
 </body>
 
 </html>
