@@ -6,11 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Translatable\Translatable as TranslatableInterface;
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\VilleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AccidentRepository")
  * @Serializer\ExclusionPolicy("all")
  */
-class Ville implements TranslatableInterface
+class Accident
 {
     use Translatable;
 
@@ -27,23 +28,22 @@ class Ville implements TranslatableInterface
      * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private $type;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getType(): ?string
     {
-        return $this->nom;
+        return $this->type;
     }
 
-    public function setNom(string $nom): self
+    public function setType(string $type): self
     {
-        $this->nom = $nom;
+        $this->type = $type;
 
         return $this;
     }
-
 }
