@@ -146,6 +146,37 @@ class ContentController extends FOSRestController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
+     *     description="accidents",
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="accident successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(
+     *     path = "/api/accidents",
+     *     name = "accidents"
+     * )
+     * @Rest\View(
+     * )
+     */
+    public function accidents()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $accident = $em->getRepository('App:Accident')->findAll();
+        return array("response"=>$accident);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
      *     description="marques",
      *     @SWG\Parameter(
      *         name="lang",
