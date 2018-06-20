@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn green"> Ajouter Modèle Véhicule
+                                    <button type="button" class="btn green" data-toggle="modal" data-target="#add-modele-modal">Ajouter Modèle Véhicule
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
@@ -32,23 +32,18 @@
                         <thead>
                         <tr>
                             <th> Modèle </th>
-                            <th> Editer </th>
-                            <th> Supprimer </th>
+                            <th> Marque </th>
+                            <th> Actions </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for modele in modeles %}
                             <tr data-id="{{ modele.id }}">
                                 <td> {{ modele.nom }} </td>
+                                <td>{% if modele.marque is not null %} {{ modele.marque.nom }} {% endif %}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary bs-tooltip edit" data-id= {{ modele.id }} data-placement="top" data-original-title="Editer">
-                                        <i class="glyphicon glyphicon-edit"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-xs btn-danger bs-tooltip delete" data-id=" {{ modele.id }}" data-placement="top" data-original-title="Supprimer">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </a>
+                                    <a class="btn btn-xs btn-primary bs-tooltip edit" data-id= "{{modele.id}}" data-placement="top" data-original-title="Editer" title="Modifier"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a class="btn btn-xs btn-danger bs-tooltip delete" data-id= "{{modele.id}}" data-placement="top" data-original-title="Supprimer" title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -59,4 +54,30 @@
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
+
+    <div class="modal fade " tabindex="1" role="dialog" id="add-modele-modal" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Ajouter Modèle véhicule: </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">{% include 'modele_vehicule/form.html.twig' with {'form': form} %}</div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade " tabindex="1" role="dialog" id="edit-modele-modal" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modifier Modèle véhicule:</h4>
+                </div>
+                <div class="modal-body"><div class="form"></div></div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {% endblock %}

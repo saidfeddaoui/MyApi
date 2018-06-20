@@ -23,7 +23,7 @@ class PhotosSyinistreType extends AbstractType
                 'choice_label' => 'title',
             ))
             ->add('_img', FileType::class, array(
-                'label' => 'Image: ',
+                'label' => 'Image ',
                 'required' => false,
                 'mapped' => false,
             ))

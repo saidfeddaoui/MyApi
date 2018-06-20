@@ -16,7 +16,7 @@ class VilleType extends AbstractType
         $builder
             ->add('nom', TextType::class, ['label' => 'Nom',])
             ->add('nom_ar', TextType::class, [
-                'label' => 'Nom (arabe)',
+                'label' => 'إسم المدينة',
                 'required' => false,
                 'mapped' => false,
             ])

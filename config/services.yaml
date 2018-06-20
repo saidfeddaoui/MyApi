@@ -31,3 +31,7 @@ services:
     authentication.handler.login_success_handler:
             class:  App\Security\LoginSuccessHandler
             arguments:  ['@router', '@security.authorization_checker']
+
+    App\EventSubscriber\PathSerializerEventSubscriber:
+        tags:
+            - { name: jms_serializer.event_subscriber }

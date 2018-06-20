@@ -31,19 +31,29 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th>Titre</th>
-                            <th>Icône</th>
-                            <th>Actions</th>
+                            <th> Titre </th>
+                            <th> العنوان </th>
+                            <th> Icône </th>
+                            <th> Icône(active) </th>
+                            <th> Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for type in types %}
                             <tr data-id="{{ type.id }}">
                                 <td> {{ type.title }} </td>
+                                <td> {{ type.title_ar }} </td>
                                 <td>
-                                    {% if type.icon %}
+                                    {% if type.image %}
                                         <div >
-                                            <img src="{{ asset('img/' ~ type.icon.path) }}" class="product_img">
+                                            <img src="{{ asset('img/' ~ type.image.path) }}" class="product_img">
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if type.image_active %}
+                                        <div >
+                                            <img src="{{ asset('img/' ~ type.image_active.path) }}" class="product_img">
                                         </div>
                                     {% endif %}
                                 </td>

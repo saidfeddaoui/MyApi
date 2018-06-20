@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="AttachmentRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Attachment
 {
@@ -18,6 +21,10 @@ class Attachment
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     *
+     * @Serializer\Groups({"all"})
      */
     private $path;
 

@@ -33,6 +33,7 @@
                         <thead>
                         <tr>
                             <th> Titre </th>
+                            <th> العنوان </th>
                             <th> Image </th>
                             <th> Actions</th>
                         </tr>
@@ -41,6 +42,7 @@
                         {% for item in items %}
                             <tr data-id="{{ item.id }}">
                                 <td> {{ item.title }} </td>
+                                <td> {{ item.title_ar }} </td>
                                 <td>
                                     {% if item.image %}
                                         <div >

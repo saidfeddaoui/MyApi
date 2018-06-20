@@ -5,6 +5,14 @@ jQuery(document).ready(function() {
                 "searchable": true,
                 "orderable": true,
             },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            },
             {
                 "searchable": false,
                 "orderable": false,

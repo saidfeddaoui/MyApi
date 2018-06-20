@@ -5,6 +5,10 @@ jQuery(document).ready(function() {
                 "searchable": true,
                 "orderable": true,
             },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
             {
                 "searchable": false,
                 "orderable": false,
@@ -43,8 +47,9 @@ jQuery(document).ready(function() {
         });
     });
     $('.delete').on('click', function () {
-        var $this = $(this).data('id');
         var remove_cuerrent = $(this);
+        var td = $(this);
+        var id = td.data('id');
         swal({
             title: "Voulez-vous vraiement supprimer ce produit ?",
             text: "",
@@ -57,7 +62,7 @@ jQuery(document).ready(function() {
             closeOnCancel: false
         }, function (isConfirm) {
             if (isConfirm) {
-                deleteAction();
+                deleteAction(id, td);
             } else {
                 swal("Action annulée", "Aucune action n'a été exécutée", "error");
             }

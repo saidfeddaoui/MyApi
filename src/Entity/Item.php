@@ -5,12 +5,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable as TranslatableInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
-class Item
+class Item implements  TranslatableInterface
 {
+    use Translatable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,43 +27,65 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"slider","products","modes","sinistre"})
+     * @Gedmo\Translatable
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Serializer\Expose()
      */
     private $subTitle;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Serializer\Expose()
+     * * @Serializer\Groups({"slider","modes"})
+     * @Gedmo\Translatable
      */
     private $content;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Attachment", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"slider","products","sinistre"})
      */
     private $image;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Attachment", cascade={"persist"})
      * @ORM\JoinColumn(name="icon_id", referencedColumnName="id")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"products","sinistre"})
      */
     private $icon;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Serializer\Expose()
      */
     private $status = true;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
      */
     private $position = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ItemList", inversedBy="items")
+     *
+     * @Serializer\Expose()
      */
     private $itemList;
 
