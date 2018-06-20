@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -19,16 +20,14 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface {
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
-
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token)
+    {
         $response = null;
-
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $response = new RedirectResponse($this->router->generate('backend'));
+            $response = new RedirectResponse($this->router->generate('list_ville'));
         } else if ($this->authorizationChecker->isGranted('ROLE_USER')) {
             $response = new RedirectResponse($this->router->generate('list_ville'));
         }
-
         return $response;
     }
 

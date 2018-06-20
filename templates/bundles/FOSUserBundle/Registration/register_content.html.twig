@@ -14,26 +14,26 @@
                 {{ form_start(form, {'method': 'post', 'action': path('register'), 'attr': {'class': 'fos_user_registration_register', 'role':'form'}}) }}
                 <div class="form-group">
                     <div class="row">
-
-                        <div class="col-md-2">
-                            {{ form_label(form.username) }}
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class='input-icon input-group'>
-                                <i class="icon-user"></i>
-                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ form_label(form.username) }}
+                            </div>
+                            <div class="col-md-8">
+                                <div class='input-icon input-group'>
+                                    <i class="icon-user"></i>
+                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-md-2">
-                            {{ form_label(form.email) }}
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class='input-icon input-group'>
-                                <i class="icon-envelope"></i>
-                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ form_label(form.email) }}
+                            </div>
+                            <div class="col-md-8">
+                                <div class='input-icon input-group'>
+                                    <i class="icon-envelope"></i>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -41,46 +41,48 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2">
-                            {{ form_label(form.plainPassword.first) }}
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class='input-icon input-group'>
-                                <i class="icon-lock"></i>
-                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control '}})}}
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ form_label(form.plainPassword.first) }}
+                            </div>
+                            <div class="col-md-8">
+                                <div class='input-icon input-group'>
+                                    <i class="icon-lock"></i>
+                                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control '}})}}
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-md-2">
-                            {{ form_label(form.plainPassword.second) }}
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class='input-icon input-group'>
-                                <i class="icon-lock"></i>
-                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}})}}
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ form_label(form.plainPassword.second) }}
+                            </div>
+                            <div class="col-md-8">
+                                <div class='input-icon input-group'>
+                                    <i class="icon-lock"></i>
+                                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}})}}
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2">
-                            {{ form_label(form.role) }}
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class='input-icon input-group col-md-4'>
-                                {{ form_widget(form.role, {'attr': {'class': 'form-control '}})}}
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ form_label(form.roles) }}
+                            </div>
+                            <div class="col-md-8">
+                                <div class='input-icon input-group'>
+                                    {{ form_widget(form.roles, {'attr': {'class': 'form-control select2'}})}}
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-success uppercase pull-right">Ajouter</button>
                         </div>
-
                     </div>
                 </div>
 
@@ -112,14 +114,14 @@
                 </thead>
                 <tbody>
 
-                {% for key,oUser in users %}
+                {% for key, user in users %}
                     <tr>
-                        <td>{{ oUser.username }}</td>
-                        <td>{{ oUser.email }}</td>
-                        <td class="hidden-xs hidden-sm">{{ oUser.role.nom }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td class="hidden-xs hidden-sm">{{ user.roles.0.name }}</td>
                         <td>
-                            <a href="{{ path('edit_user',{'id':oUser.id})}}" class="btn btn-xs btn-primary bs-tooltip" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a class="btn btn-xs btn-danger bs-tooltip remove" data-id= "{{oUser.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
+                            <a href="{{ path('edit_user',{'id':user.id})}}" class="btn btn-xs btn-primary bs-tooltip" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a class="btn btn-xs btn-danger bs-tooltip remove" data-id= "{{user.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
