@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.nom) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.marque) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.marque, {'attr': {'class': 'form-control select2'}} ) }}
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}
