@@ -109,7 +109,7 @@ class TypeSinistreController extends Controller
             $_icn = $form->get('_icn')->getData();
             if($_icn) {
                 $iconFile = $_icn->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_icn->guessExtension());
-                $typeSinistre->setImage(new Attachment($iconFile->getBasename()));
+                $typeSinistre->setIcon(new Attachment($iconFile->getBasename()));
             }
             $typeSinistre->setTitle($submittedSinistre->getTitle());
             $em->persist($typeSinistre);
@@ -133,7 +133,7 @@ class TypeSinistreController extends Controller
         $em->remove($typeSinistre);
         $em->flush();
         return  new JsonResponse(array(
-            "message" => "Type siniste supprimé avec succès"
+            'message' => 'Type siniste supprimé avec succès'
         ));
     }
 

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RegistrationController extends Controller
 {
+
     /**
      * @Route("/admin/register", name="register")
      *
@@ -20,22 +21,22 @@ class RegistrationController extends Controller
     public function register(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = new User();
         $users = $em->getRepository('App:User')->findAll();
-        $form = $this->createForm(RegistrationType::class,$user);
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
-        if($form->isSubmitted() and $form->isValid()){
+        if($form->isSubmitted() and $form->isValid()) {
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute('register');
         }
-        return $this->render('@FOSUser/Registration/register.html.twig', array(
-            'form' => $form->createView(),
+
+        return $this->render('@FOSUser/Registration/register.html.twig', [
             'page_title' => 'Gestion des utilisateurs MAMDA',
             'page_subtitle' => '',
-            'users'=>$users
-        ));
-
+            'users' => $users,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -46,49 +47,37 @@ class RegistrationController extends Controller
      */
     public function editAction($id,Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
         $oUser = $em->getRepository('App:User')->find($id);
         $form = $this->createForm(RegistrationType::class,$oUser);
-        if ( $request->getMethod() == "POST" ){
-
-            $form->handleRequest($request);
-            if ( $form->isValid() ){
-                $em->persist($oUser);
-                $em->flush();
-                //$this->container->get('session')->getFlashBag()->add("success", "L'agent ".$oUser->getUsername()." a été mise à jour");
-                return $this->redirectToRoute('register');
-            }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() and $form->isValid()) {
+            $em->persist($oUser);
+            $em->flush();
+            //$this->container->get('session')->getFlashBag()->add("success", "L'agent ".$oUser->getUsername()." a été mise à jour");
+            return $this->redirectToRoute('register');
         }
 
-        return $this->render('@FOSUser/Registration/edit.html.twig', array(
+        return $this->render('@FOSUser/Registration/edit.html.twig', [
             'form' => $form->createView(),
             'page_title' => 'Gestion des utilisateurs MAMDA',
             'page_subtitle' => ''
-        ));
+        ]);
     }
 
     /**
-     * @Route("/admin/remove/{id}", name="remove_user",options={"expose"=true})
+     * @Route("/admin/remove/{id}", name="remove_user", options={"expose"=true})
      *
-     * @param Request $request
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function removeAction($id)
+    public function removeAction(User $user)
     {
         $em = $this->getDoctrine()->getManager();
-        $oUser = $em->getRepository('App:User')->find($id);
-
-        if (!$oUser) {
-            $this->container->get('session')->getFlashBag()->add("error", "Cet agent n'existe pas dans la base de données!");
-        }
-        else{
-            $em->remove($oUser);
-            $em->flush();
-            $this->container->get('session')->getFlashBag()->add("success", "L'agent a été supprimé avec succés");
-        }
+        $em->remove($user);
+        $em->flush();
+        $this->container->get('session')->getFlashBag()->add("success", "L'Utilisateur a été supprimé avec succés");
         return $this->redirectToRoute('register');
     }
-
 
 }

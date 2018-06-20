@@ -14,10 +14,11 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-            ->add('role', EntityType::class, array(
+            ->add('roles', EntityType::class, array(
                 'class' => Role::class,
-                'choice_label' => 'nom',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'label' => 'Rôles'
             ));
     }
 
