@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\MarqueVehicule;
+use App\Services\FonctionDivers;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
@@ -207,32 +209,32 @@ class ContentController extends FOSRestController
 
     /**
      * @SWG\Get(
+     *     path = "/api/vehicule/modeles/{id}",
      *     tags={"Content Types"},
      *     description="modeles",
      *     @SWG\Parameter(
-     *         name="lang",
-     *         in="query",
+     *         name="id",
+     *         in="path",
+     *         required=true,
      *         type="string",
-     *         default="fr",
-     *         description="Specify the user's language"
+     *         description="Specify the car's marque"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="car models successfully returned"
+     *         description="car's models successfully returned"
      *     )
      * )
      *
      * @Rest\Get(
-     *     path = "/api/vehicule/modeles",
+     *     path = "/api/vehicule/modeles/{id}",
      *     name = "modeles"
      * )
      * @Rest\View(
      * )
      */
-    public function modelesVehicule()
+    public function modelesVehicule(MarqueVehicule $marque)
     {
-        $em = $this->getDoctrine()->getManager();
-        $models = $em->getRepository('App:ModeleVehicule')->findAll();
+        $models = $marque->getModeleVehicules();
         return array("response"=>$models);
     }
 
@@ -352,23 +354,7 @@ class ContentController extends FOSRestController
         $city = $request->get('city');
         $lang = $request->get('lang');
         $weather = array();
-
-        $aCities = array(array("ville"=>"Casablanca","code"=>"1532755","ville_ar"=>"الدار البيضاء"),
-            array("ville"=>"Rabat","code"=>"1539359","ville_ar"=>"الرباط"),
-            array("ville"=>"Tanger","code"=>"1540935","ville_ar"=>"طنجة"),
-            array("ville"=>"Oujda","code"=>"1538412","ville_ar"=>"وجدة"),
-            array("ville"=>"Agadir","code"=>"1542773","ville_ar"=>"أكادير"),
-            array("ville"=>"El jadida","code"=>"1534936","ville_ar"=>"الجديدة"),
-            array("ville"=>"Khouribga","code"=>"1537353"),
-            array("ville"=>"Beni-Mellal","code"=>"1532231","ville_ar"=>"بني ملال"),
-            array("ville"=>"Marrakech","code"=>"1537782","ville_ar"=>"مراكش"),
-            array("ville"=>"Meknes","code"=>"1537862","ville_ar"=>"مكناس"),
-            array("ville"=>"Fes","code"=>"1535450","ville_ar"=>"فاس"),
-            array("ville"=>"Taza","code"=>"1541306","ville_ar"=>"تازة"),
-            array("ville"=>"Tetouan","code"=>"1541445","ville_ar"=>"تطوان"),
-            array("ville"=>"Kenitra","code"=>"1537281"),
-            array("ville"=>"Larache","code"=>"1537598","ville_ar"=>"العرائش")
-        );
+        $aCities = FonctionDivers::getCities();
         foreach ($aCities as $key =>  $value){
             if(strtolower($value["ville"]) == strtolower($city)){
                 $yh = new YahooWeather($value["code"]);
