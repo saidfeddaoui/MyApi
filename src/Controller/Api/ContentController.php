@@ -5,13 +5,13 @@ namespace App\Controller\Api;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\EventSubscriber\PathSerializerEventSubscriber;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 use App\Services\YahooWeather;
 use App\Services\aladhan;
 
+/**
+ * @Rest\Route(path="/content_types", name="api_content_types_")
+ */
 class ContentController extends FOSRestController
 {
     /**
@@ -32,7 +32,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/slider",
+     *     path = "/slider",
      *     name = "slider"
      * )
      * @Rest\View(
@@ -65,7 +65,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/products",
+     *     path = "/products",
      *     name = "products"
      * )
      * @Rest\View(
@@ -98,7 +98,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/modes",
+     *     path = "/modes",
      *     name = "modes"
      * )
      * @Rest\View(
@@ -130,7 +130,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/cities",
+     *     path = "/cities",
      *     name = "cities"
      * )
      * @Rest\View(
@@ -161,7 +161,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/accidents",
+     *     path = "/accidents",
      *     name = "accidents"
      * )
      * @Rest\View(
@@ -192,7 +192,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/vehicule/marques",
+     *     path = "/vehicule/marques",
      *     name = "vehicules"
      * )
      * @Rest\View(
@@ -223,7 +223,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/vehicule/modeles",
+     *     path = "/vehicule/modeles",
      *     name = "modeles"
      * )
      * @Rest\View(
@@ -254,7 +254,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/sinitre/types",
+     *     path = "/sinitre/types",
      *     name = "type_sinistre"
      * )
      * @Rest\View(
@@ -300,7 +300,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/aladhan",
+     *     path = "/aladhan",
      *     name = "aladhan"
      * )
      * @Rest\View(
@@ -340,7 +340,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/weather",
+     *     path = "/weather",
      *     name = "weather"
      * )
      * @Rest\View(

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\BackOffice;
 
 use App\Entity\Ville;
 use Symfony\Component\HttpFoundation\JsonResponse;
