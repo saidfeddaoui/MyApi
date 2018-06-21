@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\MarqueVehicule;
+use App\Services\FonctionDivers;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
@@ -207,32 +209,32 @@ class ContentController extends FOSRestController
 
     /**
      * @SWG\Get(
+     *     path = "/api/vehicule/modeles/{id}",
      *     tags={"Content Types"},
      *     description="modeles",
      *     @SWG\Parameter(
-     *         name="lang",
-     *         in="query",
+     *         name="id",
+     *         in="path",
+     *         required=true,
      *         type="string",
-     *         default="fr",
-     *         description="Specify the user's language"
+     *         description="Specify the car's marque"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="car models successfully returned"
+     *         description="car's models successfully returned"
      *     )
      * )
      *
      * @Rest\Get(
-     *     path = "/vehicule/modeles",
+     *     path = "/vehicule/modeles/{id}",
      *     name = "modeles"
      * )
      * @Rest\View(
      * )
      */
-    public function modelesVehicule()
+    public function modelesVehicule(MarqueVehicule $marque)
     {
-        $em = $this->getDoctrine()->getManager();
-        $models = $em->getRepository('App:ModeleVehicule')->findAll();
+        $models = $marque->getModeleVehicules();
         return array("response"=>$models);
     }
 

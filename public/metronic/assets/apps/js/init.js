@@ -21,6 +21,25 @@ var MamdaAppContext = {
     initSelect2: function () {
         $('.select2').select2();
     },
+    date_picker: function (){
+
+        $('.datetimepicker').datetimepicker({
+            locale:'fr',
+            // format: 'd-m-Y H:i',
+            // step:30,
+            // dayOfWeekStart: 1,
+            // closeOnDateSelect:true
+        });
+
+        $.datetimepicker.setLocale('fr');
+        $(document).on("focus", ".datetimepicker", function(){
+            $(this).datetimepicker({
+                locale:'fr',
+                format: 'd-m-Y H:i',
+                closeOnDateSelect:true
+            });
+        });
+    },
     initSideBar: function () {
         var $current_url = window.location.pathname;
         $('.page-sidebar-menu .nav-link').each(function(){
@@ -40,6 +59,7 @@ var MamdaAppContext = {
         this.initDataTable();
         this.initSelect2();
         this.initSideBar();
+        this.date_picker();
     }
 }
 jQuery(document).ready(function() {
