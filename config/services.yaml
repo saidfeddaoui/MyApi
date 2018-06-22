@@ -35,3 +35,11 @@ services:
     App\EventSubscriber\PathSerializerEventSubscriber:
         tags:
             - { name: jms_serializer.event_subscriber }
+
+    App\Services\AladhanApiService:
+#        class: App\Services\AladhanApiService
+#        public: true
+        arguments:
+            - '@eight_points_guzzle.client.api_aladhan'
+            - '@jms_serializer'
+            - App\DTO\AladhanApi\AladhanResponse

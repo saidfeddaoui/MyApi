@@ -24,12 +24,14 @@ security:
                 provider: fos_userbundle
 #                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
                 success_handler: authentication.handler.login_success_handler
+                check_path: /backoffice/login_check
+                login_path: /backoffice/login
             logout:
                 path:    fos_user_security_logout
-                target:  /login
+                target:  /backoffice/login
             anonymous:    true
 #            security: false
 
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backoffice/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ ROLE_USER ] }

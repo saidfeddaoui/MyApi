@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\MarqueVehicule;
+use App\Services\AladhanApiService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
@@ -273,6 +274,7 @@ class ContentController extends FOSRestController
         }
         return array("response"=>$products);
     }
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -296,14 +298,15 @@ class ContentController extends FOSRestController
      * )
      * @Rest\View(
      * )
+     *
+     * @param AladhanApiService $apiAladhan
+     * @param Request $request
+     * @return array
      */
-    public function aladhan(Request $request)
+    public function aladhan(AladhanApiService $apiAladhan, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $city = $request->get('city');
-        $aladhan = new aladhan($city);
-        $timings = $aladhan->getTimings();
-        return array("response"=>$timings);
+        $data = $apiAladhan->getTimingsData();
+        return [ "response" => [ $data->getUpcomingPrayerTime() ] ];
     }
     /**
      * @SWG\Get(
