@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\Type;
 use Gedmo\Translatable\Translatable as TranslatableInterface;
 
 /**
@@ -26,17 +27,21 @@ class Alert
     /**
      * @ORM\Column(type="string", length=255)
      * @Gedmo\Translatable
+     * @Serializer\Expose()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Gedmo\Translatable
+     * @Serializer\Expose()
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Serializer\Expose()
+     * @Type("DateTime<'d-m-Y H:i'>")
      */
     private $date_creation;
 
