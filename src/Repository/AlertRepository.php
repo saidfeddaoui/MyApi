@@ -19,32 +19,16 @@ class AlertRepository extends ServiceEntityRepository
         parent::__construct($registry, Alert::class);
     }
 
-//    /**
-//     * @return Alert[] Returns an array of Alert objects
-//     */
-    /*
-    public function findByExampleField($value)
+     /**
+     * @return Alert[] Returns an array of Alert objects
+     */
+    public function getCurrentAlerts()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->Where('a.date_expiration > :today or a.date_expiration is null')
+            ->setParameter("today",date("Y-m-d H:i:m"))
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Alert
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
