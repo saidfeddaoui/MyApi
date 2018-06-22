@@ -49,7 +49,7 @@
                                 <td> {{ element.description }} </td>
                                 <td> {{ element.description_ar }} </td>
                                 <td> {{ element.date_creation|date("d-m-Y H:i") }} </td>
-                                <td> {{ element.date_expiration|date("d-m-Y H:i") }} </td>
+                                <td> {% if (element.date_expiration is not null)  %}{{ element.date_expiration|date("d-m-Y H:i") }} {% endif %}</td>
                                 <td>
                                     <a class="btn btn-xs btn-primary bs-tooltip edit" data-id="{{ element.id }}"
                                        data-placement="top" data-original-title="Editer">

@@ -8,9 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
+ * @ORM\Table(name="groups")
+ * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  */
-class Role extends BaseRole
+class Group extends BaseRole
 {
 
     /**
@@ -26,12 +27,12 @@ class Role extends BaseRole
     private $name;
 
     /**
-     * @ORM\Column(name="role", type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     private $role;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="roles")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="_group")
      */
     private $users;
 
@@ -47,47 +48,32 @@ class Role extends BaseRole
         $this->users = new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @return null|string
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
-    /**
-     * @param string $name
-     * @return self
-     */
+
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getRole(): ?string
     {
         return $this->role;
     }
-    /**
-     * @param string $role
-     * @return self
-     */
-    public function setRole($role): self
+
+    public function setRole(string $role): self
     {
         $this->role = $role;
+
         return $this;
     }
 
@@ -103,7 +89,7 @@ class Role extends BaseRole
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addRole($this);
+            $user->setGroup($this);
         }
 
         return $this;
@@ -113,7 +99,10 @@ class Role extends BaseRole
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeRole($this);
+            // set the owning side to null (unless already changed)
+            if ($user->getGroup() === $this) {
+                $user->setGroup(null);
+            }
         }
 
         return $this;

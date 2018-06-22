@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Group;
 use App\Entity\Role;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -14,12 +15,17 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('roles', EntityType::class, array(
+            ->add('group', EntityType::class, [
+                'class' => Group::class,
+                'choice_label' => 'name',
+                'label' => 'Groupe'
+            ])
+            ->add('roles', EntityType::class, [
                 'class' => Role::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'label' => 'Rôles'
-            ));
+            ]);
     }
 
     public function getParent()

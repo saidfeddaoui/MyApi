@@ -3,19 +3,19 @@
 namespace App\Controller\Api;
 
 use App\Entity\MarqueVehicule;
-use App\Services\FonctionDivers;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\EventSubscriber\PathSerializerEventSubscriber;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 use App\Services\YahooWeather;
 use App\Services\aladhan;
 
+/**
+ * @Rest\Route(path="/content_types", name="api_content_types_")
+ */
 class ContentController extends FOSRestController
 {
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -34,7 +34,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/slider",
+     *     path = "/slider",
      *     name = "slider"
      * )
      * @Rest\View(
@@ -48,11 +48,10 @@ class ContentController extends FOSRestController
         $slider = $em->getRepository('App:ItemList')->findOneByType('slider');
         return array("response"=>$slider);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
-     *     description="Home Producuts",
+     *     description="Home Products",
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -67,7 +66,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/products",
+     *     path = "/products",
      *     name = "products"
      * )
      * @Rest\View(
@@ -80,8 +79,6 @@ class ContentController extends FOSRestController
         $products = $em->getRepository('App:ItemList')->findOneByType('products');
         return array("response"=>$products);
     }
-
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -100,7 +97,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/modes",
+     *     path = "/modes",
      *     name = "modes"
      * )
      * @Rest\View(
@@ -113,7 +110,6 @@ class ContentController extends FOSRestController
         $modes = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
         return array("response"=>$modes);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -132,7 +128,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/cities",
+     *     path = "/cities",
      *     name = "cities"
      * )
      * @Rest\View(
@@ -144,7 +140,6 @@ class ContentController extends FOSRestController
         $villes = $em->getRepository('App:Ville')->findAll();
         return array("response"=>$villes);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -163,7 +158,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/accidents",
+     *     path = "/accidents",
      *     name = "accidents"
      * )
      * @Rest\View(
@@ -175,7 +170,6 @@ class ContentController extends FOSRestController
         $accident = $em->getRepository('App:Accident')->findAll();
         return array("response"=>$accident);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -194,7 +188,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/vehicule/marques",
+     *     path = "/vehicule/marques",
      *     name = "vehicules"
      * )
      * @Rest\View(
@@ -206,10 +200,9 @@ class ContentController extends FOSRestController
         $marques = $em->getRepository('App:MarqueVehicule')->findAll();
         return array("response"=>$marques);
     }
-
     /**
      * @SWG\Get(
-     *     path = "/api/vehicule/modeles/{id}",
+     *     path = "/vehicule/modeles/{id}",
      *     tags={"Content Types"},
      *     description="modeles",
      *     @SWG\Parameter(
@@ -226,18 +219,16 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/vehicule/modeles/{id}",
+     *     path = "/vehicule/modeles/{id}",
      *     name = "modeles"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View
      */
     public function modelesVehicule(MarqueVehicule $marque)
     {
         $models = $marque->getModeleVehicules();
         return array("response"=>$models);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -256,7 +247,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/sinitre/types",
+     *     path = "/sinitre/types",
      *     name = "type_sinistre"
      * )
      * @Rest\View(
@@ -268,22 +259,20 @@ class ContentController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('App:ItemList')->findOneByType('sinistre');
         /**
-         * @var \JMS\Serializer\Serializer $serialzer
+         * @var \JMS\Serializer\Serializer $serializer
          */
-        $serialzer = $this->get('jms_serializer');
-
-        $contextSerialzer = $this->get('jms_serializer.serialization_context_factory')
+        $serializer = $this->get('jms_serializer');
+        $contextSerializer = $this->get('jms_serializer.serialization_context_factory')
             ->createSerializationContext()
             ->setGroups(['all', 'sinistre'])
             ->setSerializeNull(true);
-        $products = $serialzer->toArray($products, $contextSerialzer);
-        foreach ($products['items'] as $key => &$value){
+        $products = $serializer->toArray($products, $contextSerializer);
+        foreach ($products['items'] as &$value) {
             $value['active_icon'] = $value['image'];
             unset($value['image']);
         }
         return array("response"=>$products);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -302,7 +291,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/aladhan",
+     *     path = "/aladhan",
      *     name = "aladhan"
      * )
      * @Rest\View(
@@ -316,7 +305,6 @@ class ContentController extends FOSRestController
         $timings = $aladhan->getTimings();
         return array("response"=>$timings);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -342,7 +330,7 @@ class ContentController extends FOSRestController
      * )
      *
      * @Rest\Get(
-     *     path = "/api/weather",
+     *     path = "/weather",
      *     name = "weather"
      * )
      * @Rest\View(
@@ -354,7 +342,23 @@ class ContentController extends FOSRestController
         $city = $request->get('city');
         $lang = $request->get('lang');
         $weather = array();
-        $aCities = FonctionDivers::getCities();
+
+        $aCities = array(array("ville"=>"Casablanca","code"=>"1532755","ville_ar"=>"الدار البيضاء"),
+            array("ville"=>"Rabat","code"=>"1539359","ville_ar"=>"الرباط"),
+            array("ville"=>"Tanger","code"=>"1540935","ville_ar"=>"طنجة"),
+            array("ville"=>"Oujda","code"=>"1538412","ville_ar"=>"وجدة"),
+            array("ville"=>"Agadir","code"=>"1542773","ville_ar"=>"أكادير"),
+            array("ville"=>"El jadida","code"=>"1534936","ville_ar"=>"الجديدة"),
+            array("ville"=>"Khouribga","code"=>"1537353"),
+            array("ville"=>"Beni-Mellal","code"=>"1532231","ville_ar"=>"بني ملال"),
+            array("ville"=>"Marrakech","code"=>"1537782","ville_ar"=>"مراكش"),
+            array("ville"=>"Meknes","code"=>"1537862","ville_ar"=>"مكناس"),
+            array("ville"=>"Fes","code"=>"1535450","ville_ar"=>"فاس"),
+            array("ville"=>"Taza","code"=>"1541306","ville_ar"=>"تازة"),
+            array("ville"=>"Tetouan","code"=>"1541445","ville_ar"=>"تطوان"),
+            array("ville"=>"Kenitra","code"=>"1537281"),
+            array("ville"=>"Larache","code"=>"1537598","ville_ar"=>"العرائش")
+        );
         foreach ($aCities as $key =>  $value){
             if(strtolower($value["ville"]) == strtolower($city)){
                 $yh = new YahooWeather($value["code"]);
@@ -370,4 +374,5 @@ class ContentController extends FOSRestController
     }
         return array("response"=>$weather);
     }
+
 }
