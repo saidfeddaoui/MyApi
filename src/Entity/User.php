@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\Role\Role as BaseRole;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -97,9 +98,15 @@ class User implements UserInterface, EquatableInterface
      */
     protected $passwordRequestedAt;
     /**
+     * @var Collection
      * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
      */
-    private $roles;
+    protected $roles;
+    /**
+     * @var Group
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="users")
+     */
+    protected $_group;
 
     public function __construct(?string $username = null, ?string $password = null, bool $enabled = true, bool $userNonExpired = true, bool $credentialsNonExpired = true, bool $userNonLocked = true)
     {
@@ -118,7 +125,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function __toString()
     {
-        return (string) $this->getUsername();
+        return (string)$this->getUsername();
     }
 
     public function getId()
@@ -477,30 +484,10 @@ class User implements UserInterface, EquatableInterface
      */
     public function getRoles()
     {
+        $roles = $this->roles->toArray();
+        $roles[] = $this->_group;
+        return $roles;
 //        return $this->roles->map(function ($element) { return $element->getRole();})->toArray();
-        return $this->roles->toArray();
-    }
-    /**
-     * @param Role $role
-     * @return User
-     */
-    public function _addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-        }
-        return $this;
-    }
-    /**
-     * @param Role $role
-     * @return User
-     */
-    public function _removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-        }
-        return $this;
     }
     /**
      * Never use this to check if this user has access to anything!
@@ -555,6 +542,51 @@ class User implements UserInterface, EquatableInterface
     public function removeRole($role)
     {
         return $this->_removeRole($role);
+    }
+    /**
+     * @return Collection
+     */
+    public function _getRoles(): Collection
+    {
+        return $this->roles;
+    }
+    /**
+     * @param BaseRole $role
+     * @return static
+     */
+    public function _addRole(BaseRole $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }
+    /**
+     * @param BaseRole $role
+     * @return static
+     */
+    public function _removeRole(BaseRole $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+        }
+        return $this;
+    }
+    /**
+     * @return Group
+     */
+    public function getGroup(): ?Group
+    {
+        return $this->_group;
+    }
+    /**
+     * @param Group
+     * @return static
+     */
+    public function setGroup(?Group $_group): self
+    {
+        $this->_group = $_group;
+        return $this;
     }
 
     /**

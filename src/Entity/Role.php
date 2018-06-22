@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  */
@@ -25,7 +26,7 @@ class Role extends BaseRole
     private $name;
 
     /**
-     * @ORM\Column(name="role", type="string", length=20, unique=true)
+     * @ORM\Column(name="role", type="string", length=60, unique=true)
      */
     private $role;
 
@@ -39,7 +40,7 @@ class Role extends BaseRole
      * @param string $name
      * @param string $role
      */
-    public function __construct(?string $name, ?string $role)
+    public function __construct(?string $name = null, ?string $role = null)
     {
         $this->name = $name;
         $this->role = $role;

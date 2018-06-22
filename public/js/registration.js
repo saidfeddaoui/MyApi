@@ -1,4 +1,27 @@
-$(document).ready(function(){
+$(document).ready(function() {
+    $('.datatable').dataTable({
+        "columns": [
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            }
+        ],
+        "order": [
+            [0, "asc"]
+        ] // set first column as a default sort by asc
+    });
     $('.remove').on('click', function () {
         var $this = $(this).data('id');
         var remove_cuerrent = $(this);
