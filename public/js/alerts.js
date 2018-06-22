@@ -197,10 +197,11 @@ var TableDatatablesEditable = function () {
                 }else if(date_creation == ''){
                     toastr.error("Veuillez renseigner la date de creation");
                     return false;
-                }else if(date_expiration == ''){
-                    toastr.error("Veuillez renseigner la date d'expiration");
-                    return false;
                 }
+                // else if(date_expiration == ''){
+                //     toastr.error("Veuillez renseigner la date d'expiration");
+                //     return false;
+                // }
                 $.ajax({
                     url: saveUrl,
                     type: "POST",
