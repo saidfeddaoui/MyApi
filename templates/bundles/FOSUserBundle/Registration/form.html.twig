@@ -1,0 +1,85 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal fos_user_registration_register', 'role':'form'}}) }}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.username) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        <i class="icon-user"></i>
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.email) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        <i class="icon-envelope"></i>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.plainPassword.first) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        <i class="icon-lock"></i>
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control '}})}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.plainPassword.second) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        <i class="icon-lock"></i>
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.group) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        {{ form_widget(form.group, {'attr': {'class': 'form-control select2'}})}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    {{ form_label(form.roles) }}
+                </div>
+                <div class="col-md-8">
+                    <div class='input-icon input-group'>
+                        {{ form_widget(form.roles, {'attr': {'class': 'form-control select2'}})}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-success uppercase pull-right">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

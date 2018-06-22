@@ -3,7 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Entity\MarqueVehicule;
-use App\Services\FonctionDivers;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
@@ -16,6 +15,7 @@ use App\Services\aladhan;
  */
 class ContentController extends FOSRestController
 {
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -48,11 +48,10 @@ class ContentController extends FOSRestController
         $slider = $em->getRepository('App:ItemList')->findOneByType('slider');
         return array("response"=>$slider);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
-     *     description="Home Producuts",
+     *     description="Home Products",
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -80,8 +79,6 @@ class ContentController extends FOSRestController
         $products = $em->getRepository('App:ItemList')->findOneByType('products');
         return array("response"=>$products);
     }
-
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -113,7 +110,6 @@ class ContentController extends FOSRestController
         $modes = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
         return array("response"=>$modes);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -144,7 +140,6 @@ class ContentController extends FOSRestController
         $villes = $em->getRepository('App:Ville')->findAll();
         return array("response"=>$villes);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -175,7 +170,6 @@ class ContentController extends FOSRestController
         $accident = $em->getRepository('App:Accident')->findAll();
         return array("response"=>$accident);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -206,10 +200,9 @@ class ContentController extends FOSRestController
         $marques = $em->getRepository('App:MarqueVehicule')->findAll();
         return array("response"=>$marques);
     }
-
     /**
      * @SWG\Get(
-     *     path = "/api/vehicule/modeles/{id}",
+     *     path = "/vehicule/modeles/{id}",
      *     tags={"Content Types"},
      *     description="modeles",
      *     @SWG\Parameter(
@@ -229,15 +222,13 @@ class ContentController extends FOSRestController
      *     path = "/vehicule/modeles/{id}",
      *     name = "modeles"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View
      */
     public function modelesVehicule(MarqueVehicule $marque)
     {
         $models = $marque->getModeleVehicules();
         return array("response"=>$models);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -268,22 +259,20 @@ class ContentController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('App:ItemList')->findOneByType('sinistre');
         /**
-         * @var \JMS\Serializer\Serializer $serialzer
+         * @var \JMS\Serializer\Serializer $serializer
          */
-        $serialzer = $this->get('jms_serializer');
-
-        $contextSerialzer = $this->get('jms_serializer.serialization_context_factory')
+        $serializer = $this->get('jms_serializer');
+        $contextSerializer = $this->get('jms_serializer.serialization_context_factory')
             ->createSerializationContext()
             ->setGroups(['all', 'sinistre'])
             ->setSerializeNull(true);
-        $products = $serialzer->toArray($products, $contextSerialzer);
-        foreach ($products['items'] as $key => &$value){
+        $products = $serializer->toArray($products, $contextSerializer);
+        foreach ($products['items'] as &$value) {
             $value['active_icon'] = $value['image'];
             unset($value['image']);
         }
         return array("response"=>$products);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -316,7 +305,6 @@ class ContentController extends FOSRestController
         $timings = $aladhan->getTimings();
         return array("response"=>$timings);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -386,4 +374,5 @@ class ContentController extends FOSRestController
     }
         return array("response"=>$weather);
     }
+
 }
