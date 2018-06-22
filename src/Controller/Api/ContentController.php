@@ -278,6 +278,37 @@ class ContentController extends FOSRestController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
+     *     description="Alertes",
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="alerts types successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(
+     *     path = "/alerts",
+     *     name = "alerts"
+     * )
+     * @Rest\View
+     */
+    public function Alerts()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $alerts = $em->getRepository('App:Alert')->getCurrentAlerts();
+        return array("response"=>$alerts);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
      *     description="aladhan",
      *     @SWG\Parameter(
      *         name="city",
