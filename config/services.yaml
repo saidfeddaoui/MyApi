@@ -43,3 +43,7 @@ services:
             - '@eight_points_guzzle.client.api_aladhan'
             - '@jms_serializer'
             - App\DTO\AladhanApi\AladhanResponse
+
+    App\Services\PharmacieApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_pharmacie'

@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\YahooWeather;
+use App\Services\PharmacieApiService;
 use App\Services\aladhan;
 
 /**
@@ -407,6 +408,42 @@ class ContentController extends FOSRestController
             }
     }
         return array("response"=>$weather);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="pharmacy",
+     *     @SWG\Parameter(
+     *         name="city",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's city"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="nearest pharmacies successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(
+     *     path = "/pharmacy",
+     *     name = "pharmacy"
+     * )
+     * @Rest\View(
+     * )
+     *
+     * @param PharmacieApiService $apiPahrmacy
+     * @param Request $request
+     * @return array
+     */
+    public function Pharmacy(PharmacieApiService $apiPahrmacy, Request $request)
+    {
+        $city = $request->get('city');
+        $data = $apiPahrmacy->getPharmacies($city);
+        return [ "response" => $data ];
     }
 
 }
