@@ -12,3 +12,12 @@ eight_points_guzzle:
             # Find plugins here:
             # https://github.com/8p/EightPointsGuzzleBundle#known-and-supported-plugins
             plugin: ~
+
+        api_weather_yahoo:
+            base_url: http://query.yahooapis.com/v1/public/
+            options:
+                timeout: 30
+                headers:
+                    User-Agent: MobiblancMamda/7.0
+                    Accept: application/json
+            plugin: ~
