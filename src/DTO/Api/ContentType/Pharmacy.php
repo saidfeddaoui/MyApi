@@ -4,20 +4,40 @@ namespace App\DTO\Api\ContentType;
 
 use JMS\Serializer\Annotation as Serializer;
 
+/**
+ * Class Pharmacy
+ * @package App\DTO\Api\ContentType
+ *
+ * @Serializer\VirtualProperty(
+ *     name="name",
+ *     exp="object.getNom()"
+ * )
+ * @Serializer\VirtualProperty(
+ *     name="address",
+ *     exp="object.getAddresse()"
+ * )
+ * @Serializer\VirtualProperty(
+ *     name="phone",
+ *     exp="object.getTel()"
+ * )
+ */
 class Pharmacy
 {
 
     /**
+     * @Serializer\Exclude(if="context.getDirection() === 1")
      * @Serializer\Type("string")
      * @var string
      */
     private $nom;
     /**
+     * @Serializer\Exclude(if="context.getDirection() === 1")
      * @Serializer\Type("string")
      * @var string
      */
     private $addresse;
     /**
+     * @Serializer\Exclude(if="context.getDirection() === 1")
      * @Serializer\Type("string")
      * @var string
      */
