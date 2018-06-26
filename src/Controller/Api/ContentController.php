@@ -6,6 +6,7 @@ use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\MarqueVehicule;
 use App\Services\AladhanApiService;
+use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -336,7 +337,6 @@ class ContentController extends BaseController
      *         description="Return practical information such as Adhan time, Weather and 'Pharmacie de garde' ..."
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/infos_pratiques",
      *     name = "aladhan"
@@ -345,83 +345,26 @@ class ContentController extends BaseController
      *
      * @param AladhanApiService $aladhanApi
      * @param YahooWeatherApiService $weatherApi
+     * @param PharmacieApiService $apiPharmacyApi
      * @param Request $request
-     * @return array
+     * @return ApiResponse
      */
-    public function infosPratiques(AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, Request $request)
+    public function infosPratiques(AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
     {
-        $prayer = $aladhanApi->getPrayer();
-        $weather = $weatherApi->getWeather();
+//        $key = openssl_random_pseudo_bytes($length = 16, $crypto_strong);
+//        dump($key, bin2hex($key), hex2bin(bin2hex($key)));
+//        die;
+//        $data = 'Omar El Maguiri';
+//        $enc = $apiPharmacyApi->encrypt(json_encode($_SERVER));
+//        $dec = $apiPharmacyApi->decrypt($enc);
+//        dump($enc, $dec);
+//        die;
+        $pharmacies = $apiPharmacyApi->getPharmacies(33.5739983,-7.6584367);
+        $prayer = $aladhanApi->getPrayer(33.5739983,-7.6584367);
+        $weather = $weatherApi->getWeather(33.5739983,-7.6584367);
+        dump($prayer, $weather, $pharmacies);
+        die;
         return $this->respondWith(new InfoPratique($prayer, $weather));
-    }
-    /**
-     * @SWG\Get(
-     *     tags={"Content Types"},
-     *     description="weather",
-     *     @SWG\Parameter(
-     *         name="city",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's city"
-     *     ),
-     *      @SWG\Parameter(
-     *         name="lang",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's language"
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="weather successfully returned"
-     *     )
-     * )
-     *
-     * @Rest\Get(
-     *     path = "/weather",
-     *     name = "weather"
-     * )
-     * @Rest\View(
-     * )
-     */
-    public function weather(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $city = $request->get('city');
-        $lang = $request->get('lang');
-        $weather = array();
-
-        $aCities = array(array("ville"=>"Casablanca","code"=>"1532755","ville_ar"=>"الدار البيضاء"),
-            array("ville"=>"Rabat","code"=>"1539359","ville_ar"=>"الرباط"),
-            array("ville"=>"Tanger","code"=>"1540935","ville_ar"=>"طنجة"),
-            array("ville"=>"Oujda","code"=>"1538412","ville_ar"=>"وجدة"),
-            array("ville"=>"Agadir","code"=>"1542773","ville_ar"=>"أكادير"),
-            array("ville"=>"El jadida","code"=>"1534936","ville_ar"=>"الجديدة"),
-            array("ville"=>"Khouribga","code"=>"1537353"),
-            array("ville"=>"Beni-Mellal","code"=>"1532231","ville_ar"=>"بني ملال"),
-            array("ville"=>"Marrakech","code"=>"1537782","ville_ar"=>"مراكش"),
-            array("ville"=>"Meknes","code"=>"1537862","ville_ar"=>"مكناس"),
-            array("ville"=>"Fes","code"=>"1535450","ville_ar"=>"فاس"),
-            array("ville"=>"Taza","code"=>"1541306","ville_ar"=>"تازة"),
-            array("ville"=>"Tetouan","code"=>"1541445","ville_ar"=>"تطوان"),
-            array("ville"=>"Kenitra","code"=>"1537281"),
-            array("ville"=>"Larache","code"=>"1537598","ville_ar"=>"العرائش")
-        );
-        foreach ($aCities as $key =>  $value){
-            if(strtolower($value["ville"]) == strtolower($city)){
-                $yh = new YahooWeather($value["code"]);
-                $weather = array("ville"=>($lang == 'ar') ? $value["ville_ar"]:$value["ville"],
-                                 "temperature"=>$yh->getTemperature(false),
-                                 "vent"=>$yh->getWindSpeed(),
-                                 "image"=>substr($yh->getYahooIcon(),10,37),
-                                 "description"=>$yh->getDescription()
-
-                    );
-                return array("response"=>$weather);
-            }
-    }
-        return array("response"=>$weather);
     }
 
 }
