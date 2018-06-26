@@ -12,7 +12,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
-use App\Services\YahooWeather;
 
 /**
  * @Rest\Route(path="/content_types", name="api_content_types_")
@@ -322,14 +321,12 @@ class ContentController extends BaseController
      *         name="latitude",
      *         in="query",
      *         type="number",
-     *         default="35",
      *         description="User geo-location latitude"
      *     ),
      *     @SWG\Parameter(
      *         name="longitude",
      *         in="query",
      *         type="number",
-     *         default="-7",
      *         description="User geo-location longitude"
      *     ),
      *     @SWG\Response(
@@ -341,30 +338,24 @@ class ContentController extends BaseController
      *     path = "/infos_pratiques",
      *     name = "aladhan"
      * )
+     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\-?\d+(\.\d+)?")
+     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\-?\d+(\.\d+)?")
      * @Rest\View()
      *
+     * @param double $latitude
+     * @param double $longitude
      * @param AladhanApiService $aladhanApi
      * @param YahooWeatherApiService $weatherApi
      * @param PharmacieApiService $apiPharmacyApi
      * @param Request $request
      * @return ApiResponse
      */
-    public function infosPratiques(AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
+    public function infosPratiques($latitude, $longitude, AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
     {
-//        $key = openssl_random_pseudo_bytes($length = 16, $crypto_strong);
-//        dump($key, bin2hex($key), hex2bin(bin2hex($key)));
-//        die;
-//        $data = 'Omar El Maguiri';
-//        $enc = $apiPharmacyApi->encrypt(json_encode($_SERVER));
-//        $dec = $apiPharmacyApi->decrypt($enc);
-//        dump($enc, $dec);
-//        die;
-        $pharmacies = $apiPharmacyApi->getPharmacies(33.5739983,-7.6584367);
-        $prayer = $aladhanApi->getPrayer(33.5739983,-7.6584367);
-        $weather = $weatherApi->getWeather(33.5739983,-7.6584367);
-        dump($prayer, $weather, $pharmacies);
-        die;
-        return $this->respondWith(new InfoPratique($prayer, $weather));
+        $pharmacy = $apiPharmacyApi->getPharmacy($latitude,$longitude);
+        $prayer = $aladhanApi->getPrayer($latitude,$longitude);
+        $weather = $weatherApi->getWeather($latitude,$longitude);
+        return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
     }
 
 }

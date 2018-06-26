@@ -49,3 +49,5 @@ services:
     App\Services\PharmacieApiService:
         arguments:
             - '@eight_points_guzzle.client.api_pharmacie'
+            - '@jms_serializer'
+            - App\DTO\PharmacyApi\PharmacyResponse
