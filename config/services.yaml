@@ -35,3 +35,17 @@ services:
     App\EventSubscriber\PathSerializerEventSubscriber:
         tags:
             - { name: jms_serializer.event_subscriber }
+
+    App\Services\AladhanApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_aladhan'
+            - '@jms_serializer'
+            - App\DTO\AladhanApi\AladhanResponse
+    App\Services\YahooWeatherApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_weather_yahoo'
+            - '@jms_serializer'
+            - App\DTO\YahooWeatherApi\YahooResponse
+    App\Services\PharmacieApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_pharmacie'

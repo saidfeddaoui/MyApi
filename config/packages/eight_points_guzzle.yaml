@@ -1,0 +1,29 @@
+eight_points_guzzle:
+    clients:
+        api_aladhan:
+            base_url: http://api.aladhan.com/v1/
+            options:
+                timeout: 30
+                # Configure headers.
+                # More info: http://docs.guzzlephp.org/en/stable/request-options.html#headers
+                headers:
+                    User-Agent: MobiblancMamda/7.0
+                    Accept: application/json
+            # Find plugins here:
+            # https://github.com/8p/EightPointsGuzzleBundle#known-and-supported-plugins
+            plugin: ~
+        api_weather_yahoo:
+            base_url: http://query.yahooapis.com/v1/public/
+            options:
+                timeout: 30
+                headers:
+                    User-Agent: MobiblancMamda/7.0
+                    Accept: application/json
+            plugin: ~
+        api_pharmacie:
+            base_url: http://pharma.mobiblanc.com/json.php/
+            options:
+                timeout: 30
+                headers:
+                    User-Agent: MobiblancMamda/7.0
+            plugin: ~
