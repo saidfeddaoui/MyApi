@@ -207,7 +207,6 @@ class ContentController extends BaseController
     }
     /**
      * @SWG\Get(
-     *     path = "/vehicule/modeles/{id}",
      *     tags={"Content Types"},
      *     description="modeles",
      *     @SWG\Parameter(
