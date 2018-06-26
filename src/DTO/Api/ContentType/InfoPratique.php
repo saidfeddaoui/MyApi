@@ -2,7 +2,6 @@
 
 namespace App\DTO\Api\ContentType;
 
-use App\DTO\PharmacyApi\Pharmacy;
 use JMS\Serializer\Annotation as Serializer;
 
 class InfoPratique
@@ -19,7 +18,7 @@ class InfoPratique
      */
     private $weather;
     /**
-     * @Serializer\Type("App\DTO\Api\ContentType\Weather")
+     * @Serializer\Type("App\DTO\Api\ContentType\Pharmacy")
      * @var Pharmacy
      */
     private $pharmacy;
