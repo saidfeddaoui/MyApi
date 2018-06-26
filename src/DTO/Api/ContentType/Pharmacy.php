@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\PharmacyApi;
+namespace App\DTO\Api\ContentType;
 
 use JMS\Serializer\Annotation as Serializer;
 
