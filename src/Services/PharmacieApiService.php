@@ -27,7 +27,7 @@ class PharmacieApiService extends ApiCustomerService
         /**
          * @var \App\DTO\PharmacyApi\PharmacyResponse $pharmacieResponse
          */
-        $pharmacieResponse = $this->serializer->deserialize($this->decrypt($data), 'array', 'json');
+        $pharmacieResponse = $this->serializer->deserialize($this->decrypt($data), $this->class, 'json');
         return $pharmacieResponse->getNearestPharmacy() ?: null;
     }
 
