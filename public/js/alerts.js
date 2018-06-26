@@ -18,6 +18,7 @@ var TableDatatablesEditable = function () {
             var jqTds = $('>td', nRow);
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small title" value="' + aData[0] + '" required>';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small title_ar" value="' + aData[1] + '" required>';
+           // jqTds[2].innerHTML = '<textarea rows="4" cols="50" class="form-control input-small description">'+aData[2]+'</textarea>';
             jqTds[2].innerHTML = '<input type="text" class="form-control input-small description" value="' + aData[2] + '">';
             jqTds[3].innerHTML = '<input type="text" class="form-control input-small description_ar" value="' + aData[3] + '">';
             jqTds[4].innerHTML = '<input type="text" class="form-control input-small created_at datetimepicker" value="' + aData[4] + '" required>';

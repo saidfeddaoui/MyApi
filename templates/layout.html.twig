@@ -168,6 +168,15 @@
         toastr.error($_aError[1], $_aError[0], { timeOut: 10000 });
         {% endfor %}
         {% endif %}
+
+        {% if app.session.flashbag.has('warning') %}
+        var $aError = Array();
+        {% for iKey, flashMessage in app.session.flashbag.get('warning') %}
+        var $sError = '{{ flashMessage }}';
+        var $_aError = $sError.split(':');
+        toastr.warning($_aError[1], $_aError[0], { timeOut: 10000 });
+        {% endfor %}
+        {% endif %}
     });
 </script>
 </body>
