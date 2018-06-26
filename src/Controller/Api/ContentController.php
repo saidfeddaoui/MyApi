@@ -359,7 +359,7 @@ class ContentController extends BaseController
 //        $dec = $apiPharmacyApi->decrypt($enc);
 //        dump($enc, $dec);
 //        die;
-        $pharmacies = $apiPharmacyApi->getPharmacies(33.5739983,-7.6584367);
+        $pharmacies = $apiPharmacyApi->getPharmacy(33.5739983,-7.6584367);
         $prayer = $aladhanApi->getPrayer(33.5739983,-7.6584367);
         $weather = $weatherApi->getWeather(33.5739983,-7.6584367);
         dump($prayer, $weather, $pharmacies);
