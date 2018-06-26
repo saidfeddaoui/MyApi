@@ -10,6 +10,7 @@ use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\YahooWeather;
@@ -341,30 +342,24 @@ class ContentController extends BaseController
      *     path = "/infos_pratiques",
      *     name = "aladhan"
      * )
+     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\d+\.\d+")
+     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\d+\.\d+")
      * @Rest\View()
      *
+     * @param double $latitude
+     * @param double $longitude
      * @param AladhanApiService $aladhanApi
      * @param YahooWeatherApiService $weatherApi
      * @param PharmacieApiService $apiPharmacyApi
      * @param Request $request
      * @return ApiResponse
      */
-    public function infosPratiques(AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
+    public function infosPratiques($latitude, $longitude, AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
     {
-//        $key = openssl_random_pseudo_bytes($length = 16, $crypto_strong);
-//        dump($key, bin2hex($key), hex2bin(bin2hex($key)));
-//        die;
-//        $data = 'Omar El Maguiri';
-//        $enc = $apiPharmacyApi->encrypt(json_encode($_SERVER));
-//        $dec = $apiPharmacyApi->decrypt($enc);
-//        dump($enc, $dec);
-//        die;
-        $pharmacies = $apiPharmacyApi->getPharmacy(33.5739983,-7.6584367);
-        $prayer = $aladhanApi->getPrayer(33.5739983,-7.6584367);
-        $weather = $weatherApi->getWeather(33.5739983,-7.6584367);
-        dump($prayer, $weather, $pharmacies);
-        die;
-        return $this->respondWith(new InfoPratique($prayer, $weather));
+        $pharmacy = $apiPharmacyApi->getPharmacy($latitude,$longitude);
+        $prayer = $aladhanApi->getPrayer($latitude,$longitude);
+        $weather = $weatherApi->getWeather($latitude,$longitude);
+        return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
     }
 
 }
