@@ -2,6 +2,7 @@
 
 namespace App\DTO\AladhanApi;
 
+use App\DTO\Api\ContentType\Prayer;
 use JMS\Serializer\Annotation as Serializer;
 
 class Data
@@ -32,17 +33,17 @@ class Data
         return $this;
     }
 
-    public function getUpcomingPrayerTime()
+    public function getUpcomingPrayer()
     {
         $now = new \DateTime();
-        $prayer = [];
+        $prayer = null;
         foreach ($this->getTimings() as $key => $timing) {
             list($hour, $minutes) = explode(':', $timing);
             $time = (new \DateTime())->setTime($hour, $minutes);
             if ($time < $now) {
                 continue;
             }
-            $prayer = [$key => $timing];
+            $prayer = new Prayer($key, $time);
             break;
         }
         return $prayer;

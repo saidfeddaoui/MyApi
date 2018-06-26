@@ -2,20 +2,22 @@
 
 namespace App\Controller\Api;
 
+use App\DTO\Api\ApiResponse;
+use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\MarqueVehicule;
 use App\Services\AladhanApiService;
+use App\Services\PharmacieApiService;
+use App\Services\YahooWeatherApiService;
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\YahooWeather;
-use App\Services\PharmacieApiService;
-use App\Services\aladhan;
 
 /**
  * @Rest\Route(path="/content_types", name="api_content_types_")
  */
-class ContentController extends FOSRestController
+class ContentController extends BaseController
 {
 
     /**
@@ -34,7 +36,6 @@ class ContentController extends FOSRestController
      *         description="Slider successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/slider",
      *     name = "slider"
@@ -42,13 +43,14 @@ class ContentController extends FOSRestController
      * @Rest\View(
      *     serializerGroups={"all", "slider"}
      * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function slider()
+    public function slider(ObjectManager $em)
     {
-
-        $em = $this->getDoctrine()->getManager();
         $slider = $em->getRepository('App:ItemList')->findOneByType('slider');
-        return array("response"=>$slider);
+        return $this->respondWith($slider);
     }
     /**
      * @SWG\Get(
@@ -66,7 +68,6 @@ class ContentController extends FOSRestController
      *         description="Products successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/products",
      *     name = "products"
@@ -74,12 +75,14 @@ class ContentController extends FOSRestController
      * @Rest\View(
      *     serializerGroups={"all", "products"}
      * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function products()
+    public function products(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('App:ItemList')->findOneByType('products');
-        return array("response"=>$products);
+        return $this->respondWith($products);
     }
     /**
      * @SWG\Get(
@@ -97,7 +100,6 @@ class ContentController extends FOSRestController
      *         description="repair modes successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/modes",
      *     name = "modes"
@@ -105,12 +107,14 @@ class ContentController extends FOSRestController
      * @Rest\View(
      *     serializerGroups={"all", "modes"}
      * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function reparation()
+    public function reparation(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $modes = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
-        return array("response"=>$modes);
+        return $this->respondWith($modes);
     }
     /**
      * @SWG\Get(
@@ -128,19 +132,19 @@ class ContentController extends FOSRestController
      *         description="cities successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/cities",
      *     name = "cities"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View()
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function cities()
+    public function cities(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $villes = $em->getRepository('App:Ville')->findAll();
-        return array("response"=>$villes);
+        return $this->respondWith($villes);
     }
     /**
      * @SWG\Get(
@@ -158,19 +162,19 @@ class ContentController extends FOSRestController
      *         description="accident successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/accidents",
      *     name = "accidents"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View()
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function accidents()
+    public function accidents(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $accident = $em->getRepository('App:Accident')->findAll();
-        return array("response"=>$accident);
+        return $this->respondWith($accident);
     }
     /**
      * @SWG\Get(
@@ -188,19 +192,19 @@ class ContentController extends FOSRestController
      *         description="car models successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/vehicule/marques",
      *     name = "vehicules"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View()
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function marquesVehicule()
+    public function marquesVehicule(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $marques = $em->getRepository('App:MarqueVehicule')->findAll();
-        return array("response"=>$marques);
+        return $this->respondWith($marques);
     }
     /**
      * @SWG\Get(
@@ -225,11 +229,14 @@ class ContentController extends FOSRestController
      *     name = "modeles"
      * )
      * @Rest\View
+     *
+     * @param MarqueVehicule $marque
+     * @return ApiResponse
      */
     public function modelesVehicule(MarqueVehicule $marque)
     {
         $models = $marque->getModeleVehicules();
-        return array("response"=>$models);
+        return $this->respondWith($models);
     }
     /**
      * @SWG\Get(
@@ -247,7 +254,6 @@ class ContentController extends FOSRestController
      *         description="sinistre types successfully returned"
      *     )
      * )
-     *
      * @Rest\Get(
      *     path = "/sinitre/types",
      *     name = "type_sinistre"
@@ -255,10 +261,12 @@ class ContentController extends FOSRestController
      * @Rest\View(
      *     serializerGroups={"all", "sinistre"}
      * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function typesSinistre()
+    public function typesSinistre(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('App:ItemList')->findOneByType('sinistre');
         /**
          * @var \JMS\Serializer\Serializer $serializer
@@ -273,9 +281,8 @@ class ContentController extends FOSRestController
             $value['active_icon'] = $value['image'];
             unset($value['image']);
         }
-        return array("response"=>$products);
+        return $this->respondWith($products);
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -298,152 +305,66 @@ class ContentController extends FOSRestController
      *     name = "alerts"
      * )
      * @Rest\View
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
      */
-    public function Alerts()
+    public function Alerts(ObjectManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts();
-        return array("response"=>$alerts);
+        return $this->respondWith($alerts);
     }
-
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
-     *     description="aladhan",
+     *     description="Info Pratiques",
      *     @SWG\Parameter(
-     *         name="city",
+     *         name="latitude",
      *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's city"
+     *         type="number",
+     *         default="35",
+     *         description="User geo-location latitude"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="longitude",
+     *         in="query",
+     *         type="number",
+     *         default="-7",
+     *         description="User geo-location longitude"
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="adan timing successfully returned"
+     *         description="Return practical information such as Adhan time, Weather and 'Pharmacie de garde' ..."
      *     )
      * )
-     *
      * @Rest\Get(
-     *     path = "/aladhan",
+     *     path = "/infos_pratiques",
      *     name = "aladhan"
      * )
-     * @Rest\View(
-     * )
+     * @Rest\View()
      *
-     * @param AladhanApiService $apiAladhan
+     * @param AladhanApiService $aladhanApi
+     * @param YahooWeatherApiService $weatherApi
+     * @param PharmacieApiService $apiPharmacyApi
      * @param Request $request
-     * @return array
+     * @return ApiResponse
      */
-    public function aladhan(AladhanApiService $apiAladhan, Request $request)
+    public function infosPratiques(AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
     {
-        $data = $apiAladhan->getTimingsData();
-        return [ "response" => [ $data->getUpcomingPrayerTime() ] ];
-    }
-    /**
-     * @SWG\Get(
-     *     tags={"Content Types"},
-     *     description="weather",
-     *     @SWG\Parameter(
-     *         name="city",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's city"
-     *     ),
-     *      @SWG\Parameter(
-     *         name="lang",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's language"
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="weather successfully returned"
-     *     )
-     * )
-     *
-     * @Rest\Get(
-     *     path = "/weather",
-     *     name = "weather"
-     * )
-     * @Rest\View(
-     * )
-     */
-    public function weather(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $city = $request->get('city');
-        $lang = $request->get('lang');
-        $weather = array();
-
-        $aCities = array(array("ville"=>"Casablanca","code"=>"1532755","ville_ar"=>"الدار البيضاء"),
-            array("ville"=>"Rabat","code"=>"1539359","ville_ar"=>"الرباط"),
-            array("ville"=>"Tanger","code"=>"1540935","ville_ar"=>"طنجة"),
-            array("ville"=>"Oujda","code"=>"1538412","ville_ar"=>"وجدة"),
-            array("ville"=>"Agadir","code"=>"1542773","ville_ar"=>"أكادير"),
-            array("ville"=>"El jadida","code"=>"1534936","ville_ar"=>"الجديدة"),
-            array("ville"=>"Khouribga","code"=>"1537353"),
-            array("ville"=>"Beni-Mellal","code"=>"1532231","ville_ar"=>"بني ملال"),
-            array("ville"=>"Marrakech","code"=>"1537782","ville_ar"=>"مراكش"),
-            array("ville"=>"Meknes","code"=>"1537862","ville_ar"=>"مكناس"),
-            array("ville"=>"Fes","code"=>"1535450","ville_ar"=>"فاس"),
-            array("ville"=>"Taza","code"=>"1541306","ville_ar"=>"تازة"),
-            array("ville"=>"Tetouan","code"=>"1541445","ville_ar"=>"تطوان"),
-            array("ville"=>"Kenitra","code"=>"1537281"),
-            array("ville"=>"Larache","code"=>"1537598","ville_ar"=>"العرائش")
-        );
-        foreach ($aCities as $key =>  $value){
-            if(strtolower($value["ville"]) == strtolower($city)){
-                $yh = new YahooWeather($value["code"]);
-                $weather = array("ville"=>($lang == 'ar') ? $value["ville_ar"]:$value["ville"],
-                                 "temperature"=>$yh->getTemperature(false),
-                                 "vent"=>$yh->getWindSpeed(),
-                                 "image"=>substr($yh->getYahooIcon(),10,37),
-                                 "description"=>$yh->getDescription()
-
-                    );
-                return array("response"=>$weather);
-            }
-    }
-        return array("response"=>$weather);
-    }
-
-
-    /**
-     * @SWG\Get(
-     *     tags={"Content Types"},
-     *     description="pharmacy",
-     *     @SWG\Parameter(
-     *         name="city",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's city"
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="nearest pharmacies successfully returned"
-     *     )
-     * )
-     *
-     * @Rest\Get(
-     *     path = "/pharmacy",
-     *     name = "pharmacy"
-     * )
-     * @Rest\View(
-     * )
-     *
-     * @param PharmacieApiService $apiPahrmacy
-     * @param Request $request
-     * @return array
-     */
-    public function Pharmacy(PharmacieApiService $apiPahrmacy, Request $request)
-    {
-        $city = $request->get('city');
-        $data = $apiPahrmacy->getPharmacies($city);
-        return [ "response" => $data ];
+//        $key = openssl_random_pseudo_bytes($length = 16, $crypto_strong);
+//        dump($key, bin2hex($key), hex2bin(bin2hex($key)));
+//        die;
+//        $data = 'Omar El Maguiri';
+//        $enc = $apiPharmacyApi->encrypt(json_encode($_SERVER));
+//        $dec = $apiPharmacyApi->decrypt($enc);
+//        dump($enc, $dec);
+//        die;
+        $pharmacies = $apiPharmacyApi->getPharmacies(33.5739983,-7.6584367);
+        $prayer = $aladhanApi->getPrayer(33.5739983,-7.6584367);
+        $weather = $weatherApi->getWeather(33.5739983,-7.6584367);
+        dump($prayer, $weather, $pharmacies);
+        die;
+        return $this->respondWith(new InfoPratique($prayer, $weather));
     }
 
 }
