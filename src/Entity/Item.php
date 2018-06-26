@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable as TranslatableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
@@ -36,8 +37,9 @@ class Item implements  TranslatableInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      * @Serializer\Expose()
+     *
+     * @Assert\Regex(pattern="/^0[0-9]{0,9}$/",message="numéro de téléphone n'est pas valide",groups={"emergency"});
      */
     private $subTitle;
 
