@@ -19,8 +19,8 @@ var TableDatatablesEditable = function () {
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small title" value="' + aData[0] + '" required>';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small title_ar" value="' + aData[1] + '" required>';
            // jqTds[2].innerHTML = '<textarea rows="4" cols="50" class="form-control input-small description">'+aData[2]+'</textarea>';
-            jqTds[2].innerHTML = '<input type="text" class="form-control input-small description" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<input type="text" class="form-control input-small description_ar" value="' + aData[3] + '">';
+            jqTds[2].innerHTML = '<input type="text" class="form-control  description" value="' + aData[2] + '">';
+            jqTds[3].innerHTML = '<input type="text" class="form-control  description_ar" value="' + aData[3] + '">';
             jqTds[4].innerHTML = '<input type="text" class="form-control input-small created_at datetimepicker" value="' + aData[4] + '" required>';
             jqTds[5].innerHTML = '<input type="text" class="form-control input-small expired_at datetimepicker" value="' + aData[5] + '">';
 
@@ -30,7 +30,7 @@ var TableDatatablesEditable = function () {
         }
 
         function saveRow(oTable, nRow) {
-            var jqInputs = $('input', nRow);
+           var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
@@ -62,7 +62,7 @@ var TableDatatablesEditable = function () {
             // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
             // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-
+            "autoWidth": false,
             "lengthMenu": [
                 [5, 15, 20, -1],
                 [5, 15, 20, "All"] // change per page values here
@@ -85,7 +85,22 @@ var TableDatatablesEditable = function () {
             }, {
                 "searchable": true,
                 "targets": [0]
-            }],
+            },
+                {
+                    "width": "12%",
+                    "targets": [0]
+                },{
+                "width": "12%",
+                "targets": [1]
+                },
+                {
+                    "width": "18%",
+                    "targets": [2]
+                },
+                {
+                    "width": "18%",
+                    "targets": [3]
+                }],
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc
