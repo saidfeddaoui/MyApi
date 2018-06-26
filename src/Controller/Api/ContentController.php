@@ -10,10 +10,8 @@ use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
-use App\Services\YahooWeather;
 
 /**
  * @Rest\Route(path="/content_types", name="api_content_types_")
@@ -323,14 +321,12 @@ class ContentController extends BaseController
      *         name="latitude",
      *         in="query",
      *         type="number",
-     *         default="35",
      *         description="User geo-location latitude"
      *     ),
      *     @SWG\Parameter(
      *         name="longitude",
      *         in="query",
      *         type="number",
-     *         default="-7",
      *         description="User geo-location longitude"
      *     ),
      *     @SWG\Response(
@@ -342,8 +338,8 @@ class ContentController extends BaseController
      *     path = "/infos_pratiques",
      *     name = "aladhan"
      * )
-     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\d+\.\d+")
-     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\d+\.\d+")
+     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\-?\d+(\.\d+)?")
+     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\-?\d+(\.\d+)?")
      * @Rest\View()
      *
      * @param double $latitude
