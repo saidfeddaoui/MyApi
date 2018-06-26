@@ -8,7 +8,7 @@ class PharmacyResponse
 {
 
     /**
-     * @Serializer\Type("array<\App\DTO\PharmacyApi\Pharmacy>")
+     * @Serializer\Type("array<App\DTO\PharmacyApi\Pharmacy>")
      * @var Pharmacy[]
      */
     private $pharmacies;
