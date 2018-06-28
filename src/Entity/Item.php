@@ -30,7 +30,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider","products","modes","sinistre"})
+     * @Serializer\Groups({"slider","products","modes","sinistre","emergency"})
      * @Gedmo\Translatable
      */
     private $title;
@@ -38,7 +38,7 @@ class Item implements  TranslatableInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Serializer\Expose()
-     *
+     * @Serializer\Groups({"emergency"})
      * @Assert\Regex(pattern="/^0[0-9]{0,9}$/",message="numéro de téléphone n'est pas valide",groups={"emergency"});
      */
     private $subTitle;
@@ -66,7 +66,7 @@ class Item implements  TranslatableInterface
      * @ORM\JoinColumn(name="icon_id", referencedColumnName="id")
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"products","sinistre"})
+     * @Serializer\Groups({"products","sinistre","emergency"})
      */
     private $icon;
 

@@ -35,13 +35,9 @@ class ContentController extends BaseController
      *         description="Slider successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/slider",
-     *     name = "slider"
-     * )
-     * @Rest\View(
-     *     serializerGroups={"all", "slider"}
-     * )
+     *
+     * @Rest\Get(path = "/slider", name = "slider")
+     * @Rest\View(serializerGroups={"all", "slider"})
      *
      * @param ObjectManager $em
      * @return ApiResponse
@@ -67,13 +63,9 @@ class ContentController extends BaseController
      *         description="Products successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/products",
-     *     name = "products"
-     * )
-     * @Rest\View(
-     *     serializerGroups={"all", "products"}
-     * )
+     *
+     * @Rest\Get(path = "/products", name = "products")
+     * @Rest\View(serializerGroups={"all", "products"})
      *
      * @param ObjectManager $em
      * @return ApiResponse
@@ -99,13 +91,9 @@ class ContentController extends BaseController
      *         description="repair modes successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/modes",
-     *     name = "modes"
-     * )
-     * @Rest\View(
-     *     serializerGroups={"all", "modes"}
-     * )
+     *
+     * @Rest\Get(path = "/modes", name = "modes")
+     * @Rest\View(serializerGroups={"all", "modes"})
      *
      * @param ObjectManager $em
      * @return ApiResponse
@@ -131,10 +119,8 @@ class ContentController extends BaseController
      *         description="cities successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/cities",
-     *     name = "cities"
-     * )
+     *
+     * @Rest\Get(path = "/cities", name = "cities")
      * @Rest\View()
      *
      * @param ObjectManager $em
@@ -161,10 +147,8 @@ class ContentController extends BaseController
      *         description="accident successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/accidents",
-     *     name = "accidents"
-     * )
+     *
+     * @Rest\Get(path = "/accidents", name = "accidents")
      * @Rest\View()
      *
      * @param ObjectManager $em
@@ -191,10 +175,8 @@ class ContentController extends BaseController
      *         description="car models successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/vehicule/marques",
-     *     name = "vehicules"
-     * )
+     *
+     * @Rest\Get(path = "/vehicule/marques", name = "vehicles")
      * @Rest\View()
      *
      * @param ObjectManager $em
@@ -222,10 +204,7 @@ class ContentController extends BaseController
      *     )
      * )
      *
-     * @Rest\Get(
-     *     path = "/vehicule/modeles/{id}",
-     *     name = "modeles"
-     * )
+     * @Rest\Get(path = "/vehicule/modeles/{id}", name = "modeles")
      * @Rest\View
      *
      * @param MarqueVehicule $marque
@@ -252,13 +231,9 @@ class ContentController extends BaseController
      *         description="sinistre types successfully returned"
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/sinitre/types",
-     *     name = "type_sinistre"
-     * )
-     * @Rest\View(
-     *     serializerGroups={"all", "sinistre"}
-     * )
+     *
+     * @Rest\Get(path = "/sinitre/types", name = "type_sinistre")
+     * @Rest\View(serializerGroups={"all", "sinistre"})
      *
      * @param ObjectManager $em
      * @return ApiResponse
@@ -298,10 +273,7 @@ class ContentController extends BaseController
      *     )
      * )
      *
-     * @Rest\Get(
-     *     path = "/alerts",
-     *     name = "alerts"
-     * )
+     * @Rest\Get(path = "/alerts", name = "alerts")
      * @Rest\View
      *
      * @param ObjectManager $em
@@ -315,30 +287,17 @@ class ContentController extends BaseController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
-     *     description="Info Pratiques",
-     *     @SWG\Parameter(
-     *         name="latitude",
-     *         in="query",
-     *         type="number",
-     *         description="User geo-location latitude"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="longitude",
-     *         in="query",
-     *         type="number",
-     *         description="User geo-location longitude"
-     *     ),
+     *     description="Infos Pratiques",
+     *     @SWG\Parameter(name="latitude", type="number", in="query"),
+     *     @SWG\Parameter(name="longitude", type="number", in="query"),
      *     @SWG\Response(
      *         response=200,
      *         description="Return practical information such as Adhan time, Weather and 'Pharmacie de garde' ..."
      *     )
      * )
-     * @Rest\Get(
-     *     path = "/infos_pratiques",
-     *     name = "aladhan"
-     * )
-     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\-?\d+(\.\d+)?")
-     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\-?\d+(\.\d+)?")
+     * @Rest\Get(path = "/infos_pratiques", name = "infos_pratiques")
+     * @Rest\QueryParam(name="latitude", default="33.5739983", requirements="\-?\d+(\.\d+)?", description="User geo-location latitude")
+     * @Rest\QueryParam(name="longitude", default="-7.6584367", requirements="\-?\d+(\.\d+)?", description="User geo-location longitude")
      * @Rest\View()
      *
      * @param double $latitude
@@ -355,6 +314,39 @@ class ContentController extends BaseController
         $prayer = $aladhanApi->getPrayer($latitude,$longitude);
         $weather = $weatherApi->getWeather($latitude,$longitude);
         return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Emergency Numbers",
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Slider successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/emergency",
+     *     name = "emergency"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all", "emergency"}
+     * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function emergency(ObjectManager $em)
+    {
+        $emergency = $em->getRepository('App:ItemList')->findOneByType('emergency');
+        return $this->respondWith($emergency);
     }
 
 }
