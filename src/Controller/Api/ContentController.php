@@ -358,4 +358,37 @@ class ContentController extends BaseController
         return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
     }
 
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Emergency Numbers",
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Slider successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/emergency",
+     *     name = "emergency"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all", "emergency"}
+     * )
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function emergency(ObjectManager $em)
+    {
+        $emergency = $em->getRepository('App:ItemList')->findOneByType('emergency');
+        return $this->respondWith($emergency);
+    }
+
 }
