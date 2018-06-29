@@ -20,6 +20,14 @@ eight_points_guzzle:
                     User-Agent: MobiblancMamda/7.0
                     Accept: application/json
             plugin: ~
+        api_locator_yahoo:
+            base_url: https://www.yahoo.com/news/_td/api/resource/
+            options:
+                timeout: 30
+                headers:
+                    User-Agent: MobiblancMamda/7.0
+                    Accept: application/json
+            plugin: ~
         api_pharmacie:
             base_url: http://pharma.mobiblanc.com/json.php/
             options:

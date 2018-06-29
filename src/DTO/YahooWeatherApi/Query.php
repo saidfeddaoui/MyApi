@@ -111,5 +111,12 @@ class Query
         $icon = $code ? "http://l.yimg.com/a/i/us/we/52/{$code}.gif" : null;
         return new Weather($temp, $unit, $date, $text, $icon, $location);
     }
+    /**
+     * @return string
+     */
+    public function getWoeid()
+    {
+        return $this->results['place']['woeid'] ?? '';
+    }
 
 }

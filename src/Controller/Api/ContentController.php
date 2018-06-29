@@ -290,6 +290,7 @@ class ContentController extends BaseController
      *     description="Infos Pratiques",
      *     @SWG\Parameter(name="latitude", type="number", in="query"),
      *     @SWG\Parameter(name="longitude", type="number", in="query"),
+     *     @SWG\Parameter(name="lang", in="query", type="string", default="fr", description="Specify the user's language"),
      *     @SWG\Response(
      *         response=200,
      *         description="Return practical information such as Adhan time, Weather and 'Pharmacie de garde' ..."
