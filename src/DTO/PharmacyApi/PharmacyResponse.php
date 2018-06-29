@@ -32,6 +32,6 @@ class PharmacyResponse
 
     public function getNearestPharmacy()
     {
-        return $this->pharmacies[0];
+        return $this->pharmacies[0] ?? null;
     }
 }
