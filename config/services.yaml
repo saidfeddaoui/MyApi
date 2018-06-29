@@ -51,3 +51,9 @@ services:
             - '@eight_points_guzzle.client.api_pharmacie'
             - '@jms_serializer'
             - App\DTO\PharmacyApi\PharmacyResponse
+    app.normalizer.resource_validation_exception:
+            class: App\Normalizer\NotFoundHttpExceptionNormalizer
+            arguments:
+                - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
+            tags:
+                - { name: app.normalizer }
