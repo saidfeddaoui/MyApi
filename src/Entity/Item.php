@@ -39,7 +39,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Serializer\Expose()
      * @Serializer\Groups({"emergency"})
-     * @Assert\Regex(pattern="/^0[0-9]{0,9}$/",message="numéro de téléphone n'est pas valide",groups={"emergency"});
+     * @Assert\Regex(pattern="/^[0-9]/",message="numéro de téléphone n'est pas valide",groups={"emergency"});
      */
     private $subTitle;
 
