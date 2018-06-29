@@ -2,13 +2,28 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Client;
+use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AladhanApiService extends ApiCustomerService
 {
 
     const DEFAULT_CITY = 'Casablanca';
     const DEFAULT_COUNTRY = 'Morocco';
+
+    /**
+     * @var TranslatorInterface $translator
+     */
+    private $translator;
+
+    public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', TranslatorInterface $translator, string $language = 'fr')
+    {
+        parent::__construct($httpClient, $serializer, $class);
+        $this->translator = $translator;
+        $this->translator->setLocale($language);
+    }
 
     /**
      * @param double $latitude
@@ -26,7 +41,9 @@ class AladhanApiService extends ApiCustomerService
                 'longitude' => $longitude,
             ]
         ]);
-        return $this->getResult($response);
+        $prayer = $this->getResult($response);
+        $prayer->setName($this->translator->trans($prayer->getName(), [], 'salat'));
+        return $prayer;
     }
     /**
      * @param string $city

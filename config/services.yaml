@@ -41,6 +41,8 @@ services:
             - '@eight_points_guzzle.client.api_aladhan'
             - '@jms_serializer'
             - App\DTO\AladhanApi\AladhanResponse
+            - '@translator.data_collector'
+            - "@=service('request_stack').getCurrentRequest().getLocale()"
     App\Services\YahooWeatherApiService:
         arguments:
             - '@eight_points_guzzle.client.api_weather_yahoo'
@@ -51,3 +53,9 @@ services:
             - '@eight_points_guzzle.client.api_pharmacie'
             - '@jms_serializer'
             - App\DTO\PharmacyApi\PharmacyResponse
+    App\Services\YahooLocatorApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_locator_yahoo'
+            - '@jms_serializer'
+            - array
+            - "@=service('request_stack').getCurrentRequest().getLocale()"
