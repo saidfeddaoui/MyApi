@@ -9,6 +9,7 @@
 namespace App\DTO\Api;
 
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Serializer\ExclusionPolicy("none")
@@ -17,8 +18,14 @@ class ApiResponse
 {
 
     const OK = 200;
+    const INTERNAL_SERVER_ERROR = 500;
     const STATUS_TEXT = [
-        200 => 'OK',
+        self::OK => 'OK',
+        self::INTERNAL_SERVER_ERROR => 'Internal Server Error',
+    ];
+    const HTTP_STATUS_CODE = [
+        self::OK => Response::HTTP_OK,
+        self::INTERNAL_SERVER_ERROR => Response::HTTP_INTERNAL_SERVER_ERROR,
     ];
 
     /**
@@ -101,6 +108,14 @@ class ApiResponse
     {
         $this->data = $data;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHttpStatusCode()
+    {
+        return self::HTTP_STATUS_CODE[$this->code] ?? self::HTTP_STATUS_CODE[self::INTERNAL_SERVER_ERROR];
     }
 
 }

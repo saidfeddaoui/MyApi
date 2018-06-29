@@ -59,3 +59,9 @@ services:
             - '@jms_serializer'
             - array
             - "@=service('request_stack').getCurrentRequest().getLocale()"
+    app.normalizer.resource_validation_exception:
+            class: App\Normalizer\NotFoundHttpExceptionNormalizer
+            arguments:
+                - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
+            tags:
+                - { name: app.normalizer }
