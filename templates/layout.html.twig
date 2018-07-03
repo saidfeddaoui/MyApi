@@ -145,6 +145,10 @@
     <script src="{{ asset('metronic/assets/apps/js/sweetalert.min.js') }}" type="text/javascript"></script>
     <!-- END TSWEETALERT -->
     <!-- BEGIN APPLICATION INIT -->
+    <script>
+    var URL_FRENCH_JSON_DATATABLE = "{{ asset('metronic/assets/apps/js/data_table_French.js') }}";
+    </script>
+
     <script src="{{ asset('metronic/assets/apps/js/init.js') }}" type="text/javascript"></script>
     <!-- END APPLICATION INIT -->
 {% endblock %}
@@ -177,6 +181,7 @@
         toastr.warning($_aError[1], $_aError[0], { timeOut: 10000 });
         {% endfor %}
         {% endif %}
+
     });
 </script>
 </body>

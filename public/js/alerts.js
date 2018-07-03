@@ -1,260 +1,116 @@
-var TableDatatablesEditable = function () {
-
-    var handleTable = function () {
-
-        function restoreRow(oTable, nRow) {
-            var aData = oTable.fnGetData(nRow);
-            var jqTds = $('>td', nRow);
-
-            for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
-                oTable.fnUpdate(aData[i], nRow, i, false);
-            }
-
-            oTable.fnDraw();
-        }
-
-        function editRow(oTable, nRow) {
-            var aData = oTable.fnGetData(nRow);
-            var jqTds = $('>td', nRow);
-            jqTds[0].innerHTML = '<input type="text" class="form-control input-small title" value="' + aData[0] + '" required>';
-            jqTds[1].innerHTML = '<input type="text" class="form-control input-small title_ar" value="' + aData[1] + '" required>';
-           // jqTds[2].innerHTML = '<textarea rows="4" cols="50" class="form-control input-small description">'+aData[2]+'</textarea>';
-            jqTds[2].innerHTML = '<input type="text" class="form-control  description" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<input type="text" class="form-control  description_ar" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<input type="text" class="form-control input-small created_at datetimepicker" value="' + aData[4] + '" required>';
-            jqTds[5].innerHTML = '<input type="text" class="form-control input-small expired_at datetimepicker" value="' + aData[5] + '">';
-
-            jqTds[6].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
-            jqTds[7].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
-
-        }
-
-        function saveRow(oTable, nRow) {
-           var jqInputs = $('input', nRow);
-            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-            oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 6, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow,7, false);
-            oTable.fnDraw();
-        }
-
-        function cancelEditRow(oTable, nRow) {
-            var jqInputs = $('input', nRow);
-            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-            oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 6, false);
-            oTable.fnDraw();
-        }
-
-        var table = $('#sample_editable_1');
-
-        var oTable = table.dataTable({
-
-            // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
-            // So when dropdowns used the scrollable div should be removed.
-            //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-            "autoWidth": false,
-            "lengthMenu": [
-                [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
-            ],
-
-            // Or you can use remote translation file
-            //"language": {
-            //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
-            //},
-
-            // set the initial value
-            "pageLength": 5,
-
-            "language": {
-                "lengthMenu": " _MENU_ records"
-            },
-            "columnDefs": [{ // set default column settings
-                'orderable': true,
-                'targets': [0]
-            }, {
+jQuery(document).ready(function() {
+    $('.datatable').dataTable({
+        "columns": [
+            { // set default column settings
                 "searchable": true,
-                "targets": [0]
+                "orderable": true,
             },
-                {
-                    "width": "12%",
-                    "targets": [0]
-                },{
-                "width": "12%",
-                "targets": [1]
-                },
-                {
-                    "width": "18%",
-                    "targets": [2]
-                },
-                {
-                    "width": "18%",
-                    "targets": [3]
-                }],
-            "order": [
-                [0, "asc"]
-            ] // set first column as a default sort by asc
-        });
-
-        var tableWrapper = $("#sample_editable_1_wrapper");
-
-        var nEditing = null;
-        var nNew = false;
-
-        $('#sample_editable_1_new').click(function (e) {
-            e.preventDefault();
-
-            if (nNew && nEditing) {
-                if (confirm("Previose row not saved. Do you want to save it ?")) {
-                    saveRow(oTable, nEditing); // save
-                    $(nEditing).find("td:first").html("Untitled");
-                    nEditing = null;
-                    nNew = false;
-
-                } else {
-                    oTable.fnDeleteRow(nEditing); // cancel
-                    nEditing = null;
-                    nNew = false;
-
-                    return;
-                }
+            { // set default column settings
+                "searchable": true,
+                "orderable": false,
+            },
+            {
+                "searchable": true,
+                "orderable": false,
+            },
+            {
+                "searchable": true,
+                "orderable": false,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
+            },
+            {
+                "searchable": false,
+                "orderable": false,
             }
-
-            var aiNew = oTable.fnAddData(['', '', '', '', '', '','','']);
-            var nRow = oTable.fnGetNodes(aiNew[0]);
-            editRow(oTable, nRow);
-            nEditing = nRow;
-            nNew = true;
-        });
-
-        table.on('click', '.delete', function (e) {
-            e.preventDefault();
-            if (confirm("Voulez-vous vraiment supprimer cet enregistrement ?") == false) {
-                return;
-            }
-            /* delete data backend */
-            var $this = $(this);
-            var id = $this.closest('tr').data('id');
-            $.ajax({
-                url: Routing.generate('delete_alert', {id: id}),
-                type: "POST",
-                success: function(response) {
-                    toastr.success(response.message);
-                    var nRow = $this.parents('tr')[0];
-                    oTable.fnDeleteRow(nRow);
+        ],
+        "order": [
+            [0, "asc"]
+        ] // set first column as a default sort by asc
+    });
+    $('.edit').on('click', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: Routing.generate('edit_alert', {id: id}),
+            type: "POST",
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                //traitement en cas de succès
+                200: function (response) {
+                    $("#edit-alert-modal .modal-body .form").html(response);
+                    $("#edit-alert-modal").modal();
                     return false;
-                },
-                error: function(e){
-                    console.log(e.responseText);
                 }
-            });
-            //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+            }
         });
-
-        table.on('click', '.cancel', function (e) {
-            e.preventDefault();
-            if (nNew) {
-                oTable.fnDeleteRow(nEditing);
-                nEditing = null;
-                nNew = false;
+    });
+    $('.delete').on('click', function () {
+        var remove_cuerrent = $(this);
+        var td = $(this);
+        var id = td.data('id');
+        swal({
+            title: "Voulez-vous vraiement supprimer cette alerte ?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "Confirmer!",
+            cancelButtonText: "Annuler",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                deleteAction(id, td);
             } else {
-                restoreRow(oTable, nEditing);
-                nEditing = null;
+                swal("Action annulée", "Aucune action n'a été exécutée", "error");
             }
         });
-
-        table.on('click', '.edit', function (e) {
-            e.preventDefault();
-            /* Get the row as a parent of the link that was clicked on */
-            var nRow = $(this).parents('tr')[0];
-            if (nEditing !== null && nEditing != nRow) {
-                /* Currently editing - but not this row - restore the old before continuing to edit mode */
-                restoreRow(oTable, nEditing);
-                editRow(oTable, nRow);
-                nEditing = nRow;
-            } else if (nEditing == nRow && this.innerHTML == '<i class="glyphicon glyphicon-saved"></i>') {
-                var $this = $(this);
-                var tr = $this.closest('tr');
-                /* save data backend */
-                var id = tr.data('id');
-                var saveUrl = Routing.generate('add_alert');
-                if (id) {
-                    var saveUrl = Routing.generate('edit_alert', {id: id});
+    });
+    function deleteAction(id, td) {
+        $.ajax({
+            url: Routing.generate('delete_alert', {id: id}),
+            type: "POST",
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                //traitement en cas de succès
+                200: function (response) {
+                    /*******************************
+                     Flash Notification
+                     *******************************/
+                    swal.close();
+                    setTimeout(function(){
+                        swal({
+                            title: "",
+                            text: response.message,
+                            timer: 3000,
+                            showConfirmButton: false,
+                            customClass: 'custom-swal',
+                        });
+                    }, 500);
+                    /*******************************
+                     End Flash Notification
+                     *******************************/
+                    $('.datatable').DataTable().row( td.parents('tr') ).remove().draw();
                 }
-                var title = tr.find('td .title').val();
-                var title_ar = tr.find('td .title_ar').val();
-                var description = tr.find('td .description').val();
-                var description_ar = tr.find('td .description_ar').val();
-                var date_creation = tr.find('td .created_at').val();
-                var date_expiration = tr.find('td .expired_at').val();
-                var DATA = {"title":title,
-                            "title_ar":title_ar,
-                            "description":description,
-                            "description_ar":description_ar,
-                            "date_creation":date_creation,
-                            "date_expiration":date_expiration
-                };
-                if(title == ''){
-                    toastr.error("Veuillez renseigner le titre");
-                    return false;
-                }else if(title_ar == ''){
-                    toastr.error("Veuillez renseigner le titre en arabe");
-                    return false;
-                }else if(date_creation == ''){
-                    toastr.error("Veuillez renseigner la date de creation");
-                    return false;
-                }
-                // else if(date_expiration == ''){
-                //     toastr.error("Veuillez renseigner la date d'expiration");
-                //     return false;
-                // }
-                $.ajax({
-                    url: saveUrl,
-                    type: "POST",
-                    data:DATA,
-                    success: function(response) {
-                        toastr.success(response.message);
-                        /* Editing this row and want to save it */
-
-                        saveRow(oTable, nEditing);
-                        nEditing = null;
-                        tr.data('id', response.id);
-                        return false;
-                    },
-                    error: function(e){
-                        console.log(e.responseText);
-                    }
-                });
-               // alert("Updated! Do not forget to do some ajax to sync with backend :)");
-            } else {
-                /* No edit in progress - let's start one */
-                editRow(oTable, nRow);
-                nEditing = nRow;
             }
         });
     }
-
-    return {
-
-        //main function to initiate the module
-        init: function () {
-            handleTable();
-        }
-
-    };
-
-}();
-
-jQuery(document).ready(function() {
-    TableDatatablesEditable.init();
 });

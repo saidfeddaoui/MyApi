@@ -14,7 +14,8 @@ var MamdaAppContext = {
             "bDestroy": true,
             "oLanguage": {
                 "sSearch": "",
-                "sUrl": "http://cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"
+                //"sUrl": "http://cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"
+                "sUrl": URL_FRENCH_JSON_DATATABLE
             }
         })
     },
@@ -25,6 +26,7 @@ var MamdaAppContext = {
 
         $('.datetimepicker').datetimepicker({
             locale:'fr',
+            minDate: 0,
             // format: 'd-m-Y H:i',
             // step:30,
             // dayOfWeekStart: 1,
@@ -35,6 +37,7 @@ var MamdaAppContext = {
         $(document).on("focus", ".datetimepicker", function(){
             $(this).datetimepicker({
                 locale:'fr',
+                minDate: 0,
                 format: 'd-m-Y H:i',
                 closeOnDateSelect:true
             });
