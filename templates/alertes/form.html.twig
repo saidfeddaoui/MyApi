@@ -1,0 +1,64 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.title) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.title_ar) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.title_ar, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.description) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.description_ar) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.description_ar, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.date_creation) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.date_creation, {'attr': {'class': 'form-control datetimepicker'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.date_expiration) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.date_expiration, {'attr': {'class': 'form-control datetimepicker'}} ) }}
+    </div>
+</div>
+
+
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green SaveProductEdit">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}
