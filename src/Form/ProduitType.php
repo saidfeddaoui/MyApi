@@ -15,7 +15,7 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Titre: ',])
+            ->add('title', TextType::class, ['label' => 'Titre ',])
             ->add('_icn', FileType::class, [
                 'label' => 'Icône ',
                 'required' => false,
