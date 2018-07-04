@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: JIDAL_MOHAMED
- * Date: 29/06/2018
- * Time: 14:59
- */
 
 namespace App\EventSubscriber;
 
@@ -17,10 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-
 class ExceptionListener implements EventSubscriberInterface
 {
 
+    const API_FIREWALL = 'security.firewall.map.context.api';
     private $serializer;
     private $normalizers = [];
 
@@ -31,10 +25,16 @@ class ExceptionListener implements EventSubscriberInterface
 
     public function processException(GetResponseForExceptionEvent $event)
     {
-
+        $firewall = $event->getRequest()->attributes->get('_firewall_context');
+        if (self::API_FIREWALL !== $firewall) {
+            return;
+        }
         $result = null;
-        $response = new ApiResponse([], ApiResponse::INTERNAL_SERVER_ERROR);
         $exception = $event->getException();
+        $response = new ApiResponse([], ApiResponse::INTERNAL_SERVER_ERROR);
+        if ($message = $exception->getMessage()) {
+            $response->setStatus($message);
+        }
         foreach ($this->normalizers as $normalizer) {
             if ($normalizer->supports($exception)) {
                 $response = $normalizer->normalize($exception);
