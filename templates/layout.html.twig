@@ -42,7 +42,7 @@
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{{ asset('metronic/assets/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('metronic/assets/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+        {{ render(controller('App\\Controller\\BackOffice\\LayoutController::renderThemeColor')) }}
         <link href="{{ asset('metronic/assets/layouts/layout2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->

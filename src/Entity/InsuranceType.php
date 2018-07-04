@@ -29,6 +29,11 @@ class InsuranceType
     private $role;
 
     /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $theme_color;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="insuranceTypes")
      */
     private $users;
@@ -64,6 +69,24 @@ class InsuranceType
     {
         $this->role = $role;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThemeColor()
+    {
+        return $this->theme_color;
+    }
+
+    /**
+     * @param string $theme_color
+     * @return static
+     */
+    public function setThemeColor($theme_color)
+    {
+        $this->theme_color = $theme_color;
         return $this;
     }
 
