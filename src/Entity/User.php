@@ -108,6 +108,11 @@ class User implements UserInterface, EquatableInterface
      */
     protected $_group;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Mutuelle", mappedBy="users")
+     */
+    private $mutuelles;
+
     public function __construct(?string $username = null, ?string $password = null, bool $enabled = true, bool $userNonExpired = true, bool $credentialsNonExpired = true, bool $userNonLocked = true)
     {
         $this->username = $username;
@@ -118,6 +123,7 @@ class User implements UserInterface, EquatableInterface
         $this->accountNonLocked = $userNonLocked;
         $this->salt = sha1(random_bytes(30));
         $this->roles = new ArrayCollection();
+        $this->mutuelles = new ArrayCollection();
     }
 
     /**
@@ -608,6 +614,34 @@ class User implements UserInterface, EquatableInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return Collection|Mutuelle[]
+     */
+    public function getMutuelles(): Collection
+    {
+        return $this->mutuelles;
+    }
+
+    public function addMutuelle(Mutuelle $mutuelle): self
+    {
+        if (!$this->mutuelles->contains($mutuelle)) {
+            $this->mutuelles[] = $mutuelle;
+            $mutuelle->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMutuelle(Mutuelle $mutuelle): self
+    {
+        if ($this->mutuelles->contains($mutuelle)) {
+            $this->mutuelles->removeElement($mutuelle);
+            $mutuelle->removeUser($this);
+        }
+
+        return $this;
     }
 
 }
