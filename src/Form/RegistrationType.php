@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Group;
+use App\Entity\InsuranceType;
+use App\Entity\Mutuelle;
 use App\Entity\Role;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -19,6 +21,12 @@ class RegistrationType extends AbstractType
                 'class' => Group::class,
                 'choice_label' => 'name',
                 'label' => 'Groupe'
+            ])
+            ->add('insuranceTypes', EntityType::class, [
+                'class' => InsuranceType::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'label' => 'Mutuelles'
             ])
             ->add('roles', EntityType::class, [
                 'class' => Role::class,

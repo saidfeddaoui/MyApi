@@ -5,12 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\Role as BaseRole;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\MutuelleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InsuranceTypeRepository")
  */
-class Mutuelle extends BaseRole
+class InsuranceType
 {
     /**
      * @ORM\Id()
@@ -25,25 +24,17 @@ class Mutuelle extends BaseRole
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=60)
      */
     private $role;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="mutuelles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="insuranceTypes")
      */
     private $users;
 
-    /**
-     * Mutuelle constructor.
-     * @param string $name
-     * @param string $role
-     */
-
-    public function __construct(?string $name = null, ?string $role = null)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->role = $role;
         $this->users = new ArrayCollection();
     }
 
@@ -88,6 +79,7 @@ class Mutuelle extends BaseRole
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
+            $user->addInsuranceType($this);
         }
 
         return $this;
@@ -97,6 +89,7 @@ class Mutuelle extends BaseRole
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+            $user->removeInsuranceType($this);
         }
 
         return $this;
