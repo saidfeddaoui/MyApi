@@ -490,10 +490,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function getRoles()
     {
-        $roles = $this->roles->toArray();
-        $roles[] = $this->_group;
-        return $roles;
-//        return $this->roles->map(function ($element) { return $element->getRole();})->toArray();
+        return array_merge($this->roles->toArray(), $this->insuranceTypes->toArray(), [$this->_group]);
     }
     /**
      * Never use this to check if this user has access to anything!
