@@ -30,6 +30,11 @@ class Accident
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="accidents")
+     */
+    private $insuranceType;
+
     public function getId()
     {
         return $this->id;
@@ -43,6 +48,18 @@ class Accident
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?InsuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?InsuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }

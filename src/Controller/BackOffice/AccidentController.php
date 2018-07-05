@@ -21,9 +21,10 @@ class AccidentController extends Controller
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $request->getSession()->get('insuranceType');
         $data = array();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-        $accident = $em->getRepository('App:Accident')->findAll();
+        $accident = $em->getRepository('App:Accident')->findBy(['insuranceType'=> $insuranceType ]);
         foreach ($accident as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -47,11 +48,14 @@ class AccidentController extends Controller
     public function addAccident(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $request->getSession()->get('insuranceType');
+        $insurance = $em->getRepository('App:InsuranceType')->find($insuranceType->getId());
         $iType = $request->request->get('type');
         $iType_ar = $request->request->get('type_ar');
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $accident = new Accident();
         $accident->setType($iType);
+        $accident->setInsuranceType($insurance);
         $em->persist($accident);
         $repository->translate($accident, 'type', 'ar', $iType_ar) ;
         $em->flush();

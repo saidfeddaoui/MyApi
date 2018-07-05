@@ -38,9 +38,15 @@ class InsuranceType extends BaseRole
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Accident", mappedBy="insuranceType")
+     */
+    private $accidents;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->accidents = new ArrayCollection();
     }
 
     public function getId()
@@ -113,6 +119,37 @@ class InsuranceType extends BaseRole
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             $user->removeInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Accident[]
+     */
+    public function getAccidents(): Collection
+    {
+        return $this->accidents;
+    }
+
+    public function addAccident(Accident $accident): self
+    {
+        if (!$this->accidents->contains($accident)) {
+            $this->accidents[] = $accident;
+            $accident->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccident(Accident $accident): self
+    {
+        if ($this->accidents->contains($accident)) {
+            $this->accidents->removeElement($accident);
+            // set the owning side to null (unless already changed)
+            if ($accident->getInsuranceType() === $this) {
+                $accident->setInsuranceType(null);
+            }
         }
 
         return $this;
