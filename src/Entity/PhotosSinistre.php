@@ -27,6 +27,11 @@ class PhotosSinistre
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\insuranceType", inversedBy="photosSinistres")
+     */
+    private $insuranceType;
+
     public function getId()
     {
         return $this->id;
@@ -52,6 +57,18 @@ class PhotosSinistre
     public function setType(?Item $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?insuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?insuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }

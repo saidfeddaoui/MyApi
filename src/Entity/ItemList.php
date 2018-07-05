@@ -42,6 +42,11 @@ class ItemList
      */
     private $items;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="itemLists")
+     */
+    private $insuranceType;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -103,6 +108,18 @@ class ItemList
                 $item->setItemList(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?InsuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?InsuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }
