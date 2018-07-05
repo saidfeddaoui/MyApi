@@ -4,17 +4,19 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
+use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Services\AladhanApiService;
 use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Rest\Route(path="/content_types", name="api_content_types_")
+ * @Rest\Route(path="/public/content_types", name="api_content_types_")
  */
 class ContentController extends BaseController
 {
@@ -23,6 +25,13 @@ class ContentController extends BaseController
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="Home slider",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -39,18 +48,28 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/slider", name = "slider")
      * @Rest\View(serializerGroups={"all", "slider"})
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function slider(ObjectManager $em)
+    public function slider(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $slider = $em->getRepository('App:ItemList')->findOneByType('slider');
+        $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'slider', 'insuranceType' => $insuranceType]);
         return $this->respondWith($slider);
     }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="Home Products",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -67,18 +86,28 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/products", name = "products")
      * @Rest\View(serializerGroups={"all", "products"})
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function products(ObjectManager $em)
+    public function products(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $products = $em->getRepository('App:ItemList')->findOneByType('products');
+        $products = $em->getRepository('App:ItemList')->findOneBy(['type' => 'products', 'insuranceType' => $insuranceType]);
         return $this->respondWith($products);
     }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="repair mode",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -95,18 +124,28 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/modes", name = "modes")
      * @Rest\View(serializerGroups={"all", "modes"})
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function reparation(ObjectManager $em)
+    public function reparation(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $modes = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
+        $modes = $em->getRepository('App:ItemList')->findOneBy(['type' => 'modes_reparation', 'insuranceType' => $insuranceType]);
         return $this->respondWith($modes);
     }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="cities",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -123,18 +162,26 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/cities", name = "cities")
      * @Rest\View()
      *
-     * @param ObjectManager $em
+     * @ParamConverter("insuranceType")
+     *
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function cities(ObjectManager $em)
+    public function cities(InsuranceType $insuranceType)
     {
-        $villes = $em->getRepository('App:Ville')->findAll();
-        return $this->respondWith($villes);
+        return $this->respondWith($insuranceType->getVilles());
     }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="accidents",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -151,18 +198,26 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/accidents", name = "accidents")
      * @Rest\View()
      *
-     * @param ObjectManager $em
+     * @ParamConverter("insuranceType")
+     *
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function accidents(ObjectManager $em)
+    public function accidents(InsuranceType $insuranceType)
     {
-        $accident = $em->getRepository('App:Accident')->findAll();
-        return $this->respondWith($accident);
+        return $this->respondWith($insuranceType->getAccidents());
     }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="marques",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -179,13 +234,14 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/vehicule/marques", name = "vehicles")
      * @Rest\View()
      *
-     * @param ObjectManager $em
+     * @ParamConverter("insuranceType")
+     *
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function marquesVehicule(ObjectManager $em)
+    public function marquesVehicule(InsuranceType $insuranceType)
     {
-        $marques = $em->getRepository('App:MarqueVehicule')->findAll();
-        return $this->respondWith($marques);
+        return $this->respondWith($insuranceType->getMarqueVehicules());
     }
     /**
      * @SWG\Get(
@@ -220,6 +276,13 @@ class ContentController extends BaseController
      *     tags={"Content Types"},
      *     description="Types sinistre",
      *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
      *         type="string",
@@ -235,21 +298,24 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/sinitre/types", name = "type_sinistre")
      * @Rest\View(serializerGroups={"all", "sinistre"})
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function typesSinistre(ObjectManager $em)
+    public function typesSinistre(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $products = $em->getRepository('App:ItemList')->findOneByType('sinistre');
-        /**
-         * @var \JMS\Serializer\Serializer $serializer
-         */
+        $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre', 'insuranceType' => $insuranceType]);
+        if (!$sinistre) {
+            return $this->respondWith([]);
+        }
         $serializer = $this->get('jms_serializer');
         $contextSerializer = $this->get('jms_serializer.serialization_context_factory')
             ->createSerializationContext()
             ->setGroups(['all', 'sinistre'])
             ->setSerializeNull(true);
-        $products = $serializer->toArray($products, $contextSerializer);
+        $products = $serializer->toArray($sinistre, $contextSerializer);
         foreach ($products['items'] as &$value) {
             $value['active_icon'] = $value['image'];
             unset($value['image']);
@@ -260,6 +326,13 @@ class ContentController extends BaseController
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="Alertes",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -276,12 +349,15 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/alerts", name = "alerts")
      * @Rest\View
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function Alerts(ObjectManager $em)
+    public function Alerts(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $alerts = $em->getRepository('App:Alert')->getCurrentAlerts();
+        $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
         return $this->respondWith($alerts);
     }
     /**
@@ -316,11 +392,17 @@ class ContentController extends BaseController
         $weather = $weatherApi->getWeather($latitude,$longitude);
         return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
     }
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="Emergency Numbers",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
      *     @SWG\Parameter(
      *         name="lang",
      *         in="query",
@@ -341,12 +423,15 @@ class ContentController extends BaseController
      *     serializerGroups={"all", "emergency"}
      * )
      *
+     * @ParamConverter("insuranceType")
+     *
      * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function emergency(ObjectManager $em)
+    public function emergency(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $emergency = $em->getRepository('App:ItemList')->findOneByType('emergency');
+        $emergency = $em->getRepository('App:ItemList')->findOneBy(['type' => 'emergency', 'insuranceType' => $insuranceType]);
         return $this->respondWith($emergency);
     }
 
