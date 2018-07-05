@@ -51,6 +51,11 @@ class Alert
      */
     private $date_expiration;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="alerts")
+     */
+    private $insuranceType;
+
     public function getId()
     {
         return $this->id;
@@ -100,6 +105,18 @@ class Alert
     public function setDateExpiration(?\DateTimeInterface $date_expiration): self
     {
         $this->date_expiration = $date_expiration;
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?InsuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?InsuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }

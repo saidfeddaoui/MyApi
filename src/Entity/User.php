@@ -205,13 +205,15 @@ class User implements UserInterface, EquatableInterface
     {
         return serialize([
             $this->password,
-//            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->enabled,
             $this->id,
             $this->email,
             $this->emailCanonical,
+            $this->roles,
+            $this->_group,
+            $this->insuranceTypes,
         ]);
     }
     /**
@@ -228,13 +230,15 @@ class User implements UserInterface, EquatableInterface
         $data = unserialize($serialized);
         list(
             $this->password,
-//            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->enabled,
             $this->id,
             $this->email,
-            $this->emailCanonical
+            $this->emailCanonical,
+            $this->roles,
+            $this->_group,
+            $this->insuranceTypes,
         ) = $data;
     }
     /**
@@ -491,6 +495,13 @@ class User implements UserInterface, EquatableInterface
     public function getRoles()
     {
         return array_merge($this->roles->toArray(), $this->insuranceTypes->toArray(), [$this->_group]);
+    }
+    /**
+     * @return string[]
+     */
+    public function getRolesNames()
+    {
+        return array_map(function ($role) {return $role->getRole();}, $this->getRoles());
     }
     /**
      * Never use this to check if this user has access to anything!

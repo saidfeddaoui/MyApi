@@ -28,7 +28,7 @@ class LayoutController extends Controller
     public function changeMutuelle(InsuranceType $insuranceType, SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker)
     {
         if ($authorizationChecker->isGranted($insuranceType->getRole())) {
-            $session->set('insuranceType', serialize($insuranceType));
+            $session->set('insuranceType', $insuranceType);
         }
         return $this->redirect($this->generateUrl('list_ville'));
     }
@@ -49,7 +49,7 @@ class LayoutController extends Controller
     public function renderThemeColor(SessionInterface $session)
     {
         $color = self::DEFAULT_THEME_COLOR;
-        $insuranceType = unserialize($session->get('insuranceType'));
+        $insuranceType = $session->get('insuranceType');
         if ($insuranceType && $_color = $insuranceType->getThemeColor()) {
             $color = $_color;
         }

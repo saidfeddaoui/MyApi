@@ -29,6 +29,11 @@ class Ville implements TranslatableInterface
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="villes")
+     */
+    private $insuranceType;
+
     public function getId()
     {
         return $this->id;
@@ -42,6 +47,18 @@ class Ville implements TranslatableInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?InsuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?InsuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }

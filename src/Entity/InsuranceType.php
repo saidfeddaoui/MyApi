@@ -38,9 +38,51 @@ class InsuranceType extends BaseRole
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Accident", mappedBy="insuranceType")
+     */
+    private $accidents;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Alert", mappedBy="insuranceType")
+     */
+    private $alerts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ItemList", mappedBy="insuranceType")
+     */
+    private $itemLists;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MarqueVehicule", mappedBy="insuranceType")
+     */
+    private $marqueVehicules;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeleVehicule", mappedBy="insuranceType")
+     */
+    private $modeleVehicules;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PhotosSinistre", mappedBy="insuranceType")
+     */
+    private $photosSinistres;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ville", mappedBy="insuranceType")
+     */
+    private $villes;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->accidents = new ArrayCollection();
+        $this->alerts = new ArrayCollection();
+        $this->itemLists = new ArrayCollection();
+        $this->marqueVehicules = new ArrayCollection();
+        $this->modeleVehicules = new ArrayCollection();
+        $this->photosSinistres = new ArrayCollection();
+        $this->villes = new ArrayCollection();
     }
 
     public function getId()
@@ -113,6 +155,223 @@ class InsuranceType extends BaseRole
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             $user->removeInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Accident[]
+     */
+    public function getAccidents(): Collection
+    {
+        return $this->accidents;
+    }
+
+    public function addAccident(Accident $accident): self
+    {
+        if (!$this->accidents->contains($accident)) {
+            $this->accidents[] = $accident;
+            $accident->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccident(Accident $accident): self
+    {
+        if ($this->accidents->contains($accident)) {
+            $this->accidents->removeElement($accident);
+            // set the owning side to null (unless already changed)
+            if ($accident->getInsuranceType() === $this) {
+                $accident->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Alert[]
+     */
+    public function getAlerts(): Collection
+    {
+        return $this->alerts;
+    }
+
+    public function addAlert(Alert $alert): self
+    {
+        if (!$this->alerts->contains($alert)) {
+            $this->alerts[] = $alert;
+            $alert->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlert(Alert $alert): self
+    {
+        if ($this->alerts->contains($alert)) {
+            $this->alerts->removeElement($alert);
+            // set the owning side to null (unless already changed)
+            if ($alert->getInsuranceType() === $this) {
+                $alert->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ItemList[]
+     */
+    public function getItemLists(): Collection
+    {
+        return $this->itemLists;
+    }
+
+    public function addItemList(ItemList $itemList): self
+    {
+        if (!$this->itemLists->contains($itemList)) {
+            $this->itemLists[] = $itemList;
+            $itemList->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItemList(ItemList $itemList): self
+    {
+        if ($this->itemLists->contains($itemList)) {
+            $this->itemLists->removeElement($itemList);
+            // set the owning side to null (unless already changed)
+            if ($itemList->getInsuranceType() === $this) {
+                $itemList->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MarqueVehicule[]
+     */
+    public function getMarqueVehicules(): Collection
+    {
+        return $this->marqueVehicules;
+    }
+
+    public function addMarqueVehicule(MarqueVehicule $marqueVehicule): self
+    {
+        if (!$this->marqueVehicules->contains($marqueVehicule)) {
+            $this->marqueVehicules[] = $marqueVehicule;
+            $marqueVehicule->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMarqueVehicule(MarqueVehicule $marqueVehicule): self
+    {
+        if ($this->marqueVehicules->contains($marqueVehicule)) {
+            $this->marqueVehicules->removeElement($marqueVehicule);
+            // set the owning side to null (unless already changed)
+            if ($marqueVehicule->getInsuranceType() === $this) {
+                $marqueVehicule->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ModeleVehicule[]
+     */
+    public function getModeleVehicules(): Collection
+    {
+        return $this->modeleVehicules;
+    }
+
+    public function addModeleVehicule(ModeleVehicule $modeleVehicule): self
+    {
+        if (!$this->modeleVehicules->contains($modeleVehicule)) {
+            $this->modeleVehicules[] = $modeleVehicule;
+            $modeleVehicule->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModeleVehicule(ModeleVehicule $modeleVehicule): self
+    {
+        if ($this->modeleVehicules->contains($modeleVehicule)) {
+            $this->modeleVehicules->removeElement($modeleVehicule);
+            // set the owning side to null (unless already changed)
+            if ($modeleVehicule->getInsuranceType() === $this) {
+                $modeleVehicule->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhotosSinistre[]
+     */
+    public function getPhotosSinistres(): Collection
+    {
+        return $this->photosSinistres;
+    }
+
+    public function addPhotosSinistre(PhotosSinistre $photosSinistre): self
+    {
+        if (!$this->photosSinistres->contains($photosSinistre)) {
+            $this->photosSinistres[] = $photosSinistre;
+            $photosSinistre->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotosSinistre(PhotosSinistre $photosSinistre): self
+    {
+        if ($this->photosSinistres->contains($photosSinistre)) {
+            $this->photosSinistres->removeElement($photosSinistre);
+            // set the owning side to null (unless already changed)
+            if ($photosSinistre->getInsuranceType() === $this) {
+                $photosSinistre->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ville[]
+     */
+    public function getVilles(): Collection
+    {
+        return $this->villes;
+    }
+
+    public function addVille(Ville $ville): self
+    {
+        if (!$this->villes->contains($ville)) {
+            $this->villes[] = $ville;
+            $ville->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVille(Ville $ville): self
+    {
+        if ($this->villes->contains($ville)) {
+            $this->villes->removeElement($ville);
+            // set the owning side to null (unless already changed)
+            if ($ville->getInsuranceType() === $this) {
+                $ville->setInsuranceType(null);
+            }
         }
 
         return $this;
