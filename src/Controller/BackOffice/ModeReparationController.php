@@ -13,17 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ModeReparationController extends Controller
 {
 
     /**
      * @Route(path="/modes", name="list_mode", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(ModeReparationType::class, new Item(), [
             'action' => $this->generateUrl('add_mode'),
@@ -34,7 +35,8 @@ class ModeReparationController extends Controller
         /**
          * @var ItemList $modeReparationList
          */
-        $modeReparationList = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
+        $modeReparationList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'modes_reparation','insuranceType'=> $session->get('insuranceType')]);
+
         foreach ($modeReparationList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -57,13 +59,15 @@ class ModeReparationController extends Controller
      * @Route(path="/modes/add", name="add_mode", options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return Response
      */
-    public function add(Request $request)
+    public function add(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(ModeReparationType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
@@ -85,7 +89,7 @@ class ModeReparationController extends Controller
             /**
              * @var ItemList $modeReparationList
              */
-            $modeReparationList = $em->getRepository('App:ItemList')->findOneByType('modes_reparation');
+            $modeReparationList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'modes_reparation','insuranceType'=> $insuranceType]);
             $modeReparationList->addItem($mode);
             $em->persist($modeReparationList);
             $repository->translate($mode, 'title', 'ar', $iName_ar) ;

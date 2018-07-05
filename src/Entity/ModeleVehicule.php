@@ -33,11 +33,6 @@ class ModeleVehicule
      */
     private $marque;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="modeleVehicules")
-     */
-    private $insuranceType;
-
     public function getId()
     {
         return $this->id;
@@ -67,16 +62,6 @@ class ModeleVehicule
         return $this;
     }
 
-    public function getInsuranceType(): ?InsuranceType
-    {
-        return $this->insuranceType;
-    }
 
-    public function setInsuranceType(?InsuranceType $insuranceType): self
-    {
-        $this->insuranceType = $insuranceType;
-
-        return $this;
-    }
 
 }

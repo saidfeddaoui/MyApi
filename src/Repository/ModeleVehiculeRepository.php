@@ -47,4 +47,19 @@ class ModeleVehiculeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+   public function getModelesByInsurance($value)
+   {
+       return $this->createQueryBuilder('mo')
+           ->innerJoin('mo.marque','mr')
+           ->where('mo.marque = mr.id')
+           ->andWhere('mr.insuranceType = :insuranceType')
+           ->setParameter('insuranceType', $value)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
 }

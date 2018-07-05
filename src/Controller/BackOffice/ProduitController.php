@@ -16,17 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ProduitController extends Controller
 {
 
     /**
      * @Route(path="/produits", name="list_produit", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(ProduitType::class, new Item(), [
             'action' => $this->generateUrl('add_produit'),
@@ -37,7 +38,7 @@ class ProduitController extends Controller
         /**
          * @var ItemList $productList
          */
-        $productList = $em->getRepository('App:ItemList')->findOneByType('products');
+        $productList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'products','insuranceType'=> $session->get('insuranceType')]);
 
         foreach ($productList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
@@ -58,15 +59,16 @@ class ProduitController extends Controller
     }
     /**
      * @Route(path="/produits/add", name="add_produit", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return Response
      */
-    public function add(Request $request)
+    public function add(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(ProduitType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
@@ -94,7 +96,7 @@ class ProduitController extends Controller
             /**
              * @var ItemList $productList
              */
-            $productList = $em->getRepository('App:ItemList')->findOneByType('products');
+            $productList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'products','insuranceType'=> $insuranceType]);
             $productList->addItem($product);
             $em->persist($productList);
             $repository->translate($product, 'title', 'ar', $iName_ar) ;

@@ -16,17 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SliderController extends Controller
 {
 
     /**
      * @Route(path="/sliders", name="list_slider", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
 
         $form = $this->createForm(SliderType::class, new Item(), [
@@ -38,7 +39,7 @@ class SliderController extends Controller
         /**
          * @var ItemList $sliderList
          */
-        $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
+        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $session->get('insuranceType')]);
         foreach ($sliderList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -58,15 +59,16 @@ class SliderController extends Controller
     }
     /**
      * @Route(path="/sliders/add", name="add_slider", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return Response
      */
-    public function add(Request $request)
+    public function add(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(SliderType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
@@ -86,7 +88,8 @@ class SliderController extends Controller
             /**
              * @var ItemList $sliderList
              */
-            $sliderList = $em->getRepository('App:ItemList')->findOneByType('slider');
+            $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $insuranceType]);
+
             $sliderList->addItem($slider);
             $em->persist($sliderList);
             $repository->translate($slider, 'title', 'ar', $iName_ar) ;
