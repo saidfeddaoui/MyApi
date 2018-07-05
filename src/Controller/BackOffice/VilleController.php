@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class VilleController extends Controller
 {
@@ -17,14 +18,15 @@ class VilleController extends Controller
      * @Route(path="/villes", name="list_ville", options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $data = array();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-        $villes = $em->getRepository('App:Ville')->findAll();
+        $villes = $em->getRepository('App:Ville')->findBy(['insuranceType'=> $session->get('insuranceType')]);
         foreach ($villes as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -41,18 +43,20 @@ class VilleController extends Controller
     }
     /**
      * @Route(path="/villes/add", name="add_ville", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return JsonResponse
      */
-    public function addVille(Request $request)
+    public function addVille(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $iName = $request->request->get('name');
         $iName_ar = $request->request->get('name_ar');
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $ville = new Ville();
         $ville->setNom($iName);
+        $ville->setInsuranceType($insuranceType);
         $em->persist($ville);
         $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
         $em->flush();

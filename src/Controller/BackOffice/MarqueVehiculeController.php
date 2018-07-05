@@ -3,6 +3,7 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\MarqueVehicule;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +15,13 @@ class MarqueVehiculeController extends Controller
      * @Route("/marque", name="marque_vehicule",options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $Marques = $em->getRepository('App:MarqueVehicule')->findAll();
+        $Marques = $em->getRepository('App:MarqueVehicule')->findBy(['insuranceType'=> $session->get('insuranceType')]);
 
         return $this->render('marque_vehicule/index.html.twig', [
             'page_title' => 'Marque Véhicule',
@@ -33,15 +35,18 @@ class MarqueVehiculeController extends Controller
      * @Route(path="/marque/add", name="add_marque", options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return JsonResponse
      */
-    public function addMarque(Request $request)
+    public function addMarque(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $iName = $request->request->get('name');
 
         $marque = new MarqueVehicule();
         $marque->setNom($iName);
+        $marque->setInsuranceType($insuranceType);
         $em->persist($marque);
         $em->flush();
         return  new JsonResponse(array(

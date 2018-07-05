@@ -16,16 +16,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PhotosSinistreController extends Controller
 {
     /**
      * @Route(path="/sinistre/photos", name="photos_sinistres", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {   $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(PhotosSyinistreType::class, new PhotosSinistre(), [
             'action' => $this->generateUrl('add_photo_sinistre'),
@@ -33,7 +34,7 @@ class PhotosSinistreController extends Controller
         /**
          * @var ItemList $typesList
          */
-        $photos_sinistre = $em->getRepository('App:PhotosSinistre')->findAll();
+        $photos_sinistre = $em->getRepository('App:PhotosSinistre')->findBy(['insuranceType'=> $session->get('insuranceType')]);
         return $this->render('sinistre/photos.html.twig', [
             'page_title' => 'Photos Sinistre',
             'page_subtitle' => '',
@@ -43,15 +44,16 @@ class PhotosSinistreController extends Controller
     }
     /**
      * @Route(path="/sinistre/photos/add", name="add_photo_sinistre", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return Response
      */
-    public function addPhotoSinistre(Request $request)
+    public function addPhotoSinistre(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(PhotosSyinistreType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         if ($form->isSubmitted() && $form->isValid()) {
             /**
              * @var PhotosSinistre $photo_sinistre
@@ -70,7 +72,7 @@ class PhotosSinistreController extends Controller
                     ->setPath($imageFile->getBasename())
                 ;
             }
-
+            $photo_sinistre->setInsuranceType($insuranceType);
             $em->persist($photo_sinistre);
             $em->flush();
         }

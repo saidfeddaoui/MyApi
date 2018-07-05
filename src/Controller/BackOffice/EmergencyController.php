@@ -14,17 +14,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class EmergencyController extends Controller
 {
 
     /**
      * @Route(path="/emergency", name="list_emergency", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(EmergencyType::class, new Item(), [
             'action' => $this->generateUrl('add_emergency'),
@@ -35,7 +36,7 @@ class EmergencyController extends Controller
         /**
          * @var ItemList $emergencyList
          */
-        $emergencyList = $em->getRepository('App:ItemList')->findOneByType('emergency');
+        $emergencyList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'emergency','insuranceType'=> $session->get('insuranceType')]);
         foreach ($emergencyList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -58,13 +59,15 @@ class EmergencyController extends Controller
      *
      * @param Request $request
      * @param $validator
+     * @param SessionInterface $session
      * @return Response
      */
-    public function add(Request $request,ValidatorInterface $validator)
+    public function add(Request $request,ValidatorInterface $validator, SessionInterface $session)
     {
         $form = $this->createForm(EmergencyType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
@@ -85,7 +88,7 @@ class EmergencyController extends Controller
             /**
              * @var ItemList $emergencyList
              */
-            $emergencyList = $em->getRepository('App:ItemList')->findOneByType('emergency');
+            $emergencyList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'emergency','insuranceType'=> $insuranceType]);
             $emergencyList->addItem($emergency);
             $em->persist($emergencyList);
             $repository->translate($emergency, 'title', 'ar', $iName_ar) ;
