@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Flex\Response;
 
 class AlertController extends Controller
@@ -15,9 +16,10 @@ class AlertController extends Controller
     /**
      * @Route("/alertes", name="alerts")
      * @param Request $request
+     * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(AlertType::class, new Alert(), [
             'action' => $this->generateUrl('add_alert'),
@@ -25,7 +27,7 @@ class AlertController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $data = array();
-        $alerts = $em->getRepository('App:Alert')->findAll();
+        $alerts = $em->getRepository('App:Alert')->findBy(['insuranceType'=> $session->get('insuranceType')]);
 
         foreach ($alerts as $key => $value){
             $translations =  $repository->findTranslations($value);
@@ -52,13 +54,15 @@ class AlertController extends Controller
      * @Route(path="/alertes/add", name="add_alert", options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return Response
      */
-    public function addAlert(Request $request)
+    public function addAlert(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(AlertType::class);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         if ($form->isSubmitted() && $form->isValid()) {
             /**
@@ -68,6 +72,7 @@ class AlertController extends Controller
 
             $iTitle_ar = $form->get('title_ar')->getData();
             $iDescription_ar = $form->get('description_ar')->getData();
+            $alert->setInsuranceType($insuranceType);
             $em->persist($alert);
             $repository->translate($alert, 'title', 'ar', $iTitle_ar) ;
             $repository->translate($alert, 'description', 'ar', $iDescription_ar) ;

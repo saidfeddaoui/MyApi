@@ -4,11 +4,13 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\ModeleVehicule;
 use App\Form\ModeleVehiculeType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Services\FonctionDivers;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ModeleVehiculeController extends Controller
 {
@@ -16,15 +18,17 @@ class ModeleVehiculeController extends Controller
      * @Route("/modele", name="modele_vehicule",options={"expose"=true})
      *
      * @param Request $request
+     * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ModeleVehiculeType::class,new ModeleVehicule(),[
             'action' => $this->generateUrl('add_modele'),
         ]);
-        $Modeles = $em->getRepository('App:ModeleVehicule')->findAll();
+
+        $Modeles = $em->getRepository('App:ModeleVehicule')->getModelesByInsurance($session->get('insuranceType'));
 
         return $this->render('modele_vehicule/index.html.twig', [
             'page_title' => 'Modèle Véhicule',
@@ -37,10 +41,11 @@ class ModeleVehiculeController extends Controller
 
     /**
      * @Route(path="/modele/add", name="add_modele", options={"expose"=true})
-     *
+     * @param SessionInterface $session
      * @param  Request $request
+     * @return Response
      */
-    public function addModele(Request $request)
+    public function addModele(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $modele = new ModeleVehicule();
