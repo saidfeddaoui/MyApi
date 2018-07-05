@@ -34,7 +34,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface {
          */
         $user = $token->getUser();
         if ($mutuelle = $user->getInsuranceTypes()->first()) {
-            $request->getSession()->set('mutuelle', $mutuelle->getId());
+            $request->getSession()->set('insuranceType', $mutuelle->getId());
         }
         return $response;
     }
