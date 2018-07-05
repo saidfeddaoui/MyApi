@@ -16,7 +16,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Rest\Route(path="/public/content_types", name="api_content_types_")
+ * @Rest\Route(path="/public/content_types", name="api_public_content_types_")
  */
 class ContentController extends BaseController
 {
