@@ -1,0 +1,19 @@
+<!-- BEGIN PAGE MUTUELLES -->
+<div class="page-actions">
+    <div class="btn-group">
+        <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
+            <span class="hidden-sm hidden-xs">Mutuelles&nbsp;</span>&nbsp;
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            {% for insurance in insurances %}
+                <li>
+                    <a href="{{ path('backoffice_layout_change_mutuelle', {'id': insurance.id}) }}">
+                        <i class="icon-docs"></i> {{ insurance.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<!-- END PAGE MUTUELLES -->

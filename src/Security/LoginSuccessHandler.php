@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -27,6 +28,13 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface {
             $response = new RedirectResponse($this->router->generate('list_ville'));
         } else if ($this->authorizationChecker->isGranted('ROLE_USER')) {
             $response = new RedirectResponse($this->router->generate('list_ville'));
+        }
+        /**
+         * @var User $user
+         */
+        $user = $token->getUser();
+        if ($mutuelle = $user->getInsuranceTypes()->first()) {
+            $request->getSession()->set('mutuelle', $mutuelle->getId());
         }
         return $response;
     }

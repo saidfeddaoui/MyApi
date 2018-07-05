@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
@@ -109,9 +108,9 @@ class User implements UserInterface, EquatableInterface
     protected $_group;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Mutuelle", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\InsuranceType", inversedBy="users")
      */
-    private $mutuelles;
+    protected $insuranceTypes;
 
     public function __construct(?string $username = null, ?string $password = null, bool $enabled = true, bool $userNonExpired = true, bool $credentialsNonExpired = true, bool $userNonLocked = true)
     {
@@ -124,6 +123,7 @@ class User implements UserInterface, EquatableInterface
         $this->salt = sha1(random_bytes(30));
         $this->roles = new ArrayCollection();
         $this->mutuelles = new ArrayCollection();
+        $this->insuranceTypes = new ArrayCollection();
     }
 
     /**
@@ -594,6 +594,37 @@ class User implements UserInterface, EquatableInterface
         $this->_group = $_group;
         return $this;
     }
+    /**
+     * @return Collection|InsuranceType[]
+     */
+    public function getInsuranceTypes(): Collection
+    {
+        return $this->insuranceTypes;
+    }
+    /**
+     * @param InsuranceType $insuranceType
+     * @return User
+     */
+    public function addInsuranceType(InsuranceType $insuranceType): self
+    {
+        if (!$this->insuranceTypes->contains($insuranceType)) {
+            $this->insuranceTypes[] = $insuranceType;
+        }
+
+        return $this;
+    }
+    /**
+     * @param InsuranceType $insuranceType
+     * @return User
+     */
+    public function removeInsuranceType(InsuranceType $insuranceType): self
+    {
+        if ($this->insuranceTypes->contains($insuranceType)) {
+            $this->insuranceTypes->removeElement($insuranceType);
+        }
+
+        return $this;
+    }
 
     /**
      * The equality comparison should neither be done by referential equality
@@ -616,32 +647,5 @@ class User implements UserInterface, EquatableInterface
         return true;
     }
 
-    /**
-     * @return Collection|Mutuelle[]
-     */
-    public function getMutuelles(): Collection
-    {
-        return $this->mutuelles;
-    }
-
-    public function addMutuelle(Mutuelle $mutuelle): self
-    {
-        if (!$this->mutuelles->contains($mutuelle)) {
-            $this->mutuelles[] = $mutuelle;
-            $mutuelle->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMutuelle(Mutuelle $mutuelle): self
-    {
-        if ($this->mutuelles->contains($mutuelle)) {
-            $this->mutuelles->removeElement($mutuelle);
-            $mutuelle->removeUser($this);
-        }
-
-        return $this;
-    }
 
 }
