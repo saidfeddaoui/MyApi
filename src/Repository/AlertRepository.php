@@ -22,11 +22,13 @@ class AlertRepository extends ServiceEntityRepository
      /**
      * @return Alert[] Returns an array of Alert objects
      */
-    public function getCurrentAlerts()
+    public function getCurrentAlerts($insuranceType)
     {
         return $this->createQueryBuilder('a')
             ->Where('a.date_expiration > :today or a.date_expiration is null')
-            ->setParameter("today",date("Y-m-d H:i:m"))
+            ->andWhere('a.insuranceType = :insuranceType')
+            ->setParameter('today', date('Y-m-d H:i:m'))
+            ->setParameter('insuranceType', $insuranceType)
             ->getQuery()
             ->getResult()
             ;
