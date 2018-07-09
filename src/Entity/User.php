@@ -6,16 +6,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  */
 class User implements UserInterface, EquatableInterface
 {
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"include_id"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -23,27 +30,33 @@ class User implements UserInterface, EquatableInterface
     protected $id;
     /**
      * @var string
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     protected $username;
     /**
      * @var string
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     protected $usernameCanonical;
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $password;
     /**
      * @var string
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_account_creation"})
+     *
+     * @Assert\NotBlank(groups={"client_account_creation"})
+     * @Assert\Email(groups={"client_account_creation"})
+     *
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     protected $email;
     /**
      * @var string
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     protected $emailCanonical;
     /**
@@ -57,25 +70,26 @@ class User implements UserInterface, EquatableInterface
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $enabled;
+    protected $enabled = true;
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $accountNonExpired;
+    protected $accountNonExpired = true;
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $credentialsNonExpired;
+    protected $credentialsNonExpired = true;
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $accountNonLocked;
+    protected $accountNonLocked = true;
     /**
      * Plain password. Used for model validation. Must not be persisted.
-     *
+     * @Serializer\Type("string")
+     * @Assert\NotBlank(groups={"client_account_creation"})
      * @var string
      */
     protected $plainPassword;
@@ -122,7 +136,6 @@ class User implements UserInterface, EquatableInterface
         $this->accountNonLocked = $userNonLocked;
         $this->salt = sha1(random_bytes(30));
         $this->roles = new ArrayCollection();
-        $this->mutuelles = new ArrayCollection();
         $this->insuranceTypes = new ArrayCollection();
     }
 
@@ -570,6 +583,9 @@ class User implements UserInterface, EquatableInterface
      */
     public function _addRole(BaseRole $role): self
     {
+        if (!$this->roles) {
+            $this->roles = new ArrayCollection();
+        }
         if (!$this->roles->contains($role)) {
             $this->roles[] = $role;
         }
@@ -609,16 +625,31 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->insuranceTypes;
     }
+
+    /**
+     * @param ArrayCollection|InsuranceType $insuranceTypes
+     * @return static
+     */
+    public function setInsuranceTypes($insuranceTypes): self
+    {
+        if ($insuranceTypes instanceof InsuranceType) {
+            $insuranceTypes = new ArrayCollection([$insuranceTypes]);
+        }
+        $this->insuranceTypes = $insuranceTypes;
+        return $this;
+    }
     /**
      * @param InsuranceType $insuranceType
      * @return User
      */
     public function addInsuranceType(InsuranceType $insuranceType): self
     {
+        if (!$this->insuranceTypes) {
+            $this->insuranceTypes = new ArrayCollection();
+        }
         if (!$this->insuranceTypes->contains($insuranceType)) {
             $this->insuranceTypes[] = $insuranceType;
         }
-
         return $this;
     }
     /**
@@ -627,10 +658,12 @@ class User implements UserInterface, EquatableInterface
      */
     public function removeInsuranceType(InsuranceType $insuranceType): self
     {
+        if (!$this->insuranceTypes) {
+            $this->insuranceTypes = new ArrayCollection();
+        }
         if ($this->insuranceTypes->contains($insuranceType)) {
             $this->insuranceTypes->removeElement($insuranceType);
         }
-
         return $this;
     }
 

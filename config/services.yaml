@@ -59,10 +59,27 @@ services:
             - '@jms_serializer'
             - array
             - "@=service('request_stack').getCurrentRequest().getLocale()"
+    App\Services\SmsApiService:
+        arguments:
+            - '@eight_points_guzzle.client.api_sms'
+            - '@jms_serializer'
+            - array
 
-    app.normalizer.resource_validation_exception:
+    app.normalizer.not_found_http_exception:
             class: App\Normalizer\NotFoundHttpExceptionNormalizer
             arguments:
                 - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
+            tags:
+                - { name: app.normalizer }
+    app.normalizer.constraint_violation_exception:
+            class: App\Normalizer\ConstraintViolationExceptionNormalizer
+            arguments:
+                - [ 'App\Exception\ConstraintViolationException', 'FOS\RestBundle\Exception\InvalidParameterException' ]
+            tags:
+                - { name: app.normalizer }
+    app.normalizer.jwt_failure_exception:
+            class: App\Normalizer\JWTFailureExceptionNormalizer
+            arguments:
+                - [ 'Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException' ]
             tags:
                 - { name: app.normalizer }

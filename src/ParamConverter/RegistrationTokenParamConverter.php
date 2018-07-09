@@ -2,14 +2,15 @@
 
 namespace App\ParamConverter;
 
-use App\Entity\InsuranceType;
+use App\Entity\Client;
 use Doctrine\Common\Persistence\ObjectManager;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class InsuranceTypeParamConverter implements ParamConverterInterface
+class RegistrationTokenParamConverter implements ParamConverterInterface
 {
 
     /**
@@ -17,13 +18,20 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     private $em;
     /**
-     * InsuranceTypeParamConverter constructor.
-     * @param ObjectManager $em
+     * @var JWTEncoderInterface
      */
-    public function __construct(ObjectManager $em)
+    private $encoder;
+    /**
+     * RegistrationTokenParamConverter constructor.
+     * @param ObjectManager $em
+     * @param JWTEncoderInterface $encoder
+     */
+    public function __construct(ObjectManager $em, JWTEncoderInterface $encoder)
     {
         $this->em = $em;
+        $this->encoder = $encoder;
     }
+
     /**
      * Stores the object in the request.
      *
@@ -31,18 +39,20 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      * @param ParamConverter $configuration Contains the name, class and options of the object
      *
      * @return bool True if the object has been successfully set, else false
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        if (!$request->headers->has('x-entity')) {
+        if (!$request->headers->has('x-registration-token')) {
             return false;
         }
-        $insuranceName = $request->headers->get('x-entity');
-        $insuranceType = $this->em->getRepository('App:InsuranceType')->findOneByName(strtoupper($insuranceName));
-        if (!$insuranceType) {
-            throw new NotFoundHttpException('Requested Insurance Name Does Not exist');
+        $token = $request->headers->get('x-registration-token');
+        $jwt = $this->encoder->decode($token);
+        $client = $this->em->getRepository('App:Client')->findOneByPhone($jwt['phone']);
+        if (!$client) {
+            throw new NotFoundHttpException('No client was found');
         }
-        $request->attributes->set($configuration->getName(), $insuranceType);
+        $request->attributes->set($configuration->getName(), $client);
         return true;
     }
     /**
@@ -53,7 +63,7 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        return InsuranceType::class === $configuration->getClass() && static::class === $configuration->getOptions()['converter'];;
+        return Client::class === $configuration->getClass() && static::class === $configuration->getOptions()['converter'];
     }
 
 }

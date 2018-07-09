@@ -18,14 +18,32 @@ class ApiResponse
 {
 
     const OK = 200;
+    const CREATED = 201;
+    const UPDATED = 202;
+    const CONSTRAINT_VIOLATION_ERROR = 406;
     const INTERNAL_SERVER_ERROR = 500;
+    const VERIFICATION_CODE_ERROR = 610;
+    const CLIENT_NOT_VERIFIED_ERROR = 611;
+    const JWT_FAILURE_ERROR = 730;
     const STATUS_TEXT = [
         self::OK => 'OK',
+        self::CREATED => 'Created',
+        self::UPDATED => 'Updated',
+        self::CONSTRAINT_VIOLATION_ERROR => 'Constraint Violation Error',
         self::INTERNAL_SERVER_ERROR => 'Internal Server Error',
+        self::VERIFICATION_CODE_ERROR => 'Verification code is not correct',
+        self::CLIENT_NOT_VERIFIED_ERROR => 'Unauthorized action for an unverified client',
+        self::JWT_FAILURE_ERROR => 'Invalid Token',
     ];
     const HTTP_STATUS_CODE = [
         self::OK => Response::HTTP_OK,
+        self::CREATED => Response::HTTP_CREATED,
+        self::UPDATED => Response::HTTP_ACCEPTED,
+        self::CONSTRAINT_VIOLATION_ERROR => Response::HTTP_NOT_ACCEPTABLE,
         self::INTERNAL_SERVER_ERROR => Response::HTTP_INTERNAL_SERVER_ERROR,
+        self::VERIFICATION_CODE_ERROR => Response::HTTP_BAD_REQUEST,
+        self::CLIENT_NOT_VERIFIED_ERROR => Response::HTTP_UNAUTHORIZED,
+        self::JWT_FAILURE_ERROR => Response::HTTP_UNAUTHORIZED,
     ];
 
     /**

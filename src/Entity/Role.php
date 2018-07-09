@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Role\Role as BaseRole;
 class Role extends BaseRole
 {
 
+    const MOBILE_CLIENT = 'ROLE_MOBILE_CLIENT';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
