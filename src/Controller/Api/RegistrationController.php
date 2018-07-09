@@ -81,7 +81,7 @@ class RegistrationController extends BaseController
         ;
         $em->persist($client);
         $em->flush();
-//        $smsService->sendSms($client->getPhone(), $verificationCode);
+        $smsService->sendSms($client->getPhone(), $verificationCode);
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
 
