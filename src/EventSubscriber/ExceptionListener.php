@@ -14,7 +14,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class ExceptionListener implements EventSubscriberInterface
 {
 
-    const API_FIREWALL = 'security.firewall.map.context.api';
+    const API_FIREWALLS = [
+        'security.firewall.map.context.api',
+        'security.firewall.map.context.api_public',
+    ];
+
     private $serializer;
     private $normalizers = [];
 
@@ -26,7 +30,7 @@ class ExceptionListener implements EventSubscriberInterface
     public function processException(GetResponseForExceptionEvent $event)
     {
         $firewall = $event->getRequest()->attributes->get('_firewall_context');
-        if (self::API_FIREWALL !== $firewall) {
+        if (!in_array($firewall, self::API_FIREWALLS)) {
             return;
         }
         $result = null;

@@ -48,7 +48,7 @@ class AladhanApiService extends ApiCustomerService
     /**
      * @param string $city
      * @param string $country
-     * @return \App\DTO\AladhanApi\Data|array
+     * @return \App\DTO\AladhanApi\Data|null
      */
     public function getPrayerByCityAndCountry($city = self::DEFAULT_CITY, $country = self::DEFAULT_COUNTRY)
     {

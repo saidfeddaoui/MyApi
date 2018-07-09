@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\Role\Role as BaseRole;
 class Group extends BaseRole
 {
 
+    const ADMIN = 'ROLE_ADMIN';
+    const USER = 'ROLE_USER';
+    const MOBILE_USER = 'ROLE_MOBILE_USER';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
