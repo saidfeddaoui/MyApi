@@ -34,6 +34,9 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if (!$request->headers->has('x-entity')) {
+            return false;
+        }
         $insuranceName = $request->headers->get('x-entity');
         $insuranceType = $this->em->getRepository('App:InsuranceType')->findOneByName(strtoupper($insuranceName));
         if (!$insuranceType) {
