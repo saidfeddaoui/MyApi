@@ -175,6 +175,7 @@ class RegistrationController extends BaseController
             ->setPassword($encoder->encodePassword($client, $submittedClient->getPlainPassword()))
             ->setContactPreference($submittedClient->getContactPreference())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
+            ->setEnabled(true)
         ;
         $em->persist($client);
         $em->flush();
