@@ -1,0 +1,24 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.content) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Ajouter un scénario'}} ) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.content_ar) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.content_ar, {'attr': {'class': 'form-control', 'placeholder': 'Ajouter un scénario en arabe'}} ) }}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}
