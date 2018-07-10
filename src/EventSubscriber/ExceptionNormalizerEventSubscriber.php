@@ -4,7 +4,6 @@ namespace App\EventSubscriber;
 
 use App\DTO\Api\ApiResponse;
 use App\Normalizer\NormalizerInterface;
-
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,11 +40,15 @@ class ExceptionNormalizerEventSubscriber implements EventSubscriberInterface
      */
     public function processException(GetResponseForExceptionEvent $event)
     {
-        $firewall = $event->getRequest()->attributes->get('_firewall_context');
-        if (!in_array($firewall, self::API_FIREWALLS)) {
+        $request = $event->getRequest();
+        $firewall = $request->attributes->get('_firewall_context');
+        $pathInfo = $request->getPathInfo();
+        if (!$firewall && !preg_match('#^/api#', $pathInfo)) {
             return;
         }
-        $result = null;
+        if ($firewall && !in_array($firewall, self::API_FIREWALLS)) {
+            return;
+        }
         $exception = $event->getException();
         $response = new ApiResponse([], ApiResponse::INTERNAL_SERVER_ERROR);
         if ($message = $exception->getMessage()) {
@@ -72,9 +75,7 @@ class ExceptionNormalizerEventSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return [
-            KernelEvents::EXCEPTION => [['processException', 255]]
-        ];
+        return [ KernelEvents::EXCEPTION => ['processException', 255] ];
     }
 
 }
