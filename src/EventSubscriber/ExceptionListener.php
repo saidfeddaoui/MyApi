@@ -7,6 +7,7 @@ use App\Normalizer\NormalizerInterface;
 
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -46,7 +47,7 @@ class ExceptionListener implements EventSubscriberInterface
             }
         }
         $body = $this->serializer->serialize($response, 'json');
-        $event->setResponse(new Response($body, $response->getHttpStatusCode()));
+        $event->setResponse(new JsonResponse($body, $response->getHttpStatusCode(), [], true));
     }
 
     public function addNormalizer(NormalizerInterface $normalizer)
