@@ -27,7 +27,7 @@ class Item implements  TranslatableInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      *
      * @Serializer\Expose()
      * @Serializer\Groups({"slider","products","modes","sinistre","emergency"})
@@ -47,7 +47,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * * @Serializer\Groups({"slider","modes"})
+     * @Serializer\Groups({"slider","modes","scenarios"})
      * @Gedmo\Translatable
      */
     private $content;
@@ -230,5 +230,7 @@ class Item implements  TranslatableInterface
 
         return $this;
     }
+
+
 
 }
