@@ -48,7 +48,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/slider", name = "slider")
      * @Rest\View(serializerGroups={"all", "slider"})
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
@@ -86,7 +86,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/products", name = "products")
      * @Rest\View(serializerGroups={"all", "products"})
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
@@ -124,7 +124,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/modes", name = "modes")
      * @Rest\View(serializerGroups={"all", "modes"})
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
@@ -162,7 +162,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/cities", name = "cities")
      * @Rest\View()
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param InsuranceType $insuranceType
      * @return ApiResponse
@@ -198,7 +198,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/accidents", name = "accidents")
      * @Rest\View()
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param InsuranceType $insuranceType
      * @return ApiResponse
@@ -234,7 +234,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/vehicule/marques", name = "vehicles")
      * @Rest\View()
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param InsuranceType $insuranceType
      * @return ApiResponse
@@ -298,7 +298,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/sinitre/types", name = "type_sinistre")
      * @Rest\View(serializerGroups={"all", "sinistre"})
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
@@ -349,7 +349,7 @@ class ContentController extends BaseController
      * @Rest\Get(path = "/alerts", name = "alerts")
      * @Rest\View
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
@@ -423,7 +423,7 @@ class ContentController extends BaseController
      *     serializerGroups={"all", "emergency"}
      * )
      *
-     * @ParamConverter("insuranceType")
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param ObjectManager $em
      * @param InsuranceType $insuranceType
