@@ -25,7 +25,12 @@ abstract class AbstractNormalizer implements NormalizerInterface
      */
     public function supports(\Exception $exception): bool
     {
-        return in_array(get_class($exception), $this->exceptionTypes);
+        foreach ($this->exceptionTypes as $exceptionType) {
+            if ($exception instanceof $exceptionType) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

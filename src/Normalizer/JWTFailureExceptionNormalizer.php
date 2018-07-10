@@ -13,7 +13,7 @@ class JWTFailureExceptionNormalizer extends AbstractNormalizer
      */
     public function normalize(\Exception $exception): ApiResponse
     {
-        $response = new ApiResponse([], ApiResponse::JWT_FAILURE_ERROR);
+        $response = new ApiResponse(null, ApiResponse::JWT_FAILURE_ERROR);
         $response->setStatus($exception->getMessage());
         return $response;
     }
