@@ -32,11 +32,26 @@ class SecurityController extends BaseController
         throw new \RuntimeException('You should never be here.');
     }
     /**
-    * @Rest\Get(name="test", path="/secured/test")
-    */
+     * @SWG\Get(
+     *     tags={"Secured Area"},
+     *     description="Authentication Test",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Return hello world",
+     *     )
+     * )
+     * @Rest\Get(name="test", path="/secured/test")
+     */
     public function test()
     {
-        dump('Hello There!');
+        dump('Hello World!');
         die;
     }
 
