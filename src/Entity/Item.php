@@ -23,6 +23,8 @@ class Item implements  TranslatableInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     * @Serializer\Groups({"scenarios"})
      */
     private $id;
 
