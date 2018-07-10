@@ -26,30 +26,31 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Translation listener alias
     Gedmo\Translatable\TranslatableListener: '@stof_doctrine_extensions.listener.translatable'
 
+    # Security
     authentication.handler.login_success_handler:
             class:  App\Security\LoginSuccessHandler
             arguments:  ['@router', '@security.authorization_checker']
-
     api_user.provider:
         class: App\Security\ApiUserProvider
-
     basic_credentials.extractor:
         class: Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor
         arguments: [ 'Basic', 'Authorization' ]
-
     username_password.authenticator:
         class: App\Security\UsernamePasswordAuthenticator
-        arguments: ["@basic_credentials.extractor"]
-
+        arguments: ['@basic_credentials.extractor']
     jwt.authenticator:
         class: App\Security\JwtAuthenticator
 
+    # Serialization
     App\EventSubscriber\PathSerializerEventSubscriber:
         tags:
             - { name: jms_serializer.event_subscriber }
 
+    # WebService consumers based on guzzle
     App\Services\AladhanApiService:
         arguments:
             - '@eight_points_guzzle.client.api_aladhan'
@@ -79,6 +80,7 @@ services:
             - '@jms_serializer'
             - array
 
+    # Exception normalizers
     app.normalizer.not_found_http_exception:
             class: App\Normalizer\NotFoundHttpExceptionNormalizer
             arguments:

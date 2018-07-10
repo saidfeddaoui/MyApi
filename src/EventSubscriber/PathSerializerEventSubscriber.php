@@ -1,28 +1,48 @@
 <?php
 
 namespace App\EventSubscriber;
-/**
- * Created by PhpStorm.
- * User: JIDAL_MOHAMED
- * Date: 11/06/2018
- * Time: 10:26
- */
 
 use App\Entity\Attachment;
 use App\Entity\ItemList;
-use Symfony\Component\HttpFoundation\Request;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
-use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
+
 class PathSerializerEventSubscriber implements EventSubscriberInterface
 {
+
+    /**
+     * @var RequestStack
+     */
     protected $requestStack;
 
-
+    /**
+     * PathSerializerEventSubscriber constructor.
+     * @param RequestStack $requestStack
+     */
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
+    }
+
+    /**
+     * @param ObjectEvent $event
+     */
+    public function onPreSerialize(ObjectEvent $event)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $pathToImageDir = $request->getSchemeAndHttpHost() . '/img/';
+        $object  = $event->getObject();
+        if ($object instanceof ItemList) {
+            foreach ($object->getItems() as $key => $item) {
+                if ($item->getImage()) {
+                    $item->setImage(new Attachment($pathToImageDir . $item->getImage()->getPath()));
+                }
+                if ($item->getIcon()) {
+                    $item->setIcon(new Attachment($pathToImageDir . $item->getIcon()->getPath()));
+                }
+            }
+        }
     }
     /**
      * Returns the events to which this class has subscribed.
@@ -32,36 +52,8 @@ class PathSerializerEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ['event' => 'serializer.pre_serialize', 'method' => 'onPreSerialize','class' => ItemList::class],
+            ['event' => 'serializer.pre_serialize', 'method' => 'onPreSerialize', 'class' => ItemList::class],
         ];
     }
 
-    public function onPreSerialize(ObjectEvent $event)
-    {
-
-
-        $request = $this->requestStack->getCurrentRequest();
-        $dirWeb = $request->getSchemeAndHttpHost();
-
-        if($event->getObject() instanceof ItemList) {
-            $object  = $event->getObject();
-            foreach ($object->getItems() as $key => $item){
-
-                if($item->getImage()){
-                    $img_attachment = new Attachment($dirWeb.'/img/'.$item->getImage()->getPath());
-                    $item->setImage($img_attachment);
-                }
-                if($item->getIcon()){
-                    $icon_attachment = new Attachment($dirWeb.'/img/'.$item->getIcon()->getPath());
-                    $item->setIcon($icon_attachment);
-                }
-
-            }
-        }else{
-//            $object  = $event->getObject();
-//            $object->setPath( $dirWeb.'/img/'.$object->getPath() );
-
-        }
-
-    }
 }
