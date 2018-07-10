@@ -84,7 +84,6 @@ class RegistrationController extends BaseController
         $smsService->sendSms($client->getPhone(), $verificationCode);
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
-
     /**
      * @SWG\Post(
      *     tags={"Registration"},

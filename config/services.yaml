@@ -32,6 +32,20 @@ services:
             class:  App\Security\LoginSuccessHandler
             arguments:  ['@router', '@security.authorization_checker']
 
+    api_user.provider:
+        class: App\Security\ApiUserProvider
+
+    basic_credentials.extractor:
+        class: Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor
+        arguments: [ 'Basic', 'Authorization' ]
+
+    username_password.authenticator:
+        class: App\Security\UsernamePasswordAuthenticator
+        arguments: ["@basic_credentials.extractor"]
+
+    jwt.authenticator:
+        class: App\Security\JwtAuthenticator
+
     App\EventSubscriber\PathSerializerEventSubscriber:
         tags:
             - { name: jms_serializer.event_subscriber }
