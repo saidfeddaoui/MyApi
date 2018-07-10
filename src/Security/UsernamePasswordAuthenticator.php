@@ -77,8 +77,6 @@ class UsernamePasswordAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        dump($this->extractor->extract($request), $this->extractor);
-        die;
         return $this->extractor->extract($request);
     }
     /**
