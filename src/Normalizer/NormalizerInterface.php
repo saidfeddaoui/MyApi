@@ -7,7 +7,15 @@ use App\DTO\Api\ApiResponse;
 interface NormalizerInterface
 {
 
+    /**
+     * @param \Exception $exception
+     * @return ApiResponse
+     */
     public function normalize(\Exception $exception): ApiResponse;
-    public function supports(\Exception $exception);
+    /**
+     * @param \Exception $exception
+     * @return bool
+     */
+    public function supports(\Exception $exception): bool;
 
 }

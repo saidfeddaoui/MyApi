@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends BaseController
 {
@@ -51,8 +52,7 @@ class SecurityController extends BaseController
      */
     public function test()
     {
-        dump('Hello World!');
-        die;
+        return new Response('Hello World!');
     }
 
 }

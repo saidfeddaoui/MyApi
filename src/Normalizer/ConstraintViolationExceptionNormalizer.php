@@ -7,6 +7,10 @@ use App\DTO\Api\ApiResponse;
 class ConstraintViolationExceptionNormalizer extends AbstractNormalizer
 {
 
+    /**
+     * @param \Exception $exception
+     * @return ApiResponse
+     */
     public function normalize(\Exception $exception): ApiResponse
     {
         $violations = $exception->getViolations();
