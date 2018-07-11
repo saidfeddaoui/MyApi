@@ -96,6 +96,6 @@ services:
     app.normalizer.jwt_failure_exception:
             class: App\Normalizer\JWTFailureExceptionNormalizer
             arguments:
-                - [ 'Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException' ]
+                - [ 'Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTFailureException' ]
             tags:
                 - { name: app.normalizer }

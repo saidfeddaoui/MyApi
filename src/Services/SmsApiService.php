@@ -6,7 +6,7 @@ class SmsApiService extends ApiCustomerService
 {
 
     const APP_ID = 'MAMDA';
-    const SENDER_ID = 'MAMDAPROD';
+    const SENDER_ID = 'MAMDA';
 
     /**
      * @param string $phoneNumber

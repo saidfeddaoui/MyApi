@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\Api;
+
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\Client;

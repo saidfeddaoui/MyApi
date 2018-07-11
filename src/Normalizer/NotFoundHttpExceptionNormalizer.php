@@ -13,8 +13,8 @@ class NotFoundHttpExceptionNormalizer extends AbstractNormalizer
      */
     public function normalize(\Exception $exception): ApiResponse
     {
-        $response = new ApiResponse([], $exception->getStatusCode());
-        $response->setStatus($exception->getReason());
+        $response = new ApiResponse(null, $exception->getStatusCode());
+        $response->setStatus($exception->getMessage());
         return $response;
     }
 
