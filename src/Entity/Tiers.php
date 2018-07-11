@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tiers
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -29,9 +30,9 @@ class Tiers
     private $attachments;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Predeclaration", mappedBy="tiers", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="PreDeclaration", mappedBy="tiers", cascade={"persist", "remove"})
      */
-    private $predeclaration;
+    private $preDeclaration;
 
     public function __construct()
     {
@@ -86,23 +87,22 @@ class Tiers
         return $this;
     }
 
-    public function getPredeclaration(): ?Predeclaration
+    public function getPreDeclaration(): ?PreDeclaration
     {
-        return $this->predeclaration;
+        return $this->preDeclaration;
     }
 
-    public function setPredeclaration(?Predeclaration $predeclaration): self
+    public function setPreDeclaration(?PreDeclaration $preDeclaration): self
     {
-        $this->predeclaration = $predeclaration;
+        $this->preDeclaration = $preDeclaration;
 
         // set (or unset) the owning side of the relation if necessary
-        $newTiers = $predeclaration === null ? null : $this;
-        if ($newTiers !== $predeclaration->getTiers()) {
-            $predeclaration->setTiers($newTiers);
+        $newTiers = $preDeclaration === null ? null : $this;
+        if ($newTiers !== $preDeclaration->getTiers()) {
+            $preDeclaration->setTiers($newTiers);
         }
 
         return $this;
     }
-
 
 }

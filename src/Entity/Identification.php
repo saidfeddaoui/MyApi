@@ -37,9 +37,9 @@ class Identification
     private $modele;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Predeclaration", mappedBy="identification", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\PreDeclaration", mappedBy="identification", cascade={"persist", "remove"})
      */
-    private $predeclaration;
+    private $preDeclaration;
 
     public function getId()
     {
@@ -94,19 +94,19 @@ class Identification
         return $this;
     }
 
-    public function getPredeclaration(): ?Predeclaration
+    public function getPreDeclaration(): ?PreDeclaration
     {
-        return $this->predeclaration;
+        return $this->preDeclaration;
     }
 
-    public function setPredeclaration(?Predeclaration $predeclaration): self
+    public function setPreDeclaration(?PreDeclaration $preDeclaration): self
     {
-        $this->predeclaration = $predeclaration;
+        $this->preDeclaration = $preDeclaration;
 
         // set (or unset) the owning side of the relation if necessary
-        $newIdentification = $predeclaration === null ? null : $this;
-        if ($newIdentification !== $predeclaration->getIdentification()) {
-            $predeclaration->setIdentification($newIdentification);
+        $newIdentification = $preDeclaration === null ? null : $this;
+        if ($newIdentification !== $preDeclaration->getIdentification()) {
+            $preDeclaration->setIdentification($newIdentification);
         }
 
         return $this;

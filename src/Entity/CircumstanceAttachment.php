@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CirconstanceAttachmentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CircumstanceAttachmentRepository")
  */
-class CirconstanceAttachment
+class CircumstanceAttachment
 {
     /**
      * @ORM\Id()
@@ -27,9 +27,9 @@ class CirconstanceAttachment
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Circonstance", inversedBy="photos")
+     * @ORM\ManyToOne(targetEntity="Circumstance", inversedBy="photos")
      */
-    private $circonstance;
+    private $circumstance;
 
     public function getId()
     {
@@ -60,14 +60,14 @@ class CirconstanceAttachment
         return $this;
     }
 
-    public function getCirconstance(): ?Circonstance
+    public function getCircumstance(): ?Circumstance
     {
-        return $this->circonstance;
+        return $this->circumstance;
     }
 
-    public function setCirconstance(?Circonstance $circonstance): self
+    public function setCircumstance(?Circumstance $circumstance): self
     {
-        $this->circonstance = $circonstance;
+        $this->circumstance = $circumstance;
 
         return $this;
     }

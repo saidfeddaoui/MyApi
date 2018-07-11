@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Circonstance;
+use App\Entity\CircumstanceAttachment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Circonstance|null find($id, $lockMode = null, $lockVersion = null)
- * @method Circonstance|null findOneBy(array $criteria, array $orderBy = null)
- * @method Circonstance[]    findAll()
- * @method Circonstance[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CircumstanceAttachment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CircumstanceAttachment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CircumstanceAttachment[]    findAll()
+ * @method CircumstanceAttachment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CirconstanceRepository extends ServiceEntityRepository
+class CircumstanceAttachmentRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Circonstance::class);
+        parent::__construct($registry, CircumstanceAttachment::class);
     }
 
 //    /**
-//     * @return Circonstance[] Returns an array of Circonstance objects
+//     * @return CircumstanceAttachment[] Returns an array of CircumstanceAttachment objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CirconstanceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Circonstance
+    public function findOneBySomeField($value): ?CircumstanceAttachment
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

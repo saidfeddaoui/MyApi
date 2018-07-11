@@ -24,9 +24,9 @@ class VehiculeDamage
     private $damagedParts;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Predeclaration", mappedBy="vehiculeDamage", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\PreDeclaration", mappedBy="vehiculeDamage", cascade={"persist", "remove"})
      */
-    private $predeclaration;
+    private $preDeclaration;
 
     public function __construct()
     {
@@ -64,19 +64,19 @@ class VehiculeDamage
         return $this;
     }
 
-    public function getPredeclaration(): ?Predeclaration
+    public function getPreDeclaration(): ?PreDeclaration
     {
-        return $this->predeclaration;
+        return $this->preDeclaration;
     }
 
-    public function setPredeclaration(?Predeclaration $predeclaration): self
+    public function setPreDeclaration(?PreDeclaration $preDeclaration): self
     {
-        $this->predeclaration = $predeclaration;
+        $this->preDeclaration = $preDeclaration;
 
         // set (or unset) the owning side of the relation if necessary
-        $newVehiculeDamage = $predeclaration === null ? null : $this;
-        if ($newVehiculeDamage !== $predeclaration->getVehiculeDamage()) {
-            $predeclaration->setVehiculeDamage($newVehiculeDamage);
+        $newVehiculeDamage = $preDeclaration === null ? null : $this;
+        if ($newVehiculeDamage !== $preDeclaration->getVehiculeDamage()) {
+            $preDeclaration->setVehiculeDamage($newVehiculeDamage);
         }
 
         return $this;

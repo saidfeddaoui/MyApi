@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PredeclarationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PreDeclarationRepository")
  */
-class Predeclaration
+class PreDeclaration
 {
     /**
      * @ORM\Id()
@@ -32,7 +32,7 @@ class Predeclaration
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="predeclarations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="preDeclarations")
      */
     private $contract;
 
@@ -42,22 +42,22 @@ class Predeclaration
     private $scenario;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Identification", inversedBy="predeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Identification", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $identification;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Circonstance", inversedBy="predeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
-    private $Circonstance;
+    private $circumstance;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\VehiculeDamage", inversedBy="predeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\VehiculeDamage", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $vehiculeDamage;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="predeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $tiers;
 
@@ -138,14 +138,14 @@ class Predeclaration
         return $this;
     }
 
-    public function getCirconstance(): ?Circonstance
+    public function getCircumstance(): ?Circumstance
     {
-        return $this->Circonstance;
+        return $this->circumstance;
     }
 
-    public function setCirconstance(?Circonstance $Circonstance): self
+    public function setCircumstance(?Circumstance $circumstance): self
     {
-        $this->Circonstance = $Circonstance;
+        $this->circumstance = $circumstance;
 
         return $this;
     }

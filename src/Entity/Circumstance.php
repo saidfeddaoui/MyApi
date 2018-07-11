@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CirconstanceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CircumstanceRepository")
  */
-class Circonstance
+class Circumstance
 {
     /**
      * @ORM\Id()
@@ -40,14 +40,14 @@ class Circonstance
     private $remorquage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CirconstanceAttachment", mappedBy="circonstance")
+     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance")
      */
     private $photos;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Predeclaration", mappedBy="Circonstance", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\PreDeclaration", mappedBy="circumstance", cascade={"persist", "remove"})
      */
-    private $predeclaration;
+    private $preDeclaration;
 
     public function __construct()
     {
@@ -108,14 +108,14 @@ class Circonstance
     }
 
     /**
-     * @return Collection|CirconstanceAttachment[]
+     * @return Collection|CircumstanceAttachment[]
      */
     public function getPhotos(): Collection
     {
         return $this->photos;
     }
 
-    public function addPhoto(CirconstanceAttachment $photo): self
+    public function addPhoto(CircumstanceAttachment $photo): self
     {
         if (!$this->photos->contains($photo)) {
             $this->photos[] = $photo;
@@ -125,7 +125,7 @@ class Circonstance
         return $this;
     }
 
-    public function removePhoto(CirconstanceAttachment $photo): self
+    public function removePhoto(CircumstanceAttachment $photo): self
     {
         if ($this->photos->contains($photo)) {
             $this->photos->removeElement($photo);
@@ -138,19 +138,19 @@ class Circonstance
         return $this;
     }
 
-    public function getPredeclaration(): ?Predeclaration
+    public function getPreDeclaration(): ?PreDeclaration
     {
-        return $this->predeclaration;
+        return $this->preDeclaration;
     }
 
-    public function setPredeclaration(?Predeclaration $predeclaration): self
+    public function setPreDeclaration(?PreDeclaration $preDeclaration): self
     {
-        $this->predeclaration = $predeclaration;
+        $this->preDeclaration = $preDeclaration;
 
         // set (or unset) the owning side of the relation if necessary
-        $newCirconstance = $predeclaration === null ? null : $this;
-        if ($newCirconstance !== $predeclaration->getCirconstance()) {
-            $predeclaration->setCirconstance($newCirconstance);
+        $newCircumstance = $preDeclaration === null ? null : $this;
+        if ($newCircumstance !== $preDeclaration->getCirconstance()) {
+            $preDeclaration->setCirconstance($newCircumstance);
         }
 
         return $this;

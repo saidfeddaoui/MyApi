@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 /**
  * @Rest\Route(name="api_")
  */
-class PredeclarationController extends BaseController
+class PreDeclarationController extends BaseController
 {
 
     /**
@@ -28,11 +28,11 @@ class PredeclarationController extends BaseController
      *     tags={"Pré-déclaration"},
      *     description="predeclaration process",
      *     @SWG\Parameter(
-     *        name="Predeclaration",
+     *        name="PreDeclaration",
      *        in="body",
-     *        description="Predeclaration object",
+     *        description="PreDeclaration object",
      *        required=true,
-     *        @Model(type="App\Entity\Predeclaration")
+     *        @Model(type="App\Entity\PreDeclaration")
      *     ),
      *     @SWG\Response(
      *         response=200,
