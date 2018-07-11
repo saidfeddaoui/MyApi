@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contract
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,13 +25,13 @@ class Contract
     private $contract_number;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Predeclaration", mappedBy="contract")
+     * @ORM\OneToMany(targetEntity="App\Entity\PreDeclaration", mappedBy="contract")
      */
-    private $predeclarations;
+    private $preDeclarations;
 
     public function __construct()
     {
-        $this->predeclarations = new ArrayCollection();
+        $this->preDeclarations = new ArrayCollection();
     }
 
     public function getId()
@@ -51,33 +52,34 @@ class Contract
     }
 
     /**
-     * @return Collection|Predeclaration[]
+     * @return Collection|PreDeclaration[]
      */
-    public function getPredeclarations(): Collection
+    public function getPreDeclarations(): Collection
     {
-        return $this->predeclarations;
+        return $this->preDeclarations;
     }
 
-    public function addPredeclaration(Predeclaration $predeclaration): self
+    public function addPreDeclaration(PreDeclaration $preDeclaration): self
     {
-        if (!$this->predeclarations->contains($predeclaration)) {
-            $this->predeclarations[] = $predeclaration;
-            $predeclaration->setContract($this);
+        if (!$this->preDeclarations->contains($preDeclaration)) {
+            $this->preDeclarations[] = $preDeclaration;
+            $preDeclaration->setContract($this);
         }
 
         return $this;
     }
 
-    public function removePredeclaration(Predeclaration $predeclaration): self
+    public function removePreDeclaration(PreDeclaration $preDeclaration): self
     {
-        if ($this->predeclarations->contains($predeclaration)) {
-            $this->predeclarations->removeElement($predeclaration);
+        if ($this->preDeclarations->contains($preDeclaration)) {
+            $this->preDeclarations->removeElement($preDeclaration);
             // set the owning side to null (unless already changed)
-            if ($predeclaration->getContract() === $this) {
-                $predeclaration->setContract(null);
+            if ($preDeclaration->getContract() === $this) {
+                $preDeclaration->setContract(null);
             }
         }
 
         return $this;
     }
+
 }

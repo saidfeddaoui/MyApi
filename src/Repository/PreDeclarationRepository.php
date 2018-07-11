@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Predeclaration;
+use App\Entity\PreDeclaration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Predeclaration|null find($id, $lockMode = null, $lockVersion = null)
- * @method Predeclaration|null findOneBy(array $criteria, array $orderBy = null)
- * @method Predeclaration[]    findAll()
- * @method Predeclaration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PreDeclaration|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PreDeclaration|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PreDeclaration[]    findAll()
+ * @method PreDeclaration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PredeclarationRepository extends ServiceEntityRepository
+class PreDeclarationRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Predeclaration::class);
+        parent::__construct($registry, PreDeclaration::class);
     }
 
 //    /**
-//     * @return Predeclaration[] Returns an array of Predeclaration objects
+//     * @return PreDeclaration[] Returns an array of PreDeclaration objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PredeclarationRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Predeclaration
+    public function findOneBySomeField($value): ?PreDeclaration
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

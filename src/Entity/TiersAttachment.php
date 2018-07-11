@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TiersAttachment
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -88,4 +89,5 @@ class TiersAttachment
 
         return $this;
     }
+
 }
