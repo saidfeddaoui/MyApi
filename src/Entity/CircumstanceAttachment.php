@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CircumstanceAttachment
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -71,4 +72,5 @@ class CircumstanceAttachment
 
         return $this;
     }
+
 }

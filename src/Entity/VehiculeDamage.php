@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VehiculeDamage
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -81,6 +82,5 @@ class VehiculeDamage
 
         return $this;
     }
-
 
 }

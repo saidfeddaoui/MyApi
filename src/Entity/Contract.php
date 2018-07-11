@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contract
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -80,4 +81,5 @@ class Contract
 
         return $this;
     }
+
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Identification
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -111,4 +112,5 @@ class Identification
 
         return $this;
     }
+
 }

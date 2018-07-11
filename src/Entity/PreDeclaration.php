@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PreDeclaration
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -173,4 +174,5 @@ class PreDeclaration
 
         return $this;
     }
+
 }

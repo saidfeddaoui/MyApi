@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Circumstance
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -155,4 +156,5 @@ class Circumstance
 
         return $this;
     }
+
 }

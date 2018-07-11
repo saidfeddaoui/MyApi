@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VehiculeComponent
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -55,6 +55,5 @@ class VehiculeComponent
 
         return $this;
     }
-
 
 }
