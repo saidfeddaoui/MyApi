@@ -113,4 +113,26 @@ jQuery(document).ready(function() {
             }
         });
     }
+
+
+
+    $("body").on("click", ".SaveAlert", function(event){
+        event.preventDefault();
+        var form = $(this).closest("form").serializeArray();
+        var date_creation = form[4].value;
+        var date_expiration = form[5].value;
+        console.log(date_creation);
+        console.log(date_expiration);
+        if(date_creation == ""){
+            toastr.warning("Veuillez renseigner la date de création");
+            return false;
+        }
+        if(moment(date_creation,"DD-MM-YYYY HH:mm") > moment(date_expiration,"DD-MM-YYYY HH:mm") ) {
+            toastr.warning("Veuillez renseigner une date d'expiration supérieure à la date d'ajout");
+            return false;
+        }
+        $(this).closest("form").submit();
+    });
+
+
 });
