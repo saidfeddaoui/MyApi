@@ -9,7 +9,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
-
+date_default_timezone_set( 'Africa/Casablanca' );
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
