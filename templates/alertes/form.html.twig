@@ -1,4 +1,4 @@
-{{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
+{{ form_start(form, {'attr': {'class': 'form-horizontal AlertForm', 'role':'form'}}) }}
 
 <div class="form-group">
     <div class="col-md-4 ">
@@ -41,7 +41,7 @@
         {{ form_label(form.date_creation) }}
     </div>
     <div class="col-md-8 ">
-        {{ form_widget(form.date_creation, {'attr': {'class': 'form-control datetimepicker'}} ) }}
+        {{ form_widget(form.date_creation, {'attr': {'class': 'form-control creation datetimepicker'}} ) }}
     </div>
 </div>
 
@@ -50,7 +50,7 @@
         {{ form_label(form.date_expiration) }}
     </div>
     <div class="col-md-8 ">
-        {{ form_widget(form.date_expiration, {'attr': {'class': 'form-control datetimepicker'}} ) }}
+        {{ form_widget(form.date_expiration, {'attr': {'class': 'form-control expiration datetimepicker'}} ) }}
     </div>
 </div>
 
@@ -58,7 +58,7 @@
 
 <div class="modal-footer">
     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
-    <button type="submit" class="btn green SaveProductEdit">Enregistrer</button>
+    <button type="submit" class="btn green SaveAlert">Enregistrer</button>
 </div>
 
 {{ form_end(form) }}

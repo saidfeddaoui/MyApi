@@ -59,11 +59,6 @@ class InsuranceType extends BaseRole
     private $marqueVehicules;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ModeleVehicule", mappedBy="insuranceType")
-     */
-    private $modeleVehicules;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\PhotosSinistre", mappedBy="insuranceType")
      */
     private $photosSinistres;
@@ -80,7 +75,6 @@ class InsuranceType extends BaseRole
         $this->alerts = new ArrayCollection();
         $this->itemLists = new ArrayCollection();
         $this->marqueVehicules = new ArrayCollection();
-        $this->modeleVehicules = new ArrayCollection();
         $this->photosSinistres = new ArrayCollection();
         $this->villes = new ArrayCollection();
     }
@@ -283,38 +277,6 @@ class InsuranceType extends BaseRole
 
         return $this;
     }
-
-    /**
-     * @return Collection|ModeleVehicule[]
-     */
-    public function getModeleVehicules(): Collection
-    {
-        return $this->modeleVehicules;
-    }
-
-    public function addModeleVehicule(ModeleVehicule $modeleVehicule): self
-    {
-        if (!$this->modeleVehicules->contains($modeleVehicule)) {
-            $this->modeleVehicules[] = $modeleVehicule;
-            $modeleVehicule->setInsuranceType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeModeleVehicule(ModeleVehicule $modeleVehicule): self
-    {
-        if ($this->modeleVehicules->contains($modeleVehicule)) {
-            $this->modeleVehicules->removeElement($modeleVehicule);
-            // set the owning side to null (unless already changed)
-            if ($modeleVehicule->getInsuranceType() === $this) {
-                $modeleVehicule->setInsuranceType(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|PhotosSinistre[]
      */
