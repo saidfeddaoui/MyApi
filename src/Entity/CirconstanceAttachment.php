@@ -3,16 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ORM\Entity(repositoryClass="AttachmentRepository")
- *
- * @Serializer\ExclusionPolicy("all")
+ * @ORM\Entity(repositoryClass="App\Repository\CirconstanceAttachmentRepository")
  */
-class Attachment
+class CirconstanceAttachment
 {
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -22,30 +18,18 @@ class Attachment
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Serializer\Expose()
-     *
-     * @Serializer\Groups({"all"})
      */
     private $path;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $created_at;
 
     /**
-     * Attachment constructor.
-     * @param $path
+     * @ORM\ManyToOne(targetEntity="App\Entity\Circonstance", inversedBy="photos")
      */
-    public function __construct($path = null)
-    {
-        if ($path) {
-            $this->path = $path;
-        }
-        $this->createdAt = new \DateTime();
-    }
-
+    private $circonstance;
 
     public function getId()
     {
@@ -66,16 +50,25 @@ class Attachment
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
+    public function getCirconstance(): ?Circonstance
+    {
+        return $this->circonstance;
+    }
 
+    public function setCirconstance(?Circonstance $circonstance): self
+    {
+        $this->circonstance = $circonstance;
 
+        return $this;
+    }
 }
