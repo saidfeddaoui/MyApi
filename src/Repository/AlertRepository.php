@@ -28,7 +28,7 @@ class AlertRepository extends ServiceEntityRepository
             ->Where('a.date_expiration > :today or a.date_expiration is null')
             ->andWhere('a.insuranceType = :insuranceType')
             ->andWhere('a.date_creation <= :today')
-            ->setParameter('today', date('Y-m-d H:i:m'))
+            ->setParameter('today', date('Y-m-d'))
             ->setParameter('insuranceType', $insuranceType)
             ->getQuery()
             ->getResult()
