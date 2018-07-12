@@ -77,7 +77,7 @@ class UsernamePasswordAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return $this->extractor->extract($request);
+        return false !== $this->extractor->extract($request);
     }
     /**
      * Get the authentication credentials from the request and return them
