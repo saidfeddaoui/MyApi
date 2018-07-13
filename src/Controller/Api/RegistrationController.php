@@ -8,6 +8,8 @@ use App\Entity\Client;
 use App\Entity\Group;
 use App\Entity\InsuranceType;
 use App\Entity\Role;
+use App\Event\ApplicationEvents;
+use App\Event\PhoneRegistrationEvent;
 use App\Services\SmsApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -15,6 +17,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -91,7 +94,7 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param InsuranceType $insuranceType
-     * @param SmsApiService $smsService
+     * @param EventDispatcherInterface $eventDispatcher
      * @param JWTEncoderInterface $jwtEncoder
      * @param ObjectManager $em
      * @param ConstraintViolationListInterface $violations
@@ -99,15 +102,14 @@ class RegistrationController extends BaseController
      * @return ApiResponse
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
-    public function phoneRegistration(Client $client, InsuranceType $insuranceType, SmsApiService $smsService, JWTEncoderInterface $jwtEncoder, ObjectManager $em, ConstraintViolationListInterface $violations)
+    public function phoneRegistration(Client $client, InsuranceType $insuranceType, EventDispatcherInterface $eventDispatcher, JWTEncoderInterface $jwtEncoder, ObjectManager $em, ConstraintViolationListInterface $violations)
     {
         $token = $jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-        $verificationCode = random_int(1000, 9999);
         $client
             ->setEnabled(false)
-            ->setVerificationCode($verificationCode)
+            ->setVerificationCode(random_int(1000, 9999))
             ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
             ->addInsuranceType($insuranceType)
             ->addRole($role)
@@ -115,7 +117,7 @@ class RegistrationController extends BaseController
         ;
         $em->persist($client);
         $em->flush();
-        $smsService->sendSms($client->getPhone(), $verificationCode);
+        $eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
     /**
