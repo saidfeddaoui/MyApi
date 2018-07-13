@@ -173,4 +173,37 @@ class Client extends User
         return $this;
     }
 
+    /**
+     * Check if the client is unverified
+     * @return bool
+     */
+    public function isUnverified()
+    {
+        return self::STATUS_UNVERIFIED_WITH_SMS === $this->getStatus();
+    }
+    /**
+     * Check if the client is verified
+     * @return bool
+     */
+    public function isVerified()
+    {
+        return self::STATUS_VERIFIED_WITH_SMS === $this->getStatus();
+    }
+    /**
+     * Check if the client is unconfirmed
+     * @return bool
+     */
+    public function isUnconfirmed()
+    {
+        return self::STATUS_UNCONFIRMED_ACCOUNT === $this->getStatus();
+    }
+    /**
+     * Check if the client is confirmed
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
+    }
+
 }

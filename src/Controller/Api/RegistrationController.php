@@ -8,13 +8,16 @@ use App\Entity\Client;
 use App\Entity\Group;
 use App\Entity\InsuranceType;
 use App\Entity\Role;
-use App\Services\SmsApiService;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Event\ApplicationEvents;
+use App\Event\PhoneRegistrationEvent;
+use App\Services\VerificationCodeGeneratorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -23,6 +26,50 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class RegistrationController extends BaseController
 {
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+    /**
+     * @var JWTEncoderInterface
+     */
+    private $jwtEncoder;
+    /**
+     * @var VerificationCodeGeneratorInterface
+     */
+    private $codeGenerator;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * RegistrationController constructor.
+     * @param EntityManagerInterface $em
+     * @param UserPasswordEncoderInterface $encoder
+     * @param JWTEncoderInterface $jwtEncoder
+     * @param VerificationCodeGeneratorInterface $codeGenerator
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(
+        EntityManagerInterface $em,
+        UserPasswordEncoderInterface $encoder,
+        JWTEncoderInterface $jwtEncoder,
+        VerificationCodeGeneratorInterface $codeGenerator,
+        EventDispatcherInterface $eventDispatcher
+    )
+    {
+        $this->em = $em;
+        $this->encoder = $encoder;
+        $this->jwtEncoder = $jwtEncoder;
+        $this->codeGenerator = $codeGenerator;
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @SWG\Post(
@@ -91,31 +138,27 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param InsuranceType $insuranceType
-     * @param SmsApiService $smsService
-     * @param JWTEncoderInterface $jwtEncoder
-     * @param ObjectManager $em
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
-    public function phoneRegistration(Client $client, InsuranceType $insuranceType, SmsApiService $smsService, JWTEncoderInterface $jwtEncoder, ObjectManager $em, ConstraintViolationListInterface $violations)
+    public function phoneRegistration(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
-        $token = $jwtEncoder->encode(['phone' => $client->getPhone()]);
-        $role = $em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
-        $group = $em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-        $verificationCode = random_int(1000, 9999);
+        $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
+        $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
+        $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
         $client
             ->setEnabled(false)
-            ->setVerificationCode($verificationCode)
+            ->setVerificationCode($this->codeGenerator->generate())
             ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
             ->addInsuranceType($insuranceType)
             ->addRole($role)
             ->setGroup($group)
         ;
-        $em->persist($client);
-        $em->flush();
-        $smsService->sendSms($client->getPhone(), $verificationCode);
+        $this->em->persist($client);
+        $this->em->flush();
+        $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
     /**
@@ -158,6 +201,11 @@ class RegistrationController extends BaseController
      *                 "code"=730,
      *                 "status"="Invalid Token"
      *             },
+     *             "Already verified Error (Http Code: 406)":
+     *             {
+     *                 "code"=612,
+     *                 "status"="Client is already verified"
+     *             },
      *             "Verification code Error (Http Code: 400)":
      *             {
      *                 "code"=610,
@@ -175,17 +223,19 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param string $code
-     * @param ObjectManager $em
      * @return ApiResponse
      */
-    public function phoneVerification(Client $client, string $code, ObjectManager $em)
+    public function phoneVerification(Client $client, string $code)
     {
-        if (Client::STATUS_UNVERIFIED_WITH_SMS !== $client->getStatus() || $code !== (string)$client->getVerificationCode()) {
+        if (!$client->isUnverified()) {
+            return $this->respondWith(null, ApiResponse::CLIENT_ALREADY_VERIFIED_ERROR);
+        }
+        if ($code !== (string)$client->getVerificationCode()) {
             return $this->respondWith(null, ApiResponse::VERIFICATION_CODE_ERROR);
         }
         $client->setStatus(Client::STATUS_VERIFIED_WITH_SMS);
-        $em->persist($client);
-        $em->flush();
+        $this->em->persist($client);
+        $this->em->flush();
         return $this->respondWith(null);
     }
     /**
@@ -237,6 +287,11 @@ class RegistrationController extends BaseController
      *             {
      *                 "code"=611,
      *                 "status"="Unauthorized action for an unverified client"
+     *             },
+     *             "Account already created Error (Http Code: 406)":
+     *             {
+     *                 "code"=613,
+     *                 "status"="Client has already created his account"
      *             }
      *         }
      *     )
@@ -252,28 +307,29 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param UserPasswordEncoderInterface $encoder
-     * @param ObjectManager $em
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient, UserPasswordEncoderInterface $encoder, ObjectManager $em, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient, ConstraintViolationListInterface $violations)
     {
-        if (Client::STATUS_VERIFIED_WITH_SMS !== $client->getStatus()) {
+        if ($client->isUnverified()) {
             return $this->respondWith(null, ApiResponse::CLIENT_NOT_VERIFIED_ERROR);
+        }
+        if ($client->isUnconfirmed() || $client->isConfirmed()) {
+            return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
         $client
             ->setName($submittedClient->getName())
             ->setEmail($submittedClient->getEmail())
             ->setEmailCanonical($submittedClient->getEmailCanonical())
-            ->setPassword($encoder->encodePassword($client, $submittedClient->getPlainPassword()))
+            ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))
             ->setContactPreference($submittedClient->getContactPreference())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
             ->setEnabled(true)
         ;
-        $em->persist($client);
-        $em->flush();
+        $this->em->persist($client);
+        $this->em->flush();
         return $this->respondWith(null, ApiResponse::UPDATED);
     }
 

@@ -26,6 +26,8 @@ class ApiResponse
     const INTERNAL_SERVER_ERROR = 500;
     const VERIFICATION_CODE_ERROR = 610;
     const CLIENT_NOT_VERIFIED_ERROR = 611;
+    const CLIENT_ALREADY_VERIFIED_ERROR = 612;
+    const CLIENT_ACCOUNT_ALREADY_CREATED_ERROR = 613;
     const JWT_FAILURE_ERROR = 730;
     const STATUS_TEXT = [
         self::OK => 'OK',
@@ -37,6 +39,8 @@ class ApiResponse
         self::INTERNAL_SERVER_ERROR => 'Internal Server Error',
         self::VERIFICATION_CODE_ERROR => 'Verification code is not correct',
         self::CLIENT_NOT_VERIFIED_ERROR => 'Unauthorized action for an unverified client',
+        self::CLIENT_ALREADY_VERIFIED_ERROR => 'Client is already verified',
+        self::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR => 'Client has already created his account',
         self::JWT_FAILURE_ERROR => 'Invalid Token',
     ];
     const HTTP_STATUS_CODE = [
@@ -49,6 +53,8 @@ class ApiResponse
         self::INTERNAL_SERVER_ERROR => Response::HTTP_INTERNAL_SERVER_ERROR,
         self::VERIFICATION_CODE_ERROR => Response::HTTP_BAD_REQUEST,
         self::CLIENT_NOT_VERIFIED_ERROR => Response::HTTP_UNAUTHORIZED,
+        self::CLIENT_ALREADY_VERIFIED_ERROR => Response::HTTP_NOT_ACCEPTABLE,
+        self::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR => Response::HTTP_NOT_ACCEPTABLE,
         self::JWT_FAILURE_ERROR => Response::HTTP_UNAUTHORIZED,
     ];
 

@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CircumstanceAttachmentRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class CircumstanceAttachment
 {
@@ -14,16 +16,27 @@ class CircumstanceAttachment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"show_predeclaration"})
      */
     private $path;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"show_predeclaration"})
+     * @Serializer\Type("DateTime<'d-m-Y H:i'>")
      */
     private $created_at;
 
@@ -31,6 +44,11 @@ class CircumstanceAttachment
      * @ORM\ManyToOne(targetEntity="Circumstance", inversedBy="photos")
      */
     private $circumstance;
+
+    public function __construct($path = null)
+    {
+        $this->created_at = new \DateTime();
+    }
 
     public function getId()
     {

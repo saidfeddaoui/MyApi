@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CircumstanceRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Circumstance
 {
@@ -21,27 +24,60 @@ class Circumstance
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @Assert\Type(
+     *     type="double",
+     *     message="The value {{ value }} is not a valid {{ type }}.",
+     *     groups={"client_pre_declaration"}
+     * )
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @Assert\Type(
+     *     type="double",
+     *     message="The value {{ value }} is not a valid {{ type }}.",
+     *     groups={"client_pre_declaration"}
+     * )
      */
     private $longitude;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
      */
     private $ville;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Type(
+     *     type="bool",
+     *     message="The value {{ value }} is not a valid {{ type }}.",
+     *     groups={"client_pre_declaration"}
+     * )
      */
     private $remorquage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance")
+     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
      */
     private $photos;
 
@@ -116,11 +152,27 @@ class Circumstance
         return $this->photos;
     }
 
+    /**
+     * @param mixed $photos
+     * @return Circumstance
+     */
+    public function setPhotos($photos)
+    {
+        foreach ($this->photos as $photo) {
+            $this->removePhoto($photo);
+        }
+        foreach ($photos as $photo) {
+            $this->addPhoto($photo);
+        }
+        return $this;
+    }
+
+
     public function addPhoto(CircumstanceAttachment $photo): self
     {
         if (!$this->photos->contains($photo)) {
             $this->photos[] = $photo;
-            $photo->setCirconstance($this);
+            $photo->setCircumstance($this);
         }
 
         return $this;
@@ -131,8 +183,8 @@ class Circumstance
         if ($this->photos->contains($photo)) {
             $this->photos->removeElement($photo);
             // set the owning side to null (unless already changed)
-            if ($photo->getCirconstance() === $this) {
-                $photo->setCirconstance(null);
+            if ($photo->getCircumstance() === $this) {
+                $photo->setCircumstance(null);
             }
         }
 
@@ -150,8 +202,8 @@ class Circumstance
 
         // set (or unset) the owning side of the relation if necessary
         $newCircumstance = $preDeclaration === null ? null : $this;
-        if ($newCircumstance !== $preDeclaration->getCirconstance()) {
-            $preDeclaration->setCirconstance($newCircumstance);
+        if ($newCircumstance !== $preDeclaration->getCircumstance()) {
+            $preDeclaration->setCircumstance($newCircumstance);
         }
 
         return $this;

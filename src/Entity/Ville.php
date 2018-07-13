@@ -19,6 +19,9 @@ class Ville implements TranslatableInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
      */
     private $id;
 

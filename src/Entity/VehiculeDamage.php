@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VehiculeDamageRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class VehiculeDamage
 {
@@ -20,7 +23,12 @@ class VehiculeDamage
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\VehiculeComponent")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\VehiculeComponent",cascade={"persist"})
      */
     private $damagedParts;
 
@@ -45,6 +53,21 @@ class VehiculeDamage
     public function getDamagedParts(): Collection
     {
         return $this->damagedParts;
+    }
+
+    /**
+     * @param mixed $damagedParts
+     * @return VehiculeDamage
+     */
+    public function setDamagedParts($damagedParts)
+    {
+        foreach ($this->damagedParts as $part) {
+            $this->removeDamagedPart($part);
+        }
+        foreach ($damagedParts as $part) {
+            $this->addDamagedPart($part);
+        }
+        return $this;
     }
 
     public function addDamagedPart(VehiculeComponent $damagedPart): self
