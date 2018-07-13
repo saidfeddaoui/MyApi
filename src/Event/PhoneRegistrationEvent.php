@@ -2,7 +2,6 @@
 
 namespace App\Event;
 
-
 use App\Entity\Client;
 use Symfony\Component\EventDispatcher\Event;
 
