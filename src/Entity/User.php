@@ -88,9 +88,12 @@ class User implements UserInterface, EquatableInterface
     protected $accountNonLocked = true;
     /**
      * Plain password. Used for model validation. Must not be persisted.
-     * @Serializer\Type("string")
-     * @Assert\NotBlank(groups={"client_account_creation"})
      * @var string
+     * @Serializer\Type("string")
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_account_creation"})
+     *
+     * @Assert\NotBlank(groups={"client_account_creation"})
      */
     protected $plainPassword;
     /**
