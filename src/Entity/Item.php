@@ -24,7 +24,7 @@ class Item implements  TranslatableInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups({"scenarios"})
+     * @Serializer\Groups({"scenarios","client_pre_declaration"})
      */
     private $id;
 

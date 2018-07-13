@@ -19,22 +19,17 @@ class VehiculeComponentRepository extends ServiceEntityRepository
         parent::__construct($registry, VehiculeComponent::class);
     }
 
-//    /**
-//     * @return VehiculeComponents[] Returns an array of VehiculeComponents objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+   /**
+     * @return VehiculeComponents[] Returns an array of VehiculeComponents objects
     */
+    public function findByIds(array $ids)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.id in (:ids) ')
+            ->setParameter('ids',$ids)
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?VehiculeComponents

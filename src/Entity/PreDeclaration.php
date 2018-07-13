@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PreDeclarationRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class PreDeclaration
 {
@@ -18,11 +21,26 @@ class PreDeclaration
     private $id;
 
     /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}.",
+     *     groups={"client_pre_declaration"}
+     * )
+     * @Assert\GreaterThan(0 , groups={"client_pre_declaration"})
+     *
      * @ORM\Column(type="integer")
      */
     private $nb_vehicule;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("show_predeclaration")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $statut;
@@ -33,31 +51,55 @@ class PreDeclaration
     private $description;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="preDeclarations")
      */
     private $contract;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Item")
      */
     private $scenario;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
      * @ORM\OneToOne(targetEntity="App\Entity\Identification", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $identification;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $circumstance;
 
     /**
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\OneToOne(targetEntity="App\Entity\VehiculeDamage", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $vehiculeDamage;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $tiers;

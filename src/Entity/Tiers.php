@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TiersRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Tiers
 {
@@ -20,12 +23,24 @@ class Tiers
     private $id;
 
     /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @Assert\Regex(pattern="/^[a-zA-Z0-9]+$/", groups={"client_pre_declaration"})
+     *
      * @ORM\Column(type="string", length=20)
      */
     private $immatriculation;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachment", mappedBy="tiers")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachment", mappedBy="tiers", cascade={"persist"})
      */
     private $attachments;
 
@@ -62,6 +77,21 @@ class Tiers
     public function getAttachments(): Collection
     {
         return $this->attachments;
+    }
+
+    /**
+     * @param mixed $attachments
+     * @return Tiers
+     */
+    public function setAttachments($attachments)
+    {
+        foreach ($this->attachments as $attachment) {
+            $this->removeAttachment($attachment);
+        }
+        foreach ($attachments as $attachment){
+            $this->addAttachment($attachment);
+        }
+        return $this;
     }
 
     public function addAttachment(TiersAttachment $attachment): self

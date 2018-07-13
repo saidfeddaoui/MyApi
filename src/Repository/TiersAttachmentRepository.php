@@ -19,22 +19,19 @@ class TiersAttachmentRepository extends ServiceEntityRepository
         parent::__construct($registry, TiersAttachment::class);
     }
 
-//    /**
-//     * @return TiersAttachment[] Returns an array of TiersAttachment objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return TiersAttachment[] Returns an array of TiersAttachment objects
+     */
+
+    public function findByIds(array $ids)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('c')
+            ->where('c.id in (:ids) ')
+            ->setParameter('ids',$ids)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?TiersAttachment

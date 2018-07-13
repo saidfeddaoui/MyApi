@@ -19,6 +19,8 @@ class ModeleVehicule
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
      */
     private $id;
 

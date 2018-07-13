@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use Couchbase\MatchSearchQuery;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IdentificationRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Identification
 {
@@ -18,22 +22,40 @@ class Identification
     private $id;
 
     /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @Assert\Regex(pattern="/^[a-zA-Z0-9]+$/", groups={"client_pre_declaration"})
      * @ORM\Column(type="string", length=255)
      */
     private $immatriculation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
      */
     private $identity;
 
     /**
+     * @var MarqueVehicule
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\MarqueVehicule")
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
      */
     private $marque;
 
     /**
+     * @var ModeleVehicule
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\ModeleVehicule")
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
      */
     private $modele;
 

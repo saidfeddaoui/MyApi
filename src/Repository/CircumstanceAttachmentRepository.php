@@ -19,22 +19,18 @@ class CircumstanceAttachmentRepository extends ServiceEntityRepository
         parent::__construct($registry, CircumstanceAttachment::class);
     }
 
-//    /**
-//     * @return CircumstanceAttachment[] Returns an array of CircumstanceAttachment objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return CircumstanceAttachment[] Returns an array of CircumstanceAttachment objects
+     */
+    public function findByIds(array $ids)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+               ->where('c.id in (:ids) ')
+               ->setParameter('ids',$ids)
+               ->getQuery()
+               ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?CircumstanceAttachment
