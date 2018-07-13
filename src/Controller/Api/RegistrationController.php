@@ -36,15 +36,48 @@ class RegistrationController extends BaseController
      *         description="Specify the user's Entity",
      *     ),
      *     @SWG\Parameter(
-     *        name="Client",
-     *        in="body",
-     *        description="Client object",
-     *        required=true,
-     *        @Model(type="App\Entity\Client", groups={"phone_registration"})
+     *         name="Client",
+     *         in="body",
+     *         description="Client object",
+     *         required=true,
+     *         @Model(type="App\Entity\Client", groups={"phone_registration"})
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return client object after his creation",
+     *         description="Returns a registration token",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=201,
+     *                 "status"="Created",
+     *                 "data"={
+     *                     "registration_token"="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1MzEyMjUyNjksImV4..."
+     *                 }
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Insurance Type Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Requested Insurance Name Does Not exist"
+     *             },
+     *             "Token Encoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             }
+     *         }
      *     )
      * )
      *
@@ -98,8 +131,40 @@ class RegistrationController extends BaseController
      *         description="Registration Token",
      *     ),
      *     @SWG\Parameter(name="code", in="formData", type="string", required=true),
-     *     @SWG\Response(response=200, description="Success response returned if the verification code is correct"),
-     *     @SWG\Response(response=400, description="Failure response returned if the verification code is not correct")
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns a success response if the verification code is correct",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=200,
+     *                 "status"="Ok"
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Token Decoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             },
+     *             "Verification code Error (Http Code: 400)":
+     *             {
+     *                 "code"=610,
+     *                 "status"="Verification code is not correct"
+     *             }
+     *         }
+     *     )
      * )
      *
      * @Rest\Post(path="/phone/verification", name="phone_verification")
@@ -142,8 +207,38 @@ class RegistrationController extends BaseController
      *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
      *     ),
      *     @SWG\Response(
-     *         response=200,
-     *         description="Return client object after completing his account",
+     *         response=202,
+     *         description="Returns a success response if the client account wad successfully completed",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=202,
+     *                 "status"="Updated"
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Token Decoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             },
+     *             "Client Unverified Error (Http Code: 401)":
+     *             {
+     *                 "code"=611,
+     *                 "status"="Unauthorized action for an unverified client"
+     *             }
+     *         }
      *     )
      * )
      *
