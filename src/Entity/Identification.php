@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Couchbase\MatchSearchQuery;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -42,20 +41,26 @@ class Identification
     /**
      * @var MarqueVehicule
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\MarqueVehicule")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\MarqueVehicule")
      */
     private $marque;
 
     /**
      * @var ModeleVehicule
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\ModeleVehicule")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\ModeleVehicule")
      */
     private $modele;
 

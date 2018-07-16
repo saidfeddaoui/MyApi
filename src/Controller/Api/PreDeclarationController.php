@@ -1,27 +1,47 @@
 <?php
 
 namespace App\Controller\Api;
+
 use App\DTO\Api\ApiResponse;
-use App\Entity\Circumstance;
 use App\Entity\CircumstanceAttachment;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Exception\MissingRequiredFileException;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @Rest\Route(path="/pre_declaration", name="api_")
+ * @Rest\Route(path="/public/pre_declaration", name="api_pre_declaration_")
  */
 class PreDeclarationController extends BaseController
 {
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * RegistrationController constructor.
+     * @param EntityManagerInterface $em
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->em = $em;
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @SWG\Post(
@@ -43,57 +63,51 @@ class PreDeclarationController extends BaseController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return Predclaration",
+     *         description="Success response",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Not Found Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Resource Not Found"
+     *             }
+     *         }
      *     )
      * )
      *
-     * @Rest\Post(path="/", name="predeclaration")
-     * @ParamConverter(name="preDeclaration", converter="fos_rest.request_body", options={"validator"={ "groups"={"client_pre_declaration"} }})
-     * @Rest\View(serializerGroups={"all","show_predeclaration","client_pre_declaration"})
-     *
+     * @Rest\Post(name="predeclaration")
+     * @ParamConverter(
+     *     name="preDeclaration",
+     *     options={
+     *         "converter":"App\ParamConverter\PreDeclarationParamConverter",
+     *         "validator"={"groups"={"client_pre_declaration"}}
+     *     }
+     * )
+     * @Rest\View(serializerGroups={"all", "show_predeclaration", "client_pre_declaration"})
      *
      * @param PreDeclaration $preDeclaration
-     * @param ObjectManager $em
-     * @param ConstraintViolationListInterface $violations
-     *
      * @return ApiResponse
      */
-    public function predeclaration(PreDeclaration $preDeclaration, ObjectManager $em, ConstraintViolationListInterface $violations)
+    public function preDeclaration(PreDeclaration $preDeclaration)
     {
-        $ids_circumstance = $preDeclaration->getCircumstance()->getPhotos()->map(function ($c) { return $c->getId(); })->toArray();
-        $ids_damaged      = $preDeclaration->getVehiculeDamage()->getDamagedParts()->map(function ($c) { return $c->getId(); })->toArray();
-        $ids_tiers        = $preDeclaration->getTiers()->getAttachments()->map(function ($c) { return $c->getId(); })->toArray();
-        $circumstanceAttachments = $em->getRepository('App:CircumstanceAttachment')->findByIds($ids_circumstance);
-        $damagedParts     = $em->getRepository('App:VehiculeComponent')->findByIds($ids_damaged);
-        $tiersAttachment= $em->getRepository('App:TiersAttachment')->findByIds($ids_tiers);
-        $marque   = $em->getRepository('App:MarqueVehicule')->findOneById($preDeclaration->getIdentification()->getMarque()->getId());
-        $modele   = $em->getRepository('App:ModeleVehicule')->findOneById($preDeclaration->getIdentification()->getModele()->getId());
-        $ville    = $em->getRepository('App:Ville')->findOneById($preDeclaration->getCircumstance()->getVille()->getId());
-        $contrat  = $em->getRepository('App:Contract')->findOneById($preDeclaration->getContract()->getId());
-        $Sceanrio = $em->getRepository('App:Item')->findOneById($preDeclaration->getScenario()->getId());
-
-        $preDeclaration->getIdentification()
-            ->setMarque($marque)
-            ->setModele($modele)
-        ;
-        $preDeclaration->getCircumstance()
-            ->setVille($ville)
-        ;
-        $preDeclaration->setContract($contrat);
-        $preDeclaration->setScenario($Sceanrio);
-        $preDeclaration->getCircumstance()->setPhotos($circumstanceAttachments);
-        $preDeclaration->getVehiculeDamage()->setDamagedParts($damagedParts);
-        $preDeclaration->getTiers()->setAttachments($tiersAttachment);
-
-        $em->persist($preDeclaration);
-        $em->flush();
-        return $this->respondWith($preDeclaration);
+        $preDeclaration->setStatus(PreDeclaration::IN_PROGRESS);
+        $this->em->persist($preDeclaration);
+        $this->em->flush();
+        return $this->respondWith($preDeclaration, ApiResponse::CREATED);
     }
-
     /**
      * @SWG\Post(
-     *     tags={"circumstanceAttachement"},
-     *     description="upload cricumstance",
+     *     tags={"Pré-déclaration"},
+     *     description="Upload circumstance's attachments",
      *     consumes={"multipart/form-data"},
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -107,7 +121,7 @@ class PreDeclarationController extends BaseController
      *         in="formData",
      *         type="file",
      *         required=true,
-     *         description="Bearer auth",
+     *         description="Files",
      *     ),
      *     @SWG\Response(
      *         response=200,
@@ -115,40 +129,33 @@ class PreDeclarationController extends BaseController
      *     )
      * )
      *
-     * @Rest\Post(path="/circumstances/attachements", name="circumstances_attachements")
+     * @Rest\Post(path="/circumstances/attachments", name="circumstances_attachments")
      * @Rest\View()
      *
-     *
-     * @param ObjectManager $em
      * @param Request $request
-     *
-     * @return JsonResponse
+     * @return ApiResponse
      */
-    public function uploadCircumstanceAttachement(Request $request,ObjectManager $em)
+    public function uploadCircumstanceAttachments(Request $request)
     {
-          $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img/circumstance';
-          $Attachments = $request->files->get("attachments");
-          $photos = [];
-          foreach ($Attachments as $key => $attachment){
-              /**
-               * @var UploadedFile $attachment
-               */
-              $imageFile = $attachment->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
-              $CircumstanceAttachment = new CircumstanceAttachment();
-              $CircumstanceAttachment->setPath($imageFile->getBasename());
-              $em->persist($CircumstanceAttachment);
-              $em->flush();
-              $photos[] = ["id"=>$CircumstanceAttachment->getId()];
-              return $this->respondWith($photos);
-          }
-        return new JsonResponse($photos);
+        $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img/circumstances';
+        $attachments = $request->files->get('attachments', []);
+        $photos = [];
+        foreach ($attachments as $attachment) {
+            /**
+             * @var UploadedFile $attachment
+             */
+            $imageFile = $attachment->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
+            $circumstanceAttachment = new CircumstanceAttachment($imageFile->getBasename());
+            $this->em->persist($circumstanceAttachment);
+            $this->em->flush();
+            $photos[] = $circumstanceAttachment->getId();
+        }
+        return $this->respondWith($photos);
     }
-
-
     /**
      * @SWG\Post(
-     *     tags={"tiersAttachement"},
-     *     description="upload tiers",
+     *     tags={"Pré-déclaration"},
+     *     description="upload tiers's attachments",
      *     consumes={"multipart/form-data"},
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -162,58 +169,68 @@ class PreDeclarationController extends BaseController
      *         in="formData",
      *         type="file",
      *         required=true,
-     *         description="Bearer auth",
+     *         description="Gray card picture",
      *     ),
      *     @SWG\Parameter(
-     *         name="tiers_certif",
+     *         name="tiers_attestation",
      *         in="formData",
      *         type="file",
      *         required=true,
-     *         description="Bearer auth",
+     *         description="Attestation picture",
      *     ),
      *    @SWG\Parameter(
-     *         name="tiers_vehicule",
+     *         name="tiers_vehicle",
      *         in="formData",
      *         type="file",
      *         required=false,
-     *         description="Bearer auth",
+     *         description="Vehicule picture",
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return tiersAttachement",
+     *         description="Return attachments list",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Missing requirement Error (Http Code: 400)":
+     *             {
+     *                 "code"=408,
+     *                 "status"="Missing required file: ..."
+     *             }
+     *         }
      *     )
      * )
      *
-     * @Rest\Post(path="/tiers/attachements", name="tiers_attachements")
+     * @Rest\Post(path="/tiers/attachments", name="tiers_attachments")
      * @Rest\View()
      *
-     *
-     * @param ObjectManager $em
      * @param Request $request
-     *
-     * @return JsonResponse
+     * @return ApiResponse
+     * @throws MissingRequiredFileException
      */
-    public function uploadTiersAttachement(Request $request,ObjectManager $em)
+    public function uploadTiersAttachments(Request $request)
     {
-          $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
-          $Attachments = $request->files->all();
-          $tiersAttachments = [];
-
-          foreach ($Attachments as $key => $attachment){
-              /**
-               * @var UploadedFile $attachment
-               */
-
-              $imageFile = $attachment->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
-              $tiersAttachment = new TiersAttachment();
-              $tiersAttachment->setPath($imageFile->getBasename());
-              $tiersAttachment->setType($key);
-              $em->persist($tiersAttachment);
-              $em->flush();
-              $tiersAttachments[]=['id'=>$tiersAttachment->getId()];
-          }
-
-        return new JsonResponse($tiersAttachments);
+        foreach (TiersAttachment::getRequiredAttachmentTypes() as $type) {
+            if (!$request->files->has($type)) {
+                throw new MissingRequiredFileException($type);
+            }
+        }
+        $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
+        $tiersAttachments = [];
+        foreach (TiersAttachment::getAttachmentTypes() as $type) {
+            /**
+             * @var UploadedFile $attachment
+             */
+            $attachment = $request->files->get($type);
+            $file = $attachment->move($directory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
+            $tiersAttachment = new TiersAttachment($type, $file->getBasename());
+            $this->em->persist($tiersAttachment);
+            $this->em->flush();
+            $tiersAttachments[] = ['id' => $tiersAttachment->getId(), 'type' => $type];
+        }
+        return $this->respondWith($tiersAttachments);
     }
 
 }

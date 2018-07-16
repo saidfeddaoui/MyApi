@@ -24,9 +24,9 @@ class Tiers
 
     /**
      * @var string
-     *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\NotBlank(groups={"client_pre_declaration"})
      * @Assert\Regex(pattern="/^[a-zA-Z0-9]+$/", groups={"client_pre_declaration"})
      *
@@ -35,9 +35,11 @@ class Tiers
     private $immatriculation;
 
     /**
-     *
+     * @var Collection
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
      * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachment", mappedBy="tiers", cascade={"persist"})

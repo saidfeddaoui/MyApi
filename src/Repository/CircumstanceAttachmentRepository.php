@@ -14,19 +14,25 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CircumstanceAttachmentRepository extends ServiceEntityRepository
 {
+
+    /**
+     * CircumstanceAttachmentRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, CircumstanceAttachment::class);
     }
 
     /**
+     * @param array $ids
      * @return CircumstanceAttachment[] Returns an array of CircumstanceAttachment objects
      */
     public function findByIds(array $ids)
     {
         return $this->createQueryBuilder('c')
                ->where('c.id in (:ids) ')
-               ->setParameter('ids',$ids)
+               ->setParameter('ids', $ids)
                ->getQuery()
                ->getResult();
     }

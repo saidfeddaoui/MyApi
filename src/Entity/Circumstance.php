@@ -51,12 +51,15 @@ class Circumstance
     private $longitude;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
-     * @ORM\JoinColumn(nullable=false)
-     *
+     * @var Ville
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
 
@@ -73,11 +76,15 @@ class Circumstance
     private $remorquage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
+     * @var Collection
      *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
      */
     private $photos;
 
