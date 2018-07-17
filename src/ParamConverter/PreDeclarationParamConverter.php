@@ -86,7 +86,6 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     {
         $this->processContract($preDeclaration);
         $this->processTypeSinistre($preDeclaration);
-        $this->processScenario($preDeclaration);
         $this->processVille($preDeclaration);
         $this->processCircumstanceAttachments($preDeclaration);
         $type = $preDeclaration->getTypeSinistre()->getTitle();
@@ -129,19 +128,6 @@ class PreDeclarationParamConverter implements ParamConverterInterface
             throw new NotFoundHttpException("No Sinistre type with reference: {$id} was found");
         }
         $preDeclaration->setTypeSinistre($typeSinistre);
-    }
-    /**
-     * @param PreDeclaration $preDeclaration
-     * @throws NotFoundHttpException
-     */
-    private function processScenario(PreDeclaration $preDeclaration)
-    {
-        $id = $preDeclaration->getScenario()->getId();
-        $scenario = $this->em->getRepository('App:Item')->findOneById($id);
-        if (!$scenario) {
-            throw new NotFoundHttpException("No Scenario with reference: {$id} was found");
-        }
-        $preDeclaration->setScenario($scenario);
     }
     /**
      * @param PreDeclaration $preDeclaration

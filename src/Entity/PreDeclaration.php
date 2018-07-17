@@ -109,17 +109,6 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item")
-     */
-    private $scenario;
-
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\Valid(groups={"client_pre_declaration"})
-     *
      * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $circumstance;
@@ -217,18 +206,6 @@ class PreDeclaration
     public function setTypeSinistre(?Item $typeSinistre): self
     {
         $this->typeSinistre = $typeSinistre;
-
-        return $this;
-    }
-
-    public function getScenario(): ?Item
-    {
-        return $this->scenario;
-    }
-
-    public function setScenario(?Item $scenario): self
-    {
-        $this->scenario = $scenario;
 
         return $this;
     }
