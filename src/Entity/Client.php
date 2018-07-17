@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -75,6 +77,16 @@ class Client extends User
      * @ORM\Column(type="smallint")
      */
     protected $status;
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="client")
+     */
+    protected $contracts;
+
+    public function __construct()
+    {
+        $this->contracts = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -170,6 +182,42 @@ class Client extends User
     public function setStatus(int $status): self
     {
         $this->status = $status;
+        return $this;
+    }
+    /**
+     * @return Collection|Contract[]
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+    /**
+     * @param Contract $contract
+     * @return Client
+     */
+    public function addContract(Contract $contract): self
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts[] = $contract;
+            $contract->setClient($this);
+        }
+
+        return $this;
+    }
+    /**
+     * @param Contract $contract
+     * @return Client
+     */
+    public function removeContract(Contract $contract): self
+    {
+        if ($this->contracts->contains($contract)) {
+            $this->contracts->removeElement($contract);
+            // set the owning side to null (unless already changed)
+            if ($contract->getClient() === $this) {
+                $contract->setClient(null);
+            }
+        }
+
         return $this;
     }
 

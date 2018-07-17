@@ -23,16 +23,21 @@ class Contract
      * @Serializer\Groups({"scenarios","client_pre_declaration"})
      */
     private $id;
-
     /**
+     * @var string
      * @ORM\Column(type="string", length=20)
      */
     private $contract_number;
-
     /**
+     * @var PreDeclaration
      * @ORM\OneToMany(targetEntity="App\Entity\PreDeclaration", mappedBy="contract")
      */
     private $preDeclarations;
+    /**
+     * @var Client
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="contracts")
+     */
+    private $client;
 
     public function __construct()
     {
@@ -43,19 +48,22 @@ class Contract
     {
         return $this->id;
     }
-
+    /**
+     * @return null|string
+     */
     public function getContractNumber(): ?string
     {
         return $this->contract_number;
     }
-
+    /**
+     * @param string $contract_number
+     * @return Contract
+     */
     public function setContractNumber(string $contract_number): self
     {
         $this->contract_number = $contract_number;
-
         return $this;
     }
-
     /**
      * @return Collection|PreDeclaration[]
      */
@@ -63,17 +71,22 @@ class Contract
     {
         return $this->preDeclarations;
     }
-
+    /**
+     * @param PreDeclaration $preDeclaration
+     * @return Contract
+     */
     public function addPreDeclaration(PreDeclaration $preDeclaration): self
     {
         if (!$this->preDeclarations->contains($preDeclaration)) {
             $this->preDeclarations[] = $preDeclaration;
             $preDeclaration->setContract($this);
         }
-
         return $this;
     }
-
+    /**
+     * @param PreDeclaration $preDeclaration
+     * @return Contract
+     */
     public function removePreDeclaration(PreDeclaration $preDeclaration): self
     {
         if ($this->preDeclarations->contains($preDeclaration)) {
@@ -83,7 +96,22 @@ class Contract
                 $preDeclaration->setContract(null);
             }
         }
-
+        return $this;
+    }
+    /**
+     * @return Client|null
+     */
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+    /**
+     * @param Client|null $client
+     * @return static
+     */
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
         return $this;
     }
 
