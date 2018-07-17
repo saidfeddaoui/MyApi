@@ -53,6 +53,9 @@ class PreDeclaration
      */
     private $nbInjured;
     /**
+     * @var \DateTime
+     *
+     * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
      *
