@@ -13,6 +13,26 @@ class SecurityController extends BaseController
 {
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+    /**
+     * @var JWTEncoderInterface
+     */
+    private $jwtEncoder;
+
+    /**
+     * SecurityController constructor.
+     * @param TokenStorageInterface $tokenStorage
+     * @param JWTEncoderInterface $jwtEncoder
+     */
+    public function __construct(TokenStorageInterface $tokenStorage, JWTEncoderInterface $jwtEncoder)
+    {
+        $this->tokenStorage = $tokenStorage;
+        $this->jwtEncoder = $jwtEncoder;
+    }
+
+    /**
      * @SWG\Post(
      *     tags={"Authentication"},
      *     description="Client phone number registration",
@@ -25,24 +45,21 @@ class SecurityController extends BaseController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return Jwt Token",
+     *         description="Return Jwt Token with client data",
      *     )
      * )
      *
      * @Rest\Post(name="login", path="/login")
      * @Rest\View(serializerGroups={"all", "login_response"})
      *
-     * @param TokenStorageInterface $tokenStorage
-     * @param JWTEncoderInterface $jwtEncoder
-     *
      * @return ApiResponse
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
-    public function login(TokenStorageInterface $tokenStorage, JWTEncoderInterface $jwtEncoder)
+    public function login()
     {
-        $user = $tokenStorage->getToken()->getUser();
-        $token = 'Bearer ' . $jwtEncoder->encode(['phone' => $user->getPhone()]);
-        $loginResponse = new LoginResponse($token, $user);
-        return $this->respondWith($loginResponse);
+        $user = $this->tokenStorage->getToken()->getUser();
+        $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
+        return $this->respondWith(new LoginResponse($token, $user));
     }
 
 }

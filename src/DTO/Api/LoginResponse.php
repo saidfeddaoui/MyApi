@@ -2,11 +2,8 @@
 
 namespace App\DTO\Api;
 
-
 use App\Entity\Client;
 use JMS\Serializer\Annotation as Serializer;
-
-
 
 class LoginResponse
 {
@@ -47,7 +44,6 @@ class LoginResponse
     {
         return $this->token;
     }
-
     /**
      * @param string $token
      */
@@ -55,7 +51,6 @@ class LoginResponse
     {
         $this->token = $token;
     }
-
     /**
      * @return Client
      */
@@ -63,7 +58,6 @@ class LoginResponse
     {
         return $this->client;
     }
-
     /**
      * @param Client $client
      */
