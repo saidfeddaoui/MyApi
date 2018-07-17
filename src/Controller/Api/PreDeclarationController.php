@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @Rest\Route(path="/public/pre_declaration", name="api_pre_declaration_")
+ * @Rest\Route(path="/pre_declaration", name="api_pre_declaration_")
  */
 class PreDeclarationController extends BaseController
 {
