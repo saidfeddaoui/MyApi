@@ -185,6 +185,7 @@ class UsernamePasswordAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        return;
         return $this->respondWith(['token' => 'Bearer ' . $this->jwtEncoder->encode(['phone' => $token->getUser()->getPhone()])]);
     }
     /**
