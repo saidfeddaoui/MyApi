@@ -53,7 +53,10 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        return InsuranceType::class === $configuration->getClass() && array_key_exists('converter', $configuration->getOptions()) && static::class === $configuration->getOptions()['converter'];;
+        return
+            InsuranceType::class === $configuration->getClass()
+            && array_key_exists('converter', $configuration->getOptions())
+            && static::class === $configuration->getOptions()['converter'];
     }
 
 }

@@ -23,61 +23,66 @@ class Circumstance
     private $id;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     *
+     * @var double
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Type(
-     *     type="double",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
+     * @Assert\Regex(pattern="/^\-?\d+(\.\d+)?$/", groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     *
+     * @var double
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Type(
-     *     type="double",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
+     * @Assert\Regex(pattern="/^\-?\d+(\.\d+)?$/", groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
-     * @ORM\JoinColumn(nullable=false)
-     *
+     * @var Ville
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="boolean")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\Type(
      *     type="bool",
      *     message="The value {{ value }} is not a valid {{ type }}.",
      *     groups={"client_pre_declaration"}
      * )
+     *
+     * @ORM\Column(type="boolean")
      */
     private $remorquage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
+     * @var Collection
      *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
      */
     private $photos;
 

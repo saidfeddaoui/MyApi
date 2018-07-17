@@ -4,7 +4,7 @@ namespace App\Normalizer;
 
 use App\DTO\Api\ApiResponse;
 
-class NotFoundHttpExceptionNormalizer extends AbstractNormalizer
+class PreDeclarationCreationFailureExceptionNormalizer extends AbstractNormalizer
 {
 
     /**
@@ -13,7 +13,7 @@ class NotFoundHttpExceptionNormalizer extends AbstractNormalizer
      */
     public function normalize(\Exception $exception): ApiResponse
     {
-        $response = new ApiResponse(null, ApiResponse::NOT_FOUND);
+        $response = new ApiResponse(null, $exception->getCode());
         if ($exception->getMessage()) {
             $response->setStatus($exception->getMessage());
         }

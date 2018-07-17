@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class TiersAttachment
 {
 
+    const TYPE_DRIVER_LICENSE = 'permis';
+    const TYPE_INSURANCE_ATTESTATION = 'attestation_assurance';
+    const TYPE_FRIENDLY_REPORT = 'constat_amiable';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,6 +27,7 @@ class TiersAttachment
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose()
@@ -32,6 +36,7 @@ class TiersAttachment
     private $type;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose()
@@ -55,12 +60,15 @@ class TiersAttachment
 
     /**
      * TiersAttachment constructor.
+     * @param string $type
+     * @param string $path
      */
-    public function __construct()
+    public function __construct(string $type = null, string $path = null)
     {
+        $this->type = $type;
+        $this->path = $path;
         $this->created_at = new \DateTime();
     }
-
 
     public function getId()
     {
@@ -113,6 +121,28 @@ class TiersAttachment
         $this->tiers = $tiers;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAttachmentTypes()
+    {
+        return [
+            self::TYPE_DRIVER_LICENSE,
+            self::TYPE_INSURANCE_ATTESTATION,
+            self::TYPE_FRIENDLY_REPORT,
+        ];
+    }
+    /**
+     * @return array
+     */
+    public static function getRequiredAttachmentTypes()
+    {
+        return [
+            self::TYPE_DRIVER_LICENSE,
+            self::TYPE_INSURANCE_ATTESTATION,
+        ];
     }
 
 }
