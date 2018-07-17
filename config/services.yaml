@@ -99,6 +99,12 @@ services:
                 - [ 'App\Exception\MissingRequiredFileException' ]
             tags:
                 - { name: app.normalizer }
+    app.normalizer.pre_declaration_creation_failure_exception:
+            class: App\Normalizer\PreDeclarationCreationFailureExceptionNormalizer
+            arguments:
+                - [ 'App\Exception\PreDeclarationCreationFailureException' ]
+            tags:
+                - { name: app.normalizer }
     app.normalizer.jwt_failure_exception:
             class: App\Normalizer\JWTFailureExceptionNormalizer
             arguments:

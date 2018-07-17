@@ -6,6 +6,8 @@ use App\DTO\Api\ApiResponse;
 use App\Entity\CircumstanceAttachment;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
+use App\Event\ApplicationEvents;
+use App\Event\NewPreDeclarationEvent;
 use App\Exception\MissingRequiredFileException;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -99,9 +101,11 @@ class PreDeclarationController extends BaseController
      */
     public function preDeclaration(PreDeclaration $preDeclaration)
     {
-        $preDeclaration->setStatus(PreDeclaration::IN_PROGRESS);
+        $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS);
         $this->em->persist($preDeclaration);
         $this->em->flush();
+        $event = new NewPreDeclarationEvent($preDeclaration);
+        $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
         return $this->respondWith($preDeclaration, ApiResponse::CREATED);
     }
     /**
@@ -165,25 +169,25 @@ class PreDeclarationController extends BaseController
      *         description="Bearer auth",
      *     ),
      *     @SWG\Parameter(
-     *         name="gray_card",
+     *         name="permis",
      *         in="formData",
      *         type="file",
      *         required=true,
-     *         description="Gray card picture",
+     *         description="Driver's license picture",
      *     ),
      *     @SWG\Parameter(
-     *         name="tiers_attestation",
+     *         name="attestation_assurance",
      *         in="formData",
      *         type="file",
      *         required=true,
-     *         description="Attestation picture",
+     *         description="Insurance's attestation picture",
      *     ),
      *    @SWG\Parameter(
-     *         name="tiers_vehicle",
+     *         name="constat_amiable",
      *         in="formData",
      *         type="file",
      *         required=false,
-     *         description="Vehicule picture",
+     *         description="Friendly report picture",
      *     ),
      *     @SWG\Response(
      *         response=200,

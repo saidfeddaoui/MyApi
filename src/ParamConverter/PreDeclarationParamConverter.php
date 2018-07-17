@@ -4,6 +4,7 @@ namespace App\ParamConverter;
 
 use App\Entity\PreDeclaration;
 use App\Exception\ConstraintViolationException;
+use App\Exception\DuplicatedPreDeclarationException;
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -49,6 +50,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      *
      * @return bool True if the object has been successfully set, else false
      * @throws ConstraintViolationException
+     * @throws DuplicatedPreDeclarationException
      * @throws NotFoundHttpException
      */
     public function apply(Request $request, ParamConverter $configuration)
@@ -65,6 +67,13 @@ class PreDeclarationParamConverter implements ParamConverterInterface
                 throw new ConstraintViolationException($violations);
             }
         }
+        $_preDeclaration = $this->em->getRepository('App:PreDeclaration')->findBy([
+            'contract' => $preDeclaration->getContract(),
+            'dateSinistre' => $preDeclaration->getDateSinistre(),
+        ]);
+        if ($_preDeclaration) {
+            throw new DuplicatedPreDeclarationException();
+        }
         $this->processPreDeclaration($preDeclaration);
         $request->attributes->set($configuration->getName(), $preDeclaration);
         return true;
@@ -76,13 +85,24 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processPreDeclaration(PreDeclaration $preDeclaration)
     {
         $this->processContract($preDeclaration);
+        $this->processTypeSinistre($preDeclaration);
         $this->processScenario($preDeclaration);
-        $this->processMarqueVehicule($preDeclaration);
-        $this->processModeleVehicule($preDeclaration);
         $this->processVille($preDeclaration);
         $this->processCircumstanceAttachments($preDeclaration);
-        $this->processDamagedParts($preDeclaration);
-        $this->processTiersAttachments($preDeclaration);
+        $type = $preDeclaration->getTypeSinistre()->getTitle();
+        switch ($type) {
+            case PreDeclaration::TYPE_ACCIDENT:
+                    $this->processDamagedParts($preDeclaration);
+                    $this->processTiersAttachments($preDeclaration);
+                break;
+            case PreDeclaration::TYPE_BRIS_GLACE:
+                    $this->processDamagedParts($preDeclaration);
+                    $preDeclaration->setTiers(null);
+                break;
+            default:
+                    $preDeclaration->setTiers(null)->setVehiculeDamage(null);
+                break;
+        }
     }
     /**
      * @param PreDeclaration $preDeclaration
@@ -93,9 +113,22 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $id = $preDeclaration->getContract()->getId();
         $contract = $this->em->getRepository('App:Contract')->findOneById($id);
         if (!$contract) {
-            throw new NotFoundHttpException("No Contract with reference: {$id} does exist");
+            throw new NotFoundHttpException("No Contract with reference: {$id}was found");
         }
         $preDeclaration->setContract($contract);
+    }
+    /**
+     * @param PreDeclaration $preDeclaration
+     * @throws NotFoundHttpException
+     */
+    private function processTypeSinistre(PreDeclaration $preDeclaration)
+    {
+        $id = $preDeclaration->getTypeSinistre()->getId();
+        $typeSinistre = $this->em->getRepository('App:Item')->findOneById($id);
+        if (!$typeSinistre) {
+            throw new NotFoundHttpException("No Sinistre type with reference: {$id} was found");
+        }
+        $preDeclaration->setTypeSinistre($typeSinistre);
     }
     /**
      * @param PreDeclaration $preDeclaration
@@ -106,35 +139,9 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $id = $preDeclaration->getScenario()->getId();
         $scenario = $this->em->getRepository('App:Item')->findOneById($id);
         if (!$scenario) {
-            throw new NotFoundHttpException("No Scenario with reference: {$id} does exist");
+            throw new NotFoundHttpException("No Scenario with reference: {$id} was found");
         }
         $preDeclaration->setScenario($scenario);
-    }
-    /**
-     * @param PreDeclaration $preDeclaration
-     * @throws NotFoundHttpException
-     */
-    private function processMarqueVehicule(PreDeclaration $preDeclaration)
-    {
-        $id = $preDeclaration->getIdentification()->getMarque()->getId();
-        $marque = $this->em->getRepository('App:MarqueVehicule')->findOneById($id);
-        if (!$marque) {
-            throw new NotFoundHttpException("No Marque with reference: {$id} does exist");
-        }
-        $preDeclaration->getIdentification()->setMarque($marque);
-    }
-    /**
-     * @param PreDeclaration $preDeclaration
-     * @throws NotFoundHttpException
-     */
-    private function processModeleVehicule(PreDeclaration $preDeclaration)
-    {
-        $id = $preDeclaration->getIdentification()->getModele()->getId();
-        $modele = $this->em->getRepository('App:ModeleVehicule')->findOneById($id);
-        if (!$modele) {
-            throw new NotFoundHttpException("No Modele Vehicle with reference: {$id} does exist");
-        }
-        $preDeclaration->getIdentification()->setModele($modele);
     }
     /**
      * @param PreDeclaration $preDeclaration
@@ -145,7 +152,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $id = $preDeclaration->getCircumstance()->getVille()->getId();
         $city = $this->em->getRepository('App:Ville')->findOneById($id);
         if (!$city) {
-            throw new NotFoundHttpException("No City with reference: {$id} does exist");
+            throw new NotFoundHttpException("No City with reference: {$id} was found");
         }
         $preDeclaration->getCircumstance()->setVille($city);
     }

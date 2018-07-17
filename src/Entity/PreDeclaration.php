@@ -13,9 +13,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class PreDeclaration
 {
 
-    const IN_PROGRESS = 0;
-    const ACCEPTED = 1;
-    const REJECTED = 2;
+    const STATUS_IN_PROGRESS = 0;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REJECTED = 2;
+
+    const TYPE_ACCIDENT = 'Accident';
+    const TYPE_BRIS_GLACE = 'Bris de glace';
+    const TYPE_INCENDIE = 'Incendie';
+    const TYPE_VOL = 'Vol';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -29,21 +35,38 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
      * @Assert\GreaterThan(0 , groups={"client_pre_declaration"})
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $nb_vehicule;
+    private $nbVehicule;
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbInjured;
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
+     * @Assert\DateTime(groups={"client_pre_declaration"}, format="Y-m-d H:i:s")
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $dateSinistre;
 
     /**
      * @Serializer\Expose()
      * @Serializer\Groups("show_predeclaration")
+     *
      * @ORM\Column(type="smallint")
      */
     private $status;
@@ -94,27 +117,14 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Identification", inversedBy="preDeclaration", cascade={"persist", "remove"})
-     */
-    private $identification;
-
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\Valid(groups={"client_pre_declaration"})
-     *
      * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $circumstance;
 
     /**
-     *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
      *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
      * @ORM\OneToOne(targetEntity="App\Entity\VehiculeDamage", inversedBy="preDeclaration", cascade={"persist", "remove"})
@@ -125,23 +135,11 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
      *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
      * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $tiers;
-
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\DateTime(groups={"client_pre_declaration"})
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $dateSinistre;
 
     public function getId()
     {
@@ -150,12 +148,24 @@ class PreDeclaration
 
     public function getNbVehicule(): ?int
     {
-        return $this->nb_vehicule;
+        return $this->nbVehicule;
     }
 
-    public function setNbVehicule(int $nb_vehicule): self
+    public function setNbVehicule(int $nbVehicule): self
     {
-        $this->nb_vehicule = $nb_vehicule;
+        $this->nbVehicule = $nbVehicule;
+
+        return $this;
+    }
+
+    public function getNbInjured(): ?int
+    {
+        return $this->nbInjured;
+    }
+
+    public function setNbInjured(?int $nbInjured): self
+    {
+        $this->nbInjured = $nbInjured;
 
         return $this;
     }
@@ -216,18 +226,6 @@ class PreDeclaration
     public function setScenario(?Item $scenario): self
     {
         $this->scenario = $scenario;
-
-        return $this;
-    }
-
-    public function getIdentification(): ?Identification
-    {
-        return $this->identification;
-    }
-
-    public function setIdentification(?Identification $identification): self
-    {
-        $this->identification = $identification;
 
         return $this;
     }

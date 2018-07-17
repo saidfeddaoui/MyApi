@@ -13,9 +13,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class TiersAttachment
 {
 
-    const TYPE_GRAY_CARD = 'gray_card';
-    const TYPE_TIERS_ATTESTATION = 'tiers_attestation';
-    const TYPE_TIERS_VEHICLE = 'tiers_vehicle';
+    const TYPE_DRIVER_LICENSE = 'permis';
+    const TYPE_INSURANCE_ATTESTATION = 'attestation_assurance';
+    const TYPE_FRIENDLY_REPORT = 'constat_amiable';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -129,9 +129,9 @@ class TiersAttachment
     public static function getAttachmentTypes()
     {
         return [
-            self::TYPE_GRAY_CARD,
-            self::TYPE_TIERS_ATTESTATION,
-            self::TYPE_TIERS_VEHICLE,
+            self::TYPE_DRIVER_LICENSE,
+            self::TYPE_INSURANCE_ATTESTATION,
+            self::TYPE_FRIENDLY_REPORT,
         ];
     }
     /**
@@ -140,8 +140,8 @@ class TiersAttachment
     public static function getRequiredAttachmentTypes()
     {
         return [
-            self::TYPE_GRAY_CARD,
-            self::TYPE_TIERS_ATTESTATION,
+            self::TYPE_DRIVER_LICENSE,
+            self::TYPE_INSURANCE_ATTESTATION,
         ];
     }
 

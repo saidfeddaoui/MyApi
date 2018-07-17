@@ -23,30 +23,26 @@ class Circumstance
     private $id;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     *
+     * @var double
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Type(
-     *     type="double",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
+     * @Assert\Regex(pattern="/^\-?\d+(\.\d+)?$/", groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     *
+     * @var double
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Type(
-     *     type="double",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
+     * @Assert\Regex(pattern="/^\-?\d+(\.\d+)?$/", groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
 
@@ -64,14 +60,16 @@ class Circumstance
     private $ville;
 
     /**
-     * @ORM\Column(type="boolean")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
      * @Assert\Type(
      *     type="bool",
      *     message="The value {{ value }} is not a valid {{ type }}.",
      *     groups={"client_pre_declaration"}
      * )
+     *
+     * @ORM\Column(type="boolean")
      */
     private $remorquage;
 

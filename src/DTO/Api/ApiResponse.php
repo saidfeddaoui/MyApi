@@ -25,6 +25,8 @@ class ApiResponse
     const CLIENT_ALREADY_VERIFIED_ERROR = 612;
     const CLIENT_ACCOUNT_ALREADY_CREATED_ERROR = 613;
     const JWT_FAILURE_ERROR = 730;
+    const PRE_DECLARATION_CREATION_FAILED = 910;
+    const DUPLICATED_PRE_DECLARATION = 911;
     const STATUS_TEXT = [
         self::OK => 'OK',
         self::CREATED => 'Created',
@@ -40,6 +42,8 @@ class ApiResponse
         self::CLIENT_ALREADY_VERIFIED_ERROR => 'Client is already verified',
         self::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR => 'Client has already created his account',
         self::JWT_FAILURE_ERROR => 'Invalid Token',
+        self::PRE_DECLARATION_CREATION_FAILED => 'Pre-declaration creation failed',
+        self::DUPLICATED_PRE_DECLARATION => 'A pre-declaration with the same day and same contract already exist',
     ];
     const HTTP_STATUS_CODE = [
         self::OK => Response::HTTP_OK,
@@ -56,6 +60,8 @@ class ApiResponse
         self::CLIENT_ALREADY_VERIFIED_ERROR => Response::HTTP_NOT_ACCEPTABLE,
         self::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR => Response::HTTP_NOT_ACCEPTABLE,
         self::JWT_FAILURE_ERROR => Response::HTTP_UNAUTHORIZED,
+        self::PRE_DECLARATION_CREATION_FAILED => Response::HTTP_PRECONDITION_FAILED,
+        self::DUPLICATED_PRE_DECLARATION => Response::HTTP_NOT_ACCEPTABLE,
     ];
 
     /**
