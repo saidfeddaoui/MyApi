@@ -46,7 +46,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_account_creation"})
+     * @Serializer\Groups(groups={"client_account_creation","login_response"})
      *
      * @Assert\NotBlank(groups={"client_account_creation"})
      * @Assert\Email(groups={"client_account_creation"})
