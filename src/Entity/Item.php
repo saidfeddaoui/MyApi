@@ -24,7 +24,7 @@ class Item implements  TranslatableInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"sinistre", "client_pre_declaration"})
      */
     private $id;
 
@@ -32,7 +32,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="string", length=255,nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider","products","modes","sinistre","emergency"})
+     * @Serializer\Groups({"slider", "products", "modes", "sinistre", "emergency"})
      * @Gedmo\Translatable
      */
     private $title;
@@ -49,7 +49,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider","modes"})
+     * @Serializer\Groups({"slider", "products", "modes"})
      * @Gedmo\Translatable
      */
     private $content;
@@ -59,7 +59,7 @@ class Item implements  TranslatableInterface
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider","products","sinistre"})
+     * @Serializer\Groups({"slider", "products", "sinistre"})
      */
     private $image;
 
@@ -68,7 +68,7 @@ class Item implements  TranslatableInterface
      * @ORM\JoinColumn(name="icon_id", referencedColumnName="id")
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"products","sinistre","emergency"})
+     * @Serializer\Groups({"products", "sinistre", "emergency"})
      */
     private $icon;
 
