@@ -19,14 +19,15 @@ class VehiculeComponentRepository extends ServiceEntityRepository
         parent::__construct($registry, VehiculeComponent::class);
     }
 
-   /**
+    /**
+     * @param array $codes
      * @return VehiculeComponents[] Returns an array of VehiculeComponents objects
-    */
-    public function findByIds(array $ids)
+     */
+    public function findByCodes(array $codes)
     {
         return $this->createQueryBuilder('c')
-            ->where('c.id in (:ids) ')
-            ->setParameter('ids',$ids)
+            ->where('c.code in (:codes) ')
+            ->setParameter('codes', $codes)
             ->getQuery()
             ->getResult();
     }
