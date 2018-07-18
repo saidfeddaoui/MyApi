@@ -23,18 +23,6 @@ class Tiers
     private $id;
 
     /**
-     * @var string
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotBlank(groups={"client_pre_declaration"})
-     * @Assert\Regex(pattern="/^[a-zA-Z0-9]+$/", groups={"client_pre_declaration"})
-     *
-     * @ORM\Column(type="string", length=20)
-     */
-    private $immatriculation;
-
-    /**
      * @var Collection
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -59,18 +47,6 @@ class Tiers
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getImmatriculation(): ?string
-    {
-        return $this->immatriculation;
-    }
-
-    public function setImmatriculation(string $immatriculation): self
-    {
-        $this->immatriculation = $immatriculation;
-
-        return $this;
     }
 
     /**

@@ -31,18 +31,22 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th> Titre </th>
-                            <th> العنوان </th>
-                            <th> Icône </th>
-                            <th> Image </th>
-                            <th> Actions</th>
+                            <th>Titre</th>
+                            <th>العنوان</th>
+                            <th>Description</th>
+                            <th>الوصف</th>
+                            <th>Icône</th>
+                            <th>Image</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for product in products %}
                             <tr data-id="{{ product.id }}">
-                                <td> {{ product.title }} </td>
-                                <td> {{ product.title_ar }} </td>
+                                <td>{{ product.title }}</td>
+                                <td>{{ product.title_ar }}</td>
+                                <td>{{ product.content }}</td>
+                                <td>{{ product.content_ar }}</td>
                                 <td>
                                     {% if product.icon %}
                                         <div>
@@ -52,7 +56,7 @@
                                 </td>
                                 <td>
                                     {% if product.image %}
-                                        <div >
+                                        <div>
                                             <img src="{{ asset('img/' ~ product.image.path) }}" class="product_img">
                                         </div>
                                     {% endif %}
