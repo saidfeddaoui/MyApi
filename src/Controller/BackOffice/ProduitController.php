@@ -127,9 +127,8 @@ class ProduitController extends Controller
             'action' => $this->generateUrl('edit_produit', ['id' => $produit->getId()])
         ]);
         $translations =  $repository->findTranslations($produit);
-        if ($translations) {
-            $form->get('title_ar')->setData($translations['ar']['title']);
-        }
+        $form->get('title_ar')->setData($translations['ar']['title'] ?? '');
+        $form->get('content_ar')->setData($translations['ar']['content'] ?? '');
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
