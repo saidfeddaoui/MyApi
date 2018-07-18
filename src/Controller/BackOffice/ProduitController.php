@@ -44,6 +44,7 @@ class ProduitController extends Controller
             $products[] = [
                 'id' => $product->getId(),
                 'title' => $product->getTitle(),
+                'content' => $product->getContent(),
                 'image' => $product->getImage(),
                 'icon' => $product->getIcon(),
                 'title_ar' => $translations['ar']['title'] ?? '',
