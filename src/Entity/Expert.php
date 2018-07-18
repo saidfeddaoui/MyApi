@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GarageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ExpertRepository")
  */
-class Garage
+class Expert
 {
     /**
      * @ORM\Id()
@@ -29,23 +29,12 @@ class Garage
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nom_ville;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      *
      */
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $responsable;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $insuranceType;
 
@@ -78,18 +67,6 @@ class Garage
         return $this;
     }
 
-    public function getNomVille(): ?string
-    {
-        return $this->nom_ville;
-    }
-
-    public function setNomVille(?string $nom_ville): self
-    {
-        $this->nom_ville = $nom_ville;
-
-        return $this;
-    }
-
     public function getTel(): ?string
     {
         return $this->tel;
@@ -98,18 +75,6 @@ class Garage
     public function setTel(?string $tel): self
     {
         $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getResponsable(): ?string
-    {
-        return $this->responsable;
-    }
-
-    public function setResponsable(?string $responsable): self
-    {
-        $this->responsable = $responsable;
 
         return $this;
     }
