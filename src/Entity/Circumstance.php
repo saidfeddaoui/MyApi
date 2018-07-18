@@ -60,20 +60,6 @@ class Circumstance
     private $ville;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\Type(
-     *     type="bool",
-     *     message="The value {{ value }} is not a valid {{ type }}.",
-     *     groups={"client_pre_declaration"}
-     * )
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $remorquage;
-
-    /**
      * @var Collection
      *
      * @Serializer\Expose()
@@ -133,18 +119,6 @@ class Circumstance
     public function setVille(?Ville $ville): self
     {
         $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getRemorquage(): ?bool
-    {
-        return $this->remorquage;
-    }
-
-    public function setRemorquage(bool $remorquage): self
-    {
-        $this->remorquage = $remorquage;
 
         return $this;
     }
