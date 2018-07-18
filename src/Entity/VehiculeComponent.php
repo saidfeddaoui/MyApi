@@ -16,17 +16,14 @@ class VehiculeComponent
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     *
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="string", length=255)
      */
     private $code;
 

@@ -55,11 +55,11 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        $options = $configuration->getOptions();
         /**
          * @var PreDeclaration $preDeclaration
          */
         $preDeclaration = $this->serializer->deserialize($request->getContent(), PreDeclaration::class, 'json');
+        $options = $configuration->getOptions();
         if (array_key_exists('validator', $options)) {
             $groups = array_key_exists('groups', $options['validator']) ? $options['validator']['groups'] : null;
             $violations = $this->validator->validate($preDeclaration, null, $groups);
@@ -166,12 +166,12 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processDamagedParts(PreDeclaration $preDeclaration)
     {
-        $ids = $preDeclaration->getVehiculeDamage()
+        $codes = $preDeclaration->getVehiculeDamage()
             ->getDamagedParts()
-            ->map(function ($c) {return $c->getId();})
+            ->map(function ($c) {return $c->getCode();})
             ->toArray();
-        $components = $this->em->getRepository('App:VehiculeComponent')->findByIds($ids);
-        if ($diff = array_diff($ids, array_map(function ($c) {return $c->getId();}, $components))) {
+        $components = $this->em->getRepository('App:VehiculeComponent')->findByCodes($codes);
+        if ($diff = array_diff($codes, array_map(function ($c) {return $c->getCode();}, $components))) {
             throw new NotFoundHttpException(
                 "Submitted damaged parts doesn't exist, (" . implode(',', $diff) . ")"
             );
