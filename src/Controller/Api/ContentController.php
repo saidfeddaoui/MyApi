@@ -435,47 +435,4 @@ class ContentController extends BaseController
         return $this->respondWith($emergency);
     }
 
-    /**
-     * @SWG\Get(
-     *     tags={"Content Types"},
-     *     description="declarations",
-     *     @SWG\Parameter(
-     *         name="X-ENTITY",
-     *         in="header",
-     *         type="string",
-     *         default="MAMDA",
-     *         description="Specify the user's Entity",
-     *     ),
-     *     @SWG\Parameter(
-     *         name="lang",
-     *         in="query",
-     *         type="string",
-     *         default="fr",
-     *         description="Specify the user's language"
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="scenarios successfully returned"
-     *     )
-     * )
-     * @Rest\Get(
-     *     path = "/scenarios",
-     *     name = "scenarios"
-     * )
-     * @Rest\View(
-     *     serializerGroups={"all", "scenarios"}
-     * )
-     *
-     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
-     *
-     * @param ObjectManager $em
-     * @param InsuranceType $insuranceType
-     * @return ApiResponse
-     */
-    public function scenarios(ObjectManager $em, InsuranceType $insuranceType)
-    {
-        $scenarios = $em->getRepository('App:ItemList')->findOneBy(['type' => 'scenario', 'insuranceType' => $insuranceType]);
-        return $this->respondWith($scenarios);
-    }
-
 }

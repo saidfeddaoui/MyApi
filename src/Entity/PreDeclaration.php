@@ -53,6 +53,9 @@ class PreDeclaration
      */
     private $nbInjured;
     /**
+     * @var \DateTime
+     *
+     * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
      *
@@ -98,17 +101,6 @@ class PreDeclaration
      * @ORM\JoinColumn(nullable=false)
      */
     private $typeSinistre;
-
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\Valid(groups={"client_pre_declaration"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item")
-     */
-    private $scenario;
 
     /**
      * @Serializer\Expose()
@@ -214,18 +206,6 @@ class PreDeclaration
     public function setTypeSinistre(?Item $typeSinistre): self
     {
         $this->typeSinistre = $typeSinistre;
-
-        return $this;
-    }
-
-    public function getScenario(): ?Item
-    {
-        return $this->scenario;
-    }
-
-    public function setScenario(?Item $scenario): self
-    {
-        $this->scenario = $scenario;
 
         return $this;
     }

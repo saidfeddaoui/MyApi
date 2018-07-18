@@ -1,12 +1,9 @@
 <?php
 
-namespace App\DTO\Api;
-
+namespace App\DTO\Api\Security;
 
 use App\Entity\Client;
 use JMS\Serializer\Annotation as Serializer;
-
-
 
 class LoginResponse
 {
@@ -34,7 +31,7 @@ class LoginResponse
      * @param string $token
      * @param Client $client
      */
-    public function __construct($token, Client $client)
+    public function __construct(string $token, Client $client)
     {
         $this->token = $token;
         $this->client = $client;
@@ -47,7 +44,6 @@ class LoginResponse
     {
         return $this->token;
     }
-
     /**
      * @param string $token
      */
@@ -55,7 +51,6 @@ class LoginResponse
     {
         $this->token = $token;
     }
-
     /**
      * @return Client
      */
@@ -63,7 +58,6 @@ class LoginResponse
     {
         return $this->client;
     }
-
     /**
      * @param Client $client
      */

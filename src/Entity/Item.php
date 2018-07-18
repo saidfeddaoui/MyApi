@@ -24,7 +24,7 @@ class Item implements  TranslatableInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups({"scenarios","client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      */
     private $id;
 
@@ -49,7 +49,7 @@ class Item implements  TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider","modes","scenarios"})
+     * @Serializer\Groups({"slider","modes"})
      * @Gedmo\Translatable
      */
     private $content;
