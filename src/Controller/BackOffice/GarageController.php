@@ -115,7 +115,7 @@ class GarageController extends Controller
 
                 }
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', "Données garage cahrgé avec succès");
+                $this->get('session')->getFlashBag()->add('success', "Données garage cahrgées avec succès");
         }
         return  $this->redirect($this->generateUrl('garage'));
 
