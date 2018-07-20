@@ -111,7 +111,7 @@ class ExpertController extends Controller
 
                 }
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', "Données expert cahrgé avec succès");
+                $this->get('session')->getFlashBag()->add('success', "Données expert cahrgées avec succès");
         }
         return  $this->redirect($this->generateUrl('expert'));
 

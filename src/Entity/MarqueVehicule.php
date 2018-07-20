@@ -18,7 +18,7 @@ class MarqueVehicule
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups(groups={"client_pre_declaration", "devis_auto" })
      */
     private $id;
 
