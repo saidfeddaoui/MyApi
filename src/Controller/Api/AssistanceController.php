@@ -91,7 +91,7 @@ class AssistanceController extends BaseController
      */
     public function newAssistance(AssistanceRequest $assistanceRequest, InsuranceType $insuranceType)
     {
-        $assistanceRequest->setInsuranceType($insuranceType);
+        $assistanceRequest->setInsuranceType($this->em->getRepository('App:InsuranceType')->find($insuranceType));
         $this->em->persist($assistanceRequest);
         $this->em->flush();
         $event = new NewAssistanceRequestEvent($assistanceRequest);
