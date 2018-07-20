@@ -2,11 +2,11 @@
 
 namespace App\Event;
 
-class NewPreDeclarationEvent extends PreDeclarationEvent
+class AcceptPreDeclarationEvent extends PreDeclarationEvent
 {
 
     /**
-     * NewPreDeclarationEvent constructor.
+     * AcceptPreDeclarationEvent constructor.
      * @param PreDeclaration $preDeclaration
      */
     public function __construct(PreDeclaration $preDeclaration)

@@ -40,6 +40,7 @@ class ExceptionNormalizerEventSubscriber implements EventSubscriberInterface
      */
     public function processException(GetResponseForExceptionEvent $event)
     {
+        return;
         $request = $event->getRequest();
         $firewall = $request->attributes->get('_firewall_context');
         $pathInfo = $request->getPathInfo();

@@ -6,6 +6,7 @@ use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
+use App\Entity\Societaire;
 use App\Services\AladhanApiService;
 use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
@@ -434,5 +435,140 @@ class ContentController extends BaseController
         $emergency = $em->getRepository('App:ItemList')->findOneBy(['type' => 'emergency', 'insuranceType' => $insuranceType]);
         return $this->respondWith($emergency);
     }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Garages",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="garages successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/garages",
+     *     name = "garages"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all","garage"}
+     * )
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param  ObjectManager $em
+     * @param  InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function garage(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $garages = $em->getRepository('App:Garage')->findBy(['insuranceType' => $insuranceType]);
+        return $this->respondWith($garages);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Experts",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="experts data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/experts",
+     *     name = "experts"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all","expert"}
+     * )
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param  ObjectManager $em
+     * @param  InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function expert(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $experts = $em->getRepository('App:Expert')->findBy(['insuranceType' => $insuranceType]);
+        return $this->respondWith($experts);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="societaire",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="societaire data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/societaire",
+     *     name = "societaire"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all","societaire"}
+     * )
+     *
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function societaire(ObjectManager $em)
+    {
+        $societaires = $em->getRepository('App:Societaire')->findAll();
+        return $this->respondWith($societaires);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="packs",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="type societaire",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="societaire data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/packs",
+     *     name = "packs"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all","pack"}
+     * )
+     *
+     * @ParamConverter("societaireType", options={"converter":"App\ParamConverter\SocietaireParamConverter"})
+     *
+     * @param  ObjectManager $em
+     * @param Societaire $societaireType
+     * @return ApiResponse
+     */
+    public function pack(ObjectManager $em, Societaire $societaireType)
+    {
+        $societaires = $em->getRepository('App:Pack')->findOneBy(["societaire" => $societaireType]);
+        return $this->respondWith($societaires);
+    }
+
 
 }

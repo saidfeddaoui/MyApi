@@ -4,6 +4,9 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\InsuranceType;
 use App\Entity\PreDeclaration;
+use App\Event\AcceptPreDeclarationEvent;
+use App\Event\ApplicationEvents;
+use App\Event\RejectPreDeclarationEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -134,6 +137,8 @@ class PreDeclarationController extends Controller
         ;
         $this->em->persist($preDeclaration);
         $this->em->flush();
+        $event = new RejectPreDeclarationEvent($preDeclaration);
+        $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
     }
     /**
@@ -153,6 +158,8 @@ class PreDeclarationController extends Controller
         ;
         $this->em->persist($preDeclaration);
         $this->em->flush();
+        $event = new AcceptPreDeclarationEvent($preDeclaration);
+        $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été acceptée avec succès']);
     }
 
