@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\Api;
+use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\AssistanceRequest;
 use App\Entity\InsuranceType;
@@ -12,6 +13,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @Rest\Route(path="/public/assistance", name="assistance")
@@ -84,12 +86,13 @@ class AssistanceController extends BaseController
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @Rest\View()
-     *
+     * @ThrowViolations()
      * @param AssistanceRequest $assistanceRequest
      * @param InsuranceType $insuranceType
+     * @param ConstraintViolationListInterface $violations
      * @return ApiResponse
      */
-    public function newAssistance(AssistanceRequest $assistanceRequest, InsuranceType $insuranceType)
+    public function newAssistance(AssistanceRequest $assistanceRequest, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
         $assistanceRequest->setInsuranceType($this->em->getRepository('App:InsuranceType')->find($insuranceType));
         $this->em->persist($assistanceRequest);
