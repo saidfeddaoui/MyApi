@@ -325,6 +325,7 @@ class RegistrationController extends BaseController
             ->setEmailCanonical($submittedClient->getEmailCanonical())
             ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))
             ->setContactPreference($submittedClient->getContactPreference())
+            ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
             ->setEnabled(true)
         ;

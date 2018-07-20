@@ -83,6 +83,16 @@ class Client extends User
      */
     protected $contracts;
 
+    /**
+     * @var string
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_account_creation"})
+     *
+     * @Assert\NotBlank(groups={"client_account_creation"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cin;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -252,6 +262,18 @@ class Client extends User
     public function isConfirmed()
     {
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
+    }
+
+    public function getCin(): ?string
+    {
+        return $this->cin;
+    }
+
+    public function setCin(string $cin): self
+    {
+        $this->cin = $cin;
+
+        return $this;
     }
 
 }

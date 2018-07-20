@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExpertRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Expert
 {
@@ -18,16 +20,25 @@ class Expert
     private $id;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $raison_sociale;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $adresse;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      */

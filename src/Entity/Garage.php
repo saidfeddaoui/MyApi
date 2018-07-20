@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GarageRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Garage
 {
@@ -18,21 +20,32 @@ class Garage
     private $id;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $raison_sociale;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $adresse;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom_ville;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      */
