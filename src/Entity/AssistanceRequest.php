@@ -20,7 +20,7 @@ class AssistanceRequest
     private $id;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"{"new_assistance"}"})
+     * @Serializer\Groups({"new_assistance"})
      *
      * @Assert\Valid(groups={"new_assistance"})
      * @Assert\NotNull(groups={"new_assistance"})
