@@ -23,6 +23,7 @@ class PersonalInformation
      * @Serializer\Expose()
      * @Serializer\Groups({"new_assistance"})
      *
+     * @Assert\NotBlank(groups={"new_assistance"})
      * @Assert\Choice(choices={"Mr", "Mme", "Mlle"}, groups={"new_assistance"})
      *
      * @ORM\Column(type="string", length=10, nullable=true)
