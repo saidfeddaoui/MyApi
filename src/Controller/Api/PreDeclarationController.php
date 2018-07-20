@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\Entity\CircumstanceAttachment;
+use App\Entity\InsuranceType;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
 use App\Event\ApplicationEvents;
@@ -57,6 +58,13 @@ class PreDeclarationController extends BaseController
      *         description="Bearer auth",
      *     ),
      *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
      *        name="PreDeclaration",
      *        in="body",
      *        description="PreDeclaration object",
@@ -94,14 +102,20 @@ class PreDeclarationController extends BaseController
      *         "validator"={"groups"={"client_pre_declaration"}}
      *     }
      * )
+     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
      * @Rest\View(serializerGroups={"all", "show_predeclaration", "client_pre_declaration"})
      *
      * @param PreDeclaration $preDeclaration
+     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function preDeclaration(PreDeclaration $preDeclaration)
+    public function preDeclaration(PreDeclaration $preDeclaration, InsuranceType $insuranceType)
     {
-        $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS);
+        $preDeclaration
+            ->setStatus(PreDeclaration::STATUS_IN_PROGRESS)
+            ->setInsuranceType($this->em->getRepository('App:InsuranceType')->find($insuranceType))
+        ;
         $this->em->persist($preDeclaration);
         $this->em->flush();
         $event = new NewPreDeclarationEvent($preDeclaration);
