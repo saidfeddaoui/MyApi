@@ -21,7 +21,7 @@ class PersonalInformation
     private $id;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"{"new_assistance"}"})
+     * @Serializer\Groups({"new_assistance"})
      *
      * @Assert\Choice(choices={"Mr", "Mme", "Mlle"}, groups={"new_assistance"})
      *
@@ -30,7 +30,7 @@ class PersonalInformation
     private $civilite;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"{"new_assistance"}"})
+     * @Serializer\Groups({"new_assistance"})
      *
      * @Assert\NotBlank(groups={"new_assistance"})
      *
@@ -39,7 +39,7 @@ class PersonalInformation
     private $name;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"{"new_assistance"}"})
+     * @Serializer\Groups({"new_assistance"})
      *
      * @Assert\NotBlank(groups={"new_assistance"})
      * @Assert\Regex(pattern="/^0[0-9]{9}$/", groups={"new_assistance"})
@@ -49,7 +49,7 @@ class PersonalInformation
     private $phone;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"{"new_assistance"}"})
+     * @Serializer\Groups({"new_assistance"})
      *
      * @Assert\NotBlank(groups={"new_assistance"})
      * @Assert\Email(groups={"new_assistance"})
