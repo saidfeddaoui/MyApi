@@ -133,6 +133,11 @@ class PreDeclaration
      */
     private $tiers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
+     */
+    private $insuranceType;
+
     public function getId()
     {
         return $this->id;
@@ -254,6 +259,18 @@ class PreDeclaration
     public function setDateSinistre(\DateTimeInterface $dateSinistre): self
     {
         $this->dateSinistre = $dateSinistre;
+
+        return $this;
+    }
+
+    public function getInsuranceType(): ?InsuranceType
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType(?InsuranceType $insuranceType): self
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }

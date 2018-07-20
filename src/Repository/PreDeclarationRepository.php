@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\InsuranceType;
 use App\Entity\PreDeclaration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,22 +20,23 @@ class PreDeclarationRepository extends ServiceEntityRepository
         parent::__construct($registry, PreDeclaration::class);
     }
 
-//    /**
-//     * @return PreDeclaration[] Returns an array of PreDeclaration objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $status
+     * @param int|InsuranceType $insuranceType
+     * @return PreDeclaration[] Returns an array of PreDeclaration objects
+     */
+    public function findByStatusAndInsuranceType(int $status, $insuranceType)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $query = $this->createQueryBuilder('p')
+            ->where('p.status = :status')
+            ->andwhere('p.insuranceType = :insuranceType')
+            ->setParameter('status', $status)
+            ->setParameter('insuranceType', $insuranceType)
+            ->orderBy('p.dateSinistre', 'DESC')
         ;
+        return $query->getQuery()->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?PreDeclaration

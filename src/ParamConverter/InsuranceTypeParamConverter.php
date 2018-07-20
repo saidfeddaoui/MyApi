@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class InsuranceTypeParamConverter implements ParamConverterInterface
@@ -17,13 +18,21 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     private $em;
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * InsuranceTypeParamConverter constructor.
      * @param ObjectManager $em
+     * @param SessionInterface $session
      */
-    public function __construct(ObjectManager $em)
+    public function __construct(ObjectManager $em, SessionInterface $session)
     {
         $this->em = $em;
+        $this->session = $session;
     }
+
     /**
      * Stores the object in the request.
      *
@@ -34,6 +43,11 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        if ($insuranceType = $this->session->get('insuranceType')) {
+            $this->em->getRepository('App:InsuranceType')->find($insuranceType);
+            $request->attributes->set($configuration->getName(), $insuranceType);
+            return true;
+        }
         if (!$request->headers->has('x-entity')) {
             return false;
         }
