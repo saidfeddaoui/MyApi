@@ -50,11 +50,15 @@ jQuery(document).ready(function() {
                 "searchable": true,
                 "orderable": true,
             },
-            { // set default column settings
+            {
                 "searchable": true,
                 "orderable": true,
             },
-            { // set default column settings
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
                 "searchable": true,
                 "orderable": true,
             },
