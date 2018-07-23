@@ -26,3 +26,9 @@
     height: 150px;
     overflow: hidden;
 }
+
+.vehicle-zone {
+    position: absolute;
+    top: 0px;
+    left: 15px;
+}

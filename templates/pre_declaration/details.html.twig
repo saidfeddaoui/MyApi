@@ -82,6 +82,36 @@
             </div>
         </div>
         <!-- END Circonstances TABLE PORTLET-->
+        <!-- BEGIN Vehicle Damage TABLE PORTLET-->
+        {% if preDeclaration.vehiculeDamage %}
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase">Dommages au véhicule</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="expand" data-original-title="" title=""></a>
+                    </div>
+                </div>
+                <div class="portlet-body" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
+                                {% for part in preDeclaration.vehiculeDamage.damagedParts %}
+                                    <img {% if not loop.first %} class="vehicle-zone" {% endif %}
+                                            src="{{ asset('img/vehicle_zones/' ~ part.code ~ '.png') }}"
+                                    />
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <!-- END Vehicle Damage TABLE PORTLET-->
         <!-- BEGIN Adversaire TABLE PORTLET-->
         {% if preDeclaration.tiers %}
             <div class="portlet light portlet-fit ">
