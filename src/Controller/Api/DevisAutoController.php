@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * @Rest\Route(path="/auto", name="api_devis_auto")
+ * @Rest\Route(path="/auto", name="api_devis_auto_")
  */
 class DevisAutoController extends BaseController
 {
@@ -86,7 +86,7 @@ class DevisAutoController extends BaseController
      * @param  ObjectManager $em
      * @return ApiResponse
      */
-    public function preDeclaration(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations)
+    public function devisAuto(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations)
     {
         $societaire = $em->getRepository('App:Societaire')->findOneByCode($auto->getSocietaire()->getCode());
         $devi_auto = new DevisAuto();

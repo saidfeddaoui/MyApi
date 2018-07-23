@@ -19,6 +19,15 @@
 
 <div class="form-group">
     <div class="col-md-4 ">
+        {{ form_label(form.nomville) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.nomville, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
         {{ form_label(form.tel) }}
     </div>
     <div class="col-md-8 ">
