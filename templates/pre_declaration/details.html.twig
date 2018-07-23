@@ -44,11 +44,13 @@
                         <li class="active">
                             <a href="#localisation_tab" data-toggle="tab">Localisation</a>
                         </li>
-                        {% for photo in preDeclaration.circumstance.photos %}
-                            <li>
-                                <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
-                            </li>
-                        {% endfor %}
+                        {% if preDeclaration.circumstance.photos %}
+                            {% for photo in preDeclaration.circumstance.photos %}
+                                <li>
+                                    <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="localisation_tab">
@@ -56,23 +58,25 @@
                             <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
                                 The onChange event handler is used to update the view in the preview pane. </p>
                         </div>
-                        {% for photo in preDeclaration.circumstance.photos %}
-                            <div class="tab-pane" id="photo_{{ photo.id }}_tab">
-                                <h4>Photo {{ loop.index }}</h4>
-                                <div class="row">
-                                    <div class="col-md-6 responsive-1024">
-                                        <img src="{{ asset('img/circumstances/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
-                                    </div>
-                                    <div class="col-md-6 responsive-1024">
-                                        <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
-                                            <div class="preview-container">
-                                                <img src="{{ asset('img/circumstances/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                        {% if preDeclaration.circumstance.photos %}
+                            {% for photo in preDeclaration.circumstance.photos %}
+                                <div class="tab-pane" id="photo_{{ photo.id }}_tab">
+                                    <h4>Photo {{ loop.index }}</h4>
+                                    <div class="row">
+                                        <div class="col-md-6 responsive-1024">
+                                            <img src="{{ asset('img/circumstances/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                        </div>
+                                        <div class="col-md-6 responsive-1024">
+                                            <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
+                                                <div class="preview-container">
+                                                    <img src="{{ asset('img/circumstances/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -92,28 +96,32 @@
             <div class="portlet-body" style="display: none;">
                 <div class="tabbable-line boxless margin-bottom-20">
                     <ul class="nav nav-tabs">
-                        {% for photo in preDeclaration.tiers.attachments %}
-                            <li><a href="#tiers_photo_{{ photo.id }}_tab" data-toggle="tab">{{ photo.type | replace({'_': ' '}) | upper }}</a></li>
-                        {% endfor %}
+                        {% if preDeclaration.tiers and preDeclaration.tiers.attachments %}
+                            {% for photo in preDeclaration.tiers.attachments %}
+                                <li><a href="#tiers_photo_{{ photo.id }}_tab" data-toggle="tab">{{ photo.type | replace({'_': ' '}) | upper }}</a></li>
+                            {% endfor %}
+                        {% endif %}
                     </ul>
                     <div class="tab-content">
-                        {% for photo in preDeclaration.tiers.attachments %}
-                            <div class="tab-pane{{ loop.first ? ' active' : '' }}" id="tiers_photo_{{ photo.id }}_tab">
-                                <h4>{{ photo.type | replace({'_': ' '}) | upper }}</h4>
-                                <div class="row">
-                                    <div class="col-md-6 responsive-1024">
-                                        <img id="photo-attachment-tiers-{{ loop.index }}" src="{{ asset('img/tiers/' ~ photo.path) }}" alt="document adversaire" />
-                                    </div>
-                                    <div class="col-md-6 responsive-1024">
-                                        <div id="preview-pane" class="preview-photo-attachment-tiers-{{ loop.index }}">
-                                            <div class="preview-container">
-                                                <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                        {% if preDeclaration.tiers and preDeclaration.tiers.attachments %}
+                            {% for photo in preDeclaration.tiers.attachments %}
+                                <div class="tab-pane{{ loop.first ? ' active' : '' }}" id="tiers_photo_{{ photo.id }}_tab">
+                                    <h4>{{ photo.type | replace({'_': ' '}) | upper }}</h4>
+                                    <div class="row">
+                                        <div class="col-md-6 responsive-1024">
+                                            <img id="photo-attachment-tiers-{{ loop.index }}" src="{{ asset('img/tiers/' ~ photo.path) }}" alt="document adversaire" />
+                                        </div>
+                                        <div class="col-md-6 responsive-1024">
+                                            <div id="preview-pane" class="preview-photo-attachment-tiers-{{ loop.index }}">
+                                                <div class="preview-container">
+                                                    <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
