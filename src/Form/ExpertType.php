@@ -17,6 +17,7 @@ class ExpertType extends AbstractType
             ->add('raison_sociale',TextType::class,['label' => 'Raison sociale'])
             ->add('adresse', TextareaType::class,['label' => 'Adresse'])
             ->add('tel', TextType::class , ['label' => 'Tél'])
+            ->add('nomville',TextType::class,['label'=>'Nom Ville'])
         ;
     }
 
