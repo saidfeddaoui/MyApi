@@ -114,7 +114,7 @@ class PreDeclarationController extends BaseController
     {
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_IN_PROGRESS)
-            ->setInsuranceType($this->em->getRepository('App:InsuranceType')->find($insuranceType))
+            ->setInsuranceType($insuranceType)
         ;
         $this->em->persist($preDeclaration);
         $this->em->flush();
