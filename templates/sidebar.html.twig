@@ -49,22 +49,45 @@
                 <ul class="sub-menu">
                     <li class="nav-item">
                         <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
+                            <i class="icon-clock"></i>
                             <span class="title">En cours</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ path('pre_declarations_accepted') }}" class="nav-link">
+                            <i class="icon-check"></i>
                             <span class="title">Acceptées</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ path('pre_declarations_rejected') }}" class="nav-link">
+                            <i class="icon-ban"></i>
                             <span class="title">Rejetées</span>
                         </a>
                     </li>
                 </ul>
             </li>
-
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-docs"></i>
+                    <span class="title">Demandes d'assistance</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <a href="{{ path('assistance_in_progress') }}" class="nav-link">
+                            <i class="icon-clock"></i>
+                            <span class="title">En cours</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('assistance_handled') }}" class="nav-link">
+                            <i class="icon-check"></i>
+                            <span class="title">Traitées</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
@@ -147,6 +170,20 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-user"></i>
+                    <span class="title">Administration</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <a href="{{ path('list_user') }}" class="nav-link ">
+                            <span class="title">Gestion des utilisateurs</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
             {#<li class="nav-item">#}
                 {#<a href="javascript:;" class="nav-link nav-toggle">#}
@@ -221,20 +258,6 @@
                     {#</li>#}
                 {#</ul>#}
             {#</li>#}
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Administration</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="{{ path('list_user') }}" class="nav-link ">
-                            <span class="title">Gestion des utilisateurs</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
             {#<li class="nav-item">#}
                 {#<a href="javascript:;" class="nav-link nav-toggle">#}
@@ -495,39 +518,6 @@
                         {#<a href="ecommerce_products_edit.html" class="nav-link ">#}
                             {#<i class="icon-graph"></i>#}
                             {#<span class="title">Product Edit</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                {#</ul>#}
-            {#</li>#}
-            {#<li class="nav-item">#}
-                {#<a href="javascript:;" class="nav-link nav-toggle">#}
-                    {#<i class="icon-docs"></i>#}
-                    {#<span class="title">Apps</span>#}
-                    {#<span class="arrow"></span>#}
-                {#</a>#}
-                {#<ul class="sub-menu">#}
-                    {#<li class="nav-item">#}
-                        {#<a href="app_todo.html" class="nav-link ">#}
-                            {#<i class="icon-clock"></i>#}
-                            {#<span class="title">Todo 1</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="app_todo_2.html" class="nav-link ">#}
-                            {#<i class="icon-check"></i>#}
-                            {#<span class="title">Todo 2</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="app_inbox.html" class="nav-link ">#}
-                            {#<i class="icon-envelope"></i>#}
-                            {#<span class="title">Inbox</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="app_calendar.html" class="nav-link ">#}
-                            {#<i class="icon-calendar"></i>#}
-                            {#<span class="title">Calendar</span>#}
                         {#</a>#}
                     {#</li>#}
                 {#</ul>#}

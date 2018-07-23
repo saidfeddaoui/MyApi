@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class AssistanceRequest
 {
+
+    const STATUS_IN_PROGRESS = 0;
+    const STATUS_HANDLED = 1;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -52,6 +55,11 @@ class AssistanceRequest
      */
     private $insuranceType;
     /**
+     * @var int
+     * @ORM\Column(type="smallint")
+     */
+    private $status;
+    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -83,7 +91,6 @@ class AssistanceRequest
     public function setPersonalInformation(?PersonalInformation $personalInformation): self
     {
         $this->personalInformation = $personalInformation;
-
         return $this;
     }
     /**
@@ -100,7 +107,6 @@ class AssistanceRequest
     public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
-
         return $this;
     }
     /**
@@ -134,7 +140,22 @@ class AssistanceRequest
     public function setInsuranceType(?InsuranceType $insuranceType): self
     {
         $this->insuranceType = $insuranceType;
-
+        return $this;
+    }
+    /**
+     * @return int|null
+     */
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+    /**
+     * @param int $status
+     * @return static
+     */
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
         return $this;
     }
     /**
