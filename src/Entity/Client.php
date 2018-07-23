@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -82,7 +83,18 @@ class Client extends User
      * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="client")
      */
     protected $contracts;
-
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
     /**
      * @var string
      * @Serializer\Expose()
@@ -91,7 +103,7 @@ class Client extends User
      * @Assert\NotBlank(groups={"client_account_creation"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $cin;
+    protected $cin;
 
     public function __construct()
     {
@@ -230,6 +242,36 @@ class Client extends User
 
         return $this;
     }
+    /**
+     * @return null|string
+     */
+    public function getCin(): ?string
+    {
+        return $this->cin;
+    }
+    /**
+     * @param string $cin
+     * @return static
+     */
+    public function setCin(string $cin): self
+    {
+        $this->cin = $cin;
+        return $this;
+    }
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
 
     /**
      * Check if the client is unverified
@@ -262,18 +304,6 @@ class Client extends User
     public function isConfirmed()
     {
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
-    }
-
-    public function getCin(): ?string
-    {
-        return $this->cin;
-    }
-
-    public function setCin(string $cin): self
-    {
-        $this->cin = $cin;
-
-        return $this;
     }
 
 }

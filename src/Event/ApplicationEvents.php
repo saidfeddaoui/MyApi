@@ -9,4 +9,5 @@ final class ApplicationEvents
     const NEW_PRE_DECLARATION = 'new.pre_declaration';
     const REJECT_PRE_DECLARATION = 'reject.pre_declaration';
     const ACCEPT_PRE_DECLARATION = 'accept.pre_declaration';
+    const NEW_ASSISTANCE_REQUEST = 'new.assistance_request';
 }
