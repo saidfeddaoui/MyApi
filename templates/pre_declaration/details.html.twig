@@ -83,49 +83,51 @@
         </div>
         <!-- END Circonstances TABLE PORTLET-->
         <!-- BEGIN Adversaire TABLE PORTLET-->
-        <div class="portlet light portlet-fit ">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-settings font-red"></i>
-                    <span class="caption-subject font-red sbold uppercase">Adversaire</span>
+        {% if preDeclaration.tiers %}
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase">Adversaire</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="expand" data-original-title="" title=""></a>
+                    </div>
                 </div>
-                <div class="tools">
-                    <a href="javascript:;" class="expand" data-original-title="" title=""></a>
-                </div>
-            </div>
-            <div class="portlet-body" style="display: none;">
-                <div class="tabbable-line boxless margin-bottom-20">
-                    <ul class="nav nav-tabs">
-                        {% if preDeclaration.tiers and preDeclaration.tiers.attachments %}
-                            {% for photo in preDeclaration.tiers.attachments %}
-                                <li><a href="#tiers_photo_{{ photo.id }}_tab" data-toggle="tab">{{ photo.type | replace({'_': ' '}) | upper }}</a></li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                    <div class="tab-content">
-                        {% if preDeclaration.tiers and preDeclaration.tiers.attachments %}
-                            {% for photo in preDeclaration.tiers.attachments %}
-                                <div class="tab-pane{{ loop.first ? ' active' : '' }}" id="tiers_photo_{{ photo.id }}_tab">
-                                    <h4>{{ photo.type | replace({'_': ' '}) | upper }}</h4>
-                                    <div class="row">
-                                        <div class="col-md-6 responsive-1024">
-                                            <img id="photo-attachment-tiers-{{ loop.index }}" src="{{ asset('img/tiers/' ~ photo.path) }}" alt="document adversaire" />
-                                        </div>
-                                        <div class="col-md-6 responsive-1024">
-                                            <div id="preview-pane" class="preview-photo-attachment-tiers-{{ loop.index }}">
-                                                <div class="preview-container">
-                                                    <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                <div class="portlet-body" style="display: none;">
+                    <div class="tabbable-line boxless margin-bottom-20">
+                        <ul class="nav nav-tabs">
+                            {% if preDeclaration.tiers.attachments %}
+                                {% for photo in preDeclaration.tiers.attachments %}
+                                    <li><a href="#tiers_photo_{{ photo.id }}_tab" data-toggle="tab">{{ photo.type | replace({'_': ' '}) | upper }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                        <div class="tab-content">
+                            {% if preDeclaration.tiers.attachments %}
+                                {% for photo in preDeclaration.tiers.attachments %}
+                                    <div class="tab-pane{{ loop.first ? ' active' : '' }}" id="tiers_photo_{{ photo.id }}_tab">
+                                        <h4>{{ photo.type | replace({'_': ' '}) | upper }}</h4>
+                                        <div class="row">
+                                            <div class="col-md-6 responsive-1024">
+                                                <img id="photo-attachment-tiers-{{ loop.index }}" src="{{ asset('img/tiers/' ~ photo.path) }}" alt="document adversaire" />
+                                            </div>
+                                            <div class="col-md-6 responsive-1024">
+                                                <div id="preview-pane" class="preview-photo-attachment-tiers-{{ loop.index }}">
+                                                    <div class="preview-container">
+                                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
         <!-- END Adversaire TABLE PORTLET-->
     </div>
 </div>
