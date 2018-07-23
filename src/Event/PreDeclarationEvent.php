@@ -2,6 +2,7 @@
 
 namespace App\Event;
 
+use App\Entity\PreDeclaration;
 use Symfony\Component\EventDispatcher\Event;
 
 abstract class PreDeclarationEvent extends Event

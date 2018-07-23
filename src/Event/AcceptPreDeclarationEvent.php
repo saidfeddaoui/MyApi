@@ -2,6 +2,8 @@
 
 namespace App\Event;
 
+use App\Entity\PreDeclaration;
+
 class AcceptPreDeclarationEvent extends PreDeclarationEvent
 {
 
