@@ -100,12 +100,14 @@ class ExpertController extends Controller
                     $raisonSociale = $sheetData[$i][0] == "NULL" ? NULL : $sheetData[$i][0];
                     $adresse       = $sheetData[$i][1] == "NULL" ? NULL : $sheetData[$i][1];
                     $tel           = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
+                    $ville         = $sheetData[$i][3] == "NULL" ? NULL : $sheetData[$i][3];
 
                     if( is_null($raisonSociale) or is_null($adresse) ){ continue; }
                     $expert = New Expert();
                     $expert->setRaisonSociale($raisonSociale);
                     $expert->setAdresse($adresse);
                     $expert->setTel($tel);
+                    $expert->setNomVille($ville);
                     $expert->setInsuranceType($insuranceType);
                     $em->persist($expert);
 

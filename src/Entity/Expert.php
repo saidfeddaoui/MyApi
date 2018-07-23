@@ -45,6 +45,14 @@ class Expert
     private $tel;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom_ville;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
      */
     private $insuranceType;
@@ -74,6 +82,18 @@ class Expert
     public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getNomVille(): ?string
+    {
+        return $this->nom_ville;
+    }
+
+    public function setNomVille(?string $nom_ville): self
+    {
+        $this->nom_ville = $nom_ville;
 
         return $this;
     }
