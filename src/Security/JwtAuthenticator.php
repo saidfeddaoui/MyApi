@@ -81,6 +81,9 @@ class JwtAuthenticator implements SimplePreAuthenticatorInterface, Authenticatio
      * called by authentication listeners inheriting from
      * AbstractAuthenticationListener.
      *
+     * @param Request $request
+     * @param AuthenticationException $exception
+     *
      * @return Response The response to return, never null
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

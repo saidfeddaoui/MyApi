@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * @Rest\Route(path="/public/assistance", name="assistance")
+ * @Rest\Route(path="/public/assistance", name="api_public_assistance_")
  */
 class AssistanceController extends BaseController
 {
@@ -87,6 +87,7 @@ class AssistanceController extends BaseController
      *
      * @Rest\View()
      * @ThrowViolations()
+     *
      * @param AssistanceRequest $assistanceRequest
      * @param InsuranceType $insuranceType
      * @param ConstraintViolationListInterface $violations
@@ -94,7 +95,7 @@ class AssistanceController extends BaseController
      */
     public function newAssistance(AssistanceRequest $assistanceRequest, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
-        $assistanceRequest->setInsuranceType($this->em->getRepository('App:InsuranceType')->find($insuranceType));
+        $assistanceRequest->setInsuranceType($insuranceType);
         $this->em->persist($assistanceRequest);
         $this->em->flush();
         $event = new NewAssistanceRequestEvent($assistanceRequest);
