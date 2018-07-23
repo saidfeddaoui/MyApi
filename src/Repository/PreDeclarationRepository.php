@@ -32,7 +32,7 @@ class PreDeclarationRepository extends ServiceEntityRepository
             ->andwhere('p.insuranceType = :insuranceType')
             ->setParameter('status', $status)
             ->setParameter('insuranceType', $insuranceType)
-            ->orderBy('p.dateSinistre', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
         ;
         return $query->getQuery()->getResult();
     }

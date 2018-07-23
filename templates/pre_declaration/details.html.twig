@@ -16,6 +16,7 @@
                     <dt>Client</dt><dd>{{ preDeclaration.contract.client.name }}</dd>
                     <dt>N° du contrat</dt><dd>{{ preDeclaration.contract.contractNumber }}</dd>
                     <dt>Date Sinistre</dt><dd>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</dd>
+                    <dt>Date de pré-déclaration</dt><dd>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</dd>
                     <dt>Type de sinistre</dt><dd>{{ preDeclaration.typeSinistre.title }}</dd>
                     <dt>Nombre de véhicules</dt><dd>{{ preDeclaration.nbVehicule }}</dd>
                     <dt>Nombre de blessées</dt><dd>{{ preDeclaration.nbInjured }}</dd>

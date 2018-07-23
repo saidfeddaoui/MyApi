@@ -44,7 +44,8 @@
                             <tr>
                                 <th>Client</th>
                                 <th>N° du contrat</th>
-                                <th>date de sinistre</th>
+                                <th>Date de sinistre</th>
+                                <th>Date de pré-déclaration</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -54,6 +55,7 @@
                                 <td>{{ preDeclaration.contract.client.name }}</td>
                                 <td>{{ preDeclaration.contract.contractNumber }}</td>
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
+                                <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
                                 <td>
                                     <a class="text-info bs-tooltip details" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
