@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -40,7 +41,6 @@ class PreDeclaration
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nbVehicule;
-
     /**
      * @var integer
      *
@@ -65,7 +65,6 @@ class PreDeclaration
      * @ORM\Column(type="datetime")
      */
     private $dateSinistre;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups("show_predeclaration")
@@ -73,12 +72,10 @@ class PreDeclaration
      * @ORM\Column(type="smallint")
      */
     private $status;
-
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -89,7 +86,6 @@ class PreDeclaration
      * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="preDeclarations")
      */
     private $contract;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -101,7 +97,6 @@ class PreDeclaration
      * @ORM\JoinColumn(nullable=false)
      */
     private $typeSinistre;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -112,7 +107,6 @@ class PreDeclaration
      * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $circumstance;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -122,7 +116,6 @@ class PreDeclaration
      * @ORM\OneToOne(targetEntity="App\Entity\VehiculeDamage", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $vehiculeDamage;
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -132,147 +125,217 @@ class PreDeclaration
      * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $tiers;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
      */
     private $insuranceType;
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId()
     {
         return $this->id;
     }
-
+    /**
+     * @return int|null
+     */
     public function getNbVehicule(): ?int
     {
         return $this->nbVehicule;
     }
-
+    /**
+     * @param int $nbVehicule
+     * @return static
+     */
     public function setNbVehicule(int $nbVehicule): self
     {
         $this->nbVehicule = $nbVehicule;
-
         return $this;
     }
-
+    /**
+     * @return int|null
+     */
     public function getNbInjured(): ?int
     {
         return $this->nbInjured;
     }
-
+    /**
+     * @param int|null $nbInjured
+     * @return static
+     */
     public function setNbInjured(?int $nbInjured): self
     {
         $this->nbInjured = $nbInjured;
-
         return $this;
     }
-
+    /**
+     * @return int|null
+     */
     public function getStatus(): ?int
     {
         return $this->status;
     }
-
+    /**
+     * @param int $status
+     * @return static
+     */
     public function setStatus(int $status): self
     {
         $this->status = $status;
-
         return $this;
     }
-
+    /**
+     * @return null|string
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
-
+    /**
+     * @param null|string $description
+     * @return static
+     */
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
-
+    /**
+     * @return Contract|null
+     */
     public function getContract(): ?Contract
     {
         return $this->contract;
     }
-
+    /**
+     * @param Contract|null $contract
+     * @return static
+     */
     public function setContract(?Contract $contract): self
     {
         $this->contract = $contract;
-
         return $this;
     }
-
+    /**
+     * @return Item|null
+     */
     public function getTypeSinistre(): ?Item
     {
         return $this->typeSinistre;
     }
-
+    /**
+     * @param Item|null $typeSinistre
+     * @return static
+     */
     public function setTypeSinistre(?Item $typeSinistre): self
     {
         $this->typeSinistre = $typeSinistre;
-
         return $this;
     }
-
+    /**
+     * @return Circumstance|null
+     */
     public function getCircumstance(): ?Circumstance
     {
         return $this->circumstance;
     }
-
+    /**
+     * @param Circumstance|null $circumstance
+     * @return static
+     */
     public function setCircumstance(?Circumstance $circumstance): self
     {
         $this->circumstance = $circumstance;
-
         return $this;
     }
-
+    /**
+     * @return VehiculeDamage|null
+     */
     public function getVehiculeDamage(): ?VehiculeDamage
     {
         return $this->vehiculeDamage;
     }
-
+    /**
+     * @param VehiculeDamage|null $vehiculeDamage
+     * @return static
+     */
     public function setVehiculeDamage(?VehiculeDamage $vehiculeDamage): self
     {
         $this->vehiculeDamage = $vehiculeDamage;
-
         return $this;
     }
-
+    /**
+     * @return Tiers|null
+     */
     public function getTiers(): ?Tiers
     {
         return $this->tiers;
     }
-
+    /**
+     * @param Tiers|null $tiers
+     * @return static
+     */
     public function setTiers(?Tiers $tiers): self
     {
         $this->tiers = $tiers;
-
         return $this;
     }
-
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDateSinistre(): ?\DateTimeInterface
     {
         return $this->dateSinistre;
     }
-
+    /**
+     * @param \DateTimeInterface $dateSinistre
+     * @return static
+     */
     public function setDateSinistre(\DateTimeInterface $dateSinistre): self
     {
         $this->dateSinistre = $dateSinistre;
-
         return $this;
     }
-
+    /**
+     * @return InsuranceType|null
+     */
     public function getInsuranceType(): ?InsuranceType
     {
         return $this->insuranceType;
     }
-
+    /**
+     * @param InsuranceType|null $insuranceType
+     * @return static
+     */
     public function setInsuranceType(?InsuranceType $insuranceType): self
     {
         $this->insuranceType = $insuranceType;
-
         return $this;
+    }
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
     }
 
 }

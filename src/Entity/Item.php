@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Serializer\ExclusionPolicy("all")
  */
-class Item implements  TranslatableInterface
+class Item implements TranslatableInterface
 {
     use Translatable;
 
