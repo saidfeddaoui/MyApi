@@ -3,19 +3,26 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Ville;
-use App\Form\VilleType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class VilleController extends Controller
 {
 
     /**
      * @Route(path="/villes", name="list_ville", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Villes")
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -60,10 +67,10 @@ class VilleController extends Controller
         $em->persist($ville);
         $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
         $em->flush();
-        return  new JsonResponse(array(
-            "id" => $ville->getId(),
-            "message" => "Ville ajoutée avec succès",
-        ));
+        return  new JsonResponse([
+            'id' => $ville->getId(),
+            'message' => 'Ville ajoutée avec succès',
+        ]);
     }
     /**
      * @Route(path="/villes/edit/{id}", name="edit_ville", options={"expose"=true})
@@ -82,10 +89,10 @@ class VilleController extends Controller
         $repository->translate($ville, 'nom', 'ar', $iName_ar) ;
         $em->persist($ville);
         $em->flush();
-        return  new JsonResponse(array(
-            "id" => $ville->getId(),
-            "message" => "Ville modifiée avec succès",
-        ));
+        return  new JsonResponse([
+            'id' => $ville->getId(),
+            'message' => 'Ville modifiée avec succès',
+        ]);
     }
     /**
      * @Route(path="/villes/delete/{id}", name="delete_ville", options={"expose"=true})
@@ -99,8 +106,6 @@ class VilleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($ville);
         $em->flush();
-        return  new JsonResponse(array(
-            "message" => "Ville supprimée avec succès"
-        ));
+        return  new JsonResponse(['message' => 'Ville supprimée avec succès']);
     }
 }

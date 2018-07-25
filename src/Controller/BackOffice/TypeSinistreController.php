@@ -6,21 +6,28 @@ use App\Entity\Attachment;
 use App\Entity\Item;
 use App\Entity\ItemList;
 use App\Form\TypeSinistreType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\File\File;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class TypeSinistreController extends Controller
 {
 
     /**
      * @Route(path="/sinistre/types", name="types_sinistres", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Types sinistre")
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -28,7 +35,7 @@ class TypeSinistreController extends Controller
     public function index(Request $request)
     {
         $form = $this->createForm(TypeSinistreType::class, new Item(), [
-            'action' => $this->generateUrl('add_type_sinistre'),
+            'action' => $this->generateUrl('content_types_add_type_sinistre'),
         ]);
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
@@ -102,7 +109,7 @@ class TypeSinistreController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('types_sinistres'));
+        return  $this->redirect($this->generateUrl('content_types_types_sinistres'));
     }
     /**
      * @Route(path="/sinistre/types/edit/{id}", name="edit_type_sinistre", options={"expose"=true})
@@ -116,7 +123,7 @@ class TypeSinistreController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(TypeSinistreType::class, $typeSinistre, [
-            'action' => $this->generateUrl('edit_type_sinistre', ['id' => $typeSinistre->getId()])
+            'action' => $this->generateUrl('content_types_edit_type_sinistre', ['id' => $typeSinistre->getId()])
         ]);
         $translations =  $repository->findTranslations($typeSinistre);
         if($translations){
@@ -147,7 +154,7 @@ class TypeSinistreController extends Controller
             $repository->translate($typeSinistre, 'title', 'ar', $iName_ar) ;
             $em->persist($typeSinistre);
             $em->flush();
-            return  $this->redirect($this->generateUrl('types_sinistres'));
+            return  $this->redirect($this->generateUrl('content_types_types_sinistres'));
         }
         return  $this->render('sinistre/form.html.twig', [
             'form' => $form->createView()

@@ -1,0 +1,13 @@
+{% extends 'base_error.html.twig' %}
+{% block error_message %}
+    <div class="col-md-12 page-404">
+        <div class="number font-{{ app.session.get('insuranceType').themeColor }}">{{ status_code }}</div>
+        <div class="details">
+            <h3>Oops! Quelque chose s'est mal passé.</h3>
+            <p> Nous le réparons! S'il vous plaît revenir dans un moment.
+                <br/>
+                <a href="{{ path('home') }}"> Retourner à l'accueil </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

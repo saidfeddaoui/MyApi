@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
     $('.edit').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('edit_modele', {id: id}),
+            url: Routing.generate('content_types_edit_modele', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
     });
     function deleteAction(id, td) {
         $.ajax({
-            url: Routing.generate('delete_modele', {id: id}),
+            url: Routing.generate('content_types_delete_modele', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);

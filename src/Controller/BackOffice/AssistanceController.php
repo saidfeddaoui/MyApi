@@ -4,15 +4,20 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\AssistanceRequest;
 use App\Entity\InsuranceType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route(path="/assistance", name="assistance_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Demandes d'assistance")
  */
 class AssistanceController extends Controller
 {
@@ -41,6 +46,8 @@ class AssistanceController extends Controller
      * @Route("/in_progress", name="in_progress")
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
+     * @Breadcrumb(title="En cours")
+     *
      * @param InsuranceType $insuranceType
      * @return Response
      */
@@ -60,6 +67,8 @@ class AssistanceController extends Controller
     /**
      * @Route("/handled", name="handled")
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Breadcrumb(title="Traitées")
      *
      * @param InsuranceType $insuranceType
      * @return Response
@@ -92,6 +101,23 @@ class AssistanceController extends Controller
         $this->em->persist($assistanceRequest);
         $this->em->flush();
         return $this->json(['message' => 'la demande a été bien traitée']);
+    }
+    /**
+     * @Route(path="/display/{id}", name="display", requirements={"id":"\d+"}, options={"expose"=true})
+     *
+     * @Breadcrumb(title="{assistanceRequest.personalInformation.name}")
+     *
+     * @param AssistanceRequest $assistanceRequest
+     * @return Response
+     */
+    public function display(AssistanceRequest $assistanceRequest)
+    {
+        return $this->render('assistance/index.html.twig', [
+            'page_title' => 'Gestion des demandes d\'assistance',
+            'page_subtitle' => '',
+            'portlet_title' => 'Demande d\'assistance',
+            'assistanceRequests' => [ $assistanceRequest ],
+        ]);
     }
 
 }

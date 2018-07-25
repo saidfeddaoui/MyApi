@@ -1,0 +1,67 @@
+<!-- BEGIN NOTIFICATION PRE-DECLARATION DROPDOWN -->
+<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <i class="icon-book-open"></i>
+        <span class="badge badge-default">{{ preDeclarations | length }}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="external">
+            <h3><span class="bold">{{ preDeclarations | length }}</span> Pré-déclaration</h3>
+            <a href="{{ path('pre_declarations_in_progress') }}">Voir tout</a>
+        </li>
+        {% if preDeclarations %}
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                    {% for preDeclaration in preDeclarations %}
+                        <li>
+                            <a href="{{ path('pre_declarations_display_details', {'id': preDeclaration.id}) }}">
+                                <span class="time">{{ preDeclaration.createdAt | date_diff }}</span>
+                                <span class="details">
+                                    <span class="label label-sm label-icon label-success">
+                                        <i class="fa fa-plus"></i>
+                                    </span> {{ preDeclaration.contract.client.name }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+</li>
+<!-- END NOTIFICATION PRE-DECLARATION DROPDOWN -->
+
+<!-- BEGIN NOTIFICATION ASSISTANCE REQUESTS DROPDOWN -->
+<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <i class="icon-docs"></i>
+        <span class="badge badge-default">{{ assistanceRequests | length }}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="external">
+            <h3><span class="bold">{{ assistanceRequests | length }}</span> Demandes d'assistance</h3>
+            <a href="{{ path('assistance_in_progress') }}">Voir tout</a>
+        </li>
+        {% if assistanceRequests %}
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                    {% for request in assistanceRequests %}
+                        <li>
+                            <a href="{{ path('assistance_display', {'id': request.id}) }}">
+                                <span class="time">{{ request.createdAt | date_diff }}</span>
+                                <span class="details">
+                                    <span class="label label-sm label-icon label-info">
+                                        <i class="fa fa-bullhorn"></i>
+                                    </span> {{ request.personalInformation.name }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+</li>
+<!-- END NOTIFICATION ASSISTANCE REQUESTS DROPDOWN -->

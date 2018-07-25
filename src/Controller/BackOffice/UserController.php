@@ -4,16 +4,25 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route(path="/administration", name="administration_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Administration")
+ */
 class UserController extends Controller
 {
 
     /**
      * @Route("/users", name="list_user")
+     *
+     * @Breadcrumb(title="Gestion des utilisateurs")
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -23,7 +32,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('App:User')->findAll();
         $form = $this->createForm(RegistrationType::class, new User(),[
-            'action' => $this->generateUrl('add_user'),
+            'action' => $this->generateUrl('administration_add_user'),
         ]);
 
         return $this->render('@FOSUser/Registration/register.html.twig', [
@@ -49,7 +58,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
         }
-        return $this->redirectToRoute('list_user');
+        return $this->redirectToRoute('administration_list_user');
     }
     /**
      * @Route("/admin/users/edit/{id}", name="edit_user",options={"expose"=true})
@@ -62,14 +71,14 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(RegistrationType::class, $user, [
-            'action' => $this->generateUrl('edit_user', ['id' => $user->getId()])
+            'action' => $this->generateUrl('administration_edit_user', ['id' => $user->getId()])
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($user);
             $em->flush();
             //$this->container->get('session')->getFlashBag()->add("success", "L'agent ".$oUser->getUsername()." a été mise à jour");
-            return $this->redirectToRoute('list_user');
+            return $this->redirectToRoute('administration_list_user');
         }
 
         return $this->render('@FOSUser/Registration/edit.html.twig', [
@@ -90,7 +99,7 @@ class UserController extends Controller
         $em->remove($user);
         $em->flush();
         $this->addFlash('success', 'L\'Utilisateur a été supprimé avec succès');
-        return $this->redirectToRoute('list_user');
+        return $this->redirectToRoute('administration_list_user');
     }
 
 }
