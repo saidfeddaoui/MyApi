@@ -6,7 +6,9 @@ use App\Entity\Attachment;
 use App\Entity\Item;
 use App\Entity\ItemList;
 use App\Form\ModeReparationType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Modes de réparation")
+ */
 class ModeReparationController extends Controller
 {
 

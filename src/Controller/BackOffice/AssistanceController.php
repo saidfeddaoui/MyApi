@@ -7,6 +7,7 @@ use App\Entity\InsuranceType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route(path="/assistance", name="assistance_")
+ * @Security("is_granted('ROLE_ASSISTANCE')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Demandes d'assistance")

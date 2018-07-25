@@ -9,6 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisAutoRepository")
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_auto") })
+ *  * @Serializer\VirtualProperty(name="pack_code", exp="object.getPackCode()", options={ @Serializer\Groups("request_auto") })
  */
 class DevisAuto
 {
@@ -85,7 +87,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      * @Assert\Valid(groups={"devis_auto"})
@@ -97,7 +99,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      * @Assert\Valid(groups={"devis_auto"})
@@ -109,7 +111,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\Choice(choices={"O", "N"}, groups={"devis_auto"})
      *
@@ -120,7 +122,7 @@ class DevisAuto
     /**
      * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      * @Assert\DateTime(groups={"devis_auto"}, format="Y-m-d H:i:s")
@@ -131,7 +133,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
@@ -141,7 +143,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
@@ -151,7 +153,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
@@ -161,7 +163,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
@@ -171,7 +173,7 @@ class DevisAuto
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("devis_auto")
+     * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
@@ -362,5 +364,13 @@ class DevisAuto
         $this->vg = $vg;
 
         return $this;
+    }
+    public function getSocietaireCode()
+    {
+        return $this->getSocietaire()->getCode();
+    }
+    public function getPackCode()
+    {
+        return $this->getPack()->getCode();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\BackOffice;
 use App\Entity\Alert;
 use App\Form\AlertType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route(path="/alerts", name="alerts_")
+ * @Security("is_granted('ROLE_ALERTS')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Alertes")

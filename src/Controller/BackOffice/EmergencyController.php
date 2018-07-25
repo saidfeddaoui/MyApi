@@ -8,6 +8,7 @@ use App\Entity\ItemList;
 use App\Form\EmergencyType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
+ *
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")

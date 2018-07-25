@@ -19,7 +19,7 @@ class InfoPratique
     private $weather;
     /**
      * @Serializer\Type("App\DTO\Api\ContentType\Pharmacy")
-     * @var Pharmacy
+     * @var Garantie
      */
     private $pharmacy;
 
@@ -27,9 +27,9 @@ class InfoPratique
      * InfoPratique constructor.
      * @param Prayer $prayer
      * @param Weather $weather
-     * @param Pharmacy $pharmacy
+     * @param Garantie $pharmacy
      */
-    public function __construct(Prayer $prayer = null, Weather $weather = null, Pharmacy $pharmacy = null)
+    public function __construct(Prayer $prayer = null, Weather $weather = null, Garantie $pharmacy = null)
     {
         $this->prayer = $prayer;
         $this->weather = $weather;
@@ -70,17 +70,17 @@ class InfoPratique
     }
 
     /**
-     * @return Pharmacy
+     * @return Garantie
      */
-    public function getPharmacy(): Pharmacy
+    public function getPharmacy(): Garantie
     {
         return $this->pharmacy;
     }
     /**
-     * @param Pharmacy $pharmacy
+     * @param Garantie $pharmacy
      * @return static
      */
-    public function setPharmacy(Pharmacy $pharmacy): self
+    public function setPharmacy(Garantie $pharmacy): self
     {
         $this->pharmacy = $pharmacy;
         return $this;

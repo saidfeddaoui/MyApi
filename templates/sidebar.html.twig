@@ -40,152 +40,162 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-book-open"></i>
-                    <span class="title">Pré-déclaration</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
-                            <i class="icon-clock"></i>
-                            <span class="title">En cours</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('pre_declarations_accepted') }}" class="nav-link">
-                            <i class="icon-check"></i>
-                            <span class="title">Acceptées</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('pre_declarations_rejected') }}" class="nav-link">
-                            <i class="icon-ban"></i>
-                            <span class="title">Rejetées</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-docs"></i>
-                    <span class="title">Demandes d'assistance</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="{{ path('assistance_in_progress') }}" class="nav-link">
-                            <i class="icon-clock"></i>
-                            <span class="title">En cours</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('assistance_handled') }}" class="nav-link">
-                            <i class="icon-check"></i>
-                            <span class="title">Traitées</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ path('alerts_list') }}" class="nav-link nav-toggle">
-                    <i class="icon-feed"></i>
-                    <span class="title">Alertes</span>
-                    <span class="arrow"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-settings"></i>
-                    <span class="title">Gestion Contenu</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item ">
-                        <a href="{{ path('content_types_list_slider') }}" class="nav-link">
-                            <span class="title">Sliders</span>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="{{ path('content_types_list_produit') }}" class="nav-link ">
-                            <span class="title">Produits</span>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="{{ path('list_mode') }}" class="nav-link ">
-                            <span class="title">Modes de réparation</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <span class="title">Sinistre</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item">
-                                <a href="{{ path('content_types_types_sinistres') }}" class="nav-link">Types</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ path('photos_sinistres') }}" class="nav-link">Photos</a>
-                            </li>
+            {% if is_granted('ROLE_PRE_DECLARATION') %}
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-book-open"></i>
+                        <span class="title">Pré-déclaration</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
+                                <i class="icon-clock"></i>
+                                <span class="title">En cours</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('pre_declarations_accepted') }}" class="nav-link">
+                                <i class="icon-check"></i>
+                                <span class="title">Acceptées</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('pre_declarations_rejected') }}" class="nav-link">
+                                <i class="icon-ban"></i>
+                                <span class="title">Rejetées</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ASSISTANCE') %}
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-docs"></i>
+                        <span class="title">Demandes d'assistance</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('assistance_in_progress') }}" class="nav-link">
+                                <i class="icon-clock"></i>
+                                <span class="title">En cours</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('assistance_handled') }}" class="nav-link">
+                                <i class="icon-check"></i>
+                                <span class="title">Traitées</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ALERTS') %}
+                <li class="nav-item">
+                    <a href="{{ path('alerts_list') }}" class="nav-link nav-toggle">
+                        <i class="icon-feed"></i>
+                        <span class="title">Alertes</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_CONTENT_MANAGEMENT') %}
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-settings"></i>
+                        <span class="title">Gestion Contenu</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="{{ path('content_types_list_slider') }}" class="nav-link">
+                                <span class="title">Sliders</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ path('content_types_list_produit') }}" class="nav-link ">
+                                <span class="title">Produits</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ path('list_mode') }}" class="nav-link ">
+                                <span class="title">Modes de réparation</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Sinistre</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ path('content_types_types_sinistres') }}" class="nav-link">Types</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('photos_sinistres') }}" class="nav-link">Photos</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('content_types_list_ville') }}" class="nav-link ">
-                            <span class="title">Ville réparation</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('content_types_marque_vehicule') }}" class="nav-link ">
-                            <span class="title">Marque véhicule</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('content_types_modele_vehicule') }}" class="nav-link ">
-                            <span class="title">Modèle véhicule</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('content_types_type_accident') }}" class="nav-link ">
-                            <span class="title">Types accident</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <span class="title">Localisation</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item">
-                                <a href="{{ path('content_types_garage') }}" class="nav-link">Garages</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ path('content_types_expert') }}" class="nav-link">Experts</a>
-                            </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('content_types_list_ville') }}" class="nav-link ">
+                                <span class="title">Ville réparation</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('content_types_marque_vehicule') }}" class="nav-link ">
+                                <span class="title">Marque véhicule</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('content_types_modele_vehicule') }}" class="nav-link ">
+                                <span class="title">Modèle véhicule</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('content_types_type_accident') }}" class="nav-link ">
+                                <span class="title">Types accident</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Localisation</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ path('content_types_garage') }}" class="nav-link">Garages</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('content_types_expert') }}" class="nav-link">Experts</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('content_types_list_emergency') }}" class="nav-link ">
-                            <span class="title">Numéros d'urgences</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Administration</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="{{ path('administration_list_user') }}" class="nav-link ">
-                            <span class="title">Gestion des utilisateurs</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('content_types_list_emergency') }}" class="nav-link ">
+                                <span class="title">Numéros d'urgences</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMINISTRATION') %}
+                <li class="nav-item">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="icon-user"></i>
+                        <span class="title">Administration</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('administration_list_user') }}" class="nav-link ">
+                                <span class="title">Gestion des utilisateurs</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
 
             {#<li class="nav-item">#}
                 {#<a href="javascript:;" class="nav-link nav-toggle">#}
