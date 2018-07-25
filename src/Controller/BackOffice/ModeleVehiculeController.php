@@ -5,6 +5,7 @@ namespace App\Controller\BackOffice;
 use App\Entity\ModeleVehicule;
 use App\Form\ModeleVehiculeType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")

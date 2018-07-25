@@ -6,6 +6,7 @@ use App\Entity\Garage;
 use App\Form\ChargementGarageFileType;
 use App\Form\GarageType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")

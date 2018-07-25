@@ -5,6 +5,7 @@ namespace App\Controller\BackOffice;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route(path="/administration", name="administration_")
+ * @Security("is_granted('ROLE_USERS_MANAGEMENT')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Administration")

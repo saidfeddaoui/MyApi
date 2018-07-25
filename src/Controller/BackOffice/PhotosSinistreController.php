@@ -2,24 +2,29 @@
 
 namespace App\Controller\BackOffice;
 
-use App\Entity\Attachment;
-use App\Entity\Item;
 use App\Entity\ItemList;
 use App\Entity\PhotosSinistre;
 use App\Form\PhotosSyinistreType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Form\Form;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Photos Sinistre")
+ */
 class PhotosSinistreController extends Controller
 {
+
     /**
      * @Route(path="/sinistre/photos", name="photos_sinistres", options={"expose"=true})
      * @param SessionInterface $session
