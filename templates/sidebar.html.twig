@@ -89,6 +89,20 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Devis</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <a href="{{ path('auto') }}" class="nav-link ">
+                            <span class="title">Devis Auto</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
                 <a href="{{ path('alerts_list') }}" class="nav-link nav-toggle">
                     <i class="icon-feed"></i>
                     <span class="title">Alertes</span>
@@ -168,6 +182,16 @@
                     <li class="nav-item">
                         <a href="{{ path('content_types_list_emergency') }}" class="nav-link ">
                             <span class="title">Numéros d'urgences</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('content_types_societaire') }}" class="nav-link ">
+                            <span class="title">sociétaires</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('content_types_packs') }}" class="nav-link ">
+                            <span class="title">Packs</span>
                         </a>
                     </li>
                 </ul>

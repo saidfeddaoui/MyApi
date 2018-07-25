@@ -8,13 +8,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class SocietaireController extends Controller
 {
 
     /**
      * @Route(path="/societaires", name="societaire", options={"expose"=true})
      *
+     * @Breadcrumb(title="Sociétaires")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
