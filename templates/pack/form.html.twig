@@ -1,0 +1,34 @@
+
+{{ form_start(form, {'attr': {'class': 'form-horizontal ', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.name) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.code) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.code, {'attr': {'class': 'form-control '}} ) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.societaire) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.societaire, {'attr': {'class': 'form-control select2'}} ) }}
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}

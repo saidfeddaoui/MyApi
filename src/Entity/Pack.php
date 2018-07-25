@@ -44,7 +44,7 @@ class Pack
      * Pack constructor.
      * @param $code
      */
-    public function __construct($code)
+    public function __construct($code = null)
     {
         $this->code = $code;
     }
