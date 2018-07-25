@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\DevisAuto;
+use App\Services\DevisAutoApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * @Rest\Route(path="/auto", name="api_devis_auto_")
+ * @Rest\Route(path="/public/devis", name="api_devis_auto_")
  */
 class DevisAutoController extends BaseController
 {
@@ -38,13 +39,6 @@ class DevisAutoController extends BaseController
      * @SWG\Post(
      *     tags={"DevisAuto"},
      *     description="devis auto process",
-     *     @SWG\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         type="string",
-     *         required=true,
-     *         description="Bearer auth",
-     *     ),
      *     @SWG\Parameter(
      *        name="DevisAuto",
      *        in="body",
@@ -75,18 +69,19 @@ class DevisAutoController extends BaseController
      *     )
      * )
      *
-     * @Rest\Post(name="devis_auto")
+     * @Rest\Post(path="/auto",name="devis_auto")
      * @ParamConverter(name="auto", converter="fos_rest.request_body", options={"validator"={ "groups"={"devis_auto"} }})
-     * @Rest\View(serializerGroups={"all", "devis_auto"})
+     * @Rest\View(serializerGroups={"all", "devis_auto", "response_auto"})
      *
      * @ThrowViolations()
      *
      * @param  DevisAuto $auto
      * @param  ConstraintViolationListInterface $violations
+     * @param  DevisAutoApiService $Auto_api
      * @param  ObjectManager $em
      * @return ApiResponse
      */
-    public function devisAuto(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations)
+    public function devisAuto(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
     {
         $societaire = $em->getRepository('App:Societaire')->findOneByCode($auto->getSocietaire()->getCode());
         $devi_auto = new DevisAuto();
@@ -98,6 +93,7 @@ class DevisAutoController extends BaseController
         $devi_auto->setSocietaire($societaire);
         $em->persist($devi_auto);
         $em->flush();
-        die('ok');
+        $devis = $Auto_api->getDevisAuto($auto);
+        return $this->respondWith($devis);
     }
 }

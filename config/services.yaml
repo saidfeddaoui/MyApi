@@ -79,6 +79,11 @@ services:
             - '@eight_points_guzzle.client.api_sms'
             - '@jms_serializer'
             - array
+    App\Services\DevisAutoApiService:
+            arguments:
+                - '@eight_points_guzzle.client.api_devis_auto'
+                - '@jms_serializer'
+                - App\DTO\Devis\AutoResponse
 
     # Exception normalizers
     app.normalizer.not_found_http_exception:

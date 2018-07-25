@@ -28,7 +28,7 @@ class Pack
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"pack","devis_auto"})
+     * @Serializer\Groups(groups={"pack","devis_auto","request_auto"})
      *
      * @Assert\NotBlank(groups={"devis_auto"})
      * @ORM\Column(type="string", length=255, )

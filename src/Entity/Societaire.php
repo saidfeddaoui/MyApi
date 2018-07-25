@@ -28,7 +28,7 @@ class Societaire
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"societaire","devis_auto"})
+     * @Serializer\Groups(groups={"societaire","devis_auto","request_auto"})
      *
      * @Assert\NotBlank(groups={"devis_auto"})
      *
