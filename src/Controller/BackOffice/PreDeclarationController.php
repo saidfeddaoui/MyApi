@@ -10,6 +10,7 @@ use App\Event\RejectPreDeclarationEvent;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(path="/pre_declarations", name="pre_declarations_")
+ * @Security("is_granted('ROLE_PRE_DECLARATION')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Pré-déclarations")

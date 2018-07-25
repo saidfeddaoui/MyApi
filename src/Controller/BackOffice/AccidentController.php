@@ -4,6 +4,7 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\Accident;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
  *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")
