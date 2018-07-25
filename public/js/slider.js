@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
         var $this = $(this).data('id');
 
             $.ajax({
-                url: Routing.generate('edit_slider', {id: $this}),
+                url: Routing.generate('content_types_edit_slider', {id: $this}),
                 type: "POST",
                 error: function (request, status, error) {
                     console.log(request.responseText);
@@ -66,7 +66,7 @@ jQuery(document).ready(function() {
     });
     function deleteAction(id, td) {
         $.ajax({
-            url: Routing.generate('delete_slider', {id: id}),
+            url: Routing.generate('content_types_delete_slider', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);

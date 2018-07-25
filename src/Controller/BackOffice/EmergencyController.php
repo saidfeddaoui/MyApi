@@ -6,6 +6,7 @@ use App\Entity\Attachment;
 use App\Entity\Item;
 use App\Entity\ItemList;
 use App\Form\EmergencyType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +17,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class EmergencyController extends Controller
 {
 
     /**
      * @Route(path="/emergency", name="list_emergency", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Numéros d'urgences")
+     *
      * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -28,7 +38,7 @@ class EmergencyController extends Controller
     public function index(Request $request, SessionInterface $session)
     {
         $form = $this->createForm(EmergencyType::class, new Item(), [
-            'action' => $this->generateUrl('add_emergency'),
+            'action' => $this->generateUrl('content_types_add_emergency'),
         ]);
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
@@ -100,7 +110,7 @@ class EmergencyController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('list_emergency'));
+        return  $this->redirect($this->generateUrl('content_types_list_emergency'));
     }
     /**
      * @Route(path="/emergency/edit/{id}", name="edit_emergency", options={"expose"=true})
@@ -114,7 +124,7 @@ class EmergencyController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(EmergencyType::class, $emergency, [
-            'action' => $this->generateUrl('edit_emergency', ['id' => $emergency->getId()])
+            'action' => $this->generateUrl('content_types_edit_emergency', ['id' => $emergency->getId()])
         ]);
         $translations =  $repository->findTranslations($emergency);
         $form->get('title_ar')->setData($translations['ar']["title"]);
@@ -140,7 +150,7 @@ class EmergencyController extends Controller
             $repository->translate($emergency, 'title', 'ar', $iName_ar) ;
             $em->persist($emergency);
             $em->flush();
-            return  $this->redirect($this->generateUrl('list_emergency'));
+            return  $this->redirect($this->generateUrl('content_types_list_emergency'));
         }
         return  $this->render('emergency/form.html.twig', [
             'form' => $form->createView()

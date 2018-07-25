@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
     $('.edit').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('edit_emergency', {id: id}),
+            url: Routing.generate('content_types_edit_emergency', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
@@ -69,7 +69,7 @@ jQuery(document).ready(function() {
     });
     function deleteAction(id, td) {
         $.ajax({
-            url: Routing.generate('delete_emergency', {id: id}),
+            url: Routing.generate('content_types_delete_emergency', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);

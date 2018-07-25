@@ -15,7 +15,7 @@ security:
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         api_public:
             pattern: ^/api/public
@@ -45,9 +45,9 @@ security:
                 check_path: /backoffice/login_check
                 login_path: /backoffice/login
             logout:
-                path:    fos_user_security_logout
-                target:  /backoffice/login
-            anonymous:    true
+                path: fos_user_security_logout
+                target: /backoffice/login
+            anonymous: true
 #            security: false
 
     access_control:

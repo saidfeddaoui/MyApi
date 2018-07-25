@@ -45,7 +45,7 @@ $(document).ready(function() {
 
         function RetourActionLeft() {
             $.ajax({
-                url: Routing.generate('delete_user', {id: $this}),
+                url: Routing.generate('administration_delete_user', {id: $this}),
                 type: "POST",
                 error: function (request, status, error) {
                     console.log(request.responseText);

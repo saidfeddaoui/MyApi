@@ -3,16 +3,26 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\MarqueVehicule;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class MarqueVehiculeController extends Controller
 {
+
     /**
      * @Route("/marque", name="marque_vehicule",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Marques véhicule")
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -22,13 +32,11 @@ class MarqueVehiculeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $Marques = $em->getRepository('App:MarqueVehicule')->findBy(['insuranceType'=> $session->get('insuranceType')]);
-
         return $this->render('marque_vehicule/index.html.twig', [
             'page_title' => 'Marque Véhicule',
             'page_subtitle' => '',
             'marques'=>$Marques
         ]);
-
     }
 
     /**
@@ -43,18 +51,16 @@ class MarqueVehiculeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
         $iName = $request->request->get('name');
-
         $marque = new MarqueVehicule();
         $marque->setNom($iName);
         $marque->setInsuranceType($insuranceType);
         $em->persist($marque);
         $em->flush();
-        return  new JsonResponse(array(
-            "id" => $marque->getId(),
-            "message" => "Marque véhicule ajoutée avec succès",
-        ));
+        return  new JsonResponse([
+            'id' => $marque->getId(),
+            'message' => 'Marque véhicule ajoutée avec succès',
+        ]);
     }
-
     /**
      * @Route(path="/marque/edit/{id}", name="edit_marque", options={"expose"=true})
      *
@@ -69,10 +75,10 @@ class MarqueVehiculeController extends Controller
         $marque->setNom($iName);
         $em->persist($marque);
         $em->flush();
-        return  new JsonResponse(array(
-            "id" => $marque->getId(),
-            "message" => "Marque véhicule modifiée avec succès",
-        ));
+        return  new JsonResponse([
+            'id' => $marque->getId(),
+            'message' => 'Marque véhicule modifiée avec succès',
+        ]);
     }
 
     /**
@@ -87,8 +93,6 @@ class MarqueVehiculeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($marque);
         $em->flush();
-        return  new JsonResponse(array(
-            "message" => "Marque véhicule supprimée avec succès"
-        ));
+        return  new JsonResponse(['message' => 'Marque véhicule supprimée avec succès']);
     }
 }

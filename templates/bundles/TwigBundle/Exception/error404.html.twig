@@ -1,0 +1,13 @@
+{% extends 'base_error.html.twig' %}
+{% block error_message %}
+    <div class="col-md-12 page-404">
+        <div class="number font-{{ app.session.get('insuranceType').themeColor }}">{{ status_code }}</div>
+        <div class="details">
+            <h3>Oops! Tu es perdu.</h3>
+            <p> Nous ne pouvons pas trouver la page que vous recherchez.
+                <br/>
+                <a href="{{ path('home') }}"> Retourner à l'accueil </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

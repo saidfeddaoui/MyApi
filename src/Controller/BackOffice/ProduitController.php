@@ -6,6 +6,7 @@ use App\Entity\Attachment;
 use App\Entity\Item;
 use App\Entity\ItemList;
 use App\Form\ProduitType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class ProduitController extends Controller
 {
 
     /**
      * @Route(path="/produits", name="list_produit", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Produits")
      *
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
@@ -27,7 +36,7 @@ class ProduitController extends Controller
     public function index(SessionInterface $session)
     {
         $form = $this->createForm(ProduitType::class, new Item(), [
-            'action' => $this->generateUrl('add_produit'),
+            'action' => $this->generateUrl('content_types_add_produit'),
         ]);
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
@@ -110,7 +119,7 @@ class ProduitController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('list_produit'));
+        return  $this->redirect($this->generateUrl('content_types_list_produit'));
     }
     /**
      * @Route(path="/produits/edit/{id}", name="edit_produit", options={"expose"=true})
@@ -124,7 +133,7 @@ class ProduitController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(ProduitType::class, $produit, [
-            'action' => $this->generateUrl('edit_produit', ['id' => $produit->getId()])
+            'action' => $this->generateUrl('content_types_edit_produit', ['id' => $produit->getId()])
         ]);
         $translations =  $repository->findTranslations($produit);
         $form->get('title_ar')->setData($translations['ar']['title'] ?? '');
@@ -155,7 +164,7 @@ class ProduitController extends Controller
             $repository->translate($product, 'content', 'ar', $form->get('content_ar')->getData());
             $em->persist($produit);
             $em->flush();
-            return  $this->redirect($this->generateUrl('list_produit'));
+            return  $this->redirect($this->generateUrl('content_types_list_produit'));
         }
         return $this->render('produit/form.html.twig', [
             'form'=>$form->createView()
