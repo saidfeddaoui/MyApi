@@ -3,12 +3,16 @@
 namespace App\Controller\BackOffice;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+
 /**
+ * @Security("is_granted('ROLE_DEVIS')")
+ *
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Devis")
  */
