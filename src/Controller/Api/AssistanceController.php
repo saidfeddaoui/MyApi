@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\Api;
+
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\AssistanceRequest;
@@ -95,7 +96,10 @@ class AssistanceController extends BaseController
      */
     public function newAssistance(AssistanceRequest $assistanceRequest, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
-        $assistanceRequest->setInsuranceType($insuranceType);
+        $assistanceRequest
+            ->setStatus(AssistanceRequest::STATUS_IN_PROGRESS)
+            ->setInsuranceType($insuranceType)
+        ;
         $this->em->persist($assistanceRequest);
         $this->em->flush();
         $event = new NewAssistanceRequestEvent($assistanceRequest);

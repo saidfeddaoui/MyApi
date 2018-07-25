@@ -104,7 +104,6 @@ class PreDeclarationController extends Controller
     }
     /**
      * @Route(path="/details/{id}", name="details", requirements={"id":"\d+"}, options={"expose"=true})
-     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param  PreDeclaration $preDeclaration
      * @return \Symfony\Component\HttpFoundation\Response
@@ -117,7 +116,6 @@ class PreDeclarationController extends Controller
     }
     /**
      * @Route(path="/reject/{id}", name="reject", requirements={"id":"\d+"}, options={"expose"=true})
-     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param  PreDeclaration $preDeclaration
      * @param  Request $request
@@ -143,7 +141,6 @@ class PreDeclarationController extends Controller
     }
     /**
      * @Route(path="/accept/{id}", name="accept", requirements={"id":"\d+"}, options={"expose"=true})
-     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
      * @param  PreDeclaration $preDeclaration
      * @return \Symfony\Component\HttpFoundation\Response
@@ -153,9 +150,7 @@ class PreDeclarationController extends Controller
         if (PreDeclaration::STATUS_IN_PROGRESS !== $preDeclaration->getStatus()) {
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
         }
-        $preDeclaration
-            ->setStatus(PreDeclaration::STATUS_ACCEPTED)
-        ;
+        $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
         $this->em->persist($preDeclaration);
         $this->em->flush();
         $event = new AcceptPreDeclarationEvent($preDeclaration);
