@@ -7,6 +7,7 @@ use App\Entity\PreDeclaration;
 use App\Event\AcceptPreDeclarationEvent;
 use App\Event\ApplicationEvents;
 use App\Event\RejectPreDeclarationEvent;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,6 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(path="/pre_declarations", name="pre_declarations_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Pré-déclarations")
  */
 class PreDeclarationController extends Controller
 {
@@ -41,10 +45,11 @@ class PreDeclarationController extends Controller
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
     }
-
     /**
      * @Route(path="/in_progress", name="in_progress", options={"expose"=true})
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Breadcrumb(title="En cours")
      *
      * @param InsuranceType $insuranceType
      * @return Response
@@ -63,8 +68,28 @@ class PreDeclarationController extends Controller
         ]);
     }
     /**
+     * @Route(path="/display/details/{id}", name="display_details", requirements={"id":"\d+"}, options={"expose"=true})
+     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Breadcrumb(title="{preDeclaration.contract.client.name}")
+     *
+     * @param  PreDeclaration $preDeclaration
+     * @return Response
+     */
+    public function displayDetails(PreDeclaration $preDeclaration)
+    {
+        return $this->render('pre_declaration/display_details.html.twig', [
+            'page_title' => 'Gestion des pré-déclarations',
+            'page_subtitle' => '',
+            'portlet_title' => "Pré-déclaration de {$preDeclaration->getContract()->getClient()->getName()}",
+            'preDeclaration' => $preDeclaration,
+        ]);
+    }
+    /**
      * @Route(path="/rejected", name="rejected", options={"expose"=true})
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Breadcrumb(title="Rejetées")
      *
      * @param InsuranceType $insuranceType
      * @return Response
@@ -86,6 +111,8 @@ class PreDeclarationController extends Controller
      * @Route(path="/accepted", name="accepted", options={"expose"=true})
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
+     * @Breadcrumb(title="Acceptées")
+     *
      * @param InsuranceType $insuranceType
      * @return Response
      */
@@ -106,7 +133,7 @@ class PreDeclarationController extends Controller
      * @Route(path="/details/{id}", name="details", requirements={"id":"\d+"}, options={"expose"=true})
      *
      * @param  PreDeclaration $preDeclaration
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function details(PreDeclaration $preDeclaration)
     {
@@ -119,7 +146,7 @@ class PreDeclarationController extends Controller
      *
      * @param  PreDeclaration $preDeclaration
      * @param  Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function reject(PreDeclaration $preDeclaration, Request $request)
     {
@@ -143,7 +170,7 @@ class PreDeclarationController extends Controller
      * @Route(path="/accept/{id}", name="accept", requirements={"id":"\d+"}, options={"expose"=true})
      *
      * @param  PreDeclaration $preDeclaration
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function accept(PreDeclaration $preDeclaration)
     {

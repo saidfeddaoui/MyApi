@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 
 <head>
-    <title>{% block head_title %}MAMDA{% endblock %}</title>
+    <title>{% block head_title %}MAMDA-MCMA{% endblock %}</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -23,18 +23,12 @@
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
-
-
-
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="{{ asset('metronic/assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
-
-
         <link href="{{ asset('metronic/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{{ asset('metronic/assets/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
@@ -80,9 +74,7 @@
                     <small>{% block page_subtitle %}{% endblock %}</small>
                 </h3>
                 <div class="page-bar">
-                    <ul class="page-breadcrumb">
-                        {% block page_breadcrumb %}{% endblock %}
-                    </ul>
+                    {% block page_breadcrumb %}{% endblock %}
                 </div>
             {% endblock %}
             <!-- END PAGE HEADER-->

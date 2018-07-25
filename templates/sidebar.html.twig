@@ -89,6 +89,13 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a href="{{ path('alerts_list') }}" class="nav-link nav-toggle">
+                    <i class="icon-feed"></i>
+                    <span class="title">Alertes</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
                     <span class="title">Gestion Contenu</span>
@@ -96,12 +103,12 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item ">
-                        <a href="{{ path('list_slider') }}" class="nav-link">
+                        <a href="{{ path('content_types_list_slider') }}" class="nav-link">
                             <span class="title">Sliders</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="{{ path('list_produit') }}" class="nav-link ">
+                        <a href="{{ path('content_types_list_produit') }}" class="nav-link ">
                             <span class="title">Produits</span>
                         </a>
                     </li>
@@ -116,7 +123,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="{{ path('types_sinistres') }}" class="nav-link">Types</a>
+                                <a href="{{ path('content_types_types_sinistres') }}" class="nav-link">Types</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ path('photos_sinistres') }}" class="nav-link">Photos</a>
@@ -125,28 +132,23 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('list_ville') }}" class="nav-link ">
+                        <a href="{{ path('content_types_list_ville') }}" class="nav-link ">
                             <span class="title">Ville réparation</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('marque_vehicule') }}" class="nav-link ">
+                        <a href="{{ path('content_types_marque_vehicule') }}" class="nav-link ">
                             <span class="title">Marque véhicule</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('modele_vehicule') }}" class="nav-link ">
+                        <a href="{{ path('content_types_modele_vehicule') }}" class="nav-link ">
                             <span class="title">Modèle véhicule</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('type_accident') }}" class="nav-link ">
+                        <a href="{{ path('content_types_type_accident') }}" class="nav-link ">
                             <span class="title">Types accident</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('alerts') }}" class="nav-link ">
-                            <span class="title">Alertes</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -155,16 +157,16 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="{{ path('garage') }}" class="nav-link">Garages</a>
+                                <a href="{{ path('content_types_garage') }}" class="nav-link">Garages</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ path('expert') }}" class="nav-link">Experts</a>
+                                <a href="{{ path('content_types_expert') }}" class="nav-link">Experts</a>
                             </li>
 
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('list_emergency') }}" class="nav-link ">
+                        <a href="{{ path('content_types_list_emergency') }}" class="nav-link ">
                             <span class="title">Numéros d'urgences</span>
                         </a>
                     </li>
@@ -178,7 +180,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item">
-                        <a href="{{ path('list_user') }}" class="nav-link ">
+                        <a href="{{ path('administration_list_user') }}" class="nav-link ">
                             <span class="title">Gestion des utilisateurs</span>
                         </a>
                     </li>
@@ -421,40 +423,6 @@
                         {#<a href="layout_blank_page.html" class="nav-link ">#}
                             {#<span class="title">Blank Page</span>#}
                             {#<span class="selected"></span>#}
-                        {#</a>#}
-                    {#</li>#}
-                {#</ul>#}
-            {#</li>#}
-            {#<li class="nav-item">#}
-                {#<a href="javascript:;" class="nav-link nav-toggle">#}
-                    {#<i class="icon-feed"></i>#}
-                    {#<span class="title">Sidebar Layouts</span>#}
-                    {#<span class="arrow"></span>#}
-                {#</a>#}
-                {#<ul class="sub-menu">#}
-                    {#<li class="nav-item">#}
-                        {#<a href="layout_sidebar_menu_accordion.html" class="nav-link ">#}
-                            {#<span class="title">Sidebar Accordion Menu</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="layout_sidebar_menu_compact.html" class="nav-link ">#}
-                            {#<span class="title">Sidebar Compact Menu</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="layout_sidebar_reversed.html" class="nav-link ">#}
-                            {#<span class="title">Reversed Sidebar Page</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="layout_sidebar_fixed.html" class="nav-link ">#}
-                            {#<span class="title">Fixed Sidebar Layout</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                    {#<li class="nav-item">#}
-                        {#<a href="layout_sidebar_closed.html" class="nav-link ">#}
-                            {#<span class="title">Closed Sidebar Layout</span>#}
                         {#</a>#}
                     {#</li>#}
                 {#</ul>#}

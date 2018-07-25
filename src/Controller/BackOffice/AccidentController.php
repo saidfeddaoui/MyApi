@@ -3,21 +3,31 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Accident;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class AccidentController extends Controller
 {
 
     /**
      * @Route(path="/accident", name="type_accident", options={"expose"=true})
      *
+     * @Breadcrumb(title="Types accident")
+     *
      * @param Request $request
      * @param SessionInterface $session
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(Request $request, SessionInterface $session)
     {
@@ -81,10 +91,10 @@ class AccidentController extends Controller
         $repository->translate($accident, 'type', 'ar', $iType_ar) ;
         $em->persist($accident);
         $em->flush();
-        return  new JsonResponse(array(
-            "id" => $accident->getId(),
-            "message" => "type accident modifié avec succès",
-        ));
+        return  new JsonResponse([
+            'id' => $accident->getId(),
+            'message' => 'type accident modifié avec succès',
+        ]);
     }
     /**
      * @Route(path="/accident/delete/{id}", name="delete_accident", options={"expose"=true})
@@ -98,9 +108,7 @@ class AccidentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($accident);
         $em->flush();
-        return  new JsonResponse([
-            'message' => 'type accident supprimé avec succès'
-        ]);
+        return  new JsonResponse(['message' => 'type accident supprimé avec succès']);
     }
 
 }

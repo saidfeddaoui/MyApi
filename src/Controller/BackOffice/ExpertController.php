@@ -5,6 +5,7 @@ namespace App\Controller\BackOffice;
 use App\Entity\Expert;
 use App\Form\ChargementExpertFileType;
 use App\Form\ExpertType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ * @Breadcrumb(title="Localisation")
+ */
 class ExpertController extends Controller
 {
     /**
      * @Route("/experts", name="expert", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Experts")
+     *
      * @param Request $request
      * @param SessionInterface $session
      * @return Response
@@ -26,10 +37,10 @@ class ExpertController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ExpertType::class, new Expert(),[
-            'action' => $this->generateUrl('add_expert'),
+            'action' => $this->generateUrl('content_types_add_expert'),
         ]);
         $load_form = $this->createForm(ChargementExpertFileType::class, new Expert(),[
-            'action' => $this->generateUrl('load_experts'),
+            'action' => $this->generateUrl('content_types_load_experts'),
         ]);
         $experts = $em->getRepository('App:Expert')->findBy(['insuranceType'=> $session->get('insuranceType')]);
         return $this->render('expert/index.html.twig', [
@@ -66,7 +77,7 @@ class ExpertController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('expert'));
+        return  $this->redirect($this->generateUrl('content_types_expert'));
     }
 
     /**
@@ -115,7 +126,7 @@ class ExpertController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', "Données expert cahrgées avec succès");
         }
-        return  $this->redirect($this->generateUrl('expert'));
+        return  $this->redirect($this->generateUrl('content_types_expert'));
 
     }
 
@@ -131,7 +142,7 @@ class ExpertController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(ExpertType::class, $expert, [
-            'action' => $this->generateUrl('edit_expert', ['id' => $expert->getId()])
+            'action' => $this->generateUrl('content_types_edit_expert', ['id' => $expert->getId()])
         ]);
         $form->handleRequest($request);
 
@@ -140,7 +151,7 @@ class ExpertController extends Controller
             $em->persist($expert);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', "expert modifié avec succès");
-            return  $this->redirect($this->generateUrl('expert'));
+            return  $this->redirect($this->generateUrl('content_types_expert'));
         }
         return  $this->render('expert/form.html.twig', [
             'form' => $form->createView()

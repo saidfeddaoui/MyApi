@@ -5,6 +5,7 @@ namespace App\Controller\BackOffice;
 use App\Entity\Garage;
 use App\Form\ChargementGarageFileType;
 use App\Form\GarageType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ * @Breadcrumb(title="Localisation")
+ */
 class GarageController extends Controller
 {
     /**
      * @Route("/garages", name="garage", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Garages")
+     *
      * @param Request $request
      * @param SessionInterface $session
      * @return Response
@@ -26,10 +37,10 @@ class GarageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(GarageType::class, new Garage(),[
-            'action' => $this->generateUrl('add_garage'),
+            'action' => $this->generateUrl('content_types_add_garage'),
         ]);
         $load_form = $this->createForm(ChargementGarageFileType::class, new Garage(),[
-            'action' => $this->generateUrl('load_garages'),
+            'action' => $this->generateUrl('content_types_load_garages'),
         ]);
         $garages =  $em->getRepository('App:Garage')->findAll();
         $garages = $em->getRepository('App:Garage')->findBy(['insuranceType'=> $session->get('insuranceType')]);
@@ -67,7 +78,7 @@ class GarageController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('garage'));
+        return  $this->redirect($this->generateUrl('content_types_garage'));
     }
 
     /**
@@ -117,7 +128,7 @@ class GarageController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', "Données garage cahrgées avec succès");
         }
-        return  $this->redirect($this->generateUrl('garage'));
+        return  $this->redirect($this->generateUrl('content_types_garage'));
 
     }
 
@@ -133,7 +144,7 @@ class GarageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(GarageType::class, $garage, [
-            'action' => $this->generateUrl('edit_garage', ['id' => $garage->getId()])
+            'action' => $this->generateUrl('content_types_edit_garage', ['id' => $garage->getId()])
         ]);
         $form->handleRequest($request);
 
@@ -142,7 +153,7 @@ class GarageController extends Controller
             $em->persist($garage);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', "garage modifié avec succès");
-            return  $this->redirect($this->generateUrl('garage'));
+            return  $this->redirect($this->generateUrl('content_types_garage'));
         }elseif($errors = $form->getErrors(true)) {
             foreach ($errors as $error) {
                 $this->addFlash('warning', $error->getMessage());

@@ -5,33 +5,39 @@ namespace App\Controller\BackOffice;
 use App\Entity\Attachment;
 use App\Entity\Item;
 use App\Entity\ItemList;
-use App\Entity\Ville;
 use App\Form\SliderType;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class SliderController extends Controller
 {
 
     /**
-     * @Route(path="/sliders", name="list_slider", options={"expose"=true})
+     * @Route(path="/slider", name="list_slider", options={"expose"=true})
+     *
+     * @Breadcrumb(title="Slider")
+     *
      * @param SessionInterface $session
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request, SessionInterface $session)
     {
-
         $form = $this->createForm(SliderType::class, new Item(), [
-            'action' => $this->generateUrl('add_slider'),
+            'action' => $this->generateUrl('content_types_add_slider'),
         ]);
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
@@ -58,7 +64,7 @@ class SliderController extends Controller
         ]);
     }
     /**
-     * @Route(path="/sliders/add", name="add_slider", options={"expose"=true})
+     * @Route(path="/slider/add", name="add_slider", options={"expose"=true})
      * @param SessionInterface $session
      * @param Request $request
      * @return Response
@@ -101,10 +107,10 @@ class SliderController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('list_slider'));
+        return  $this->redirect($this->generateUrl('content_types_list_slider'));
     }
     /**
-     * @Route(path="/sliders/edit/{id}", name="edit_slider", options={"expose"=true})
+     * @Route(path="/slider/edit/{id}", name="edit_slider", options={"expose"=true})
      *
      * @param Item $slider
      * @param Request $request
@@ -115,7 +121,7 @@ class SliderController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $form = $this->createForm(SliderType::class, $slider, [
-            'action' => $this->generateUrl('edit_slider', ['id' => $slider->getId()])
+            'action' => $this->generateUrl('content_types_edit_slider', ['id' => $slider->getId()])
         ]);
         $translations =  $repository->findTranslations($slider);
         if($translations){
@@ -141,14 +147,14 @@ class SliderController extends Controller
             $repository->translate($slider, 'title', 'ar', $iName_ar) ;
             $em->persist($slider);
             $em->flush();
-            return  $this->redirect($this->generateUrl('list_slider'));
+            return  $this->redirect($this->generateUrl('content_types_list_slider'));
         }
         return  $this->render('slider/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
     /**
-     * @Route(path="/sliders/delete/{id}", name="delete_slider", options={"expose"=true})
+     * @Route(path="/slider/delete/{id}", name="delete_slider", options={"expose"=true})
      *
      * @param Item $slider
      * @param Request $request

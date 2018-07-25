@@ -41,7 +41,7 @@ jQuery(document).ready(function() {
     $('.edit').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('edit_alert', {id: id}),
+            url: Routing.generate('alerts_edit', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
     });
     function deleteAction(id, td) {
         $.ajax({
-            url: Routing.generate('delete_alert', {id: id}),
+            url: Routing.generate('alerts_delete', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
@@ -92,9 +92,6 @@ jQuery(document).ready(function() {
             statusCode: {
                 //traitement en cas de succès
                 200: function (response) {
-                    /*******************************
-                     Flash Notification
-                     *******************************/
                     swal.close();
                     setTimeout(function(){
                         swal({
@@ -105,17 +102,11 @@ jQuery(document).ready(function() {
                             customClass: 'custom-swal',
                         });
                     }, 500);
-                    /*******************************
-                     End Flash Notification
-                     *******************************/
                     $('.datatable').DataTable().row( td.parents('tr') ).remove().draw();
                 }
             }
         });
     }
-
-
-
     $("body").on("click", ".SaveAlert", function(event){
         event.preventDefault();
         var form = $(this).closest("form").serializeArray();
@@ -133,6 +124,4 @@ jQuery(document).ready(function() {
         }
         $(this).closest("form").submit();
     });
-
-
 });
