@@ -34,10 +34,10 @@ class SocietaireParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        if (!$request->headers->has('x-entity')) {
+        if (!$request->headers->has('X-CODE')) {
             return false;
         }
-        $societaire = $request->headers->get('x-entity');
+        $societaire = $request->headers->get('X-CODE');
         $societaireType = $this->em->getRepository('App:Societaire')->findOneByCode(strtoupper($societaire));
         if (!$societaireType) {
             throw new NotFoundHttpException('Requested societaire code Does Not exist');
