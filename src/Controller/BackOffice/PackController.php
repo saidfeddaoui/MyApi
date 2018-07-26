@@ -4,6 +4,7 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\Pack;
 use App\Form\PackType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,12 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Services\FonctionDivers;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class PackController extends Controller
 {
     /**
      * @Route("/packs", name="packs",options={"expose"=true})
      *
+     * @Breadcrumb(title="Packs")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
@@ -25,7 +35,7 @@ class PackController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(PackType::class,new Pack(),[
-            'action' => $this->generateUrl('add_pack'),
+            'action' => $this->generateUrl('content_types_add_pack'),
         ]);
 
         $Packs = $em->getRepository('App:Pack')->findAll();
@@ -64,7 +74,7 @@ class PackController extends Controller
                 $this->get('session')->getFlashBag()->add('error', $sError);
             }
         }
-        return  $this->redirect($this->generateUrl('packs'));
+        return  $this->redirect($this->generateUrl('content_types_packs'));
     }
 
     /**
@@ -78,13 +88,13 @@ class PackController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(PackType::class, $pack,[
-            'action' => $this->generateUrl('edit_pack',array('id' => $pack->getId()))]);
+            'action' => $this->generateUrl('content_types_edit_pack',array('id' => $pack->getId()))]);
         $form->handleRequest($request);
          if ($form->isSubmitted() && $form->isValid()) {
              $em->persist($pack);
              $em->flush();
              $this->get('session')->getFlashBag()->add('success', 'Pack modifié avec succès ');
-             return  $this->redirect($this->generateUrl('packs'));
+             return  $this->redirect($this->generateUrl('content_types_packs'));
          }else{
              $aErrors = FonctionDivers::getErrorsAsArray($form->getErrors(true,false));
              foreach ($aErrors as $iKey => $sError)

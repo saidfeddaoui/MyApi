@@ -543,7 +543,7 @@ class ContentController extends BaseController
      *         in="header",
      *         type="string",
      *         required=true,
-     *         description="type societaire",
+     *         description="code societaire",
      *     ),
      *     @SWG\Response(
      *         response=200,

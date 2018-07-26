@@ -3,18 +3,28 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Societaire;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 
+/**
+ * @Route(path="/content_types", name="content_types_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Gestion Contenu")
+ */
 class SocietaireController extends Controller
 {
 
     /**
      * @Route(path="/societaires", name="societaire", options={"expose"=true})
      *
+     * @Breadcrumb(title="Sociétaires")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
