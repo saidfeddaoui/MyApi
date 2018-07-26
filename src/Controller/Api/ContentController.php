@@ -539,7 +539,7 @@ class ContentController extends BaseController
      *     tags={"Content Types"},
      *     description="packs",
      *     @SWG\Parameter(
-     *         name="X-ENTITY",
+     *         name="X-CODE",
      *         in="header",
      *         type="string",
      *         required=true,
@@ -561,7 +561,7 @@ class ContentController extends BaseController
      * @ParamConverter("societaireType", options={"converter":"App\ParamConverter\SocietaireParamConverter"})
      *
      * @param  ObjectManager $em
-     * @param Societaire $societaireType
+     * @param  Societaire $societaireType
      * @return ApiResponse
      */
     public function pack(ObjectManager $em, Societaire $societaireType)
