@@ -79,6 +79,14 @@ class InsuranceType extends BaseRole
         $this->villes = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getRole();
+    }
+
     public function getId()
     {
         return $this->id;

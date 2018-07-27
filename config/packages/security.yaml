@@ -3,20 +3,21 @@ security:
         App\Entity\User:
             algorithm: bcrypt
 
+    # Managed by database, check App\Security\RoleHierarchy and App\Security\RoleHierarchyVoter
     role_hierarchy:
-        ROLE_ADMINISTRATION: [ ROLE_USERS_MANAGEMENT ]
-        ROLE_ADMIN:
-            - ROLE_USER
-            - ROLE_PRE_DECLARATION
-            - ROLE_ASSISTANCE
-            - ROLE_ALERTS
-            - ROLE_CONTENT_MANAGEMENT
-            - ROLE_ADMINISTRATION
-        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
+#        ROLE_ADMINISTRATION: [ ROLE_USERS_MANAGEMENT ]
+#        ROLE_ADMIN:
+#            - ROLE_USER
+#            - ROLE_PRE_DECLARATION
+#            - ROLE_ASSISTANCE
+#            - ROLE_ALERTS
+#            - ROLE_CONTENT_MANAGEMENT
+#            - ROLE_ADMINISTRATION
+#        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        back_office_user_provider:
+            id: back_office_user.provider
         api_user_provider:
             id: api_user.provider
 
@@ -46,7 +47,7 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: back_office_user_provider
 #                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
                 success_handler: authentication.handler.login_success_handler
                 check_path: /backoffice/login_check
