@@ -539,11 +539,11 @@ class ContentController extends BaseController
      *     tags={"Content Types"},
      *     description="packs",
      *     @SWG\Parameter(
-     *         name="X-ENTITY",
+     *         name="X-CODE",
      *         in="header",
      *         type="string",
      *         required=true,
-     *         description="type societaire",
+     *         description="code societaire",
      *     ),
      *     @SWG\Response(
      *         response=200,
@@ -561,12 +561,12 @@ class ContentController extends BaseController
      * @ParamConverter("societaireType", options={"converter":"App\ParamConverter\SocietaireParamConverter"})
      *
      * @param  ObjectManager $em
-     * @param Societaire $societaireType
+     * @param  Societaire $societaireType
      * @return ApiResponse
      */
     public function pack(ObjectManager $em, Societaire $societaireType)
     {
-        $societaires = $em->getRepository('App:Pack')->findOneBy(["societaire" => $societaireType]);
+        $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
         return $this->respondWith($societaires);
     }
 
