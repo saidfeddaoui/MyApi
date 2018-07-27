@@ -113,7 +113,7 @@ class Client extends User
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -121,7 +121,7 @@ class Client extends User
      * @param string $name
      * @return static
      */
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;

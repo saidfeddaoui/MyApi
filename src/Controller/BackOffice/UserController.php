@@ -32,8 +32,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('App:User')->findAll();
-        $form = $this->createForm(RegistrationType::class, new User(),[
+        $users = $em->getRepository('App:User')->getUsers();
+        $form = $this->createForm(RegistrationType::class, new User(), [
             'action' => $this->generateUrl('administration_add_user'),
         ]);
 

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class DashBoardController extends Controller
+class HomeController extends Controller
 {
 
     /**
@@ -32,7 +32,7 @@ class DashBoardController extends Controller
         if (!$this->authorizationChecker->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        return $this->redirect($this->generateUrl('pre_declarations_in_progress'));
+        return $this->redirect($this->generateUrl('dashboard'));
     }
 
 }

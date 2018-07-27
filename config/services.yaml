@@ -31,9 +31,15 @@ services:
     Gedmo\Translatable\TranslatableListener: '@stof_doctrine_extensions.listener.translatable'
 
     # Security
+    database.security.role_hierarchy_voter:
+        class: App\Security\RoleHierarchyVoter
+        tags:
+            - { name: security.voter }
     authentication.handler.login_success_handler:
-            class:  App\Security\LoginSuccessHandler
-            arguments:  ['@router', '@security.authorization_checker']
+        class: App\Security\LoginSuccessHandler
+        arguments: ['@router', '@security.authorization_checker']
+    back_office_user.provider:
+        class: App\Security\BackOfficeUserProvider
     api_user.provider:
         class: App\Security\ApiUserProvider
     basic_credentials.extractor:
@@ -84,6 +90,11 @@ services:
                 - '@eight_points_guzzle.client.api_devis_auto'
                 - '@jms_serializer'
                 - App\DTO\Devis\AutoResponse
+    App\Services\DevisAutoMesureApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_devis_auto_mesure'
+                    - '@jms_serializer'
+                    - App\DTO\Devis\AutoMesureResponse
 
     # Exception normalizers
     app.normalizer.not_found_http_exception:

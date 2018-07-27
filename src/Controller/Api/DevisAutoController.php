@@ -4,8 +4,10 @@ namespace App\Controller\Api;
 
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
+use App\DTO\Api\Devis\Mesure;
 use App\Entity\DevisAuto;
 use App\Services\DevisAutoApiService;
+use App\Services\DevisAutoMesureApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -37,12 +39,12 @@ class DevisAutoController extends BaseController
 
     /**
      * @SWG\Post(
-     *     tags={"DevisAuto"},
+     *     tags={"Devis Automobile"},
      *     description="devis auto process",
      *     @SWG\Parameter(
      *        name="DevisAuto",
      *        in="body",
-     *        description="DevisAuto object",
+     *        description="devis_auto object",
      *        required=true,
      *        @Model(type="App\Entity\DevisAuto", groups={"devis_auto"})
      *     ),
@@ -81,7 +83,7 @@ class DevisAutoController extends BaseController
      * @param  ObjectManager $em
      * @return ApiResponse
      */
-    public function devisAuto(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
+    public function normal(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
     {
         $societaire = $em->getRepository('App:Societaire')->findOneByCode($auto->getSocietaire()->getCode());
         $devi_auto = new DevisAuto();
@@ -95,5 +97,57 @@ class DevisAutoController extends BaseController
         $em->flush();
         $devis = $Auto_api->getDevisAuto($auto);
         return $this->respondWith($devis);
+    }
+
+    /**
+     * @SWG\Post(
+     *     tags={"Devis Automobile"},
+     *     description="devis auto Mesure process",
+     *     @SWG\Parameter(
+     *        name="DevisAutoMesure",
+     *        in="body",
+     *        description="devis_auto_mesure object",
+     *        required=true,
+     *        @Model(type="App\DTO\Api\Devis\Mesure")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success response",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Not Found Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Resource Not Found"
+     *             }
+     *         }
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/auto/mesure",name="devis_auto_mesure")
+     * @ParamConverter(name="mesure", converter="fos_rest.request_body", options={"validator"={ "groups"={"auto_mesure"} }})
+     * @Rest\View(serializerGroups={"all","response_mesure"})
+     *
+     * @ThrowViolations()
+     *
+     * @param  Mesure $mesure
+     * @param  ConstraintViolationListInterface $violations
+     * @param  DevisAutoMesureApiService $AutoMmesure
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function mesure(ObjectManager $em, Mesure $mesure, ConstraintViolationListInterface $violations, DevisAutoMesureApiService $AutoMmesure)
+    {
+        $mesure_devis = $AutoMmesure->getDevisAuto($mesure);
+        return $this->respondWith($mesure_devis);
     }
 }
