@@ -97,6 +97,7 @@ class GroupController extends Controller
     public function edit(Group $group, Request $request)
     {
         $persistedChildren = clone $group->getChildren();
+        $group->setRole(preg_replace('#^ROLE_#', '', $group->getRole()));
         $form = $this->createForm(GroupType::class, $group, [
             'action' => $this->generateUrl('administration_edit_group', ['id' => $group->getId()])
         ]);
