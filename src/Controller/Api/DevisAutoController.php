@@ -140,13 +140,12 @@ class DevisAutoController extends BaseController
      *
      * @param  Mesure $mesure
      * @param  ConstraintViolationListInterface $violations
-     * @param  DevisAutoApiService $autoMmesure
-     * @param  ObjectManager $em
+     * @param  DevisAutoApiService $autoMesure
      * @return ApiResponse
      */
-    public function mesure(ObjectManager $em, Mesure $mesure, ConstraintViolationListInterface $violations, DevisAutoApiService $autoMmesure)
+    public function mesure(Mesure $mesure, DevisAutoApiService $autoMesure, ConstraintViolationListInterface $violations)
     {
-        $mesureDevis = $autoMmesure->getDevisAuto($mesure);
+        $mesureDevis = $autoMesure->getDevisAuto($mesure);
         return $this->respondWith($mesureDevis);
     }
 }
