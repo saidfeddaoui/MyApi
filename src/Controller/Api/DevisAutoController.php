@@ -80,12 +80,11 @@ class DevisAutoController extends BaseController
      * @param  DevisAuto $auto
      * @param  ConstraintViolationListInterface $violations
      * @param  DevisAutoApiService $Auto_api
-     * @param  ObjectManager $em
      * @return ApiResponse
      */
-    public function normal(ObjectManager $em, DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
+    public function normal(DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
     {
-        $societaire = $em->getRepository('App:Societaire')->findOneByCode($auto->getSocietaire()->getCode());
+        $societaire = $this->em->getRepository('App:Societaire')->findOneByCode($auto->getSocietaire()->getCode());
         $devi_auto = new DevisAuto();
         $devi_auto->setNom($auto->getNom());
         $devi_auto->setPrenom($auto->getPrenom());
@@ -93,8 +92,8 @@ class DevisAutoController extends BaseController
         $devi_auto->setEmail($auto->getEmail());
         $devi_auto->setCivilite($auto->getCivilite());
         $devi_auto->setSocietaire($societaire);
-        $em->persist($devi_auto);
-        $em->flush();
+        $this->em->persist($devi_auto);
+        $this->em->flush();
         $devis = $Auto_api->getDevisAuto($auto);
         return $this->respondWith($devis);
     }
@@ -141,13 +140,13 @@ class DevisAutoController extends BaseController
      *
      * @param  Mesure $mesure
      * @param  ConstraintViolationListInterface $violations
-     * @param  DevisAutoMesureApiService $AutoMmesure
+     * @param  DevisAutoApiService $autoMmesure
      * @param  ObjectManager $em
      * @return ApiResponse
      */
-    public function mesure(ObjectManager $em, Mesure $mesure, ConstraintViolationListInterface $violations, DevisAutoMesureApiService $AutoMmesure)
+    public function mesure(ObjectManager $em, Mesure $mesure, ConstraintViolationListInterface $violations, DevisAutoApiService $autoMmesure)
     {
-        $mesure_devis = $AutoMmesure->getDevisAuto($mesure);
-        return $this->respondWith($mesure_devis);
+        $mesureDevis = $autoMmesure->getDevisAuto($mesure);
+        return $this->respondWith($mesureDevis);
     }
 }
