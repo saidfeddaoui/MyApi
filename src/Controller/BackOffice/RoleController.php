@@ -97,6 +97,7 @@ class RoleController extends Controller
     public function edit(Role $role, Request $request)
     {
         $persistedChildren = clone $role->getChildren();
+        $role->setRole(preg_replace('#^ROLE_#', '', $role->getRole()));
         $form = $this->createForm(RoleType::class, $role, [
             'action' => $this->generateUrl('administration_edit_role', ['id' => $role->getId()])
         ]);
