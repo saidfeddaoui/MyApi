@@ -7,7 +7,13 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\DevisHabitationRepository")
+ *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\Groups("request_mrh") })
  */
 class DevisHabitation
 {
@@ -77,16 +83,6 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="double", nullable = true)
-     */
-    private $batiment;
-
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh"})
-     *
-     * @Assert\NotNull(groups={"devis_mrh"})
-     *
      * @ORM\Column(type="string", length=255, nullable = true)
      */
     private $contenu;
@@ -97,7 +93,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\MrhCategorie")
      */
     private $categorie;
 
@@ -107,9 +103,39 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\MrhPropriete")
      */
     private $propriete;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_mrh"})
+     *
+     * @Assert\NotNull(groups={"devis_mrh"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Societaire")
+     */
+    private $societaire;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
+     *
+     * @Assert\NotNull(groups={"devis_mrh"})
+     *
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $batiment;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
+     *
+     * @Assert\NotNull(groups={"devis_mrh"})
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $situationRisque;
 
     /**
      * @return mixed
@@ -222,24 +248,6 @@ class DevisHabitation
     /**
      * @return mixed
      */
-    public function getBatiment()
-    {
-        return $this->batiment;
-    }
-
-    /**
-     * @param mixed $batiment
-     * @return DevisHabitation
-     */
-    public function setBatiment($batiment)
-    {
-        $this->batiment = $batiment;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getContenu()
     {
         return $this->contenu;
@@ -255,40 +263,79 @@ class DevisHabitation
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCategorie()
+    public function getCategorie(): ?MrhCategorie
     {
         return $this->categorie;
     }
 
-    /**
-     * @param mixed $categorie
-     * @return DevisHabitation
-     */
-    public function setCategorie($categorie)
+    public function setCategorie(?MrhCategorie $categorie): self
     {
         $this->categorie = $categorie;
+
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPropriete()
+    public function getPropriete(): ?MrhPropriete
     {
         return $this->propriete;
     }
 
-    /**
-     * @param mixed $propriete
-     * @return DevisHabitation
-     */
-    public function setPropriete($propriete)
+    public function setPropriete(?MrhPropriete $propriete): self
     {
         $this->propriete = $propriete;
+
         return $this;
+    }
+
+    public function getSocietaire(): ?Societaire
+    {
+        return $this->societaire;
+    }
+
+    public function setSocietaire(?Societaire $societaire): self
+    {
+        $this->societaire = $societaire;
+
+        return $this;
+    }
+
+    public function getBatiment(): ?float
+    {
+        return $this->batiment;
+    }
+
+    public function setBatiment(float $batiment): self
+    {
+        $this->batiment = $batiment;
+
+        return $this;
+    }
+
+    public function getSituationRisque(): ?string
+    {
+        return $this->situationRisque;
+    }
+
+    public function setSituationRisque(string $situationRisque): self
+    {
+        $this->situationRisque = $situationRisque;
+
+        return $this;
+    }
+
+    public function getSocietaireCode()
+    {
+        return $this->getSocietaire()->getCode();
+    }
+
+    public function getCategorieCode()
+    {
+        return $this->getCategorie()->getCode();
+    }
+
+    public function getProprieteCode()
+    {
+        return $this->getPropriete()->getCode();
     }
 
 

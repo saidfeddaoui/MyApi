@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackOffice;
 
+use App\Entity\MrhPropriete;
 use App\Entity\Societaire;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,13 +19,13 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")
  */
-class SocietaireController extends Controller
+class MrhProprieteController extends Controller
 {
 
     /**
-     * @Route(path="/societaires", name="societaire", options={"expose"=true})
+     * @Route(path="/mrh/proprietes", name="mrh_proprietes", options={"expose"=true})
      *
-     * @Breadcrumb(title="Sociétaires")
+     * @Breadcrumb(title="Mrh Propriétés")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
@@ -32,74 +33,70 @@ class SocietaireController extends Controller
     public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $societaires = $em->getRepository('App:Societaire')->findAll();
+        $proprietes = $em->getRepository('App:MrhPropriete')->findAll();
 
-        return $this->render('societaire/index.html.twig', [
-            'page_title' => 'Liste des sociétaires',
+        return $this->render('mrh/propriete/index.html.twig', [
+            'page_title' => 'Liste des propriétés',
             'page_subtitle' => '',
-            'data'=>$societaires
+            'data'=>$proprietes
         ]);
     }
     /**
-     * @Route(path="/societaires/add", name="add_societaire", options={"expose"=true})
+     * @Route(path="/mrh/propriete/add", name="add_propriete", options={"expose"=true})
      * @param SessionInterface $session
      * @param Request $request
      * @return JsonResponse
      */
-    public function addSocietaire(Request $request, SessionInterface $session)
+    public function addPropriete(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
-        $iType = $request->request->get('type');
-        $societaire = new Societaire();
-        $societaire->setName($iName);
-        $societaire->setCode($iCode);
-        $societaire->setType($iType);
-        $em->persist($societaire);
+        $propriete = new MrhPropriete();
+        $propriete->setName($iName);
+        $propriete->setCode($iCode);
+        $em->persist($propriete);
         $em->flush();
         return  new JsonResponse(array(
-            "id" => $societaire->getId(),
-            "message" => "Societaire ajouté avec succès",
+            "id" => $propriete->getId(),
+            "message" => "Proprieté ajoutée avec succès",
         ));
     }
     /**
-     * @Route(path="/societaires/edit/{id}", name="edit_societaire", options={"expose"=true})
+     * @Route(path="/mrh/propriete/edit/{id}", name="edit_propriete", options={"expose"=true})
      *
-     * @param Societaire $societaire
+     * @param MrhPropriete $propriete
      * @param Request $request
      * @return JsonResponse
      */
-    public function editSocietaire(Societaire $societaire, Request $request)
+    public function editPropriete(MrhPropriete $propriete, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
-        $iType = $request->request->get('type');
-        $societaire->setName($iName);
-        $societaire->setCode($iCode);
-        $societaire->setType($iType);
-        $em->persist($societaire);
+        $propriete->setName($iName);
+        $propriete->setCode($iCode);
+        $em->persist($propriete);
         $em->flush();
         return  new JsonResponse(array(
-            "id" => $societaire->getId(),
-            "message" => "Societaire modifié avec succès",
+            "id" => $propriete->getId(),
+            "message" => "Proprieté modifiée avec succès",
         ));
     }
     /**
-     * @Route(path="/societaires/delete/{id}", name="delete_societaire", options={"expose"=true})
+     * @Route(path="/mrh/propriete/delete/{id}", name="delete_propriete", options={"expose"=true})
      *
-     * @param Societaire $societaire
+     * @param MrhPropriete $propriete
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteVille(Societaire $societaire, Request $request)
+    public function deletePropriete(MrhPropriete $propriete, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($societaire);
+        $em->remove($propriete);
         $em->flush();
         return  new JsonResponse(array(
-            "message" => "Societaire supprimé avec succès"
+            "message" => "Proprieté supprimée avec succès"
         ));
     }
 }

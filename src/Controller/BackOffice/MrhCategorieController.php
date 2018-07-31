@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackOffice;
 
+use App\Entity\MrhCategorie;
 use App\Entity\Societaire;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,13 +19,13 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")
  */
-class SocietaireController extends Controller
+class MrhCategorieController extends Controller
 {
 
     /**
-     * @Route(path="/societaires", name="societaire", options={"expose"=true})
+     * @Route(path="/mrh/categories", name="mrh_categories", options={"expose"=true})
      *
-     * @Breadcrumb(title="Sociétaires")
+     * @Breadcrumb(title="Mrh Catégories")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
@@ -32,74 +33,70 @@ class SocietaireController extends Controller
     public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $societaires = $em->getRepository('App:Societaire')->findAll();
+        $categories = $em->getRepository('App:MrhCategorie')->findAll();
 
-        return $this->render('societaire/index.html.twig', [
-            'page_title' => 'Liste des sociétaires',
+        return $this->render('mrh/categorie/index.html.twig', [
+            'page_title' => 'Liste des catégories',
             'page_subtitle' => '',
-            'data'=>$societaires
+            'data'=>$categories
         ]);
     }
     /**
-     * @Route(path="/societaires/add", name="add_societaire", options={"expose"=true})
+     * @Route(path="/mrh/categorie/add", name="mrh_categorie_add", options={"expose"=true})
      * @param SessionInterface $session
      * @param Request $request
      * @return JsonResponse
      */
-    public function addSocietaire(Request $request, SessionInterface $session)
+    public function addCategorie(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
-        $iType = $request->request->get('type');
-        $societaire = new Societaire();
+        $societaire = new MrhCategorie();
         $societaire->setName($iName);
         $societaire->setCode($iCode);
-        $societaire->setType($iType);
         $em->persist($societaire);
         $em->flush();
         return  new JsonResponse(array(
             "id" => $societaire->getId(),
-            "message" => "Societaire ajouté avec succès",
+            "message" => "Catégortie ajoutée avec succès",
         ));
     }
     /**
-     * @Route(path="/societaires/edit/{id}", name="edit_societaire", options={"expose"=true})
+     * @Route(path="/mrh/categorie/edit/{id}", name="mrh_categorie_edit", options={"expose"=true})
      *
-     * @param Societaire $societaire
+     * @param MrhCategorie $mrhCategorie
      * @param Request $request
      * @return JsonResponse
      */
-    public function editSocietaire(Societaire $societaire, Request $request)
+    public function editCategorie(MrhCategorie $mrhCategorie, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
-        $iType = $request->request->get('type');
-        $societaire->setName($iName);
-        $societaire->setCode($iCode);
-        $societaire->setType($iType);
-        $em->persist($societaire);
+        $mrhCategorie->setName($iName);
+        $mrhCategorie->setCode($iCode);
+        $em->persist($mrhCategorie);
         $em->flush();
         return  new JsonResponse(array(
-            "id" => $societaire->getId(),
-            "message" => "Societaire modifié avec succès",
+            "id" => $mrhCategorie->getId(),
+            "message" => "Catégorie modifié avec succès",
         ));
     }
     /**
-     * @Route(path="/societaires/delete/{id}", name="delete_societaire", options={"expose"=true})
+     * @Route(path="/mrh/categorie/delete/{id}", name="mrh_categorie_delete", options={"expose"=true})
      *
-     * @param Societaire $societaire
+     * @param MrhCategorie $mrhCategorie
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteVille(Societaire $societaire, Request $request)
+    public function deleteCategorie(MrhCategorie $mrhCategorie, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($societaire);
+        $em->remove($mrhCategorie);
         $em->flush();
         return  new JsonResponse(array(
-            "message" => "Societaire supprimé avec succès"
+            "message" => "Catégorie supprimée avec succès"
         ));
     }
 }

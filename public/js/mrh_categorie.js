@@ -18,10 +18,9 @@ var TableDatatablesEditable = function () {
             var jqTds = $('>td', nRow);
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small code" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<input type="text" class="form-control input-small type" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
+            jqTds[2].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
 
-            jqTds[4].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
+            jqTds[3].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
 
         }
 
@@ -29,9 +28,8 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 3, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow, 4, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 2, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow, 3, false);
             oTable.fnDraw();
         }
 
@@ -39,8 +37,7 @@ var TableDatatablesEditable = function () {
             var jqInputs = $('input', nRow);
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 3, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 2, false);
             oTable.fnDraw();
         }
 
@@ -75,11 +72,7 @@ var TableDatatablesEditable = function () {
             }, {
                 "searchable": true,
                 "targets": [0]
-            },
-                {
-                    "searchable": true,
-                    "targets": [0]
-                }],
+            }],
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc
@@ -125,7 +118,7 @@ var TableDatatablesEditable = function () {
             var $this = $(this);
             var id = $this.closest('tr').data('id');
             $.ajax({
-                url: Routing.generate('content_types_delete_societaire', {id: id}),
+                url: Routing.generate('content_types_mrh_categorie_delete', {id: id}),
                 type: "POST",
                 success: function(response) {
                     toastr.success(response.message);
@@ -166,9 +159,9 @@ var TableDatatablesEditable = function () {
                 var tr = $this.closest('tr');
                 /* save data backend */
                 var id = tr.data('id');
-                var saveUrl = Routing.generate('content_types_add_societaire');
+                var saveUrl = Routing.generate('content_types_mrh_categorie_add');
                 if (id) {
-                    var saveUrl = Routing.generate('content_types_edit_societaire', {id: id});
+                    var saveUrl = Routing.generate('content_types_mrh_categorie_edit', {id: id});
                 }
                 var name = tr.find('td .name').val();
                 var code = tr.find('td .code').val();

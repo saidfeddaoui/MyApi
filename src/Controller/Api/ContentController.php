@@ -512,6 +512,14 @@ class ContentController extends BaseController
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="societaire",
+     *     @SWG\Parameter(
+     *         name="Type",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         default="AUTO",
+     *         description="Specify the type",
+     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="societaire data successfully returned"
@@ -526,11 +534,13 @@ class ContentController extends BaseController
      * )
      *
      * @param  ObjectManager $em
+     * @param  Request $request
      * @return ApiResponse
      */
-    public function societaire(ObjectManager $em)
+    public function societaire(ObjectManager $em, Request $request)
     {
-        $societaires = $em->getRepository('App:Societaire')->findAll();
+        $type = $request->headers->get("Type");
+        $societaires = $em->getRepository('App:Societaire')->findByType($type);
         return $this->respondWith($societaires);
     }
 
@@ -568,6 +578,60 @@ class ContentController extends BaseController
     {
         $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
         return $this->respondWith($societaires);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="mrh categories",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="categorie data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/mrh/categories",
+     *     name = "mrh_categories"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all"}
+     * )
+     *
+     *
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function categories(ObjectManager $em)
+    {
+        $mrh_categories = $em->getRepository('App:MrhCategorie')->findAll();
+        return $this->respondWith($mrh_categories);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="mrh proprietes",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="propriete data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/mrh/proprietes",
+     *     name = "mrh_proprietes"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all"}
+     * )
+     *
+     *
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function proprietes(ObjectManager $em)
+    {
+        $mrh_proprietes = $em->getRepository('App:MrhPropriete')->findAll();
+        return $this->respondWith($mrh_proprietes);
     }
 
 

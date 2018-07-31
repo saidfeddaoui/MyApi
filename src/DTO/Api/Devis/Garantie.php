@@ -86,6 +86,30 @@ class Garantie
     private $fmp;
 
     /**
+     * @Serializer\SerializedName("Capital")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_mrh")
+     * @var string
+     */
+    private $capital;
+
+    /**
+     * @Serializer\SerializedName("LibelleGarantie")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_mrh")
+     * @var string
+     */
+    private $libelle_garantie;
+
+    /**
+     * @Serializer\SerializedName("IdDet")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_mrh")
+     * @var string
+     */
+    private $id_det;
+
+    /**
      * @Serializer\SerializedName("Option")
      * @Serializer\Type("array<App\DTO\Api\Devis\Option>")
      * @Serializer\Groups("response_auto")
@@ -306,6 +330,60 @@ class Garantie
     public function setFmp($fmp)
     {
         $this->fmp = $fmp;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCapital()
+    {
+        return $this->capital;
+    }
+
+    /**
+     * @param string $capital
+     * @return Garantie
+     */
+    public function setCapital($capital)
+    {
+        $this->capital = $capital;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLibelleGarantie()
+    {
+        return $this->libelle_garantie;
+    }
+
+    /**
+     * @param string $libelle_garantie
+     * @return Garantie
+     */
+    public function setLibelleGarantie($libelle_garantie)
+    {
+        $this->libelle_garantie = $libelle_garantie;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdDet()
+    {
+        return $this->id_det;
+    }
+
+    /**
+     * @param string $id_det
+     * @return Garantie
+     */
+    public function setIdDet($id_det)
+    {
+        $this->id_det = $id_det;
         return $this;
     }
 

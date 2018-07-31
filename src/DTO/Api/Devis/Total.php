@@ -10,7 +10,7 @@ class Total
     /**
      * @Serializer\SerializedName("Id")
      * @Serializer\Type("string")
-     * @Serializer\Groups(groups={"response_auto","response_mesure"})
+     * @Serializer\Groups(groups={"response_auto","response_mesure", "response_mrh"})
      * @var int
      */
     private $id;
@@ -18,7 +18,7 @@ class Total
     /**
      * @Serializer\SerializedName("PrimeHT")
      * @Serializer\Type("double")
-     * @Serializer\Groups(groups={"response_auto","response_mesure"})
+     * @Serializer\Groups(groups={"response_auto","response_mesure", "response_mrh"})
      * @var double
      */
     private $primeht;
@@ -26,7 +26,7 @@ class Total
     /**
      * @Serializer\SerializedName("PrimeTTC")
      * @Serializer\Type("double")
-     * @Serializer\Groups(groups={"response_auto","response_mesure"})
+     * @Serializer\Groups(groups={"response_auto","response_mesure", "response_mrh"})
      * @var double
      */
     private $primettc;

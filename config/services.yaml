@@ -99,7 +99,7 @@ services:
                     arguments:
                         - '@eight_points_guzzle.client.api_devis_habitation'
                         - '@jms_serializer'
-                        - App\DTO\Devis\AutoMesureResponse
+                        - App\DTO\Devis\MrhResponse
 
     # Exception normalizers
     app.normalizer.not_found_http_exception:
