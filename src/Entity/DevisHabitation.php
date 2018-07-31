@@ -77,17 +77,17 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="double", nullable = true, nullable=true)
+     * @ORM\Column(type="double", nullable = true)
      */
     private $batiment;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh""})
+     * @Serializer\Groups(groups={"devis_mrh"})
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", length=255, nullable = true, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable = true)
      */
     private $contenu;
 
@@ -97,7 +97,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", nullable=true, nullable = true, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $categorie;
 
@@ -107,7 +107,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", nullable=true, nullable = true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $propriete;
 
