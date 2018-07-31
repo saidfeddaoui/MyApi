@@ -11,8 +11,10 @@ class DevisHabitationApiService extends ApiCustomerService
     public function getDevisHabitation(DevisHabitation $devisHabitation)
     {
         $context = new SerializationContext();
+        $context = $context->setGroups("request_mrh");
         $requestAuto = $this->serializer->serialize($devisHabitation,'json',$context);
-        $response = $this->httpClient->post("habitation", [
+
+        $response = $this->httpClient->post("mrh", [
             'body' => $requestAuto,
             'headers' => ['Content-type' => 'application/json']
         ]);
@@ -29,10 +31,10 @@ class DevisHabitationApiService extends ApiCustomerService
             return null;
         }
         /**
-         * @var \App\DTO\Devis\AutoResponse $autoResponse
+         * @var \App\DTO\Devis\MrhResponse $mrhResponse
          */
-        $autoResponse = $this->serializer->deserialize( (string) $response->getBody(), $this->class, 'json');
-        return $autoResponse;
+        $mrhResponse = $this->serializer->deserialize( (string) $response->getBody(), $this->class, 'json');
+        return $mrhResponse;
     }
 
 }

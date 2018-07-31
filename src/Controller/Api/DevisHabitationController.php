@@ -74,8 +74,8 @@ class DevisHabitationController extends BaseController
      * )
      *
      * @Rest\Post(path="/habitation",name="devis_habitation")
-     * @ParamConverter(name="auto", converter="fos_rest.request_body", options={"validator"={ "groups"={"devis_mrh"} }})
-     * @Rest\View(serializerGroups={"all", "devis_mrh"})
+     * @ParamConverter(name="habitation", converter="fos_rest.request_body", options={"validator"={ "groups"={"devis_mrh"} }})
+     * @Rest\View(serializerGroups={"all", "devis_mrh", "response_mrh"})
      *
      * @ThrowViolations()
      *
@@ -87,12 +87,15 @@ class DevisHabitationController extends BaseController
      */
     public function normal(ObjectManager $em, DevisHabitation $habitation, ConstraintViolationListInterface $violations, DevisHabitationApiService $hapitation_api)
     {
-        $habitation->setNom($habitation->getNom());
-        $habitation->setPrenom($habitation->getPrenom());
-        $habitation->setTel($habitation->getTel());
-        $habitation->setEmail($habitation->getEmail());
-        $habitation->setCivilite($habitation->getCivilite());
-        $em->persist($habitation);
+        $societaire = $this->em->getRepository('App:Societaire')->findOneByCode($habitation->getSocietaire()->getCode());
+        $devisHab = new DevisHabitation();
+        $devisHab->setNom($habitation->getNom());
+        $devisHab->setPrenom($habitation->getPrenom());
+        $devisHab->setTel($habitation->getTel());
+        $devisHab->setEmail($habitation->getEmail());
+        $devisHab->setCivilite($habitation->getCivilite());
+        $devisHab->setSocietaire($societaire);
+        $em->persist($devisHab);
         $em->flush();
         $devis = $hapitation_api->getDevisHabitation($habitation);
         return $this->respondWith($devis);

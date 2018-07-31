@@ -38,7 +38,7 @@ class SocietaireParamConverter implements ParamConverterInterface
             return false;
         }
         $societaire = $request->headers->get('X-CODE');
-        $societaireType = $this->em->getRepository('App:Societaire')->findOneByCode(strtoupper($societaire));
+        $societaireType = $this->em->getRepository('App:Societaire')->findOneBy(array("code" => strtoupper($societaire), "type" => "AUTO" ));
         if (!$societaireType) {
             throw new NotFoundHttpException('Requested societaire code Does Not exist');
         }

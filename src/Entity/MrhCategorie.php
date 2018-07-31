@@ -4,42 +4,39 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SocietaireRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MrhCategorieRepository")
+ *
  * @Serializer\ExclusionPolicy("all")
  */
-class Societaire
+class MrhCategorie
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups("all")
      */
     private $id;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups("societaire")
-     *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups("all")
      */
     private $name;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"societaire","devis_auto","request_auto", "devis_mrh"})
-     *
-     * @Assert\NotBlank(groups={"devis_auto"})
-     *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"all","devis_mrh"})
      */
     private $code;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
 
     public function getId()
     {
@@ -66,18 +63,6 @@ class Societaire
     public function setCode(string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }

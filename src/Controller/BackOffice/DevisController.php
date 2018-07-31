@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 
 /**
+ * @Route(path="/devis", name="devis_")
  * @Security("is_granted('ROLE_DEVIS')")
  *
  * @Breadcrumb(title="Accueil")
@@ -19,7 +20,7 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 class DevisController extends Controller
 {
     /**
-     * @Route("/devis/auto", name="auto",options={"expose"=true})
+     * @Route("/auto", name="auto",options={"expose"=true})
      *
      * @Breadcrumb(title="Auto")
      *
