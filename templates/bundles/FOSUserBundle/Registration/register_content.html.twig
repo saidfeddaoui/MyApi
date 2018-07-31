@@ -49,8 +49,8 @@
                             <td>{{ user.email }}</td>
                             <td class="hidden-xs hidden-sm">{{ user.group.name }}</td>
                             <td>
-                                <a href="{{ path('administration_edit_user',{'id':user.id})}}" class="btn btn-xs btn-primary bs-tooltip" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a class="btn btn-xs btn-danger bs-tooltip remove" data-id= "{{user.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash"></i></a>
+                                <a href="{{ path('administration_edit_user', {'id': user.id}) }}" class="text-info bs-tooltip edit" data-placement="top" data-original-title="Editer" data-original-title="Editer"><span style="font-size:1.5em;" class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="text-danger bs-tooltip remove" data-id= "{{user.id}}" data-placement="top" data-original-title="Supprimer" data-original-title="Supprimer"><span style="font-size:1.5em;" class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     {% endfor %}

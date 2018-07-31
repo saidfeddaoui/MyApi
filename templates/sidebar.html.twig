@@ -214,11 +214,27 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li class="nav-item">
-                            <a href="{{ path('administration_list_user') }}" class="nav-link ">
-                                <span class="title">Gestion des utilisateurs</span>
-                            </a>
-                        </li>
+                        {% if is_granted('ROLE_USERS_MANAGEMENT') %}
+                            <li class="nav-item">
+                                <a href="{{ path('administration_list_user') }}" class="nav-link ">
+                                    <span class="title">Gestion des utilisateurs</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_GROUPS_MANAGEMENT') %}
+                            <li class="nav-item">
+                                <a href="{{ path('administration_list_group') }}" class="nav-link ">
+                                    <span class="title">Gestion des groupes</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ROLES_MANAGEMENT') %}
+                            <li class="nav-item">
+                                <a href="{{ path('administration_list_role') }}" class="nav-link ">
+                                    <span class="title">Gestion des rôles</span>
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             {% endif %}
