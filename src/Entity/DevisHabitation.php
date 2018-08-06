@@ -130,10 +130,7 @@ class DevisHabitation
 
     /**
      * @Serializer\SerializedName("SituationRisque")
-     * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
-     *
-     * @Assert\NotNull(groups={"devis_mrh"})
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
