@@ -14,7 +14,7 @@ class DevisAutoMesureApiService extends ApiCustomerService
     {
         $context = new SerializationContext();
         $requestAuto = $this->serializer->serialize($mesure,'json',$context);
-        $response = $this->httpClient->post("mesure", [
+        $response = $this->httpClient->post("", [
             'body' => $requestAuto,
             'headers' => ['Content-type' => 'application/json']
         ]);
