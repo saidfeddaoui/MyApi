@@ -14,7 +14,7 @@ class DevisHabitationApiService extends ApiCustomerService
         $context = new SerializationContext();
         $context = $context->setGroups("request_mrh");
         $requestAuto = $this->serializer->serialize($devisHabitation,'json',$context);
-        $response = $this->httpClient->post("mrh", [
+        $response = $this->httpClient->post("", [
             'body' => $requestAuto,
             'headers' => ['Content-type' => 'application/json']
         ]);
