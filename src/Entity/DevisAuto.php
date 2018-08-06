@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisAutoRepository")
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_auto") })
- * @Serializer\VirtualProperty(name="pack_code", exp="object.getPackCode()", options={ @Serializer\Groups("request_auto") })
+ * @Serializer\VirtualProperty(name="CodeSocietaire", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_auto") })
+ * @Serializer\VirtualProperty(name="CodePack", exp="object.getPackCode()", options={ @Serializer\SerializedName("CodePack") ,@Serializer\Groups("request_auto") })
  */
 class DevisAuto
 {
@@ -110,6 +110,7 @@ class DevisAuto
     private $pack;
 
     /**
+     * @Serializer\SerializedName("VehW")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
@@ -120,9 +121,11 @@ class DevisAuto
     private $w;
 
     /**
-     * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
+     *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
+     * @Serializer\SerializedName("DateMec")
+     * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      *
      * @Assert\NotNull(groups={"devis_auto"})
      * @Assert\DateTime(groups={"devis_auto"}, format="Y-m-d H:i:s")
@@ -132,6 +135,7 @@ class DevisAuto
     private $date_mec;
 
     /**
+     * @Serializer\SerializedName("Puissance")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
@@ -142,6 +146,7 @@ class DevisAuto
     private $puissance;
 
     /**
+     * @Serializer\SerializedName("Combustion")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
@@ -152,6 +157,7 @@ class DevisAuto
     private $combustion;
 
     /**
+     * @Serializer\SerializedName("ValeurNeuf")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
@@ -162,6 +168,7 @@ class DevisAuto
     private $vn;
 
     /**
+     * @Serializer\SerializedName("ValeurVenale")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *
@@ -172,6 +179,7 @@ class DevisAuto
     private $vv;
 
     /**
+     * @Serializer\SerializedName("ValeurGlace")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_auto","request_auto"})
      *

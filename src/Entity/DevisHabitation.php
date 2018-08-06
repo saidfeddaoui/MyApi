@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\DevisHabitationRepository")
  *
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("CodeSocietaire"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\SerializedName("CodeCategorie"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\SerializedName("CodePropriete"), @Serializer\Groups("request_mrh") })
  */
 class DevisHabitation
 {
@@ -118,6 +118,7 @@ class DevisHabitation
     private $societaire;
 
     /**
+     * @Serializer\SerializedName("ValeurBatiment")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
      *
@@ -128,6 +129,7 @@ class DevisHabitation
     private $batiment;
 
     /**
+     * @Serializer\SerializedName("SituationRisque")
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
      *

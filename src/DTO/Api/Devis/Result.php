@@ -4,21 +4,21 @@ namespace App\DTO\Api\Devis;
 
 use JMS\Serializer\Annotation as Serializer;
 
-class ResultMesure
+class Result
 {
 
     /**
-     * @Serializer\SerializedName("succes")
+     * @Serializer\SerializedName("Succes")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_mesure")
+     * @Serializer\Groups(groups={"response_auto","response_mesure","response_mrh"})
      * @var string
      */
     private $sucess;
 
     /**
-     * @Serializer\SerializedName("IdDet")
+     * @Serializer\SerializedName("Id")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_mesure")
+     * @Serializer\Groups(groups={"response_auto","response_mesure","response_mrh"})
      * @var string
      */
     private $id_det;
@@ -26,7 +26,7 @@ class ResultMesure
     /**
      * @Serializer\SerializedName("Msg")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_mesure")
+     * @Serializer\Groups(groups={"response_auto","response_mesure","response_mrh"})
      * @var string
      */
     private $msg;

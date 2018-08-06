@@ -4,10 +4,19 @@ namespace App\DTO\Devis;
 
 use App\DTO\Api\Devis\Garantie;
 use App\DTO\Api\Devis\Total;
+use App\DTO\Api\Devis\Result;
 use JMS\Serializer\Annotation as Serializer;
 
 class MrhResponse
 {
+
+    /**
+     * @Serializer\SerializedName("result")
+     * @Serializer\Type("App\DTO\Api\Devis\Result")
+     * @Serializer\Groups("response_mrh")
+     * @var Result
+     */
+    private $result;
 
     /**
      * @Serializer\SerializedName("garanties")
@@ -60,4 +69,23 @@ class MrhResponse
         $this->total = $total;
         return $this;
     }
+
+    /**
+     * @return Result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param Result $result
+     * @return MrhResponse
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+        return $this;
+    }
+
 }

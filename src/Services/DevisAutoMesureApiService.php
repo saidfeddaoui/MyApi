@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\DTO\Api\Devis\Mesure;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class DevisAutoMesureApiService extends ApiCustomerService
 {
@@ -33,6 +34,10 @@ class DevisAutoMesureApiService extends ApiCustomerService
          * @var \App\DTO\Devis\AutoMesureResponse $autoMesureResponse
          */
         $autoMesureResponse = $this->serializer->deserialize( (string) $response->getBody(), $this->class, 'json');
+        if($autoMesureResponse->getResult()->getSucess()  !=  "1" ){
+            throw new Exception("",500);
+
+        }
         return $autoMesureResponse;
     }
 

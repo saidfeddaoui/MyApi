@@ -2,7 +2,7 @@
 
 namespace App\DTO\Devis;
 
-use App\DTO\Api\Devis\ResultMesure;
+use App\DTO\Api\Devis\Result;
 use App\DTO\Api\Devis\Total;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -11,9 +11,9 @@ class AutoMesureResponse
 
     /**
      * @Serializer\SerializedName("result")
-     * @Serializer\Type("App\DTO\Api\Devis\ResultMesure")
+     * @Serializer\Type("App\DTO\Api\Devis\Result")
      * @Serializer\Groups("response_mesure")
-     * @var ResultMesure
+     * @var Result
      */
     private $result;
 
@@ -26,7 +26,7 @@ class AutoMesureResponse
     private $total;
 
     /**
-     * @return ResultMesure
+     * @return Result
      */
     public function getResult()
     {
@@ -34,7 +34,7 @@ class AutoMesureResponse
     }
 
     /**
-     * @param ResultMesure $result
+     * @param Result $result
      * @return AutoMesureResponse
      */
     public function setResult($result)
