@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entity\DevisHabitation;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class DevisHabitationApiService extends ApiCustomerService
 {
@@ -13,7 +14,6 @@ class DevisHabitationApiService extends ApiCustomerService
         $context = new SerializationContext();
         $context = $context->setGroups("request_mrh");
         $requestAuto = $this->serializer->serialize($devisHabitation,'json',$context);
-
         $response = $this->httpClient->post("mrh", [
             'body' => $requestAuto,
             'headers' => ['Content-type' => 'application/json']
@@ -34,6 +34,9 @@ class DevisHabitationApiService extends ApiCustomerService
          * @var \App\DTO\Devis\MrhResponse $mrhResponse
          */
         $mrhResponse = $this->serializer->deserialize( (string) $response->getBody(), $this->class, 'json');
+        if($mrhResponse->getResult()->getSucess()  !=  "1" ){
+            throw new Exception("",500);
+        }
         return $mrhResponse;
     }
 

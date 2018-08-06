@@ -3,11 +3,19 @@
 namespace App\DTO\Devis;
 
 use App\DTO\Api\Devis\Garantie;
+use App\DTO\Api\Devis\Result;
 use App\DTO\Api\Devis\Total;
 use JMS\Serializer\Annotation as Serializer;
 
 class AutoResponse
 {
+    /**
+     * @Serializer\SerializedName("result")
+     * @Serializer\Type("App\DTO\Api\Devis\Result")
+     * @Serializer\Groups("response_auto")
+     * @var Result
+     */
+    private $result;
 
     /**
      * @Serializer\SerializedName("garanties")
@@ -60,4 +68,23 @@ class AutoResponse
         $this->total = $total;
         return $this;
     }
+
+    /**
+     * @return Result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param Result $result
+     * @return AutoResponse
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+        return $this;
+    }
+
 }

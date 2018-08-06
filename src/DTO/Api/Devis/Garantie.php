@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation as Serializer;
 class Garantie
 {
     /**
-     * @Serializer\SerializedName("ID")
+     * @Serializer\SerializedName("Id")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_auto")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var string
      */
     private $id_devis;
@@ -17,7 +17,7 @@ class Garantie
     /**
      * @Serializer\SerializedName("IdGarantie")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_auto")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var string
      */
     private $id_garantie;
@@ -31,7 +31,7 @@ class Garantie
     /**
      * @Serializer\SerializedName("Acquise")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_auto")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var string
      */
     private $acquise;
@@ -45,7 +45,7 @@ class Garantie
     /**
      * @Serializer\SerializedName("Franchise")
      * @Serializer\Type("double")
-     * @Serializer\Groups("response_auto")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var double
      */
     private $franchise;
@@ -55,35 +55,30 @@ class Garantie
      * @Serializer\Groups("response_auto")
      * @var double
      */
-    private $franchise_min;
+
     /**
-     * @Serializer\SerializedName("FranchiseMax")
-     * @Serializer\Type("double")
-     * @Serializer\Groups("response_auto")
-     * @var double
-     */
-    private $franchise_max;
-    /**
-     * @Serializer\SerializedName("Deces")
-     * @Serializer\Type("double")
-     * @Serializer\Groups("response_auto")
-     * @var double
-     */
-    private $deces;
-    /**
-     * @Serializer\SerializedName("IPP")
+     * @Serializer\SerializedName("Obligatoire")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_auto")
      * @var string
      */
-    private $ipp;
+    private $obligatoire;
+
     /**
-     * @Serializer\SerializedName("FMP")
+     * @Serializer\SerializedName("IsValeurAssuree")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_auto")
      * @var string
      */
-    private $fmp;
+    private $isValeurAssuree;
+
+    /**
+     * @Serializer\SerializedName("ValeurAssuree")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_auto")
+     * @var string
+     */
+    private $valeurAssuree;
 
     /**
      * @Serializer\SerializedName("Capital")
@@ -96,7 +91,7 @@ class Garantie
     /**
      * @Serializer\SerializedName("LibelleGarantie")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_mrh")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var string
      */
     private $libelle_garantie;
@@ -104,13 +99,13 @@ class Garantie
     /**
      * @Serializer\SerializedName("IdDet")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_mrh")
+     * @Serializer\Groups(groups={"response_auto","response_mrh"})
      * @var string
      */
     private $id_det;
 
     /**
-     * @Serializer\SerializedName("Option")
+     * @Serializer\SerializedName("ListOption")
      * @Serializer\Type("array<App\DTO\Api\Devis\Option>")
      * @Serializer\Groups("response_auto")
      * @var Options[]
@@ -240,96 +235,6 @@ class Garantie
     public function setFranchise($franchise)
     {
         $this->franchise = $franchise;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getFranchiseMin()
-    {
-        return $this->franchise_min;
-    }
-
-    /**
-     * @param float $franchise_min
-     * @return Garantie
-     */
-    public function setFranchiseMin($franchise_min)
-    {
-        $this->franchise_min = $franchise_min;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getFranchiseMax()
-    {
-        return $this->franchise_max;
-    }
-
-    /**
-     * @param float $franchise_max
-     * @return Garantie
-     */
-    public function setFranchiseMax($franchise_max)
-    {
-        $this->franchise_max = $franchise_max;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getDeces()
-    {
-        return $this->deces;
-    }
-
-    /**
-     * @param float $deces
-     * @return Garantie
-     */
-    public function setDeces($deces)
-    {
-        $this->deces = $deces;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIpp()
-    {
-        return $this->ipp;
-    }
-
-    /**
-     * @param string $ipp
-     * @return Garantie
-     */
-    public function setIpp($ipp)
-    {
-        $this->ipp = $ipp;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFmp()
-    {
-        return $this->fmp;
-    }
-
-    /**
-     * @param string $fmp
-     * @return Garantie
-     */
-    public function setFmp($fmp)
-    {
-        $this->fmp = $fmp;
         return $this;
     }
 

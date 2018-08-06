@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation as Serializer;
 class Mesure
 {
     /**
+     * @Serializer\SerializedName("Id")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_mesure")
      * @var string
@@ -14,12 +15,14 @@ class Mesure
     private $id_devis;
 
     /**
+     * @Serializer\SerializedName("IdGarantie")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_mesure")
      * @var string
      */
     private $id_garantie;
     /**
+     * @Serializer\SerializedName("Acquise")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_mesure")
      * @var string
@@ -27,11 +30,28 @@ class Mesure
     private $acquise;
 
     /**
+     * @Serializer\SerializedName("IdDet")
      * @Serializer\Type("string")
-     * @Serializer\Groups("response_auto")
+     * @Serializer\Groups("response_mesure")
+     * @var string
+     */
+    private $id_det;
+
+    /**
+     * @Serializer\SerializedName("IdOption")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_mesure")
      * @var string
      */
     private $id_option;
+
+    /**
+     * @Serializer\SerializedName("ValeurAssuree")
+     * @Serializer\Type("string")
+     * @Serializer\Groups("response_mesure")
+     * @var string
+     */
+    private $valeurAssuree;
 
     /**
      * @return string
@@ -104,6 +124,43 @@ class Mesure
         $this->id_option = $id_option;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdDet()
+    {
+        return $this->id_det;
+    }
+
+    /**
+     * @param mixed $id_det
+     * @return Mesure
+     */
+    public function setIdDet($id_det)
+    {
+        $this->id_det = $id_det;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValeurAssuree()
+    {
+        return $this->valeurAssuree;
+    }
+
+    /**
+     * @param string $valeurAssuree
+     * @return Mesure
+     */
+    public function setValeurAssuree($valeurAssuree)
+    {
+        $this->valeurAssuree = $valeurAssuree;
+        return $this;
+    }
+
 
 
 }
