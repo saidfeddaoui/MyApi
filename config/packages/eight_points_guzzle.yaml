@@ -50,7 +50,7 @@ eight_points_guzzle:
                     User-Agent: MobiblancMamda/7.0
             plugin: ~
         api_devis_auto_mesure:
-            base_url: http://demo3896531.mockable.io/auto/
+            base_url: http://demo3896531.mockable.io/auto
             options:
                  timeout: 30
                  headers:
