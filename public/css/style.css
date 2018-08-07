@@ -162,3 +162,12 @@ textarea.form-control {
     height: auto;
     resize: vertical;
 }
+
+.contentScroll {
+    max-height: 200px;
+    overflow: auto;
+}
+.productScroll{
+    max-height: 600px;
+    overflow: auto;
+}

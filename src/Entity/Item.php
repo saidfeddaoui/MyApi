@@ -55,6 +55,24 @@ class Item implements TranslatableInterface
     private $content;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"products"})
+     * @Gedmo\Translatable
+     */
+    private $nosGaranties;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"products"})
+     * @Gedmo\Translatable
+     */
+    private $nosPlus;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Attachment", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      *
@@ -230,6 +248,42 @@ class Item implements TranslatableInterface
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNosGaranties()
+    {
+        return $this->nosGaranties;
+    }
+
+    /**
+     * @param mixed $nosGaranties
+     * @return Item
+     */
+    public function setNosGaranties($nosGaranties)
+    {
+        $this->nosGaranties = $nosGaranties;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNosPlus()
+    {
+        return $this->nosPlus;
+    }
+
+    /**
+     * @param mixed $nosPlus
+     * @return Item
+     */
+    public function setNosPlus($nosPlus)
+    {
+        $this->nosPlus = $nosPlus;
         return $this;
     }
 

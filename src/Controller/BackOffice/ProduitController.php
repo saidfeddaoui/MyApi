@@ -56,10 +56,14 @@ class ProduitController extends Controller
                 'id' => $product->getId(),
                 'title' => $product->getTitle(),
                 'content' => $product->getContent(),
+                'nosGaranties' => $product->getNosGaranties(),
+                'nosPlus' => $product->getNosPlus(),
                 'image' => $product->getImage(),
                 'icon' => $product->getIcon(),
                 'title_ar' => $translations['ar']['title'] ?? '',
                 'content_ar' => $translations['ar']['content'] ?? '',
+                'nosGaranties_ar' => $translations['ar']['nosGaranties'] ?? '',
+                'nosPlus_ar' => $translations['ar']['nosPlus'] ?? ''
             ];
         }
         return $this->render('produit/index.html.twig', [
@@ -113,6 +117,8 @@ class ProduitController extends Controller
             $em->persist($productList);
             $repository->translate($product, 'title', 'ar', $form->get('title_ar')->getData());
             $repository->translate($product, 'content', 'ar', $form->get('content_ar')->getData());
+            $repository->translate($product, 'nosGaranties', 'ar', $form->get('nosGaranties_ar')->getData());
+            $repository->translate($product, 'nosPlus', 'ar', $form->get('nosPlus_ar')->getData());
             $em->flush();
         }
         if ($errors = $form->getErrors()) {
@@ -140,6 +146,9 @@ class ProduitController extends Controller
         $translations =  $repository->findTranslations($produit);
         $form->get('title_ar')->setData($translations['ar']['title'] ?? '');
         $form->get('content_ar')->setData($translations['ar']['content'] ?? '');
+        $form->get('nosGaranties_ar')->setData($translations['ar']['nosGaranties'] ?? '');
+        $form->get('nosPlus_ar')->setData($translations['ar']['nosPlus'] ?? '');
+
         $form->handleRequest($request);
         $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         if ($form->isSubmitted() && $form->isValid()) {
@@ -164,6 +173,8 @@ class ProduitController extends Controller
             $product->setTitle($form->get('title')->getData());
             $repository->translate($product, 'title', 'ar', $form->get('title_ar')->getData());
             $repository->translate($product, 'content', 'ar', $form->get('content_ar')->getData());
+            $repository->translate($product, 'nosGaranties', 'ar', $form->get('nosGaranties_ar')->getData());
+            $repository->translate($product, 'nosPlus', 'ar', $form->get('nosPlus_ar')->getData());
             $em->persist($produit);
             $em->flush();
             return  $this->redirect($this->generateUrl('content_types_list_produit'));
