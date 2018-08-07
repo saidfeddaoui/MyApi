@@ -35,6 +35,10 @@
                             <th>العنوان</th>
                             <th>Description</th>
                             <th>الوصف</th>
+                            <th>Nos Garanties</th>
+                            <th>ضماناتنا</th>
+                            <th>nos Plus</th>
+                            <th>إضافاتنا</th>
                             <th>Icône</th>
                             <th>Image</th>
                             <th>Actions</th>
@@ -47,6 +51,10 @@
                                 <td>{{ product.title_ar }}</td>
                                 <td>{{ product.content }}</td>
                                 <td>{{ product.content_ar }}</td>
+                                <td>{{ product.nosGaranties }}</td>
+                                <td>{{ product.nosGaranties_ar }}</td>
+                                <td>{{ product.nosPlus }}</td>
+                                <td>{{ product.nosPlus_ar }}</td>
                                 <td>
                                     {% if product.icon %}
                                         <div>
@@ -76,7 +84,7 @@
     </div>
     <div class="modal fade " tabindex="1" role="dialog" id="add-product-modal" data-backdrop="false">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content productScroll">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title" id="myModalLabel">Ajouter un produit:</h4>
@@ -89,7 +97,7 @@
     </div><!-- /.modal -->
     <div class="modal fade " tabindex="1" role="dialog" id="edit-product-modal" data-backdrop="false">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content productScroll">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title" id="myModalLabel">Modifier ce produit:</h4>

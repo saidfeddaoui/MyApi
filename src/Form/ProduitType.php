@@ -18,6 +18,8 @@ class ProduitType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre ',])
             ->add('content', TextareaType::class, ['label' => 'Description ',])
+            ->add('nosGaranties', TextareaType::class, ['label' => 'Nos Garanties ',])
+            ->add('nosPlus', TextareaType::class, ['label' => 'Nos Plus ',])
             ->add('_icn', FileType::class, [
                 'label' => 'Icône ',
                 'required' => false,
@@ -35,6 +37,18 @@ class ProduitType extends AbstractType
             ])
             ->add('content_ar', TextareaType::class, [
                 'label' => 'الوصف',
+                'required' => false,
+                'mapped' => false,
+            ])
+
+            ->add('nosGaranties_ar', TextareaType::class, [
+                'label' => 'ضماناتنا',
+                'required' => false,
+                'mapped' => false,
+            ])
+
+            ->add('nosPlus_ar', TextareaType::class, [
+                'label' => 'إضافاتنا',
                 'required' => false,
                 'mapped' => false,
             ])
