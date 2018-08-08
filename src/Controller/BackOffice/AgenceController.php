@@ -107,7 +107,7 @@ class AgenceController extends Controller
                 $spreadsheet = IOFactory::load($uploadDirData.$name);
                 $worksheet = $spreadsheet->getActiveSheet(null, true, true, true);
                 $sheetData = $worksheet->toArray();
-                $em->getRepository('App:Agence')->deleteFromTable();
+                $em->getRepository('App:Agence')->deleteFromTable($insuranceType);
                 for($i=1; $i<sizeof($sheetData); $i++) {
 
                     $raisonSociale = $sheetData[$i][0] == "NULL" ? NULL : $sheetData[$i][0];

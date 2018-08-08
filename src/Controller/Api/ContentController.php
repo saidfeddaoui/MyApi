@@ -511,6 +511,42 @@ class ContentController extends BaseController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
+     *     description="Agences",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="garages successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/agences",
+     *     name = "agences"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all","agence"}
+     * )
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param  ObjectManager $em
+     * @param  InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function agence(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $agences = $em->getRepository('App:Agence')->findBy(['insuranceType' => $insuranceType]);
+        return $this->respondWith($agences);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
      *     description="societaire",
      *     @SWG\Parameter(
      *         name="Type",
