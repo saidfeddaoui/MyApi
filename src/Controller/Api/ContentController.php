@@ -634,5 +634,34 @@ class ContentController extends BaseController
         return $this->respondWith($mrh_proprietes);
     }
 
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="mrh batiments",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="batiments data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/mrh/batiments",
+     *     name = "mrh_batiments"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all"}
+     * )
+     *
+     *
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function batiments(ObjectManager $em)
+    {
+        $mrh_batiments = $em->getRepository('App:MrhBatiment')->findAll();
+        return $this->respondWith($mrh_batiments);
+    }
+
+
+
 
 }

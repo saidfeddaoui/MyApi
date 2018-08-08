@@ -87,4 +87,28 @@ jQuery(document).ready(function() {
             }
         });
     }
+
+    $(document).on('click', '.latlon' ,function(){
+        $id = $(this).attr("data-id");
+        $('body').attr('data-id', $id);
+    });
+
+    function showMarker(){
+        $id = $('body').attr("data-id");
+        $(this).closest("tr").children("td:eq(1)").attr('data-firma');
+        var latLng = new google.maps.LatLng($(".latlon[data-id='"+$id+"']").attr("data-lat"), $(".latlon[data-id='"+$id+"']").attr("data-lon"));
+        myMarker = new google.maps.Marker({
+            position: latLng,
+            draggable: false,
+            map: map
+        });
+        google.maps.event.addListener(myMarker, 'drag', function() {
+            updateMarkerPosition(myMarker.getPosition());
+        });
+    }
+    $('#map-position').on('shown.bs.modal', function () {
+        initMap();
+        showMarker();
+    });
+
 });

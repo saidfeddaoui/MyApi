@@ -129,7 +129,7 @@ form .has-error.form-control, form .has-error.form-control:focus {
 }
 
 .modal{
-    z-index: 99999;
+    z-index: 99999!important;
 }
 
 .stage-left ul li:last-child {
