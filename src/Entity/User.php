@@ -125,7 +125,7 @@ class User implements UserInterface, EquatableInterface
     protected $_group;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\InsuranceType", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\InsuranceType", inversedBy="users", cascade={"persist"})
      */
     protected $insuranceTypes;
 
