@@ -42,6 +42,9 @@
                                     {% if request.status == constant('App\\Entity\\AssistanceRequest::STATUS_IN_PROGRESS') %}
                                         <a class="text-success bs-tooltip handle" data-id= "{{ request.id }}" data-placement="top" data-original-title="Traitée" title="Traitée"><span style="font-size:1.5em;" class="glyphicon glyphicon-ok-circle"></span></a>
                                     {% endif %}
+
+                                    <a href="#" class="bs-tooltip latlon" data-id= "{{ request.id }}" data-lat="{{ request.latitude }}"  data-lon="{{ request.longitude }}"  data-toggle="modal" data-target="#map-position" data-placement="top" data-original-title="Localiser" ><img src="{{ asset('img/marker.png') }}" style="width: 23px;margin-bottom: 10px"></a>
+
                                 </td>
                             </tr>
                         {% endfor %}
@@ -63,4 +66,26 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="map-position">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-body">
+                    <div id="map" style="width: 100%; height: 400px; position: relative; overflow: hidden;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 33.9441109, lng: -6.4768861},
+                zoom: 6
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2ZEStOUW7QtUgVLFRoIVDjZWj8gqkW0&callback=initMap&region=MA"
+            async defer></script>
 {% endblock %}
