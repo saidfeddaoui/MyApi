@@ -87,7 +87,7 @@ class DevisHabitationController extends BaseController
      */
     public function normal(ObjectManager $em, DevisHabitation $habitation, ConstraintViolationListInterface $violations, DevisHabitationApiService $hapitation_api)
     {
-        $societaire = $this->em->getRepository('App:Societaire')->findOneByCode($habitation->getSocietaire()->getCode());
+        $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$habitation->getSocietaire()->getCode(),"type" => "MRH" ]);
         $devisHab = new DevisHabitation();
         $devisHab->setNom($habitation->getNom());
         $devisHab->setPrenom($habitation->getPrenom());

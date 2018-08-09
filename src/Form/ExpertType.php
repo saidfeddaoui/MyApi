@@ -18,6 +18,8 @@ class ExpertType extends AbstractType
             ->add('adresse', TextareaType::class,['label' => 'Adresse'])
             ->add('tel', TextType::class , ['label' => 'Tél'])
             ->add('nomville',TextType::class,['label'=>'Nom Ville'])
+            ->add('responsable',TextType::class,['label'=>'Responsable'])
+            ->add('coordinates',TextType::class,['label'=>'GPS'])
         ;
     }
 

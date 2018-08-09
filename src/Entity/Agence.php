@@ -42,6 +42,25 @@ class Agence
     private $nom_ville;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("agence")
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $responsable;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coordinates;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
      */
     private $insuranceType;
@@ -98,5 +117,60 @@ class Agence
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param mixed $tel
+     * @return Agence
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * @param mixed $responsable
+     * @return Agence
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * @param mixed $coordinates
+     * @return Agence
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+        return $this;
+    }
+
 
 }

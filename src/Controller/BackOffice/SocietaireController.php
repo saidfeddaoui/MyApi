@@ -52,10 +52,12 @@ class SocietaireController extends Controller
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
         $iType = $request->request->get('type');
+        $aAssurance = $request->request->get('assurance');
         $societaire = new Societaire();
         $societaire->setName($iName);
         $societaire->setCode($iCode);
         $societaire->setType($iType);
+        $societaire->setCodeInsurance($aAssurance);
         $em->persist($societaire);
         $em->flush();
         return  new JsonResponse(array(
@@ -76,9 +78,11 @@ class SocietaireController extends Controller
         $iName = $request->request->get('name');
         $iCode = $request->request->get('code');
         $iType = $request->request->get('type');
+        $aAssurance = $request->request->get('assurance');
         $societaire->setName($iName);
         $societaire->setCode($iCode);
         $societaire->setType($iType);
+        $societaire->setCodeInsurance($aAssurance);
         $em->persist($societaire);
         $em->flush();
         return  new JsonResponse(array(

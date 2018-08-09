@@ -19,6 +19,7 @@ class GarageType extends AbstractType
             ->add('nomville',TextType::class,['label'=>'Nom Ville'])
             ->add('tel',TextType::class,['label'=>'Tél'])
             ->add('responsable',TextType::class,['label'=>'Responsable'])
+            ->add('coordinates',TextType::class,['label'=>'GPS'])
         ;
     }
 

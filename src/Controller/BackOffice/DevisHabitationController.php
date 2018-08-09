@@ -17,12 +17,12 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Devis")
  */
-class DevisController extends Controller
+class DevisHabitationController extends Controller
 {
     /**
-     * @Route("/auto", name="auto",options={"expose"=true})
+     * @Route("/mrh", name="mrh",options={"expose"=true})
      *
-     * @Breadcrumb(title="Auto")
+     * @Breadcrumb(title="MRH")
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -32,13 +32,13 @@ class DevisController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
-        $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
-        $devis = $em->getRepository('App:DevisAuto')->findBySocietaire($societaire);
+        $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "MRH" ]);
+        $devis_mrh = $em->getRepository('App:DevisHabitation')->findBySocietaire($societaire);
 
-        return $this->render('devis/index.html.twig', [
-            'page_title' => 'Liste des devis Auto',
+        return $this->render('mrh/index.html.twig', [
+            'page_title' => 'Liste des devis Mrh',
             'page_subtitle' => '',
-            'data'=>$devis
+            'data'=>$devis_mrh
         ]);
 
     }

@@ -62,6 +62,11 @@ class Garage
      */
     private $insuranceType;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coordinates;
+
     public function getId()
     {
         return $this->id;
@@ -135,6 +140,18 @@ class Garage
     public function setInsuranceType(?InsuranceType $insuranceType): self
     {
         $this->insuranceType = $insuranceType;
+
+        return $this;
+    }
+
+    public function getCoordinates(): ?string
+    {
+        return $this->coordinates;
+    }
+
+    public function setCoordinates(?string $coordinates): self
+    {
+        $this->coordinates = $coordinates;
 
         return $this;
     }

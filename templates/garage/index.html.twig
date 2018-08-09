@@ -74,6 +74,7 @@
                             <th> Nom ville </th>
                             <th> Tél </th>
                             <th> Responsable </th>
+                            <th> GPS </th>
                             <th> Actions</th>
                         </tr>
                         </thead>
@@ -85,6 +86,7 @@
                                 <td> {{ garage.nomville }} </td>
                                 <td> {{ garage.tel }} </td>
                                 <td> {{ garage.responsable }} </td>
+                                <td> {{ garage.coordinates }} </td>
                                 <td>
                                     <a class="btn btn-xs btn-primary bs-tooltip edit" data-id= "{{garage.id}}" data-placement="top" data-original-title="Editer"><i class="glyphicon glyphicon-edit" title="Modifier"></i></a>
                                     <a class="btn btn-xs btn-danger bs-tooltip delete" data-id= "{{garage.id}}" data-placement="top" data-original-title="Supprimer"><i class="glyphicon glyphicon-trash" title="Supprimer"></i></a>

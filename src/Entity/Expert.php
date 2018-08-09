@@ -45,6 +45,16 @@ class Expert
     private $tel;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $responsable;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coordinates;
+
+    /**
      * @Serializer\Expose()
      * @Serializer\Groups("expert")
      *
@@ -121,4 +131,42 @@ class Expert
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * @param mixed $responsable
+     * @return Expert
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * @param mixed $coordinates
+     * @return Expert
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+        return $this;
+    }
+
+
 }
