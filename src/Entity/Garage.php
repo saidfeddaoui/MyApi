@@ -52,6 +52,9 @@ class Garage
     private $tel;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $responsable;
@@ -63,6 +66,9 @@ class Garage
     private $insuranceType;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("garage")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $coordinates;
