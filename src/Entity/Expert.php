@@ -45,11 +45,18 @@ class Expert
     private $tel;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $responsable;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("expert")
+     *
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $coordinates;

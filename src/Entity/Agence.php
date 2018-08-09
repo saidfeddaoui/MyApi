@@ -51,11 +51,17 @@ class Agence
     private $tel;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("agence")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $responsable;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("agence")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $coordinates;

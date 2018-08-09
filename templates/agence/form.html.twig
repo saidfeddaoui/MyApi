@@ -28,6 +28,25 @@
 
 <div class="form-group">
     <div class="col-md-4 ">
+        {{ form_label(form.tel) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.tel, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.responsable) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.responsable, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
         {{ form_label(form.coordinates) }}
     </div>
     <div class="col-md-8 ">
