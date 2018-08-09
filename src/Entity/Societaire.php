@@ -41,6 +41,11 @@ class Societaire
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $CodeInsurance;
+
     public function getId()
     {
         return $this->id;
@@ -78,6 +83,18 @@ class Societaire
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCodeInsurance(): ?string
+    {
+        return $this->CodeInsurance;
+    }
+
+    public function setCodeInsurance(string $CodeInsurance): self
+    {
+        $this->CodeInsurance = $CodeInsurance;
 
         return $this;
     }

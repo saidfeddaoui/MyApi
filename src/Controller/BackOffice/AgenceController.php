@@ -113,12 +113,18 @@ class AgenceController extends Controller
                     $raisonSociale = $sheetData[$i][0] == "NULL" ? NULL : $sheetData[$i][0];
                     $adresse       = $sheetData[$i][1] == "NULL" ? NULL : $sheetData[$i][1];
                     $ville         = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
+                    $tel           = $sheetData[$i][3] == "NULL" ? NULL : $sheetData[$i][3];
+                    $responsable   = $sheetData[$i][4] == "NULL" ? NULL : $sheetData[$i][4];
+                    $gps           = $sheetData[$i][5] == "NULL" ? NULL : $sheetData[$i][5];
 
                     if( is_null($raisonSociale) or is_null($adresse) ){ continue; }
                     $agence = New Agence();
                     $agence->setRaisonSociale($raisonSociale);
                     $agence->setAdresse($adresse);
                     $agence->setNomVille($ville);
+                    $agence->setTel($tel);
+                    $agence->setResponsable($responsable);
+                    $agence->setCoordinates($gps);
                     $agence->setInsuranceType($insuranceType);
                     $em->persist($agence);
 

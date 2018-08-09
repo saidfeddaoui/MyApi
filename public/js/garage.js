@@ -20,7 +20,12 @@ jQuery(document).ready(function() {
             {
                 "searchable": true,
                 "orderable": true,
-            },{
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
                 "searchable": false,
                 "orderable": false,
             }

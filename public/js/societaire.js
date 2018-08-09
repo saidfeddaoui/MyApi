@@ -19,9 +19,10 @@ var TableDatatablesEditable = function () {
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small code" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<input type="text" class="form-control input-small type" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
+            jqTds[3].innerHTML = '<input type="text" class="form-control input-small assurance" value="' + aData[3] + '">';
+            jqTds[4].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
 
-            jqTds[4].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
+            jqTds[5].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
 
         }
 
@@ -30,8 +31,9 @@ var TableDatatablesEditable = function () {
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 3, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow, 4, false);
+            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 4, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-danger bs-tooltip delete"  data-placement="top" data-original-title="Supprimer"> <i class="glyphicon glyphicon-trash"></i></a>', nRow, 5, false);
             oTable.fnDraw();
         }
 
@@ -40,7 +42,8 @@ var TableDatatablesEditable = function () {
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 3, false);
+            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+            oTable.fnUpdate('<a class="btn btn-xs btn-primary bs-tooltip edit" data-placement="top" data-original-title="Editer"> <i class="glyphicon glyphicon-edit"></i></a>', nRow, 4, false);
             oTable.fnDraw();
         }
 
@@ -173,7 +176,8 @@ var TableDatatablesEditable = function () {
                 var name = tr.find('td .name').val();
                 var code = tr.find('td .code').val();
                 var type = tr.find('td .type').val();
-                var DATA = {"name":name,"code":code,"type":type};
+                var assurance = tr.find('td .assurance').val();
+                var DATA = {"name":name,"code":code,"type":type,"assurance":assurance};
                 $.ajax({
                     url: saveUrl,
                     type: "POST",

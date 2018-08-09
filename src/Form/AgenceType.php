@@ -17,6 +17,9 @@ class AgenceType extends AbstractType
             ->add('raison_sociale',TextType::class,['label' => 'Raison sociale'])
             ->add('adresse', TextareaType::class,['label' => 'Adresse'])
             ->add('nomville',TextType::class,['label'=>'Nom Ville'])
+            ->add('tel',TextType::class,['label'=>'Tél'])
+            ->add('responsable',TextType::class,['label'=>'Responsable'])
+            ->add('coordinates',TextType::class,['label'=>'GPS'])
         ;
     }
 

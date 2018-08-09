@@ -107,13 +107,15 @@ class ExpertController extends Controller
                 $spreadsheet = IOFactory::load($uploadDirData.$name);
                 $worksheet = $spreadsheet->getActiveSheet(null, true, true, true);
                 $sheetData = $worksheet->toArray();
-                $em->getRepository('App:Expert')->deleteFromTable();
+                $em->getRepository('App:Expert')->deleteFromTable($insuranceType);
                 for($i=1; $i<sizeof($sheetData); $i++) {
 
                     $raisonSociale = $sheetData[$i][0] == "NULL" ? NULL : $sheetData[$i][0];
                     $adresse       = $sheetData[$i][1] == "NULL" ? NULL : $sheetData[$i][1];
-                    $tel           = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
-                    $ville         = $sheetData[$i][3] == "NULL" ? NULL : $sheetData[$i][3];
+                    $ville         = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
+                    $tel           = $sheetData[$i][3] == "NULL" ? NULL : $sheetData[$i][3];
+                    $responsable   = $sheetData[$i][4] == "NULL" ? NULL : $sheetData[$i][4];
+                    $gps           = $sheetData[$i][5] == "NULL" ? NULL : $sheetData[$i][5];
 
                     if( is_null($raisonSociale) or is_null($adresse) ){ continue; }
                     $expert = New Expert();
@@ -121,6 +123,8 @@ class ExpertController extends Controller
                     $expert->setAdresse($adresse);
                     $expert->setTel($tel);
                     $expert->setNomVille($ville);
+                    $expert->setResponsable($responsable);
+                    $expert->setCoordinates($gps);
                     $expert->setInsuranceType($insuranceType);
                     $em->persist($expert);
 

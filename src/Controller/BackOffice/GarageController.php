@@ -108,21 +108,23 @@ class GarageController extends Controller
                 $spreadsheet = IOFactory::load($uploadDirData.$name);
                 $worksheet = $spreadsheet->getActiveSheet(null, true, true, true);
                 $sheetData = $worksheet->toArray();
-                $em->getRepository('App:Garage')->deleteFromTable();
+                $em->getRepository('App:Garage')->deleteFromTable($insuranceType);
                 for($i=1; $i<sizeof($sheetData); $i++) {
 
                     $raisonSociale = $sheetData[$i][0] == "NULL" ? NULL : $sheetData[$i][0];
-                    $adresse       = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
-                    $nom_ville     = $sheetData[$i][4] == "NULL" ? NULL : $sheetData[$i][4];
-                    $tel           = $sheetData[$i][5] == "NULL" ? NULL : $sheetData[$i][5];
-                    $responsable   = $sheetData[$i][9] == "NULL" ? NULL : $sheetData[$i][9];
+                    $adresse       = $sheetData[$i][1] == "NULL" ? NULL : $sheetData[$i][1];
+                    $ville         = $sheetData[$i][2] == "NULL" ? NULL : $sheetData[$i][2];
+                    $tel           = $sheetData[$i][3] == "NULL" ? NULL : $sheetData[$i][3];
+                    $responsable   = $sheetData[$i][4] == "NULL" ? NULL : $sheetData[$i][4];
+                    $gps           = $sheetData[$i][5] == "NULL" ? NULL : $sheetData[$i][5];
                     if( is_null($raisonSociale) or is_null($adresse) ){ continue; }
                     $garage = New Garage();
                     $garage->setRaisonSociale($raisonSociale);
                     $garage->setAdresse($adresse);
-                    $garage->setNomVille($nom_ville);
+                    $garage->setNomVille($ville);
                     $garage->setTel($tel);
                     $garage->setResponsable($responsable);
+                    $garage->setCoordinates($gps);
                     $garage->setInsuranceType($insuranceType);
                     $em->persist($garage);
 

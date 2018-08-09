@@ -48,9 +48,11 @@ class ExpertRepository extends ServiceEntityRepository
     }
     */
 
-    public function deleteFromTable()
+    public function deleteFromTable($insuranceType)
     {
         return $this->createQueryBuilder('e')
+            ->where("e.insuranceType = :insurance")
+            ->setParameter("insurance",$insuranceType)
             ->delete()
             ->getQuery()
             ->execute();
