@@ -171,3 +171,18 @@ textarea.form-control {
     max-height: 600px;
     overflow: auto;
 }
+
+.emoLike{
+    font-size: 21px;
+    text-shadow: none;
+    font-weight: 300;
+    text-align: center;
+    color: #0e7ed6;
+}
+.emodisLike{
+    font-size: 21px;
+    text-shadow: none;
+    font-weight: 300;
+    text-align: center;
+    color: red;
+}
