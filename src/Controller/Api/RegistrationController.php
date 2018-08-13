@@ -320,7 +320,8 @@ class RegistrationController extends BaseController
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
         $client
-            ->setName($submittedClient->getName())
+            ->setFamilyName($submittedClient->getFamilyName())
+            ->setFirstName($submittedClient->getFirstName())
             ->setEmail($submittedClient->getEmail())
             ->setEmailCanonical($submittedClient->getEmailCanonical())
             ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))

@@ -34,7 +34,19 @@ class Client extends User
      *
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    protected $name;
+    protected $familyName;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_account_creation","login_response"})
+     *
+     * @Assert\NotBlank(groups={"client_account_creation"})
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $firstName;
     /**
      * @var string
      *
@@ -113,17 +125,31 @@ class Client extends User
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getFamilyName(): ?string
     {
-        return $this->name;
+        return $this->familyName;
     }
     /**
-     * @param string $name
+     * @param string $familyName
      * @return static
      */
-    public function setName(?string $name): self
+    public function setFamilyName(?string $familyName): self
     {
-        $this->name = $name;
+        $this->familyName = $familyName;
+        return $this;
+    }
+
+      public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+    /**
+     * @param string $firstName
+     * @return static
+     */
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
         return $this;
     }
     /**
