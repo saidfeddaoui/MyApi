@@ -68,6 +68,12 @@ class InsuranceType extends BaseRole
      */
     private $villes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CirconstanceSinistre", mappedBy="insuranceType")
+     */
+    private $circonstanceSinistres;
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -77,6 +83,7 @@ class InsuranceType extends BaseRole
         $this->marqueVehicules = new ArrayCollection();
         $this->photosSinistres = new ArrayCollection();
         $this->villes = new ArrayCollection();
+        $this->circonstanceSinistres = new ArrayCollection();
     }
 
     /**
@@ -341,6 +348,39 @@ class InsuranceType extends BaseRole
             // set the owning side to null (unless already changed)
             if ($ville->getInsuranceType() === $this) {
                 $ville->setInsuranceType(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection|circonstanceSinistre[]
+     */
+    public function getCirconstanceSinistres(): Collection
+    {
+        return $this->circonstanceSinistres;
+    }
+
+    public function addCirconstanceSinistre(Ville $circonstanceSinistre): self
+    {
+        if (!$this->circonstanceSinistres->contains($circonstanceSinistre)) {
+            $this->circonstanceSinistres[] = $circonstanceSinistre;
+            $circonstanceSinistre->setInsuranceType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCirconstanceSinistre(Ville $circonstanceSinistre): self
+    {
+        if ($this->circonstanceSinistres->contains($circonstanceSinistre)) {
+            $this->circonstanceSinistres->removeElement($circonstanceSinistre);
+            // set the owning side to null (unless already changed)
+            if ($circonstanceSinistre->getInsuranceType() === $this) {
+                $circonstanceSinistre->setInsuranceType(null);
             }
         }
 
