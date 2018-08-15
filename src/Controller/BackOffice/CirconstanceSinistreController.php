@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CirconstanceSinistreController extends Controller
 {
     /**
-     * @Route(path="/circonstance-sinistre", name="list_CirconstanceSinistre", options={"expose"=true})
+     * @Route(path="/circonstance-sinistre", name="list_circonstanceSinistre", options={"expose"=true})
      *
      * @Breadcrumb(title="Les circonstances Sinistre")
      *
