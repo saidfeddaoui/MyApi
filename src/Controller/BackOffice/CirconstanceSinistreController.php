@@ -84,7 +84,7 @@ class CirconstanceSinistreController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function editVille(CirconstanceSinistre $circonstanceSinistre, Request $request)
+    public function editCirconstanceSinistre(CirconstanceSinistre $circonstanceSinistre, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $title = $request->request->get('title');
@@ -98,6 +98,21 @@ class CirconstanceSinistreController extends Controller
             'id' => $circonstanceSinistre->getId(),
             'message' => 'Circonstance sinistre modifiée avec succès',
         ]);
+    }
+
+    /**
+     * @Route(path="/circonstance-sinistre/delete/{id}", name="delete_circonstance-sinistre", options={"expose"=true})
+     *
+     * @param CirconstanceSinistre $circonstanceSinistre
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteCirconstanceSinistre(CirconstanceSinistre $circonstanceSinistre, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($circonstanceSinistre);
+        $em->flush();
+        return  new JsonResponse(['message' => 'Circonstance sinistre supprimée avec succès']);
     }
 
 }
