@@ -22,7 +22,7 @@ class VilleController extends Controller
 {
 
     /**
-     * @Route(path="/circonstance-sinistre", name="list_ville", options={"expose"=true})
+     * @Route(path="/villes", name="list_ville", options={"expose"=true})
      *
      * @Breadcrumb(title="Villes")
      *
