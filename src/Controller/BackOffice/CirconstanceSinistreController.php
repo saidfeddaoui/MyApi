@@ -31,9 +31,6 @@ class CirconstanceSinistreController extends Controller
      */
     public function index(Request $request, SessionInterface $session)
     {
-
-        var_dump("hi");
-        die();
         $em = $this->getDoctrine()->getManager();
         $data = array();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
