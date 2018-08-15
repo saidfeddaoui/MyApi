@@ -580,8 +580,6 @@ class ContentController extends BaseController
         $type = $request->headers->get("Type");
         $societaires = $em->getRepository('App:Societaire')->findByType($type);
 
-        var_dump($societaires);
-        die();
         return $this->respondWith($societaires);
     }
 
@@ -623,8 +621,6 @@ class ContentController extends BaseController
 
        // $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireTypes]);
         $societaires = $em->getRepository('App:Pack')->findBySocietaire($societaireTypes);
-        var_dump($societaires);
-        die();
         return $this->respondWith($societaires);
     }
 
