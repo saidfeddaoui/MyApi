@@ -137,7 +137,7 @@ var TableDatatablesEditable = function () {
                 var tr = $this.closest('tr');
                 /* save data backend */
                 var id = tr.data('id');
-                var saveUrl = Routing.generate('content_types_add_ville');
+                var saveUrl = Routing.generate('content_types_add_circonstance-sinistre');
                 if (id) {
                     saveUrl = Routing.generate('content_types_edit_ville', {id: id});
                 }
