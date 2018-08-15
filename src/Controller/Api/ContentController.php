@@ -541,8 +541,6 @@ class ContentController extends BaseController
     public function agence(ObjectManager $em, InsuranceType $insuranceType)
     {
 
-        var_dump($insuranceType);
-        die();
         $agences = $em->getRepository('App:Agence')->findBy(['insuranceType' => $insuranceType]);
         return $this->respondWith($agences);
     }
@@ -615,9 +613,6 @@ class ContentController extends BaseController
      */
     public function pack(ObjectManager $em, Societaire $societaireType)
     {
-
-        var_dump($societaireType);
-        die();
         $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
         return $this->respondWith($societaires);
     }
