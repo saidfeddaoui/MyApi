@@ -11,8 +11,8 @@ var TableDatatablesEditable = function () {
         function editRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
-            jqTds[0].innerHTML = '<input type="text" class="form-control input-small name" value="' + aData[0] + '">';
-            jqTds[1].innerHTML = '<input type="text" class="form-control input-small name_ar" value="' + aData[1] + '">';
+            jqTds[0].innerHTML = '<input type="text" class="form-control input-small title" value="' + aData[0] + '">';
+            jqTds[1].innerHTML = '<input type="text" class="form-control input-small title_ar" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
 
             jqTds[3].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
@@ -141,9 +141,9 @@ var TableDatatablesEditable = function () {
                 if (id) {
                     saveUrl = Routing.generate('content_types_edit_ville', {id: id});
                 }
-                var name = tr.find('td .name').val();
-                var name_ar = tr.find('td .name_ar').val();
-                var DATA = {"name":name,"name_ar":name_ar};
+                var title = tr.find('td .title').val();
+                var title_ar = tr.find('td .title_ar').val();
+                var DATA = {"title":title,"title_ar":title_ar};
                 $.ajax({
                     url: saveUrl,
                     type: "POST",
