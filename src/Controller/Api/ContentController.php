@@ -616,7 +616,7 @@ class ContentController extends BaseController
     {
 
         $societaire = $request->headers->get('X-CODE');
-        $societaireTypes = $this->em->getRepository('App:Societaire')->findOneBy(array("code" => strtoupper($societaire), "type" => "AUTO" ));
+        $societaireTypes = $em->getRepository('App:Societaire')->findOneBy(array("code" => strtoupper($societaire), "type" => "AUTO" ));
 
        // $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireTypes]);
         $societaires = $em->getRepository('App:Pack')->findBySocietaire($societaireTypes);
