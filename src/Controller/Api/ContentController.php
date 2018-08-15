@@ -612,10 +612,10 @@ class ContentController extends BaseController
      */
     public function pack(ObjectManager $em,Request $request)
     {
-        
-        $type = $request->headers->get("x-code");
 
-        $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $type]);
+        $code = $request->headers->get("x-code");
+
+        $societaires = $em->getRepository('App:Pack')->findByCode($code);
         return $this->respondWith($societaires);
     }
 
