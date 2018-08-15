@@ -45,7 +45,6 @@ class Circumstance
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
-
     /**
      * @var Ville
      * @Serializer\Expose()
@@ -58,6 +57,32 @@ class Circumstance
      * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
+
+    /**
+     * @var string
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\NotBlank(groups={"client_pre_declaration"})
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @return string
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * @param string $adress
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+    }
 
     /**
      * @var Collection
