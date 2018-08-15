@@ -6,6 +6,7 @@ use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
+use App\Entity\Pack;
 use App\Entity\Societaire;
 use App\Services\AladhanApiService;
 use App\Services\PharmacieApiService;
@@ -616,7 +617,7 @@ class ContentController extends BaseController
         $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
 
         $serializer = $this->get('jms_serializer');
-        $person = $serializer->deserialize($societaires,'App\Entity\Societaire','json');
+        $person = $serializer->deserialize($societaires,Pack::class,'json');
         var_dump($person);
         die();
 
