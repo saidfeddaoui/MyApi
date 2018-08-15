@@ -540,6 +540,9 @@ class ContentController extends BaseController
      */
     public function agence(ObjectManager $em, InsuranceType $insuranceType)
     {
+
+        var_dump($insuranceType);
+        die();
         $agences = $em->getRepository('App:Agence')->findBy(['insuranceType' => $insuranceType]);
         return $this->respondWith($agences);
     }
