@@ -614,7 +614,11 @@ class ContentController extends BaseController
     public function pack(ObjectManager $em, Societaire $societaireType)
     {
         $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
-        return $this->respondWith($societaires);
+        $societaire = serialize($societaires);
+
+        var_dump($societaire);
+        die();
+        return $this->respondWith($societaire);
     }
 
     /*public function pack(ObjectManager $em,Request $request)
