@@ -54,7 +54,7 @@ class Circumstance
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $ville;
 
@@ -140,6 +140,8 @@ class Circumstance
     {
         return $this->ville;
     }
+
+
 
     public function setVille(?Ville $ville): self
     {
