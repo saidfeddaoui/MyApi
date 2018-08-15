@@ -76,4 +76,28 @@ class CirconstanceSinistreController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route(path="/circonstance-sinistre/edit/{id}", name="edit_circonstance-sinistre", options={"expose"=true})
+     *
+     * @param CirconstanceSinistre $circonstanceSinistre
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editVille(CirconstanceSinistre $circonstanceSinistre, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $title = $request->request->get('title');
+        $title_ar = $request->request->get('title_ar');
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $circonstanceSinistre->setTitle($title);
+        $repository->translate($circonstanceSinistre, 'title', 'ar', $title_ar) ;
+        $em->persist($circonstanceSinistre);
+        $em->flush();
+        return  new JsonResponse([
+            'id' => $circonstanceSinistre->getId(),
+            'message' => 'Circonstance sinistre modifiée avec succès',
+        ]);
+    }
+
 }

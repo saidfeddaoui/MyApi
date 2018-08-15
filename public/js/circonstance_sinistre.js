@@ -14,7 +14,6 @@ var TableDatatablesEditable = function () {
             jqTds[0].innerHTML = '<input type="text" class="form-control input-small title" value="' + aData[0] + '">';
             jqTds[1].innerHTML = '<input type="text" class="form-control input-small title_ar" value="' + aData[1] + '">';
             jqTds[2].innerHTML = '<a class="btn btn-xs btn-primary bs-tooltip edit" id="Save" data-placement="top" data-original-title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></a>';
-
             jqTds[3].innerHTML = '<a class="btn btn-xs btn-danger bs-tooltip cancel"  data-placement="top" data-original-title="Annuler"> <i class="glyphicon glyphicon-remove"></i></a>';
 
         }
@@ -139,7 +138,7 @@ var TableDatatablesEditable = function () {
                 var id = tr.data('id');
                 var saveUrl = Routing.generate('content_types_add_circonstance-sinistre');
                 if (id) {
-                    saveUrl = Routing.generate('content_types_edit_ville', {id: id});
+                    saveUrl = Routing.generate('content_types_edit_circonstance-sinistre', {id: id});
                 }
                 var title = tr.find('td .title').val();
                 var title_ar = tr.find('td .title_ar').val();
