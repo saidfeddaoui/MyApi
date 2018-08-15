@@ -8,6 +8,7 @@ use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Entity\Pack;
 use App\Entity\Societaire;
+use App\Entity\CirconstanceSinistre;
 use App\Services\AladhanApiService;
 use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
@@ -60,6 +61,46 @@ class ContentController extends BaseController
     {
         $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'slider', 'insuranceType' => $insuranceType]);
         return $this->respondWith($slider);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Home Circonstances Sinistre",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Circonstance Sinistre successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/circonstance-sinistre", name = "circonstance-sinistre")
+     * @Rest\View(serializerGroups={"all", "circonstance-sinistre"})
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function circonstanceSinistre(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $circonstanceSinistres = $em->getRepository('App:CirconstanceSinistre')->findBy([ 'insuranceType' => $insuranceType]);
+        return $this->respondWith($circonstanceSinistres);
     }
     /**
      * @SWG\Get(
