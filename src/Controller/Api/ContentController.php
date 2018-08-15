@@ -610,9 +610,12 @@ class ContentController extends BaseController
      * @param  Societaire $societaireType
      * @return ApiResponse
      */
-    public function pack(ObjectManager $em, Societaire $societaireType)
+    public function pack(ObjectManager $em,Request $request)
     {
-        $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $societaireType]);
+        
+        $type = $request->headers->get("x-code");
+
+        $societaires = $em->getRepository('App:Pack')->findBy(["societaire" => $type]);
         return $this->respondWith($societaires);
     }
 
