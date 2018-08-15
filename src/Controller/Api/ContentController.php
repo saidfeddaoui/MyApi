@@ -579,6 +579,9 @@ class ContentController extends BaseController
     {
         $type = $request->headers->get("Type");
         $societaires = $em->getRepository('App:Societaire')->findByType($type);
+
+        var_dump($societaires);
+        die();
         return $this->respondWith($societaires);
     }
 
