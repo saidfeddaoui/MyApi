@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * @Breadcrumb(title="Accueil")
  * @Breadcrumb(title="Gestion Contenu")
  */
-class VilleController extends Controller
+class CirconstanceSinistreController extends Controller
 {
 
     /**
