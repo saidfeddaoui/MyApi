@@ -50,4 +50,30 @@ class CirconstanceSinistreController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route(path="/circonstance-sinistre/add", name="add_circonstance-sinistre", options={"expose"=true})
+     * @param SessionInterface $session
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addCirconstanceSinistre(Request $request, SessionInterface $session)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:InsuranceType')->find($session->get('insuranceType')->getId());
+        $title = $request->request->get('title');
+        $title_ar = $request->request->get('title_ar');
+        $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
+        $circonstanceSinistre = new CirconstanceSinistre();
+        $circonstanceSinistre->setTitle($title);
+        $circonstanceSinistre->setInsuranceType($insuranceType);
+        $em->persist($circonstanceSinistre);
+        $repository->translate($circonstanceSinistre, 'title', 'ar', $title_ar) ;
+        $em->flush();
+        return  new JsonResponse([
+            'id' => $circonstanceSinistre->getId(),
+            'message' => 'Circonstance sinistre ajoutée avec succès',
+        ]);
+    }
+
 }
