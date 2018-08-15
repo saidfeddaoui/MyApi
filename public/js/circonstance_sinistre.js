@@ -97,7 +97,7 @@ var TableDatatablesEditable = function () {
             var $this = $(this);
             var id = $this.closest('tr').data('id');
             $.ajax({
-                url: Routing.generate('content_types_delete_ville', {id: id}),
+                url: Routing.generate('content_types_delete_circonstance-sinistre', {id: id}),
                 type: "POST",
                 success: function(response) {
                     toastr.success(response.message);
