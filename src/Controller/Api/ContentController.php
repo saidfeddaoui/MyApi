@@ -99,6 +99,7 @@ class ContentController extends BaseController
      */
     public function circonstanceSinistre(ObjectManager $em, InsuranceType $insuranceType)
     {
+
         $circonstanceSinistres = $em->getRepository('App:CirconstanceSinistre')->findBy([ 'insuranceType' => $insuranceType]);
         return $this->respondWith($circonstanceSinistres);
     }
