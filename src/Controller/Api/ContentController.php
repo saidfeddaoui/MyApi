@@ -60,9 +60,6 @@ class ContentController extends BaseController
     public function slider(ObjectManager $em, InsuranceType $insuranceType)
     {
         $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'slider', 'insuranceType' => $insuranceType]);
-
-        var_dump($slider);
-        die();
         return $this->respondWith($slider);
     }
 
