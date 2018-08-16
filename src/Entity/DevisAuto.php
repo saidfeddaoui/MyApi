@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisAutoRepository")
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="CodeSocietaire", exp="object.getSocietaireCode()", options={ @Serializer\Groups("request_auto") })
+ * @Serializer\VirtualProperty(name="CodeSocietaire", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("CodeSocietaire") ,@Serializer\Groups("request_auto") })
  * @Serializer\VirtualProperty(name="CodePack", exp="object.getPackCode()", options={ @Serializer\SerializedName("CodePack") ,@Serializer\Groups("request_auto") })
  */
 class DevisAuto
