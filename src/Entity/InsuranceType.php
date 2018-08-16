@@ -364,7 +364,7 @@ class InsuranceType extends BaseRole
         return $this->circonstanceSinistres;
     }
 
-    public function addCirconstanceSinistre(Ville $circonstanceSinistre): self
+    public function addCirconstanceSinistre(CirconstanceSinistre $circonstanceSinistre): self
     {
         if (!$this->circonstanceSinistres->contains($circonstanceSinistre)) {
             $this->circonstanceSinistres[] = $circonstanceSinistre;
@@ -374,7 +374,7 @@ class InsuranceType extends BaseRole
         return $this;
     }
 
-    public function removeCirconstanceSinistre(Ville $circonstanceSinistre): self
+    public function removeCirconstanceSinistre(CirconstanceSinistre $circonstanceSinistre): self
     {
         if ($this->circonstanceSinistres->contains($circonstanceSinistre)) {
             $this->circonstanceSinistres->removeElement($circonstanceSinistre);
