@@ -724,6 +724,7 @@ class ContentController extends BaseController
     {
         $produits = $em->getRepository('App:ProduitContrat')->findAll();
         return $this->respondWith($produits);
+
     }
 
     /**
