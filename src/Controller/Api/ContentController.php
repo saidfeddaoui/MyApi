@@ -6,9 +6,7 @@ use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
-use App\Entity\Pack;
 use App\Entity\Societaire;
-use App\Entity\CirconstanceSinistre;
 use App\Services\AladhanApiService;
 use App\Services\PharmacieApiService;
 use App\Services\YahooWeatherApiService;
@@ -699,6 +697,34 @@ class ContentController extends BaseController
     {
         $mrh_categories = $em->getRepository('App:MrhCategorie')->findAll();
         return $this->respondWith($mrh_categories);
+    }
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="produit contract",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="produit data successfully returned"
+     *     )
+     * )
+     * @Rest\Get(
+     *     path = "/contrat/produit",
+     *     name = "produit_contrat"
+     * )
+     * @Rest\View(
+     *     serializerGroups={"all"}
+     * )
+     *
+     *
+     * @param  ObjectManager $em
+     * @return ApiResponse
+     */
+    public function produitContrat(ObjectManager $em)
+    {
+        $produits = $em->getRepository('App:ProduitContrat')->findAll();
+        return $this->respondWith($produits);
+
     }
 
     /**

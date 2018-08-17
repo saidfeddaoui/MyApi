@@ -37,6 +37,6 @@ fos_user:
     firewall_name: main
     user_class: App\Entity\User
     from_email:
-        address: "jidal@mobiblanc;com"
+        address: "ahargoug@mobiblanc;com"
         sender_name: "MOBIBLANC"
 
