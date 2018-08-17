@@ -355,7 +355,6 @@ class InsuranceType extends BaseRole
     }
 
 
-
     /**
      * @return Collection|circonstanceSinistre[]
      */

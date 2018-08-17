@@ -22,7 +22,7 @@ class CirconstanceSinistre implements TranslatableInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups(groups={"circonstance-sinistre"})
      */
     private $id;
 
@@ -30,7 +30,7 @@ class CirconstanceSinistre implements TranslatableInterface
      * @Serializer\Expose()
      * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
+     * @Serializer\Groups(groups={"circonstance-sinistre"})
      */
     private $title;
 
