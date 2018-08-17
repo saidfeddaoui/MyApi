@@ -699,8 +699,6 @@ class ContentController extends BaseController
         return $this->respondWith($mrh_categories);
     }
 
-
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
