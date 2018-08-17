@@ -22,6 +22,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @Serializer\Expose()
      * @Serializer\Groups({"include_id"})
+     * @Serializer\Groups({"client_account_creation","login_response"})
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
