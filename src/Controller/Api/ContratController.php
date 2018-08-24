@@ -45,10 +45,8 @@ class ContratController extends BaseController
     {
         $contrat=json_decode($request->getContent());
         $contra = $contratApiService->AddContrat($contrat);
-
-
-       // return  new JsonResponse($contra, 200);
-        return $this->respondWith($contrat);
+        return  new JsonResponse($contra, 200);
+       // return $this->respondWith($contrat);
     }
 
 
@@ -68,8 +66,6 @@ class ContratController extends BaseController
 
         $contrat = $this->em->getRepository('App:Contrats')->find($id);
 
-        var_dump($contrat);
-        die();
        // return $this->respondWith($contrat);
     }
 
