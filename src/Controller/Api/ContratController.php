@@ -65,8 +65,7 @@ class ContratController extends BaseController
     {
 
         $contrat = $this->em->getRepository('App:Contrats')->find($id);
-
-       // return $this->respondWith($contrat);
+         return $this->respondWith($contrat);
     }
 
 
