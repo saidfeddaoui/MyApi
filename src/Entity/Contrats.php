@@ -50,7 +50,7 @@ class Contrats
     private $statut;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      * @Serializer\Expose()
      * @Serializer\Groups("contrats")
      */
