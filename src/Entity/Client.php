@@ -117,9 +117,15 @@ class Client extends User
      */
     protected $cin;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contrats", mappedBy="client")
+     */
+    private $contrats;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
+        $this->contrats = new ArrayCollection();
     }
 
     /**
@@ -330,6 +336,37 @@ class Client extends User
     public function isConfirmed()
     {
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
+    }
+
+    /**
+     * @return Collection|Contrats[]
+     */
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrats(Contrats $contrats): self
+    {
+        if (!$this->contrats->contains($contrats)) {
+            $this->contrats[] = $contrats;
+            $contrats->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrats(Contrats $contrats): self
+    {
+        if ($this->contrats->contains($contrats)) {
+            $this->contrats->removeElement($contrats);
+            // set the owning side to null (unless already changed)
+            if ($contrats->getClient() === $this) {
+                $contrats->setClient(null);
+            }
+        }
+
+        return $this;
     }
 
 }
