@@ -5,7 +5,7 @@ namespace App\Services;
 class SmsApiService extends ApiCustomerService
 {
 
-    const APP_ID = 'MAMDA';
+    const APP_ID = 'MAMDA-MCMA';
     const SENDER_ID = 'MAMDA';
 
     /**
