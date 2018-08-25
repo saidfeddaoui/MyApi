@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Client;
 use App\Entity\Contrats;
 use App\DTO\Api\ApiResponse;
 use App\Services\ContratApiService;
@@ -52,20 +53,15 @@ class ContratController extends BaseController
 
 
     /**
-     *
-     *
      * @Rest\Get(path = "/{id}", name = "contrat")
      * @Rest\View(serializerGroups={"all", "contrats"})
-     *
-     * @param integer $id
+     * @param Client $id
      * @return ApiResponse
-     *
      */
     public function getContrat($id)
     {
-
-        $contrat = $this->em->getRepository('App:Contrats')->find($id);
-         return $this->respondWith($contrat);
+        $contrat = $this->em->getRepository('App:Contrats')->findByClient($id);
+        return $this->respondWith($contrat);
     }
 
 
