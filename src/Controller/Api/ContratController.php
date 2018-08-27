@@ -6,7 +6,6 @@ use App\Entity\Client;
 use App\Entity\Contrats;
 use App\DTO\Api\ApiResponse;
 use App\Services\ContratApiService;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;

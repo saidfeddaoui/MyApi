@@ -50,11 +50,29 @@ class Contrats
     private $statut;
 
     /**
+     * @return mixed
+     */
+    public function getDateEcheance()
+    {
+        return $this->dateEcheance;
+    }
+
+    /**
+     * @param mixed $dateEcheance
+     */
+    public function setDateEcheance($dateEcheance)
+    {
+        $this->dateEcheance = $dateEcheance;
+    }
+
+    /**
      * @ORM\Column(type="date")
      * @Serializer\Expose()
      * @Serializer\Groups("contrats")
      */
     private $dateEcheance;
+
+
 
     public function getId()
     {
@@ -121,7 +139,7 @@ class Contrats
         return $this;
     }
 
-    public function getDateEcheance(): ?\DateTimeInterface
+   /* public function getDateEcheance(): ?\DateTimeInterface
     {
         return $this->dateEcheance;
     }
@@ -131,5 +149,5 @@ class Contrats
         $this->dateEcheance = $dateEcheance;
 
         return $this;
-    }
+    } */
 }
