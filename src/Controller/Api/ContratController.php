@@ -64,4 +64,25 @@ class ContratController extends BaseController
     }
 
 
+    /**
+     * @Rest\Get(path = "/delete/{numeroContrat}", name = "delete")
+     * @Rest\View(serializerGroups={"all", "contrats"})
+     * @param int $numeroContrat
+     * @return ApiResponse
+     */
+    public function deleteContrat($numeroContrat)
+    {
+        $contrat = $this->em->getRepository('App:Contrats')->findByNumeroContrat($numeroContrat);
+        $this->em->remove($contrat);
+        return $this->respondWith(array(
+            "code"=>200,
+            "statut"=>"ok",
+            "message"=>"le contrat à été supprimé avec succès"
+        ));
+    }
+
+
+
+
+
 }
