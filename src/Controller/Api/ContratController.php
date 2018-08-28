@@ -95,8 +95,11 @@ class ContratController extends BaseController
         ));
     }
 
-
     /**
+     *
+     *
+     *
+     * contratsForDelete
      *
      * @Rest\Post(path="/delete/many",name="delete_many")
      * @param  Request $request
