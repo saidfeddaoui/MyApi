@@ -111,7 +111,7 @@ class ContratController extends BaseController
             $contra->setActif(false);
             $contra->setDateSuppression(date("Y-m-d"));
         }
-        
+
         $this->em->flush();
         return new JsonResponse(array(
             "code"=>200,

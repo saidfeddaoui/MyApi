@@ -168,12 +168,12 @@ class Contrats
 
 
 
-    public function getDateSuppression(): ?\DateTimeInterface
+    public function getDateSuppression()
     {
         return $this->dateSuppression;
     }
 
-    public function setDateSuppression(\DateTimeInterface $dateSuppression): self
+    public function setDateSuppression($dateSuppression)
     {
         $this->dateSuppression = $dateSuppression;
 
