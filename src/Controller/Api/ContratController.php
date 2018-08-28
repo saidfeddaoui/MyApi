@@ -37,7 +37,7 @@ class ContratController extends BaseController
     /**
      *
      * @Rest\Post(path="/add",name="add")
-     * @param  Request $contrat
+     * @param  Request $request
      * @param ContratApiService $contratApiService
      * @return JsonResponse
      */
@@ -49,6 +49,20 @@ class ContratController extends BaseController
        // return $this->respondWith($contrat);
     }
 
+
+    /**
+     *
+     * @Rest\Post(path="/details",name="details")
+     * @param  Request $request
+     * @param ContratApiService $contratApiService
+     * @return JsonResponse
+     */
+    public function detailsContrat(Request $request, ContratApiService $contratApiService)
+    {
+        $contrat=json_decode($request->getContent());
+        $contra = $contratApiService->detailsContrat($contrat);
+        return  new JsonResponse($contra, 200);
+    }
 
 
     /**
