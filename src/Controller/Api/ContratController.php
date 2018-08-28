@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Contrats;
 use App\DTO\Api\ApiResponse;
 use App\Services\ContratApiService;
+use App\Services\DetailsContratApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -49,23 +50,22 @@ class ContratController extends BaseController
        // return $this->respondWith($contrat);
     }
 
-
     /**
      *
      * @Rest\Post(path="/details",name="details")
      * @param  Request $request
-     * @param ContratApiService $contratApiService
+     * @param DetailsContratApiService $detailsContratApiService
      * @return JsonResponse
      */
-    public function detailsContrat(Request $request, ContratApiService $contratApiService)
+    public function detailsContrat(Request $request, DetailsContratApiService $detailsContratApiService)
     {
         $contrat=json_decode($request->getContent());
-        $contra = $contratApiService->detailsContrat($contrat);
+        $contra = $detailsContratApiService->detailsContrat($contrat);
         return  new JsonResponse($contra, 200);
     }
 
-
     /**
+     *
      * @Rest\Get(path = "/{id}", name = "contrat")
      * @Rest\View(serializerGroups={"all", "contrats"})
      * @param Client $id
@@ -96,10 +96,6 @@ class ContratController extends BaseController
     }
 
     /**
-     *
-     *
-     *
-     * contratsForDelete
      *
      * @Rest\Post(path="/delete/many",name="delete_many")
      * @param  Request $request
