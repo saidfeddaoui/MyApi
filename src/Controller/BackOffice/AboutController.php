@@ -129,7 +129,7 @@ class AboutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-        $form = $this->createForm(SliderType::class, $about, [
+        $form = $this->createForm(aboutType::class, $about, [
             'action' => $this->generateUrl('content_types_edit_about', ['id' => $about->getId()])
         ]);
         $translations =  $repository->findTranslations($about);
