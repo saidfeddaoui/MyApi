@@ -7,11 +7,12 @@ use JMS\Serializer\SerializationContext;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ContratApiService extends ApiCustomerService
+class DetailsContratApiService extends ApiCustomerService
 {
 
-    public function AddContrat($contrat)
+    public function detailsContrat($contrat)
     {
+
         $requestContrat = json_encode($contrat);
         $response = $this->httpClient->post("", [
             'body' => $requestContrat,
@@ -19,6 +20,7 @@ class ContratApiService extends ApiCustomerService
         ]);
         return $this->getResult($response);
     }
+
 
     /**
      * @param $response
@@ -30,7 +32,7 @@ class ContratApiService extends ApiCustomerService
             return null;
         }
 
-       $result = (string) $response->getBody();
+        $result = (string) $response->getBody();
         $autoResponse = json_decode($result);
         return $autoResponse;
     }
