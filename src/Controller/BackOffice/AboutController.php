@@ -48,7 +48,7 @@ class AboutController extends Controller
         /**
          * @var ItemList $sliderList
          */
-        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $session->get('insuranceType')]);
+        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $session->get('insuranceType')]);
         foreach ($sliderList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -98,7 +98,7 @@ class AboutController extends Controller
             /**
              * @var ItemList $abouts
              */
-            $abouts = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $insuranceType]);
+            $abouts = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $insuranceType]);
 
             $abouts->addItem($about);
             $em->persist($abouts);
@@ -117,7 +117,7 @@ class AboutController extends Controller
     /**
      * @Route(path="/slider/edit/{id}", name="edit_about", options={"expose"=true})
      *
-     * @param Item $slider
+     * @param Item $about
      * @param Request $request
      * @return Response
      */
