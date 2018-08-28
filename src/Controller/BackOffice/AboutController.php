@@ -39,28 +39,32 @@ class AboutController extends Controller
      */
     public function index(Request $request, SessionInterface $session)
     {
-        $form = $this->createForm(SliderType::class, new Item(), [
-            'action' => $this->generateUrl('content_types_add_slider'),
+        $form = $this->createForm(AboutType::class, new Item(), [
+            'action' => $this->generateUrl('content_types_add_about'),
         ]);
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
         $data = array();
         /**
-         * @var ItemList $sliderList
+         * @var ItemList $abouts
          */
-        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $session->get('insuranceType')]);
-        foreach ($sliderList->getItems() as $key => $value){
+        $abouts = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $session->get('insuranceType')]);
+        foreach ($abouts->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
                 'id' => $value->getId(),
                 'title' => $value->getTitle(),
                 'image' => $value->getImage(),
                 'title_ar' => $translations['ar']["title"] ?? '',
+                'content' => $value->getContent(),
+                'content_ar' => $translations['ar']["content"] ?? '',
+                'telephone'=> $value->getTelephone(),
+                'email'=>$value->getEmail()
             );
         }
 
         return $this->render('about/index.html.twig', [
-            'page_title' => 'Slider',
+            'page_title' => 'Qui Sommes Nous ',
             'page_subtitle' => '',
             'items' => $data ? $data : [],
             'form' => $form->createView(),
@@ -125,7 +129,7 @@ class AboutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('Gedmo\Translatable\Entity\Translation');
-        $form = $this->createForm(SliderType::class, $about, [
+        $form = $this->createForm(aboutType::class, $about, [
             'action' => $this->generateUrl('content_types_edit_about', ['id' => $about->getId()])
         ]);
         $translations =  $repository->findTranslations($about);

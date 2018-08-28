@@ -49,10 +49,58 @@ class Item implements TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider", "products", "modes","about"})
+     * @Serializer\Groups({"slider", "products", "modes"})
      * @Gedmo\Translatable
      */
     private $content;
+
+    /**
+     * @return mixed
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * @param mixed $telephone
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"about", "slider"})
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"about", "slider"})
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="text", nullable=true)
