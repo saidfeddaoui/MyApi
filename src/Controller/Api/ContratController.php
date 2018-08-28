@@ -74,7 +74,7 @@ class ContratController extends BaseController
      */
     public function getContrat($id)
     {
-        $contrat = $this->em->getRepository('App:Contrats')->findByClient($id);
+        $contrat = $this->em->getRepository('App:Contrats')->findBy([ 'client' => $id,"actif"=>true]);
         return $this->respondWith($contrat);
     }
 
@@ -109,7 +109,9 @@ class ContratController extends BaseController
         foreach ($contrats as $contrat) {
             $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
             $contra->setActif(false);
+            $contra->setDateSuppression(date("Y-m-d"));
         }
+        
         $this->em->flush();
         return new JsonResponse(array(
             "code"=>200,
