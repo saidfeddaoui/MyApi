@@ -106,6 +106,11 @@ services:
                     - '@jms_serializer'
                     - array
 
+    App\Services\ContratApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_details_contrat'
+                    - '@jms_serializer'
+                    - array
 
     # Exception normalizers
     app.normalizer.not_found_http_exception:

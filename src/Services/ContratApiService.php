@@ -12,25 +12,26 @@ class ContratApiService extends ApiCustomerService
 
     public function AddContrat($contrat)
     {
-       /* $context = new SerializationContext();*/
-
         $requestContrat = json_encode($contrat);
-
-       /* var_dump($cont);
-        $requestContrat = $this->serializer->serialize($contrat,'json');
-
-        var_dump($requestContrat);
-        die(); */
-
         $response = $this->httpClient->post("", [
             'body' => $requestContrat,
             'headers' => ['Content-type' => 'application/json']
         ]);
-
         return $this->getResult($response);
-
-
     }
+
+
+    public function detailsContrat($contrat)
+    {
+
+        $requestContrat = json_encode($contrat);
+        $response = $this->httpClient->post("", [
+            'body' => $requestContrat,
+            'headers' => ['Content-type' => 'application/json']
+        ]);
+        return $this->getResult($response);
+    }
+
 
     /**
      * @param $response
