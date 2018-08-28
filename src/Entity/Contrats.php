@@ -26,6 +26,40 @@ class Contrats
     private $nomProduit;
 
     /**
+     *
+     *  @SWG\Post(
+     *     tags={"Contrat"},
+     *     description="liste des contrats a suprimer",
+     *     @SWG\Parameter(
+     *        name="contrat",
+     *        in="body",
+     *        description="contrats object",
+     *        required=true,
+     *        @Model(type="App\Entity\Contrats", groups={"contratsForDelete"})
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success response",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Not Found Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Resource Not Found"
+     *             }
+     *         }
+     *     )
+     * )
+     *
      * @ORM\Column(type="string", length=255)
      * @Serializer\Expose()
      * @Serializer\Groups("contrats")
