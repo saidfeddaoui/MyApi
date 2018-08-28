@@ -64,7 +64,7 @@ class AboutController extends Controller
         }
 
         return $this->render('about/index.html.twig', [
-            'page_title' => 'Slider',
+            'page_title' => 'Qui Sommes Nous ',
             'page_subtitle' => '',
             'items' => $data ? $data : [],
             'form' => $form->createView(),
