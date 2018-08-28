@@ -59,7 +59,7 @@ class AboutController extends Controller
             );
         }
 
-        return $this->render('slider/index.html.twig', [
+        return $this->render('about/index.html.twig', [
             'page_title' => 'Slider',
             'page_subtitle' => '',
             'items' => $data ? $data : [],
@@ -115,7 +115,7 @@ class AboutController extends Controller
         return  $this->redirect($this->generateUrl('content_types_about'));
     }
     /**
-     * @Route(path="/slider/edit/{id}", name="edit_about", options={"expose"=true})
+     * @Route(path="/about/edit/{id}", name="edit_about", options={"expose"=true})
      *
      * @param Item $about
      * @param Request $request
@@ -157,7 +157,7 @@ class AboutController extends Controller
             $em->flush();
             return  $this->redirect($this->generateUrl('content_types_about'));
         }
-        return  $this->render('About/form.html.twig', [
+        return  $this->render('about/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
