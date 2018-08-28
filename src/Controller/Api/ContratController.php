@@ -80,14 +80,14 @@ class ContratController extends BaseController
 
 
     /**
-     * @Rest\Delete(path = "/delete/{numeroContrat}", name = "delete")
+     * @Rest\Delete(path = "/delete/{police}", name = "delete")
      * @Rest\View(serializerGroups={"all", "contrats"})
-     * @param Contrats $contrat
+     * @param Contrats $police
      * @return JsonResponse
      */
-    public function deleteContrat(Contrats $contrat)
+    public function deleteContrat(Contrats $police)
     {
-        $this->em->remove($contrat);
+        $this->em->remove($police);
         $this->em->flush();
         return new JsonResponse(array(
             "code"=>200,
@@ -107,8 +107,8 @@ class ContratController extends BaseController
     {
         $contrats=json_decode($request->getContent());
         foreach ($contrats as $contrat) {
-            $contra = $this->em->getRepository("App:Contrats")->findOneByNumeroContrat($contrat->nemeroClient);
-            $this->em->remove($contra);
+            $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
+            $contra->setActif(false);
         }
         $this->em->flush();
         return new JsonResponse(array(

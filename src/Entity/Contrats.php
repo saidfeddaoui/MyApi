@@ -31,7 +31,7 @@ class Contrats
      * @Serializer\Groups("contrats")
      * @Serializer\Groups("contrats")
      */
-    private $numeroContrat;
+    private $police;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="idSocietaire")
@@ -58,6 +58,37 @@ class Contrats
      */
     private $dateEcheance;
 
+
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     */
+    private $actif;
+
+    /**
+     * @return mixed
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param mixed $actif
+     */
+    public function setActif($actif)
+    {
+        $this->actif = $actif;
+    }
+
+    /**
+     * @ORM\Column(type="date")
+     *
+     * @Serializer\Type("DateTime<'Y-m-d'>")
+     */
+    private $dateSuppression;
+
+
     public function getId()
     {
         return $this->id;
@@ -75,14 +106,14 @@ class Contrats
         return $this;
     }
 
-    public function getNumeroContrat(): ?string
+    public function getPolice(): ?string
     {
-        return $this->numeroContrat;
+        return $this->police;
     }
 
-    public function setNumeroContrat(string $numeroContrat): self
+    public function setPolice(string $police): self
     {
-        $this->numeroContrat = $numeroContrat;
+        $this->police = $police;
 
         return $this;
     }
@@ -131,6 +162,20 @@ class Contrats
     public function setDateEcheance(\DateTimeInterface $dateEcheance): self
     {
         $this->dateEcheance = $dateEcheance;
+
+        return $this;
+    }
+
+
+
+    public function getDateSuppression(): ?\DateTimeInterface
+    {
+        return $this->dateSuppression;
+    }
+
+    public function setDateSuppression(\DateTimeInterface $dateSuppression): self
+    {
+        $this->dateSuppression = $dateSuppression;
 
         return $this;
     }
