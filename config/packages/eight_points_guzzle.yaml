@@ -71,7 +71,7 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_details_contrat:
-                    base_url: http://demo2705753.mockable.io/
+                    base_url: http://demo6081607.mockable.io/details
                     options:
                         timeout: 30
                         headers:
