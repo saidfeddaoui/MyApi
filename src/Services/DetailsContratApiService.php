@@ -14,7 +14,7 @@ class DetailsContratApiService extends ApiCustomerService
     {
 
         $requestContrat = json_encode($contrat);
-        $response = $this->httpClient->get("", [
+        $response = $this->httpClient->post("", [
             'body' => $requestContrat,
             'headers' => ['Content-type' => 'application/json']
         ]);
