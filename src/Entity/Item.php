@@ -49,7 +49,7 @@ class Item implements TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider", "products", "modes", "about"})
+     * @Serializer\Groups({"slider", "products", "modes"})
      * @Gedmo\Translatable
      */
     private $content;
@@ -90,7 +90,7 @@ class Item implements TranslatableInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"about"})
+     * @Serializer\Groups({"about", "slider"})
      */
     private $telephone;
 
@@ -98,7 +98,7 @@ class Item implements TranslatableInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"about"})
+     * @Serializer\Groups({"about", "slider"})
      */
     private $email;
 
