@@ -103,12 +103,12 @@ class ContratController extends BaseController
      * @param ContratApiService $contratApiService
      * @return JsonResponse
      */
-    public function deleteManyContrat(Request $request, ContratApiService $contratApiService)
+    public function deleteManyContrat(Request $request)
     {
         $contrats=json_decode($request->getContent());
         foreach ($contrats as $contrat) {
-           $contra= $this->em->getRepository("App:Contrats").findByNumeroContrat($contrat->nemeroClient);
-           $this->em->remove($contra);
+            $contra = $this->em->getRepository("App:Contrats")->findOneByNumeroContrat($contrat->nemeroClient);
+            $this->em->remove($contra);
         }
         $this->em->flush();
         return new JsonResponse(array(
@@ -116,8 +116,6 @@ class ContratController extends BaseController
             "status"=>"ok",
             "message"=>"les contrat ont été supprimé avec succès"
         ));
-
-
 
     }
 
