@@ -91,8 +91,34 @@ class ContratController extends BaseController
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
-            "message"=>"le contrat à été supprimé avec succès"
+            "message"=>"le contrat a été supprimé avec succès"
         ));
+    }
+
+
+    /**
+     *
+     * @Rest\Post(path="/delete/many",name="delete_many")
+     * @param  Request $request
+     * @param ContratApiService $contratApiService
+     * @return JsonResponse
+     */
+    public function deleteManyContrat(Request $request, ContratApiService $contratApiService)
+    {
+        $contrats=json_decode($request->getContent());
+        foreach ($contrats as $contrat) {
+           $contra= $this->em->getRepository("App:Contrats").findByNumeroContrat($contrat->nemeroClient);
+           $this->em->remove($contra);
+        }
+        $this->em->flush();
+        return new JsonResponse(array(
+            "code"=>200,
+            "status"=>"ok",
+            "message"=>"les contrat ont été supprimé avec succès"
+        ));
+
+
+
     }
 
 
