@@ -48,7 +48,7 @@ class AboutController extends Controller
         /**
          * @var ItemList $sliderList
          */
-        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $session->get('insuranceType')]);
+        $sliderList = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $session->get('insuranceType')]);
         foreach ($sliderList->getItems() as $key => $value){
             $translations =  $repository->findTranslations($value);
             $data[] = array(
@@ -59,7 +59,7 @@ class AboutController extends Controller
             );
         }
 
-        return $this->render('slider/index.html.twig', [
+        return $this->render('about/index.html.twig', [
             'page_title' => 'Slider',
             'page_subtitle' => '',
             'items' => $data ? $data : [],
@@ -98,7 +98,7 @@ class AboutController extends Controller
             /**
              * @var ItemList $abouts
              */
-            $abouts = $em->getRepository('App:ItemList')->findOneBy(['type'=>'slider','insuranceType'=> $insuranceType]);
+            $abouts = $em->getRepository('App:ItemList')->findOneBy(['type'=>'about','insuranceType'=> $insuranceType]);
 
             $abouts->addItem($about);
             $em->persist($abouts);
@@ -115,9 +115,9 @@ class AboutController extends Controller
         return  $this->redirect($this->generateUrl('content_types_about'));
     }
     /**
-     * @Route(path="/slider/edit/{id}", name="edit_about", options={"expose"=true})
+     * @Route(path="/about/edit/{id}", name="edit_about", options={"expose"=true})
      *
-     * @param Item $slider
+     * @param Item $about
      * @param Request $request
      * @return Response
      */
@@ -157,7 +157,7 @@ class AboutController extends Controller
             $em->flush();
             return  $this->redirect($this->generateUrl('content_types_about'));
         }
-        return  $this->render('About/form.html.twig', [
+        return  $this->render('about/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }

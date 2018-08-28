@@ -49,7 +49,7 @@ class Item implements TranslatableInterface
      * @ORM\Column(type="text", nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider", "products", "modes"})
+     * @Serializer\Groups({"slider", "products", "modes","about"})
      * @Gedmo\Translatable
      */
     private $content;
