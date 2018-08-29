@@ -44,6 +44,7 @@ class AlertController extends Controller
             $data[] = [
                 'id' => $value->getId(),
                 'title' => $value->getTitle(),
+                'title' => $value->getSubTitle(),
                 'description' => $value->getDescription(),
                 'date_creation' => $value->getDateCreation(),
                 'date_expiration' => $value->getDateExpiration(),
@@ -80,6 +81,7 @@ class AlertController extends Controller
             $alert->setInsuranceType($insuranceType);
             $em->persist($alert);
             $repository->translate($alert, 'title', 'ar', $form->get('title_ar')->getData());
+            $repository->translate($alert, 'subTitle', 'ar', $form->get('subTitle_ar')->getData());
             $repository->translate($alert, 'description', 'ar', $form->get('description_ar')->getData());
             $em->flush();
         }
@@ -108,11 +110,13 @@ class AlertController extends Controller
         $translations =  $repository->findTranslations($alert);
         if ($translations) {
             $form->get('title_ar')->setData($translations['ar']['title']);
+            $form->get('subTitle_ar')->setData($translations['ar']['subTitle']);
             $form->get('description_ar')->setData($translations['ar']['description']);
         }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->translate($alert, 'title', 'ar', $form->get('title_ar')->getData()) ;
+            $repository->translate($alert, 'subTitle', 'ar', $form->get('subTitle_ar')->getData()) ;
             $repository->translate($alert, 'description', 'ar', $form->get('description_ar')->getData());
             $em->persist($alert);
             $em->flush();
