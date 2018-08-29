@@ -9,6 +9,10 @@ jQuery(document).ready(function() {
                 "searchable": true,
                 "orderable": false,
             },
+            { // set default column settings
+                "searchable": true,
+                "orderable": false,
+            },
             {
                 "searchable": true,
                 "orderable": false,
