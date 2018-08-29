@@ -105,7 +105,11 @@ class ContratController extends BaseController
      */
     public function deleteManyContrat(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
         $contrats=json_decode($request->getContent());
+
+        var_dump($contrats);
+        die();
         foreach ($contrats as $contrat) {
             $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
             $contra->setActif(false);

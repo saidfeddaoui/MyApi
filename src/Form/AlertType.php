@@ -17,6 +17,8 @@ class AlertType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre ',])
             ->add('title_ar', TextType::class, ['label' => 'عنوان ','mapped'=>false])
+            ->add('subTitle', TextType::class, ['label' => 'Sous titre ',])
+            ->add('subTitle_ar', TextType::class, ['label' => 'عنوان فرعي ','mapped'=>false])
             ->add('description',TextareaType::class,['label'=>'Description '])
             ->add('description_ar',TextareaType::class,['label'=>'وصف','mapped'=>false])
             ->add('date_creation',DateType::class,
