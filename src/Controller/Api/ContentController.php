@@ -442,6 +442,7 @@ class ContentController extends BaseController
     {
         $thisAlert = $em->getRepository('App:Alert')->find($id);
         $thisAlert->setChecked(true);
+        $em->flush();
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
         return $this->respondWith($alerts);
     }
