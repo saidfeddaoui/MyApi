@@ -167,14 +167,16 @@ class Contrats
     }
 
 
+
     public function getDateSuppression()
     {
         return $this->dateSuppression;
     }
 
-    public function setDateSuppression($dateSuppression)
+    public function setDateSuppression($dateSuppression): self
     {
         $this->dateSuppression = $dateSuppression;
+
         return $this;
     }
 }

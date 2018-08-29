@@ -109,7 +109,8 @@ class ContratController extends BaseController
         foreach ($contrats as $contrat) {
             $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
             $contra->setActif(false);
-            $contra->setDateSuppression(date("Y-m-d"));
+            $datenow = new \DateTime("now");
+            $contra->setDateSuppression($datenow);
         }
 
         $this->em->flush();
