@@ -47,7 +47,7 @@ class Alert
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Serializer\Expose()
      */
     private $checked;
