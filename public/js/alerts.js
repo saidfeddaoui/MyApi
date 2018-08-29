@@ -19,6 +19,14 @@ jQuery(document).ready(function() {
             },
             {
                 "searchable": true,
+                "orderable": false,
+            },
+            {
+                "searchable": true,
+                "orderable": false,
+            },
+            {
+                "searchable": true,
                 "orderable": true,
             },
             {
