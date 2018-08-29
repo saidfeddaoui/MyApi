@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
+use App\Entity\Alert;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Entity\Societaire;
