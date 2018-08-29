@@ -37,7 +37,36 @@ class Alert
      * @Gedmo\Translatable
      * @Serializer\Expose()
      */
+    private $subTitle;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Gedmo\Translatable
+     * @Serializer\Expose()
+     */
     private $description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Serializer\Expose()
+     */
+    private $checked;
+
+    /**
+     * @return mixed
+     */
+    public function getChecked()
+    {
+        return $this->checked;
+    }
+
+    /**
+     * @param mixed $checked
+     */
+    public function setChecked($checked)
+    {
+        $this->checked = $checked;
+    }
 
     /**
      * @ORM\Column(type="datetime")
@@ -73,12 +102,24 @@ class Alert
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getSubTitle(): ?string
+    {
+        return $this->subTitle;
+    }
+
+    public function setSubTitle(string $subTitle): self
+    {
+        $this->subTitle = $subTitle;
+
+        return $this;
+    }
+
+    public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription($description): self
     {
         $this->description = $description;
 

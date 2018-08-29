@@ -401,6 +401,49 @@ class ContentController extends BaseController
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
         return $this->respondWith($alerts);
     }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Alertes",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="alerts types successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/alert/{id}", name = "alerts")
+     * @Rest\View
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
+     * @param Alert $id
+     * @return ApiResponse
+     */
+    public function UpdateAlerts(ObjectManager $em, InsuranceType $insuranceType,Alert $id)
+    {
+        $thisAlert = $em->getRepository('App:Alert')->find($id);
+        $thisAlert->setChecked(true);
+        $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
+        return $this->respondWith($alerts);
+    }
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
