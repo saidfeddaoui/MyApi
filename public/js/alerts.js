@@ -9,10 +9,6 @@ jQuery(document).ready(function() {
                 "searchable": true,
                 "orderable": false,
             },
-            { // set default column settings
-                "searchable": true,
-                "orderable": false,
-            },
             {
                 "searchable": true,
                 "orderable": false,
@@ -43,7 +39,6 @@ jQuery(document).ready(function() {
         ] // set first column as a default sort by asc
     });
     $('.edit').on('click', function () {
-        console.log("here");
         var id = $(this).data('id');
         $.ajax({
             url: Routing.generate('alerts_edit', {id: id}),
