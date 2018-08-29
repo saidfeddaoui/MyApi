@@ -407,7 +407,7 @@ class ContentController extends BaseController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
-     *     description="Alertes",
+     *     description="Alerte",
      *     @SWG\Parameter(
      *         name="X-ENTITY",
      *         in="header",
@@ -428,7 +428,7 @@ class ContentController extends BaseController
      *     )
      * )
      *
-     * @Rest\Get(path = "/alert/{id}", name = "alerts")
+     * @Rest\Get(path = "/alert/{id}", name = "alert_checked")
      * @Rest\View
      *
      * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
