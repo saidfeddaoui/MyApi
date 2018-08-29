@@ -44,7 +44,7 @@ class AlertController extends Controller
             $data[] = [
                 'id' => $value->getId(),
                 'title' => $value->getTitle(),
-                'title' => $value->getSubTitle(),
+                'SubTitle' => $value->getSubTitle(),
                 'description' => $value->getDescription(),
                 'date_creation' => $value->getDateCreation(),
                 'date_expiration' => $value->getDateExpiration(),
