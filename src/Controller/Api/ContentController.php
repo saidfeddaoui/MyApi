@@ -66,6 +66,46 @@ class ContentController extends BaseController
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
+     *     description="Home about",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Slider successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/about", name = "about")
+     * @Rest\View(serializerGroups={"all", "slider"})
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function about(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'about', 'insuranceType' => $insuranceType]);
+        return $this->respondWith($slider);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
      *     description="Home Circonstances Sinistre",
      *     @SWG\Parameter(
      *         name="X-ENTITY",
