@@ -17,6 +17,11 @@ class Alert
     use Translatable;
 
 
+
+    public function __construct()
+    {
+        $this->checked = false;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,7 +52,8 @@ class Alert
     private $description;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true, options={"default":false})
+     * @ORM\Column(type="boolean", nullable=true)
+     *
      * @Serializer\Expose()
      */
     private $checked;
