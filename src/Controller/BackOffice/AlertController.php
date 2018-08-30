@@ -3,6 +3,7 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Alert;
+use App\Entity\Attachment;
 use App\Form\AlertType;
 use Ramsey\Uuid\Uuid;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
