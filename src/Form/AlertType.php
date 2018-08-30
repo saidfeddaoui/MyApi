@@ -21,6 +21,11 @@ class AlertType extends AbstractType
             ->add('subTitle_ar', TextType::class, ['label' => 'عنوان فرعي ','mapped'=>false])
             ->add('description',TextareaType::class,['label'=>'Description '])
             ->add('description_ar',TextareaType::class,['label'=>'وصف','mapped'=>false])
+            ->add('_img', FileType::class, [
+                'label' => 'Image ',
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('date_creation',DateType::class,
                 ['label'=>'Date d\'ajout ',
                     'widget'=> 'single_text',
