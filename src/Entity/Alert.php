@@ -52,6 +52,14 @@ class Alert
      */
     private $checked;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Attachment", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @Serializer\Expose()
+     */
+    private $image;
+
     /**
      * @return mixed
      */
@@ -159,6 +167,17 @@ class Alert
     {
         $this->insuranceType = $insuranceType;
 
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
         return $this;
     }
 

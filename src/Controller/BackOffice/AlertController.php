@@ -119,6 +119,7 @@ class AlertController extends Controller
             $repository->translate($alert, 'title', 'ar', $form->get('title_ar')->getData()) ;
             $repository->translate($alert, 'subTitle', 'ar', $form->get('subTitle_ar')->getData()) ;
             $repository->translate($alert, 'description', 'ar', $form->get('description_ar')->getData());
+            
             $em->persist($alert);
             $em->flush();
             return $this->redirect($this->generateUrl('alerts_list'));
