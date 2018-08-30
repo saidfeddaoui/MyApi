@@ -59,8 +59,6 @@ class ContentController extends BaseController
     public function slider(ObjectManager $em, InsuranceType $insuranceType)
     {
         $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'slider', 'insuranceType' => $insuranceType]);
-        dump($slider);
-        die();
         return $this->respondWith($slider);
     }
 
@@ -441,7 +439,12 @@ class ContentController extends BaseController
      */
     public function Alerts(ObjectManager $em, InsuranceType $insuranceType)
     {
+        $imgDirectory = "http://mamda.mobiblanc.com/img/";
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
+        foreach ($alerts as $alert) {
+            $path=$imgDirectory.$alert->getImage()->getPath();
+            $alert->getImage()->setPath($path);
+        }
         return $this->respondWith($alerts);
     }
 
