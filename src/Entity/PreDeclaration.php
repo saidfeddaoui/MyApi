@@ -126,7 +126,7 @@ class PreDeclaration
      */
     private $tiers;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType",cascade={"persist", "remove"})
      */
     private $insuranceType;
     /**
