@@ -111,7 +111,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     {
         $id = $preDeclaration->getContrat()->getId();
         $police = $preDeclaration->getContrat()->getPolice();
-        $contrat = $this->em->getRepository('App:Contrats')->findOneById($id);
+        $contrat = $this->em->getRepository('App:Contrats')->findOneByPolice($police);
         if (!$contrat) {
             throw new NotFoundHttpException("No Contrat with reference: {$police} was found");
         }
@@ -124,7 +124,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processTypeSinistre(PreDeclaration $preDeclaration)
     {
         $id = $preDeclaration->getTypeSinistre()->getId();
-        $typeSinistre = $this->em->getRepository('App:Item')->findOneById($id);
+        $typeSinistre = $this->em->getRepository('App:Item')->findOneBy($id);
         if (!$typeSinistre) {
             throw new NotFoundHttpException("No Sinistre type with reference: {$id} was found");
         }
