@@ -123,7 +123,7 @@ class PreDeclaration
      *
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachement", mappedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachment", mappedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $images;
     /**
@@ -287,7 +287,7 @@ class PreDeclaration
      * @param TiersAttachment|null $images
      * @return static
      */
-    public function setImages($images)
+    public function setImages(?TiersAttachment $images)
     {
         $this->images = $images;
         return $images;
