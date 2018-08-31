@@ -122,9 +122,9 @@ class PreDeclaration
      *
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachement", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
-    private $tiers;
+    private $images;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType",cascade={"persist", "remove"})
      */
@@ -276,20 +276,20 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return Tiers|null
+     * @return TiersAttachment|null
      */
-    public function getTiers(): ?Tiers
+    public function getImages()
     {
-        return $this->tiers;
+        return $this->images;
     }
     /**
-     * @param Tiers|null $tiers
+     * @param TiersAttachment|null $images
      * @return static
      */
-    public function setTiers(?Tiers $tiers): self
+    public function setImages(?Tiers $images)
     {
-        $this->tiers = $tiers;
-        return $this;
+        $this->images = $images;
+        return $images;
     }
     /**
      * @return \DateTimeInterface|null
