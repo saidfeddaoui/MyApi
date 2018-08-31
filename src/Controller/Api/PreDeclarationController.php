@@ -227,6 +227,30 @@ class PreDeclarationController extends BaseController
      */
     public function uploadTiersAttachments(Request $request)
     {
+        $types ="predeclaration";
+        if (!count($request->files)) {
+            throw new MissingRequiredFileException("no image");
+        }
+
+        $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
+        $tiersAttachments = [];
+        foreach ($request->files as $type) {
+            /**
+             * @var UploadedFile $attachment
+             */
+            $attachment = $type;
+            $file = $attachment->move($directory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
+            $tiersAttachment = new TiersAttachment($types, $file->getBasename());
+            $this->em->persist($tiersAttachment);
+            $this->em->flush();
+            $tiersAttachments[] = ['id' => $tiersAttachment->getId(), 'type' => $types];
+        }
+        return $this->respondWith($tiersAttachments);
+    }
+
+
+  /*  public function uploadTiersAttachments(Request $request)
+    {
         foreach (TiersAttachment::getRequiredAttachmentTypes() as $type) {
             if (!$request->files->has($type)) {
                 throw new MissingRequiredFileException($type);
@@ -235,10 +259,9 @@ class PreDeclarationController extends BaseController
         $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
         $tiersAttachments = [];
         foreach (TiersAttachment::getAttachmentTypes() as $type) {
-            /**
-             * @var UploadedFile $attachment
-             */
+
             $attachment = $request->files->get($type);
+
             $file = $attachment->move($directory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
             $tiersAttachment = new TiersAttachment($type, $file->getBasename());
             $this->em->persist($tiersAttachment);
@@ -247,5 +270,6 @@ class PreDeclarationController extends BaseController
         }
         return $this->respondWith($tiersAttachments);
     }
+    */
 
 }
