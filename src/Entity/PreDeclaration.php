@@ -286,7 +286,7 @@ class PreDeclaration
      * @param TiersAttachment|null $images
      * @return static
      */
-    public function setImages(?Tiers $images)
+    public function setImages(?TiersAttachment $images)
     {
         $this->images = $images;
         return $images;
