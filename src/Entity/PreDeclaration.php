@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\TiersAttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -286,7 +287,7 @@ class PreDeclaration
      * @param TiersAttachment|null $images
      * @return static
      */
-    public function setImages(?TiersAttachment $images)
+    public function setImages($images)
     {
         $this->images = $images;
         return $images;
