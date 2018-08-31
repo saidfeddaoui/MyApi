@@ -213,19 +213,19 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return Contract|null
+     * @return Contrats|null
      */
-    public function getContract(): ?Contract
+    public function getContrat(): ?Contrats
     {
-        return $this->contract;
+        return $this->contrat;
     }
     /**
-     * @param Contract|null $contract
+     * @param Contrats|null $contrat
      * @return static
      */
-    public function setContract(?Contract $contract): self
+    public function setContrat(?Contrats $contrat): self
     {
-        $this->contract = $contract;
+        $this->contrat = $contrat;
         return $this;
     }
     /**
