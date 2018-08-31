@@ -83,9 +83,10 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="preDeclarations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contrats", inversedBy="preDeclarations")
+     * @ORM\JoinColumn(name="contrat", referencedColumnName="police")
      */
-    private $contract;
+    private $contrat;
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
