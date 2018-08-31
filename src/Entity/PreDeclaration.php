@@ -122,7 +122,7 @@ class PreDeclaration
      *
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachement", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachement", mappedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $images;
     /**
