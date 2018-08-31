@@ -124,7 +124,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processTypeSinistre(PreDeclaration $preDeclaration)
     {
         $id = $preDeclaration->getTypeSinistre()->getId();
-        $typeSinistre = $this->em->getRepository('App:Item')->findOneBy($id);
+        $typeSinistre = $this->em->getRepository('App:Item')->findOneById($id);
         if (!$typeSinistre) {
             throw new NotFoundHttpException("No Sinistre type with reference: {$id} was found");
         }
