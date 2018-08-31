@@ -68,7 +68,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
             }
         }
         $_preDeclaration = $this->em->getRepository('App:PreDeclaration')->findBy([
-            'contract' => $preDeclaration->getContract(),
+            'contrat' => $preDeclaration->getContrat(),
             'dateSinistre' => $preDeclaration->getDateSinistre(),
         ]);
         if ($_preDeclaration) {
@@ -84,7 +84,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processPreDeclaration(PreDeclaration $preDeclaration)
     {
-        $this->processContract($preDeclaration);
+        $this->processContrat($preDeclaration);
         $this->processTypeSinistre($preDeclaration);
         $this->processVille($preDeclaration);
         $this->processCircumstanceAttachments($preDeclaration);
@@ -107,14 +107,15 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      * @param PreDeclaration $preDeclaration
      * @throws NotFoundHttpException
      */
-    private function processContract(PreDeclaration $preDeclaration)
+    private function processContrat(PreDeclaration $preDeclaration)
     {
-        $id = $preDeclaration->getContract()->getId();
-        $contract = $this->em->getRepository('App:Contract')->findOneById($id);
-        if (!$contract) {
-            throw new NotFoundHttpException("No Contract with reference: {$id}was found");
+        $id = $preDeclaration->getContrat()->getId();
+        $police = $preDeclaration->getContrat()->getPolice();
+        $contrat = $this->em->getRepository('App:Contrats')->findOneById($id);
+        if (!$contrat) {
+            throw new NotFoundHttpException("No Contrat with reference: {$police} was found");
         }
-        $preDeclaration->setContract($contract);
+        $preDeclaration->setContrat($contrat);
     }
     /**
      * @param PreDeclaration $preDeclaration
