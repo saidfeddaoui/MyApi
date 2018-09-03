@@ -92,8 +92,22 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $this->processCirconstanceSinistre($preDeclaration);
 
         $this->processDamagedParts($preDeclaration);
-      //  $this->processTiersAttachments($preDeclaration);
+        $this->processTiersAttachments($preDeclaration);
 
+      /*  switch ($type) {
+            case PreDeclaration::TYPE_ACCIDENT:
+                    $this->processDamagedParts($preDeclaration);
+                    $this->processTiersAttachments($preDeclaration);
+                break;
+            case PreDeclaration::TYPE_BRIS_GLACE:
+                    $this->processDamagedParts($preDeclaration);
+                    //$preDeclaration->setTiers(null);
+                    $this->processTiersAttachments($preDeclaration);
+                break;
+            default:
+                    $preDeclaration->setTiers(null)->setVehiculeDamage(null);
+                break;
+        } */
     }
     /**
      * @param PreDeclaration $preDeclaration
