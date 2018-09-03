@@ -73,19 +73,6 @@ class Circumstance
     }
 
     /**
-     * @var Collection
-     *
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\Valid(groups={"client_pre_declaration"})
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\CircumstanceAttachment", mappedBy="circumstance", cascade={"persist"})
-     */
-    private $photos;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\PreDeclaration", mappedBy="circumstance", cascade={"persist", "remove"})
      */
     private $preDeclaration;
@@ -120,53 +107,6 @@ class Circumstance
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|CircumstanceAttachment[]
-     */
-    public function getPhotos(): Collection
-    {
-        return $this->photos;
-    }
-
-    /**
-     * @param mixed $photos
-     * @return Circumstance
-     */
-    public function setPhotos($photos)
-    {
-        foreach ($this->photos as $photo) {
-            $this->removePhoto($photo);
-        }
-        foreach ($photos as $photo) {
-            $this->addPhoto($photo);
-        }
-        return $this;
-    }
-
-
-    public function addPhoto(CircumstanceAttachment $photo): self
-    {
-        if (!$this->photos->contains($photo)) {
-            $this->photos[] = $photo;
-            $photo->setCircumstance($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhoto(CircumstanceAttachment $photo): self
-    {
-        if ($this->photos->contains($photo)) {
-            $this->photos->removeElement($photo);
-            // set the owning side to null (unless already changed)
-            if ($photo->getCircumstance() === $this) {
-                $photo->setCircumstance(null);
-            }
-        }
 
         return $this;
     }
