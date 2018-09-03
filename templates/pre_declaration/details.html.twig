@@ -65,12 +65,12 @@
                                     <h4>Photo {{ loop.index }}</h4>
                                     <div class="row">
                                         <div class="col-md-6 responsive-1024">
-                                            <img src="{{ asset('img/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                         </div>
                                         <div class="col-md-6 responsive-1024">
                                             <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
                                                 <div class="preview-container">
-                                                    <img src="{{ asset('img/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                                    <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
                                                 </div>
                                             </div>
                                         </div>
