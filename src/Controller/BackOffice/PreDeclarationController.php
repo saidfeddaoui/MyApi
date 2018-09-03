@@ -144,8 +144,11 @@ class PreDeclarationController extends Controller
      */
     public function details(PreDeclaration $preDeclaration)
     {
+        $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
+
         return $this->render('pre_declaration/details.html.twig', [
             'preDeclaration' => $preDeclaration,
+            'attachements' => $attachements,
         ]);
     }
     /**
