@@ -53,7 +53,7 @@ class Circumstance
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $ville;
