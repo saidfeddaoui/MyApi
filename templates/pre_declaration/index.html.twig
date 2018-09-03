@@ -41,7 +41,7 @@
                         <tbody>
                         {% for preDeclaration in preDeclarations %}
                             <tr data-id="{{ preDeclaration.id }}">
-                                <td>{{ preDeclaration.contrats.client.first_name }}</td>
+                                <td>{{ preDeclaration.contrats.client.firstName }}</td>
                                 <td>{{ preDeclaration.contrats.police }}</td>
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
