@@ -112,7 +112,7 @@ class PreDeclarationController extends BaseController
      */
     public function preDeclaration(PreDeclaration $preDeclaration, InsuranceType $insuranceType)
     {
-        $inType = $this->em->getRepository("app:InsuranceType")->findOneById($insuranceType->getId());
+        $inType = $this->em->getRepository("App:InsuranceType")->findOneById($insuranceType->getId());
         $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS)->setInsuranceType($inType);
         $this->em->persist($preDeclaration);
         $this->em->flush();
