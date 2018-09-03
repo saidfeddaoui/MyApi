@@ -45,18 +45,6 @@ class Circumstance
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
-    /**
-     * @var Ville
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
-     * @Assert\Valid(groups={"client_pre_declaration"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $ville;
 
     /**
      * @var string
@@ -132,20 +120,6 @@ class Circumstance
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    public function getVille(): ?Ville
-    {
-        return $this->ville;
-    }
-
-
-
-    public function setVille(?Ville $ville): self
-    {
-        $this->ville = $ville;
 
         return $this;
     }
