@@ -73,18 +73,23 @@ class PreDeclarationController extends Controller
      * @Route(path="/display/details/{id}", name="display_details", requirements={"id":"\d+"}, options={"expose"=true})
      * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
      *
-     * @Breadcrumb(title="{preDeclaration.contract.client.name}")
+     * @Breadcrumb(title="{preDeclaration.contrat.client.firstName}")
      *
      * @param  PreDeclaration $preDeclaration
      * @return Response
      */
     public function displayDetails(PreDeclaration $preDeclaration)
     {
+
+        $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
+
+
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
             'portlet_title' => "Pré-déclaration de {$preDeclaration->getContrat()->getClient()->getFirstName()}",
             'preDeclaration' => $preDeclaration,
+            'attachements' => $attachements,
         ]);
     }
     /**

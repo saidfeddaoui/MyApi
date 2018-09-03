@@ -44,8 +44,8 @@
                         <li class="active">
                             <a href="#localisation_tab" data-toggle="tab">Localisation</a>
                         </li>
-                        {% if preDeclaration.circumstance.photos %}
-                            {% for photo in preDeclaration.circumstance.photos %}
+                        {% if attachements %}
+                            {% for photo in attachements %}
                                 <li>
                                     <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
                                 </li>
@@ -58,8 +58,8 @@
                             <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
                                 The onChange event handler is used to update the view in the preview pane. </p>
                         </div>
-                        {% if preDeclaration.circumstance.photos %}
-                            {% for photo in preDeclaration.circumstance.photos %}
+                        {% if attachements %}
+                            {% for photo in attachements %}
                                 <div class="tab-pane" id="photo_{{ photo.id }}_tab">
                                     <h4>Photo {{ loop.index }}</h4>
                                     <div class="row">
