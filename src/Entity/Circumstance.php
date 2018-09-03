@@ -72,6 +72,7 @@ class Circumstance
         $this->adress = $adress;
     }
 
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\PreDeclaration", mappedBy="circumstance", cascade={"persist", "remove"})
      */
@@ -79,7 +80,6 @@ class Circumstance
 
     public function __construct()
     {
-        $this->photos = new ArrayCollection();
     }
 
     public function getId()
