@@ -83,7 +83,7 @@ class PreDeclarationController extends Controller
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
-            'portlet_title' => "Pré-déclaration de {$preDeclaration->getContract()->getClient()->getName()}",
+            'portlet_title' => "Pré-déclaration de {$preDeclaration->getContrat()->getClient()->getFirstName()}",
             'preDeclaration' => $preDeclaration,
         ]);
     }
