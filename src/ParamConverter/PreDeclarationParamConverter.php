@@ -89,10 +89,10 @@ class PreDeclarationParamConverter implements ParamConverterInterface
       //  $this->processVille($preDeclaration);
       //  $this->processCircumstanceAttachments($preDeclaration);
        // $type = $preDeclaration->getTypeSinistre()->getTitle();
-        $this->processCirconstanceSinistre($preDeclaration);
+        //$this->processCirconstanceSinistre($preDeclaration);
 
-        $this->processDamagedParts($preDeclaration);
-        $this->processTiersAttachments($preDeclaration);
+        // $this->processDamagedParts($preDeclaration);
+        // $this->processTiersAttachments($preDeclaration);
 
     }
     /**
