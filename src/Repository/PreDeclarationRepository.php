@@ -27,6 +27,13 @@ class PreDeclarationRepository extends ServiceEntityRepository
      */
     public function findByStatusAndInsuranceType(int $status, $insuranceType)
     {
+
+        var_dump($status);
+
+        var_dump($insuranceType);
+
+        die();
+
         $query = $this->createQueryBuilder('p')
             ->where('p.status = :status')
             ->andwhere('p.insuranceType = :insuranceType')
