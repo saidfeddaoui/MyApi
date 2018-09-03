@@ -14,6 +14,7 @@
             <div class="portlet-body" style="display: none;">
                 <dl class="dl-horizontal">
                     <dt>Client</dt><dd>{{ preDeclaration.contrat.client.firstName }}</dd>
+                    <dt>Client</dt><dd>{{ preDeclaration.contrat.client.lastName }}</dd>
                     <dt>N° du contrat</dt><dd>{{ preDeclaration.contrat.police }}</dd>
                     <dt>Date Sinistre</dt><dd>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</dd>
                     <dt>Date de pré-déclaration</dt><dd>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</dd>
@@ -64,12 +65,12 @@
                                     <h4>Photo {{ loop.index }}</h4>
                                     <div class="row">
                                         <div class="col-md-6 responsive-1024">
-                                            <img src="{{ asset('img/circumstances/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                         </div>
                                         <div class="col-md-6 responsive-1024">
                                             <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
                                                 <div class="preview-container">
-                                                    <img src="{{ asset('img/circumstances/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                                    <img src="{{ asset('img/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
                                                 </div>
                                             </div>
                                         </div>
