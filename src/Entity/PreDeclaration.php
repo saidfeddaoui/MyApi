@@ -105,9 +105,9 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\CirconstanceSinistre", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
-    private $circumstance;
+    private $circonstance;
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -245,19 +245,19 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return Circumstance|null
+     * @return CirconstanceSinistre|null
      */
-    public function getCircumstance(): ?Circumstance
+    public function getCirconstance(): ?Circonstance
     {
-        return $this->circumstance;
+        return $this->circonstance;
     }
     /**
-     * @param Circumstance|null $circumstance
+     * @param CirconstanceSinistre|null $circonstance
      * @return static
      */
-    public function setCircumstance(?Circumstance $circumstance): self
+    public function setCircumstance(?CirconstanceSinistre $circonstance): self
     {
-        $this->circumstance = $circumstance;
+        $this->circonstance = $circonstance;
         return $this;
     }
     /**
