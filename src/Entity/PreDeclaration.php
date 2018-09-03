@@ -286,7 +286,7 @@ class PreDeclaration
      */
     public function setCirconstanceSinistre(?CirconstanceSinistre $circonstanceSinistre): self
     {
-        $this->circumstance = $circonstanceSinistre;
+        $this->circonstanceSinistre = $circonstanceSinistre;
         return $this;
     }
     /**
