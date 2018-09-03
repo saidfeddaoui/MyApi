@@ -324,14 +324,6 @@ class PreDeclaration
 
 
     /**
-     * @return Collection|TiersAttachment[]
-     */
-    public function getAttachments(): Collection
-    {
-        return $this->attachments;
-    }
-
-    /**
      * @param mixed $attachments
      * @return TiersAttachment
      */
