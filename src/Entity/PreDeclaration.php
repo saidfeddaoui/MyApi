@@ -329,7 +329,7 @@ class PreDeclaration
      */
     public function setAttachments($attachments)
     {
-        foreach ($this->attachments as $attachment) {
+        foreach ($this->images as $attachment) {
             $this->removeAttachment($attachment);
         }
         foreach ($attachments as $attachment){
@@ -340,8 +340,8 @@ class PreDeclaration
 
     public function addAttachment(TiersAttachment $attachment): self
     {
-        if (!$this->attachments->contains($attachment)) {
-            $this->attachments[] = $attachment;
+        if (!$this->images->contains($attachment)) {
+            $this->images[] = $attachment;
             $attachment->setPreDeclaration($this);
         }
 
@@ -350,8 +350,8 @@ class PreDeclaration
 
     public function removeAttachment(TiersAttachment $attachment): self
     {
-        if ($this->attachments->contains($attachment)) {
-            $this->attachments->removeElement($attachment);
+        if ($this->images->contains($attachment)) {
+            $this->images->removeElement($attachment);
             // set the owning side to null (unless already changed)
             if ($attachment->getPreDeclaration() === $this) {
                 $attachment->setPreDeclaration(null);
