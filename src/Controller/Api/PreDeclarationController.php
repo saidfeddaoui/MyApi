@@ -112,7 +112,7 @@ class PreDeclarationController extends BaseController
      */
     public function preDeclaration(PreDeclaration $preDeclaration, InsuranceType $insuranceType)
     {
-        $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS)->setInsuranceType($insuranceType->getId());
+        $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS);
         $this->em->persist($preDeclaration);
         $this->em->flush();
         $event = new NewPreDeclarationEvent($preDeclaration);
