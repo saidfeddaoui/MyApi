@@ -321,6 +321,30 @@ class PreDeclaration
         $this->images = $images;
         return $images;
     }
+
+    /**
+     * @return Collection|TiersAttachment[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $attachments
+     * @return TiersAttachment
+     */
+    public function setImages($attachments)
+    {
+        foreach ($this->attachments as $attachment) {
+            $this->removeImages($attachment);
+        }
+        foreach ($attachments as $attachment){
+            $this->addImages($attachment);
+        }
+        return $this;
+    }
+
     /**
      * @return \DateTimeInterface|null
      */

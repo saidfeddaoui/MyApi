@@ -149,7 +149,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         if (!$circonstanceSinistre) {
             throw new NotFoundHttpException("No Circonstance Sinistre with reference: {$id} was found");
         }
-        $preDeclaration->setTypeSinistre($circonstanceSinistre);
+        $preDeclaration->setCirconstanceSinistre($circonstanceSinistre);
     }
 
 
