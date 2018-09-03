@@ -94,20 +94,6 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $this->processDamagedParts($preDeclaration);
         $this->processTiersAttachments($preDeclaration);
 
-      /*  switch ($type) {
-            case PreDeclaration::TYPE_ACCIDENT:
-                    $this->processDamagedParts($preDeclaration);
-                    $this->processTiersAttachments($preDeclaration);
-                break;
-            case PreDeclaration::TYPE_BRIS_GLACE:
-                    $this->processDamagedParts($preDeclaration);
-                    //$preDeclaration->setTiers(null);
-                    $this->processTiersAttachments($preDeclaration);
-                break;
-            default:
-                    $preDeclaration->setTiers(null)->setVehiculeDamage(null);
-                break;
-        } */
     }
     /**
      * @param PreDeclaration $preDeclaration
@@ -153,40 +139,6 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     }
 
 
-
-    /**
-     * @param PreDeclaration $preDeclaration
-     * @throws NotFoundHttpException
-     */
-  /*  private function processVille(PreDeclaration $preDeclaration)
-    {
-        $id = $preDeclaration->getCircumstance()->getVille()->getId();
-        $city = $this->em->getRepository('App:Ville')->findOneById($id);
-        if (!$city) {
-            throw new NotFoundHttpException("No City with reference: {$id} was found");
-        }
-        $preDeclaration->getCircumstance()->setVille($city);
-    } */
-
-    /**
-     * @param PreDeclaration $preDeclaration
-     * @throws NotFoundHttpException
-     */
-  /*  private function processCircumstanceAttachments(PreDeclaration $preDeclaration)
-    {
-        $ids = $preDeclaration->getCircumstance()
-            ->getPhotos()
-            ->map(function ($c) {return $c->getId();})
-            ->toArray();
-        $attachments = $this->em->getRepository('App:CircumstanceAttachment')->findByIds($ids);
-        if ($diff = array_diff($ids, array_map(function ($c) {return $c->getId();}, $attachments))) {
-            throw new NotFoundHttpException(
-                "Submitted circumstance's attachments doesn't exist, (" . implode(',', $diff) . ")"
-            );
-        }
-        $preDeclaration->getCircumstance()->setPhotos($attachments);
-    }
-    */
     /**
      * @param PreDeclaration $preDeclaration
      * @throws NotFoundHttpException
