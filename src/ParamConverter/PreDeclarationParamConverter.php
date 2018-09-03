@@ -84,15 +84,15 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processPreDeclaration(PreDeclaration $preDeclaration)
     {
-        //$this->processContrat($preDeclaration);
-       // $this->processTypeSinistre($preDeclaration);
+        $this->processContrat($preDeclaration);
+        $this->processTypeSinistre($preDeclaration);
       //  $this->processVille($preDeclaration);
       //  $this->processCircumstanceAttachments($preDeclaration);
        // $type = $preDeclaration->getTypeSinistre()->getTitle();
-        //$this->processCirconstanceSinistre($preDeclaration);
+        $this->processCirconstanceSinistre($preDeclaration);
 
-        // $this->processDamagedParts($preDeclaration);
-        // $this->processTiersAttachments($preDeclaration);
+        $this->processDamagedParts($preDeclaration);
+      //  $this->processTiersAttachments($preDeclaration);
 
     }
     /**
