@@ -322,29 +322,52 @@ class PreDeclaration
         return $images;
     }
 
+
     /**
      * @return Collection|TiersAttachment[]
      */
-    public function getImages(): Collection
+    public function getAttachments(): Collection
     {
-        return $this->images;
+        return $this->attachments;
     }
 
     /**
      * @param mixed $attachments
      * @return TiersAttachment
      */
-    public function setImages($attachments)
+    public function setAttachments($attachments)
     {
         foreach ($this->attachments as $attachment) {
-            $this->removeImages($attachment);
+            $this->removeAttachment($attachment);
         }
         foreach ($attachments as $attachment){
-            $this->addImages($attachment);
+            $this->addAttachment($attachment);
         }
         return $this;
     }
 
+    public function addAttachment(TiersAttachment $attachment): self
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments[] = $attachment;
+            $attachment->setPreDeclaration($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(TiersAttachment $attachment): self
+    {
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
+            // set the owning side to null (unless already changed)
+            if ($attachment->getPreDeclaration() === $this) {
+                $attachment->setPreDeclaration(null);
+            }
+        }
+
+        return $this;
+    }
     /**
      * @return \DateTimeInterface|null
      */

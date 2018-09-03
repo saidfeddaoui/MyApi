@@ -220,7 +220,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
                 "Submitted tiers attachments doesn't exist, (" . implode(',', $diff) . ")"
             );
         }
-        $preDeclaration->setImages($attachments);
+        $preDeclaration->setAttachments($attachments);
     }
     /**
      * Checks if the object is supported.

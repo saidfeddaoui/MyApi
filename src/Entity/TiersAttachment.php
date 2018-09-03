@@ -116,7 +116,7 @@ class TiersAttachment
         return $this->preDeclaration;
     }
 
-    public function setTiers(PreDeclaration $preDeclaration)
+    public function setPreDeclaration(PreDeclaration $preDeclaration)
     {
         $this->preDeclaration = $preDeclaration;
         return $this;
