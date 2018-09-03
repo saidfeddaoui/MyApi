@@ -87,6 +87,18 @@ class PreDeclaration
      * @ORM\ManyToOne(targetEntity="App\Entity\Contrats", inversedBy="preDeclaration")
      */
     private $contrat;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\CirconstanceSinistre", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     */
+    private $circonstanceSinistre;
+
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -105,9 +117,9 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\CirconstanceSinistre", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Circumstance", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
-    private $circonstance;
+    private $circumstance;
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -245,19 +257,36 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return CirconstanceSinistre|null
+     * @return Circumstance|null
      */
-    public function getCirconstance(): ?Circonstance
+    public function getCircumstance(): ?Circumstance
     {
-        return $this->circonstance;
+        return $this->circumstance;
     }
     /**
-     * @param CirconstanceSinistre|null $circonstance
+     * @param Circumstance|null $circumstance
      * @return static
      */
-    public function setCircumstance(?CirconstanceSinistre $circonstance): self
+    public function setCircumstance(?Circumstance $circumstance): self
     {
-        $this->circonstance = $circonstance;
+        $this->circumstance = $circumstance;
+        return $this;
+    }
+
+    /**
+     * @return CirconstanceSinistre|null
+     */
+    public function getCirconstanceSinistre(): ?CirconstanceSinistre
+    {
+        return $this->circonstanceSinistre;
+    }
+    /**
+     * @param CirconstanceSinistre|null $circonstanceSinistre
+     * @return static
+     */
+    public function setCirconstanceSinistre(?CirconstanceSinistre $circonstanceSinistre): self
+    {
+        $this->circumstance = $circonstanceSinistre;
         return $this;
     }
     /**
