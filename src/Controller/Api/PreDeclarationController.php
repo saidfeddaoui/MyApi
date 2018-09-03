@@ -114,10 +114,11 @@ class PreDeclarationController extends BaseController
     {
         $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS);
         $this->em->persist($preDeclaration);
-        $preDeclaration->setInsuranceType($insuranceType);
         $this->em->flush();
         $event = new NewPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
+        $preDeclaration->setInsuranceType($insuranceType);
+        $this->em->flush();
         return $this->respondWith($preDeclaration, ApiResponse::CREATED);
     }
     /**
