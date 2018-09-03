@@ -86,22 +86,28 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     {
         $this->processContrat($preDeclaration);
         $this->processTypeSinistre($preDeclaration);
-        $this->processVille($preDeclaration);
-        $this->processCircumstanceAttachments($preDeclaration);
-        $type = $preDeclaration->getTypeSinistre()->getTitle();
-        switch ($type) {
+      //  $this->processVille($preDeclaration);
+      //  $this->processCircumstanceAttachments($preDeclaration);
+       // $type = $preDeclaration->getTypeSinistre()->getTitle();
+        $this->processCirconstanceSinistre($preDeclaration);
+
+        $this->processDamagedParts($preDeclaration);
+        $this->processTiersAttachments($preDeclaration);
+
+      /*  switch ($type) {
             case PreDeclaration::TYPE_ACCIDENT:
                     $this->processDamagedParts($preDeclaration);
                     $this->processTiersAttachments($preDeclaration);
                 break;
             case PreDeclaration::TYPE_BRIS_GLACE:
                     $this->processDamagedParts($preDeclaration);
-                    $preDeclaration->setTiers(null);
+                    //$preDeclaration->setTiers(null);
+                    $this->processTiersAttachments($preDeclaration);
                 break;
             default:
                     $preDeclaration->setTiers(null)->setVehiculeDamage(null);
                 break;
-        }
+        } */
     }
     /**
      * @param PreDeclaration $preDeclaration
@@ -109,7 +115,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processContrat(PreDeclaration $preDeclaration)
     {
-        $id = $preDeclaration->getContrat()->getId();
+       // $id = $preDeclaration->getContrat()->getId();
         $police = $preDeclaration->getContrat()->getPolice();
         $contrat = $this->em->getRepository('App:Contrats')->findOneByPolice($police);
         if (!$contrat) {
@@ -130,11 +136,29 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         }
         $preDeclaration->setTypeSinistre($typeSinistre);
     }
+
+
     /**
      * @param PreDeclaration $preDeclaration
      * @throws NotFoundHttpException
      */
-    private function processVille(PreDeclaration $preDeclaration)
+    private function processCirconstanceSinistre(PreDeclaration $preDeclaration)
+    {
+        $id = $preDeclaration->getCirconstanceSinistre()->getId();
+        $circonstanceSinistre = $this->em->getRepository('App:CirconstanceSinistre')->findOneById($id);
+        if (!$circonstanceSinistre) {
+            throw new NotFoundHttpException("No Circonstance Sinistre with reference: {$id} was found");
+        }
+        $preDeclaration->setTypeSinistre($circonstanceSinistre);
+    }
+
+
+
+    /**
+     * @param PreDeclaration $preDeclaration
+     * @throws NotFoundHttpException
+     */
+  /*  private function processVille(PreDeclaration $preDeclaration)
     {
         $id = $preDeclaration->getCircumstance()->getVille()->getId();
         $city = $this->em->getRepository('App:Ville')->findOneById($id);
@@ -142,12 +166,13 @@ class PreDeclarationParamConverter implements ParamConverterInterface
             throw new NotFoundHttpException("No City with reference: {$id} was found");
         }
         $preDeclaration->getCircumstance()->setVille($city);
-    }
+    } */
+
     /**
      * @param PreDeclaration $preDeclaration
      * @throws NotFoundHttpException
      */
-    private function processCircumstanceAttachments(PreDeclaration $preDeclaration)
+  /*  private function processCircumstanceAttachments(PreDeclaration $preDeclaration)
     {
         $ids = $preDeclaration->getCircumstance()
             ->getPhotos()
@@ -161,6 +186,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         }
         $preDeclaration->getCircumstance()->setPhotos($attachments);
     }
+    */
     /**
      * @param PreDeclaration $preDeclaration
      * @throws NotFoundHttpException
@@ -185,8 +211,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processTiersAttachments(PreDeclaration $preDeclaration)
     {
-        $ids = $preDeclaration->getTiers()
-            ->getAttachments()
+        $ids = $preDeclaration->getImages()
             ->map(function ($c) {return $c->getId();})
             ->toArray();
         $attachments = $this->em->getRepository('App:TiersAttachment')->findByIds($ids);
@@ -195,7 +220,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
                 "Submitted tiers attachments doesn't exist, (" . implode(',', $diff) . ")"
             );
         }
-        $preDeclaration->getTiers()->setAttachments($attachments);
+        $preDeclaration->setImages($attachments);
     }
     /**
      * Checks if the object is supported.
