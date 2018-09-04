@@ -122,6 +122,12 @@ class Client extends User
      */
     private $contrats;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="Device")
+     */
+    protected $device;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -337,6 +343,24 @@ class Client extends User
     {
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    /**
+     * @param mixed $device
+     */
+    public function setDevice($device)
+    {
+        $this->device = $device;
+    }
+
+
 
     /**
      * @return Collection|Contrats[]
