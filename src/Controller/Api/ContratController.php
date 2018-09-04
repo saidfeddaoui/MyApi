@@ -38,6 +38,9 @@ class ContratController extends BaseController
 
     /**
      *
+     * @SWG\Get(
+     *  tags={"Contrat"},
+     *  )
      * @Rest\Post(path="/add",name="add")
      * @param  Request $request
      * @param ContratApiService $contratApiService
@@ -53,6 +56,9 @@ class ContratController extends BaseController
 
     /**
      *
+     * @SWG\Get(
+     *  tags={"Contrat"},
+     *  )
      * @Rest\Post(path="/details",name="details")
      * @param  Request $request
      * @param DetailsContratApiService $detailsContratApiService
@@ -67,6 +73,10 @@ class ContratController extends BaseController
 
     /**
      *
+     * @SWG\Get(
+     *  tags={"Contrat"},
+     *  )
+     *
      * @Rest\Get(path = "/{id}", name = "contrat")
      * @Rest\View(serializerGroups={"all", "contrats"})
      * @param Client $id
@@ -80,6 +90,11 @@ class ContratController extends BaseController
 
 
     /**
+     *
+     * @SWG\Get(
+     *  tags={"Contrat"},
+     *  )
+     *
      * @Rest\Delete(path = "/delete/{police}", name = "delete")
      * @Rest\View(serializerGroups={"all", "contrats"})
      * @param Contrats $police
@@ -97,6 +112,10 @@ class ContratController extends BaseController
     }
 
     /**
+     *
+     * @SWG\Get(
+     *  tags={"Contrat"},
+     *  )
      *
      * @Rest\Post(path="/delete/many",name="delete_many")
      * @param  Request $request
