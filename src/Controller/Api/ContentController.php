@@ -442,7 +442,12 @@ class ContentController extends BaseController
     public function Alerts(ObjectManager $em, InsuranceType $insuranceType)
     {
         //this code for path url  is temporary
+        $request = $this->getRequest();
+        $baseUrl=$request->getSchemeAndHttpHost();
+        var_dump($baseUrl);
+        die();
         $imgDirectory = "http://mamda.mobiblanc.com/img/";
+
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
         foreach ($alerts as $alert) {
             $path=$imgDirectory.$alert->getImage()->getPath();
