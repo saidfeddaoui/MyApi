@@ -131,6 +131,10 @@ class ContratController extends BaseController
      *
      * @SWG\Get(
      *  tags={"Contrat"},
+     *  @SWG\Response(
+     *         response=200,
+     *         description="successfully returned"
+     *     )
      *  )
      *
      * @Rest\Post(path="/delete/many",name="delete_many")
