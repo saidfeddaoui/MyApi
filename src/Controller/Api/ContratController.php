@@ -40,6 +40,7 @@ class ContratController extends BaseController
      *
      * @SWG\Post(
      *  tags={"Contrat"},
+     *
      *  @SWG\Response(
      *         response=200,
      *         description="contrat successfully added"
@@ -62,6 +63,7 @@ class ContratController extends BaseController
      *
      * @SWG\Post(
      *  tags={"Contrat"},
+     *
      *  @SWG\Response(
      *      response=200,
      *      description="contrat successfully returned"
@@ -83,6 +85,12 @@ class ContratController extends BaseController
      *
      * @SWG\Get(
      *  tags={"Contrat"},
+     *   @SWG\Parameter(
+     *         name="id",
+     *         in="header",
+     *         type="integer",
+     *         description="Specify the Contrat's id",
+     *     ),
      *  @SWG\Response(
      *      response=200,
      *      description="contrat successfully returned"
@@ -105,6 +113,12 @@ class ContratController extends BaseController
      *
      * @SWG\Delete(
      *  tags={"Contrat"},
+     *  @SWG\Parameter(
+     *         name="police",
+     *         in="header",
+     *         type="string",
+     *         description="Specify the Contrat's police",
+     *     ),
      *  @SWG\Response(
      *         response=200,
      *         description="contrat successfully deleted"
