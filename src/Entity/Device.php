@@ -28,11 +28,6 @@ class Device
     private $model;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $version_name;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $version_code;
@@ -43,24 +38,10 @@ class Device
     private $firebase_token;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $fuseau_horaire;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $pushable;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $resolution;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $density;
 
     /**
      * @ORM\Column(type="datetime")
@@ -122,17 +103,6 @@ class Device
         return $this;
     }
 
-    public function getVersionName(): ?string
-    {
-        return $this->version_name;
-    }
-
-    public function setVersionName(string $version_name): self
-    {
-        $this->version_name = $version_name;
-
-        return $this;
-    }
 
     public function getVersionCode(): ?string
     {
@@ -158,17 +128,6 @@ class Device
         return $this;
     }
 
-    public function getFuseauHoraire(): ?string
-    {
-        return $this->fuseau_horaire;
-    }
-
-    public function setFuseauHoraire(?string $fuseau_horaire): self
-    {
-        $this->fuseau_horaire = $fuseau_horaire;
-
-        return $this;
-    }
 
     public function getPushable(): ?bool
     {
@@ -182,29 +141,7 @@ class Device
         return $this;
     }
 
-    public function getResolution(): ?string
-    {
-        return $this->resolution;
-    }
 
-    public function setResolution(?string $resolution): self
-    {
-        $this->resolution = $resolution;
-
-        return $this;
-    }
-
-    public function getDensity(): ?string
-    {
-        return $this->density;
-    }
-
-    public function setDensity(string $density): self
-    {
-        $this->density = $density;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
