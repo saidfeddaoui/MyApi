@@ -22,13 +22,6 @@ class DeviceController extends Controller
      *     tags={"Devices"},
      *     description="AddDevice Process",
      *     @SWG\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         type="string",
-     *         required=true,
-     *         description="Bearer auth",
-     *     ),
-     *     @SWG\Parameter(
      *         name="X-ENTITY",
      *         in="header",
      *         type="string",
