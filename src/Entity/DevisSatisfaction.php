@@ -107,12 +107,12 @@ class DevisSatisfaction
         return $this;
     }
 
-    public function getRaison(): ?string
+    public function getRaison(): ?ListSatisfaction
     {
         return $this->raison;
     }
 
-    public function setRaison(string $raison): self
+    public function setRaison(?ListSatisfaction $raison): self
     {
         $this->raison = $raison;
 
