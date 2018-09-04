@@ -49,7 +49,7 @@ class Notification
     private $statut;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\AppBundle\Entity\NotificationDetail", mappedBy="notification", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\NotificationDetail", mappedBy="notification", cascade={"persist","remove"})
      */
     private $notificationDetails;
 

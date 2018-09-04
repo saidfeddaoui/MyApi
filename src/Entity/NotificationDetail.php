@@ -50,7 +50,7 @@ class NotificationDetail
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AppBundle\Entity\Notification", inversedBy="notificationDetails")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Notification", inversedBy="notificationDetails")
      * @ORM\JoinColumn(nullable=false)
      */
     private $notification;
