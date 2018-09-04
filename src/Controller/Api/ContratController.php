@@ -38,11 +38,11 @@ class ContratController extends BaseController
 
     /**
      *
-     * @SWG\Get(
+     * @SWG\Post(
      *  tags={"Contrat"},
      *  @SWG\Response(
      *         response=200,
-     *         description="successfully returned"
+     *         description="contrat successfully added"
      *     )
      *  )
      * @Rest\Post(path="/add",name="add")
@@ -60,11 +60,11 @@ class ContratController extends BaseController
 
     /**
      *
-     * @SWG\Get(
+     * @SWG\Post(
      *  tags={"Contrat"},
      *  @SWG\Response(
      *      response=200,
-     *      description="successfully returned"
+     *      description="contrat successfully returned"
      *   )
      *  )
      * @Rest\Post(path="/details",name="details")
@@ -85,7 +85,7 @@ class ContratController extends BaseController
      *  tags={"Contrat"},
      *  @SWG\Response(
      *      response=200,
-     *      description="successfully returned"
+     *      description="contrat successfully returned"
      *   )
      *  )
      *
@@ -103,11 +103,11 @@ class ContratController extends BaseController
 
     /**
      *
-     * @SWG\Get(
+     * @SWG\Delete(
      *  tags={"Contrat"},
      *  @SWG\Response(
      *         response=200,
-     *         description="successfully returned"
+     *         description="contrat successfully deleted"
      *     )
      *  )
      *
@@ -129,11 +129,11 @@ class ContratController extends BaseController
 
     /**
      *
-     * @SWG\Get(
+     * @SWG\Post(
      *  tags={"Contrat"},
      *  @SWG\Response(
      *         response=200,
-     *         description="successfully returned"
+     *         description="contrats successfully deleted"
      *     )
      *  )
      *
