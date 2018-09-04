@@ -389,7 +389,7 @@ class ContentController extends BaseController
      */
     public function typesSinistre(ObjectManager $em, InsuranceType $insuranceType)
     {
-      //  $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre', 'insuranceType' => $insuranceType]);
+        //  $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre', 'insuranceType' => $insuranceType]);
         $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
 
         if (!$sinistre) {

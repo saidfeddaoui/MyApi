@@ -40,6 +40,7 @@ class ContratController extends BaseController
      *
      * @SWG\Post(
      *  tags={"Contrat"},
+     *
      *  @SWG\Response(
      *         response=200,
      *         description="contrat successfully added"
@@ -55,13 +56,14 @@ class ContratController extends BaseController
         $contrat=json_decode($request->getContent());
         $contra = $contratApiService->AddContrat($contrat);
         return  new JsonResponse($contra, 200);
-       // return $this->respondWith($contrat);
+        // return $this->respondWith($contrat);
     }
 
     /**
      *
      * @SWG\Post(
      *  tags={"Contrat"},
+     *
      *  @SWG\Response(
      *      response=200,
      *      description="contrat successfully returned"
@@ -105,6 +107,7 @@ class ContratController extends BaseController
      *
      * @SWG\Delete(
      *  tags={"Contrat"},
+     *
      *  @SWG\Response(
      *         response=200,
      *         description="contrat successfully deleted"
