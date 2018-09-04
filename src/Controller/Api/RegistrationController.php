@@ -264,7 +264,7 @@ class RegistrationController extends BaseController
      *        description="Id Device",
      *        required=true,
      *        type="string",
-     *        @SWG\Schema(type="string")
+     *        @Model(type="App\Entity\Device", groups={"device_uid"})
      *     ),
      *     @SWG\Response(
      *         response=202,

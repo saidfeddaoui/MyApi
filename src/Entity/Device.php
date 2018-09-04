@@ -22,7 +22,7 @@ class Device
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"all"})
+     * @Serializer\Groups({"all", "device_uid"})
      * @ORM\Column(type="string", length=255)
      */
     private $device_uid;
