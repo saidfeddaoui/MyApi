@@ -33,8 +33,11 @@
                         <tr>
                             <th> Titre</th>
                             <th> عنوان</th>
+                            <th> Sous titre</th>
+                            <th> عنوان فرعي</th>
                             <th> Description</th>
                             <th> وصف</th>
+                            <th> Image </th>
                             <th> date d'ajout</th>
                             <th> date d'expiration</th>
                             <th> Editer</th>
@@ -46,8 +49,17 @@
                             <tr data-id="{{ element.id }}">
                                 <td> {{ element.title }} </td>
                                 <td> {{ element.title_ar }} </td>
+                                <td> {{ element.subTitle }} </td>
+                                <td> {{ element.subTitle_ar }} </td>
                                 <td> {{ element.description }} </td>
                                 <td> {{ element.description_ar }} </td>
+                                <td>
+                                    {% if element.image %}
+                                        <div >
+                                            <img src="{{ asset('img/' ~ element.image.path) }}" class="product_img">
+                                        </div>
+                                    {% endif %}
+                                </td>
                                 <td> {{ element.date_creation|date("d-m-Y H:i") }} </td>
                                 <td> {% if (element.date_expiration is not null)  %}{{ element.date_expiration|date("d-m-Y H:i") }} {% endif %}</td>
                                 <td>

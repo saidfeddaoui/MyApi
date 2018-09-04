@@ -54,9 +54,9 @@ class TiersAttachment
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tiers", inversedBy="attachments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PreDeclaration", inversedBy="attachments")
      */
-    private $tiers;
+    private $preDeclaration;
 
     /**
      * TiersAttachment constructor.
@@ -111,15 +111,14 @@ class TiersAttachment
         return $this;
     }
 
-    public function getTiers(): ?Tiers
+    public function getPreDeclaration()
     {
-        return $this->tiers;
+        return $this->preDeclaration;
     }
 
-    public function setTiers(?Tiers $tiers): self
+    public function setPreDeclaration(PreDeclaration $preDeclaration)
     {
-        $this->tiers = $tiers;
-
+        $this->preDeclaration = $preDeclaration;
         return $this;
     }
 

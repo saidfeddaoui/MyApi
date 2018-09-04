@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +18,15 @@ class AlertType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Titre ',])
             ->add('title_ar', TextType::class, ['label' => 'عنوان ','mapped'=>false])
+            ->add('subTitle', TextType::class, ['label' => 'Sous titre ',])
+            ->add('subTitle_ar', TextType::class, ['label' => 'عنوان فرعي ','mapped'=>false])
             ->add('description',TextareaType::class,['label'=>'Description '])
             ->add('description_ar',TextareaType::class,['label'=>'وصف','mapped'=>false])
+            ->add('_img', FileType::class, [
+                'label' => 'Image ',
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('date_creation',DateType::class,
                 ['label'=>'Date d\'ajout ',
                     'widget'=> 'single_text',

@@ -3,7 +3,9 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Alert;
+use App\Entity\Attachment;
 use App\Form\AlertType;
+use Ramsey\Uuid\Uuid;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,10 +46,13 @@ class AlertController extends Controller
             $data[] = [
                 'id' => $value->getId(),
                 'title' => $value->getTitle(),
+                'subTitle' => $value->getSubTitle(),
                 'description' => $value->getDescription(),
+                'image' => $value->getImage(),
                 'date_creation' => $value->getDateCreation(),
                 'date_expiration' => $value->getDateExpiration(),
                 'title_ar' => $translations['ar']['title'] ?? '',
+                'subTitle_ar' => $translations['ar']['subTitle'] ?? '',
                 'description_ar' => $translations['ar']['description'] ?? '',
             ];
         }
@@ -77,9 +82,20 @@ class AlertController extends Controller
              * @var Alert $alert
              */
             $alert = $form->getData();
+
+            /**
+             * @var UploadedFile $_img
+             */
+            $_img = $form->get('_img')->getData();
+            $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
+            if ($_img) {
+                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $alert->setImage(new Attachment($imageFile->getBasename()));
+            }
             $alert->setInsuranceType($insuranceType);
             $em->persist($alert);
             $repository->translate($alert, 'title', 'ar', $form->get('title_ar')->getData());
+            $repository->translate($alert, 'subTitle', 'ar', $form->get('subTitle_ar')->getData());
             $repository->translate($alert, 'description', 'ar', $form->get('description_ar')->getData());
             $em->flush();
         }
@@ -108,12 +124,25 @@ class AlertController extends Controller
         $translations =  $repository->findTranslations($alert);
         if ($translations) {
             $form->get('title_ar')->setData($translations['ar']['title']);
+            $form->get('subTitle_ar')->setData($translations['ar']['subTitle']);
             $form->get('description_ar')->setData($translations['ar']['description']);
         }
+        $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $repository->translate($alert, 'title', 'ar', $form->get('title_ar')->getData()) ;
+            $repository->translate($alert, 'subTitle', 'ar', $form->get('subTitle_ar')->getData()) ;
             $repository->translate($alert, 'description', 'ar', $form->get('description_ar')->getData());
+
+            /**
+             * @var UploadedFile $_img
+             */
+            $_img = $form->get('_img')->getData();
+            if($_img) {
+                $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
+                $alert->setImage(new Attachment($imageFile->getBasename()));
+            }
+
             $em->persist($alert);
             $em->flush();
             return $this->redirect($this->generateUrl('alerts_list'));

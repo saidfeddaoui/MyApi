@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
+use App\Entity\Alert;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Entity\Societaire;
@@ -15,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @Rest\Route(path="/public/content_types", name="api_public_content_types_")
@@ -58,6 +60,46 @@ class ContentController extends BaseController
     public function slider(ObjectManager $em, InsuranceType $insuranceType)
     {
         $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'slider', 'insuranceType' => $insuranceType]);
+        return $this->respondWith($slider);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Home about",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Slider successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/about", name = "about")
+     * @Rest\View(serializerGroups={"all", "slider"})
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function about(ObjectManager $em, InsuranceType $insuranceType)
+    {
+        $slider = $em->getRepository('App:ItemList')->findOneBy(['type' => 'about', 'insuranceType' => $insuranceType]);
         return $this->respondWith($slider);
     }
 
@@ -347,7 +389,9 @@ class ContentController extends BaseController
      */
     public function typesSinistre(ObjectManager $em, InsuranceType $insuranceType)
     {
-        $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre', 'insuranceType' => $insuranceType]);
+      //  $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre', 'insuranceType' => $insuranceType]);
+        $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
+
         if (!$sinistre) {
             return $this->respondWith([]);
         }
@@ -396,8 +440,60 @@ class ContentController extends BaseController
      * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function Alerts(ObjectManager $em, InsuranceType $insuranceType)
+    public function Alerts(ObjectManager $em, InsuranceType $insuranceType,RequestStack $requestStack)
     {
+        //this code for path url  is temporary
+        $baseUrl = $requestStack->getCurrentRequest()->getSchemeAndHttpHost();
+
+        $imgDirectory = $baseUrl."/img/";
+        $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
+        foreach ($alerts as $alert) {
+            $path=$imgDirectory.$alert->getImage()->getPath();
+            $alert->getImage()->setPath($path);
+        }
+        return $this->respondWith($alerts);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Content Types"},
+     *     description="Alerte",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="alerts types successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/alert/{id}", name = "alert_checked")
+     * @Rest\View
+     *
+     * @ParamConverter("insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @param ObjectManager $em
+     * @param InsuranceType $insuranceType
+     * @param Alert $id
+     * @return ApiResponse
+     */
+    public function UpdateAlerts(ObjectManager $em, InsuranceType $insuranceType,Alert $id)
+    {
+        $thisAlert = $em->getRepository('App:Alert')->find($id);
+        $thisAlert->setChecked(true);
+        $em->flush();
         $alerts = $em->getRepository('App:Alert')->getCurrentAlerts($insuranceType);
         return $this->respondWith($alerts);
     }

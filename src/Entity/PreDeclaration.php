@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\TiersAttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -83,9 +84,21 @@ class PreDeclaration
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="preDeclarations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contrats", inversedBy="preDeclaration")
      */
-    private $contract;
+    private $contrat;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
+     *
+     * @Assert\NotNull(groups={"client_pre_declaration"})
+     * @Assert\Valid(groups={"client_pre_declaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\CirconstanceSinistre", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     */
+    private $circonstanceSinistre;
+
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
@@ -122,11 +135,11 @@ class PreDeclaration
      *
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Tiers", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\TiersAttachment", mappedBy="preDeclaration", cascade={"persist", "remove"})
      */
-    private $tiers;
+    private $images;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType",cascade={"persist", "remove"})
      */
     private $insuranceType;
     /**
@@ -212,19 +225,19 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return Contract|null
+     * @return Contrats|null
      */
-    public function getContract(): ?Contract
+    public function getContrat(): ?Contrats
     {
-        return $this->contract;
+        return $this->contrat;
     }
     /**
-     * @param Contract|null $contract
+     * @param Contrats|null $contrat
      * @return static
      */
-    public function setContract(?Contract $contract): self
+    public function setContrat(?Contrats $contrat): self
     {
-        $this->contract = $contract;
+        $this->contrat = $contrat;
         return $this;
     }
     /**
@@ -259,6 +272,23 @@ class PreDeclaration
         $this->circumstance = $circumstance;
         return $this;
     }
+
+    /**
+     * @return CirconstanceSinistre|null
+     */
+    public function getCirconstanceSinistre(): ?CirconstanceSinistre
+    {
+        return $this->circonstanceSinistre;
+    }
+    /**
+     * @param CirconstanceSinistre|null $circonstanceSinistre
+     * @return static
+     */
+    public function setCirconstanceSinistre(?CirconstanceSinistre $circonstanceSinistre): self
+    {
+        $this->circonstanceSinistre = $circonstanceSinistre;
+        return $this;
+    }
     /**
      * @return VehiculeDamage|null
      */
@@ -276,19 +306,58 @@ class PreDeclaration
         return $this;
     }
     /**
-     * @return Tiers|null
+     * @return TiersAttachment|null
      */
-    public function getTiers(): ?Tiers
+    public function getImages()
     {
-        return $this->tiers;
+        return $this->images;
     }
     /**
-     * @param Tiers|null $tiers
+     * @param TiersAttachment|null $images
      * @return static
      */
-    public function setTiers(?Tiers $tiers): self
+    public function setImages(?TiersAttachment $images)
     {
-        $this->tiers = $tiers;
+        $this->images = $images;
+        return $images;
+    }
+
+
+    /**
+     * @param mixed $attachments
+     * @return TiersAttachment
+     */
+    public function setAttachments($attachments)
+    {
+        foreach ($this->images as $attachment) {
+            $this->removeAttachment($attachment);
+        }
+        foreach ($attachments as $attachment){
+            $this->addAttachment($attachment);
+        }
+        return $this;
+    }
+
+    public function addAttachment(TiersAttachment $attachment): self
+    {
+        if (!$this->images->contains($attachment)) {
+            $this->images[] = $attachment;
+            $attachment->setPreDeclaration($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(TiersAttachment $attachment): self
+    {
+        if ($this->images->contains($attachment)) {
+            $this->images->removeElement($attachment);
+            // set the owning side to null (unless already changed)
+            if ($attachment->getPreDeclaration() === $this) {
+                $attachment->setPreDeclaration(null);
+            }
+        }
+
         return $this;
     }
     /**
