@@ -5,7 +5,7 @@
  * Date: 17/05/2018
  * Time: 16:12
  */
-namespace App\Services\ApiDevices;
+namespace App\Services;
 
 use App\Entity\Device;
 use App\Entity\Version;

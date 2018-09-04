@@ -2,7 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Services\ApiDevice;
+
+use App\Services\ApiDevices;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
