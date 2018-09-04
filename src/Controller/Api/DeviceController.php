@@ -95,8 +95,8 @@ class DeviceController extends Controller
                 $dateTime=new \DateTime('now');
                 $dateTime->format('Y-m-d H:i:s');
                 $apiDevices->setDevice($device,$dateTime);
-                $check_version = $apiDevices->checkVersion($os, $version_code);
-                $response['header'] = $check_version;
+                //$check_version = $apiDevices->checkVersion($os, $version_code);
+                $response['header'] = array('status'=>'OK','message'=>'SUCCESSFULY UPDATED');;
                 $response['results'] =  array();
                 return new JsonResponse($response);
 
