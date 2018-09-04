@@ -68,8 +68,9 @@ class DeviceController extends Controller
      * @Rest\Post(path="/add",name="add")
      * @Rest\View(serializerGroups={"all"})
      *
-     * @param Device $device
-     * @return ApiResponse
+     * @param ApiDevices $apiDevices
+     * @param Request $request
+     * @return JsonResponse
      */
     public function addDeviceAction(Request $request,ApiDevices $apiDevices)
     {
