@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Device
 {
@@ -19,57 +20,79 @@ class Device
     private $id;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255)
      */
     private $device_uid;
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255)
      */
     private $model;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $version_code;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255)
      */
     private $firebase_token;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="boolean")
      */
     private $pushable;
 
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $latitude;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $longitude;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $os;
