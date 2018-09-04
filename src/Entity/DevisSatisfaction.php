@@ -46,8 +46,8 @@ class DevisSatisfaction
      * @Serializer\Groups(groups={"devis_refused"})
      *
      * @Assert\NotNull(groups={"devis_refused"})
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\JoinColumn(name="raison", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\ListSatisfaction", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
      */
     private $raison;
 

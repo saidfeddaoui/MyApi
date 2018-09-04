@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\DevisSatisfaction;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -130,9 +131,45 @@ class DevisSatisfactionController extends BaseController
      */
     public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations)
     {
+
+
         $devisRejected->setStatut(false);
         $this->em->persist($devisRejected);
         $this->em->flush();
         return $this->respondWith();
     }
+
+
+
+
+    /**
+     * @SWG\Get(
+     *     tags={"Devis Satisfaction"},
+     *     description="liste satisfaisant",
+     *     @SWG\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         type="string",
+     *         default="fr",
+     *         description="Specify the user's language"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Slider successfully returned"
+     *     )
+     * )
+     *
+     * @Rest\Get(path = "/list", name = "list")
+     * @Rest\View(serializerGroups={"all", "devis_list"})
+     *
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function listSatisfaction(ObjectManager $em)
+    {
+        $list = $em->getRepository('App:ListSatisfaction')->findAll();
+        return $this->respondWith($list);
+    }
+
+
 }
