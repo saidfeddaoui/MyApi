@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
-use App\Service\ApiDevices\ApiDevices;
+use App\Services\ApiDevice;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Entity\Langues;
 
 class DeviceController extends Controller
 {
