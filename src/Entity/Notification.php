@@ -31,6 +31,11 @@ class Notification
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $idPredeclaration;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $sujet;
 
     /**
@@ -130,6 +135,23 @@ class Notification
     {
         $this->client = $client;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdPredeclaration()
+    {
+        return $this->idPredeclaration;
+    }
+
+    /**
+     * @param mixed $idPredeclaration
+     */
+    public function setIdPredeclaration($idPredeclaration)
+    {
+        $this->idPredeclaration = $idPredeclaration;
+    }
+
 
     /**
      * @return mixed
