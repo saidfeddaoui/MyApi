@@ -67,11 +67,11 @@ class Notification
     /**
      * Add notificationDetail
      *
-     * @param \App\AppBundle\Entity\NotificationDetail $notificationDetail
+     * @param \App\Entity\NotificationDetail $notificationDetail
      *
      * @return Notification
      */
-    public function addNotifcationDetail(\App\AppBundle\Entity\News $notificationDetail)
+    public function addNotifcationDetail(\App\Entity\NotificationDetail $notificationDetail)
     {
         $this->notificationDetails[] = $notificationDetail;
 
@@ -81,9 +81,9 @@ class Notification
     /**
      * Remove notificationDetail
      *
-     * @param \App\AppBundle\Entity\NotificationDetail $notificationDetail
+     * @param \App\Entity\NotificationDetail $notificationDetail
      */
-    public function removeNotificationDetail(\App\AppBundle\Entity\News $notificationDetail)
+    public function removeNotificationDetail(\App\Entity\NotificationDetail  $notificationDetail)
     {
         $this->notificationDetails->removeElement($notificationDetail);
     }

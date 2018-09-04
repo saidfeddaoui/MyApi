@@ -171,7 +171,7 @@ class NotificationDetail
     /**
      * Get tag
      *
-     * @return \App\AppBundle\Entity\Notification
+     * @return \App\Entity\Notification
      */
     public function getNotification()
     {
@@ -181,11 +181,11 @@ class NotificationDetail
     /**
      * Set Notifcation
      *
-     * @param \App\AppBundle\Entity\Notification $notification
+     * @param \App\Entity\Notification $notification
      *
      * @return Notification
      */
-    public function setNotification(\App\AppBundle\Entity\Notification $notification)
+    public function setNotification(\App\Entity\Notification $notification)
     {
         $this->notification = $notification;
 
