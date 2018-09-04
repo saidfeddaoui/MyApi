@@ -19,7 +19,7 @@ class DeviceController extends Controller
 {
     /**
      * @SWG\Post(
-     *     tags={"addDevice"},
+     *     tags={"Devices"},
      *     description="AddDevice Process",
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -36,7 +36,7 @@ class DeviceController extends Controller
      *         description="Specify the user's Entity",
      *     ),
      *     @SWG\Parameter(
-     *        name="PreDeclaration",
+     *        name="Device",
      *        in="body",
      *        description="Device object",
      *        required=true,
