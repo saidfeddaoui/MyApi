@@ -83,7 +83,7 @@ class Device
     private $longitude;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Clients", inversedBy="device")
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
