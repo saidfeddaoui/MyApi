@@ -317,20 +317,21 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param device_uid
+     * @param Device $device
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,$device_uid, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,$device, ConstraintViolationListInterface $violations)
     {
+
         if ($client->isUnverified()) {
             return $this->respondWith(null, ApiResponse::CLIENT_NOT_VERIFIED_ERROR);
         }
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
-        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
+        //$device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device->getId()));
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
