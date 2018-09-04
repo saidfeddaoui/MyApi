@@ -20,7 +20,7 @@ class ApiDevices
     private $em;
 
 
-    public function __construct(\EntityManagerInterface $entityManager) {
+    public function __construct(EntityManagerInterface $entityManager) {
         $this->em = $entityManager;
     }
 
