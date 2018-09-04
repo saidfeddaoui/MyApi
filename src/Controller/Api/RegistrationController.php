@@ -261,7 +261,8 @@ class RegistrationController extends BaseController
      *        in="body",
      *        description="Id Device",
      *        required=true,
-     *        @Model(type="string", groups={"client_account_creation"})
+     *        type=string,
+     *
      *     ),
      *     @SWG\Response(
      *         response=202,
