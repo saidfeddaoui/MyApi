@@ -322,7 +322,7 @@ class RegistrationController extends BaseController
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,$device, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,Device $device, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
