@@ -56,15 +56,11 @@ class Device
 
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"all"})
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"all"})
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
