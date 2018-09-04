@@ -43,7 +43,7 @@ class ListSatisfactionController extends Controller
                 'title_ar' => $translations['ar']["title"] ?? '',
             );
         }
-        return $this->render('listSatisfaction/index.html.twig', [
+        return $this->render('list_satisfaction/index.html.twig', [
             'page_title' => 'Liste Satisfaction',
             'page_subtitle' => '',
             'data'=>$data
