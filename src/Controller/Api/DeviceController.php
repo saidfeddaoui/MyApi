@@ -8,6 +8,9 @@ use App\Services\ApiDevices;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Swagger\Annotations as SWG;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 /**
  * @Rest\Route(path="/public/device", name="api_device_")
