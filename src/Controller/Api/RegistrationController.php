@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\Entity\Client;
+use App\Entity\Device;
 use App\Entity\Group;
 use App\Entity\InsuranceType;
 use App\Entity\Role;
@@ -15,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Shema;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -256,6 +258,14 @@ class RegistrationController extends BaseController
      *        required=true,
      *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
      *     ),
+     *     @SWG\Parameter(
+     *        name="device_uid",
+     *        in="body",
+     *        description="Id Device",
+     *        required=true,
+     *        type="string",
+     *        @SWG\Schema(type="string")
+     *     ),
      *     @SWG\Response(
      *         response=202,
      *         description="Returns a success response if the client account wad successfully completed",
@@ -307,11 +317,12 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
+     * @param device_uid
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,$device_uid, ConstraintViolationListInterface $violations)
     {
         if ($client->isUnverified()) {
             return $this->respondWith(null, ApiResponse::CLIENT_NOT_VERIFIED_ERROR);
@@ -319,6 +330,7 @@ class RegistrationController extends BaseController
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
+        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
@@ -328,6 +340,7 @@ class RegistrationController extends BaseController
             ->setContactPreference($submittedClient->getContactPreference())
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
+            ->setDevice($device)
             ->setEnabled(true)
         ;
         $this->em->persist($client);
