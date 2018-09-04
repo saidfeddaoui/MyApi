@@ -174,12 +174,12 @@ class Item implements TranslatableInterface
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle($title)
     {
         $this->title = $title;
 
