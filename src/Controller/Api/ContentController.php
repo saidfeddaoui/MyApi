@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @Rest\Route(path="/public/content_types", name="api_public_content_types_")
@@ -439,12 +440,11 @@ class ContentController extends BaseController
      * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
-    public function Alerts(ObjectManager $em, InsuranceType $insuranceType)
+    public function Alerts(ObjectManager $em, InsuranceType $insuranceType,RequestStack $requestStack)
     {
         //this code for path url  is temporary
-        $request = $this->getRequest();
-        $baseUrl=$request->getSchemeAndHttpHost();
-        var_dump($baseUrl);
+        $request = $requestStack->getCurrentRequest()->getSchemeAndHttpHost();
+        var_dump( $request);
         die();
         $imgDirectory = "http://mamda.mobiblanc.com/img/";
 
