@@ -28,7 +28,7 @@ class ListSatisfaction implements TranslatableInterface
     /**
      * @Serializer\Expose()
      * @Gedmo\Translatable
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Serializer\Groups(groups={"devis_list"})
      */
     private $title;
