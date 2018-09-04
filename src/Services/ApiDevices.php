@@ -8,9 +8,7 @@
 namespace App\Service\ApiDevices;
 
 use App\Entity\Device;
-use App\Entity\Devices;
 use App\Entity\Version;
-use App\Entity\Versions;
 
 use Doctrine\ORM\EntityManagerInterface;
 
