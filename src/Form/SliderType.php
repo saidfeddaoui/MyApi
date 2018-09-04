@@ -15,7 +15,10 @@ class SliderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Titre ',])
+            ->add('title', TextType::class, [
+                'label' => 'Titre ',
+                'required' => false,
+                ])
             ->add('_img', FileType::class, [
                 'label' => 'Image ',
                 'required' => false,
