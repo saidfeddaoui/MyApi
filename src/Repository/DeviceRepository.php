@@ -9,7 +9,7 @@
 namespace App\Repository;
 
 
-class DeviceRepository
+class DeviceRepository extends \Doctrine\ORM\EntityRepository
 {
 
 }
