@@ -22,34 +22,34 @@ class Device
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255)
      */
     private $device_uid;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255)
      */
     private $model;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $version_code;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255)
      */
     private $firebase_token;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="boolean")
      */
     private $pushable;
@@ -57,35 +57,33 @@ class Device
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $latitude;
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $longitude;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
@@ -93,7 +91,7 @@ class Device
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $os;
