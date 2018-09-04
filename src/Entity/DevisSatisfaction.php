@@ -47,7 +47,7 @@ class DevisSatisfaction
      *
      * @Assert\NotNull(groups={"devis_refused"})
      * @ORM\JoinColumn(name="raison", referencedColumnName="id", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\ListSatisfaction", inversedBy="DevisSatisfaction")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ListSatisfaction", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
      */
     private $raison;
 

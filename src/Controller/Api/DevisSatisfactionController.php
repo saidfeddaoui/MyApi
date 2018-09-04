@@ -131,6 +131,8 @@ class DevisSatisfactionController extends BaseController
      */
     public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations)
     {
+
+
         $devisRejected->setStatut(false);
         $this->em->persist($devisRejected);
         $this->em->flush();
@@ -168,6 +170,6 @@ class DevisSatisfactionController extends BaseController
         $list = $em->getRepository('App:ListSatisfaction')->findAll();
         return $this->respondWith($list);
     }
-    
+
 
 }
