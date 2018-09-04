@@ -129,17 +129,16 @@ class DevisSatisfactionController extends BaseController
      * @param  DevisSatisfaction $devisRejected
      * @return ApiResponse
      */
-    public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations)
+    public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations,ObjectManager $em)
     {
-
-
+        $idlist= $devisRejected->getRaison()->getId();
+        $list = $em->getRepository('App:ListSatisfaction')->find($idlist);
+        $devisRejected->setRaison($list);
         $devisRejected->setStatut(false);
         $this->em->persist($devisRejected);
         $this->em->flush();
         return $this->respondWith();
     }
-
-
 
 
     /**
