@@ -256,12 +256,14 @@ class RegistrationController extends BaseController
      *        description="Client object",
      *        required=true,
      *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
-     *     ),@SWG\Parameter(
-     *        name="Device Uid",
+     *     ),
+     *     @SWG\Parameter(
+     *        name="device_uid",
      *        in="body",
      *        description="Id Device",
      *        required=true,
-     *        type="string",
+     *        @schema(type="string")
+     *
      *     ),
      *     @SWG\Response(
      *         response=202,
