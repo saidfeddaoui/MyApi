@@ -34,11 +34,8 @@ class ApiDevices
             $devices->setOs($device_params['os']);
             $devices->setModel($device_params['model']);
             $devices->setCreatedAt($dateTime);
-            $devices->setVersionName($device_params['version_name']);
             $devices->setVersionCode($device_params['version_code']);
             $devices->setFirebaseToken($device_params['firebase_token']?:'');
-            $devices->setResolution($device_params['resolution']);
-            $devices->setDensity($device_params['density']);
             $devices->setPushable($device_params['pushable']);
             $devices->setLatitude($device_params['latitude']);
             $devices->setLongitude($device_params['longitude']);
@@ -46,11 +43,8 @@ class ApiDevices
             $this->em->persist($devices);
             $this->em->flush();
         }else{
-            $devices->setVersionName($device_params['version_name']);
             $devices->setVersionCode($device_params['version_code']);
             $devices->setFirebaseToken($device_params['firebase_token']?:'');
-            $devices->setResolution($device_params['resolution']);
-            $devices->setDensity($device_params['density']);
             $devices->setPushable($device_params['pushable']);
             $devices->setLatitude($device_params['latitude']);
             $devices->setLongitude($device_params['longitude']);
