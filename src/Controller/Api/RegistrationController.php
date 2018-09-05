@@ -326,7 +326,7 @@ class RegistrationController extends BaseController
         }
        // $device_uid=$request->headers->get('device_uid');
         //var_dump($request->headers);
-        var_dump($submittedClient->getDevice()->getDeviceUid());die;
+        //var_dump($submittedClient->getDevice()->getDeviceUid());die;
         $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
       //  var_dump($device);die;
         $client
