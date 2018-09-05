@@ -101,10 +101,9 @@ class ListSatisfactionController extends Controller
      * @Route(path="/list-satisfaction/delete/{id}", name="delete_list-satisfaction", options={"expose"=true})
      *
      * @param ListSatisfaction $listSatisfaction
-     * @param Request $request
      * @return JsonResponse
      */
-    public function deleteListSatisfaction(ListSatisfaction $listSatisfaction, Request $request)
+    public function deleteListSatisfaction(ListSatisfaction $listSatisfaction)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($listSatisfaction);
