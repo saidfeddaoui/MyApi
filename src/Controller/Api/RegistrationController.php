@@ -263,7 +263,7 @@ class RegistrationController extends BaseController
      *        in="body",
      *        description="Id Device",
      *        required=true,
-     *        @SWG\Schema(type="integer")
+     *        @SWG\Schema(type="string")
      *     ),
      *     @SWG\Response(
      *         response=202,
@@ -317,12 +317,12 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param int $device_uid
+     * @param string $device_uid
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,int $device_uid, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,string $device_uid, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
