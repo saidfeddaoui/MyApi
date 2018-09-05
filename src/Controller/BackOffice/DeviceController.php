@@ -26,7 +26,7 @@ class DeviceController extends Controller
 {
 
     /**
-     * @Route(name="list")
+     * @Route(path="/devices",name="devices")
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -74,7 +74,7 @@ class DeviceController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('content_types_list'));
+        return  $this->redirect($this->generateUrl('content_types_devices'));
     }
     /**
      * @Route(path="/edit/{id}", name="content_types_edit_device", options={"expose"=true})
@@ -96,7 +96,7 @@ class DeviceController extends Controller
 
             $em->persist($device);
             $em->flush();
-            return $this->redirect($this->generateUrl('content_types_list'));
+            return $this->redirect($this->generateUrl('content_types_devices'));
         }
         return  $this->render('device/form.html.twig', [
             'form' => $form->createView()
