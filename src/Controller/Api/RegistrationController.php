@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
+use App\Entity\AssistanceRequest;
 use App\Entity\Client;
 use App\Entity\Device;
 use App\Entity\Group;
@@ -22,6 +23,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Rest\Route(path="/public/registration", name="api_public_registration")
@@ -260,11 +262,10 @@ class RegistrationController extends BaseController
      *     ),
      *     @SWG\Parameter(
      *        name="device_uid",
-     *        in="body",
+     *        in="header",
      *        description="Id Device",
      *        required=true,
-     *        type="string",
-     *        @Model(type="App\Entity\Device", groups={"device_uid"})
+     *        type="string"
      *     ),
      *     @SWG\Response(
      *         response=202,
@@ -310,7 +311,6 @@ class RegistrationController extends BaseController
      * @Rest\Post(path="/account/creation", name="account_creation")
      * @ParamConverter(name="submittedClient", converter="fos_rest.request_body", options={"validator"={ "groups"={"client_account_creation"} }})
      * @ParamConverter(name="client", options={"converter":"App\ParamConverter\RegistrationTokenParamConverter"})
-     * @ParamConverter(name="device", converter="fos_rest.request_body", options={"validator"={ "groups"={"device_uid"} }})
      *
      * @Rest\View(serializerGroups={"all", "include_id", "phone_registration", "client_account_creation"})
      *
@@ -318,12 +318,12 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param Device $device
+     * @param Request $request
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,Device $device, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,Request $request, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
@@ -332,7 +332,8 @@ class RegistrationController extends BaseController
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
-        //$device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device->getId()));
+        $device_uid=$request->headers->get('device_uid');
+        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
