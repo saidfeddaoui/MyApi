@@ -260,13 +260,6 @@ class RegistrationController extends BaseController
      *        required=true,
      *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
      *     ),
-     *     @SWG\Parameter(
-     *        name="device_uid",
-     *        in="header",
-     *        description="Id Device",
-     *        required=true,
-     *        type="string"
-     *     ),
      *     @SWG\Response(
      *         response=202,
      *         description="Returns a success response if the client account wad successfully completed",
@@ -318,12 +311,11 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param Request $request
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,Request $request, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
@@ -334,6 +326,7 @@ class RegistrationController extends BaseController
         }
        // $device_uid=$request->headers->get('device_uid');
         //var_dump($request->headers);
+        var_dump($submittedClient->getDevice()->getDeviceUid());die;
         $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
       //  var_dump($device);die;
         $client
