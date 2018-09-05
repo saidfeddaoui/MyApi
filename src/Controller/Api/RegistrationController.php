@@ -311,7 +311,6 @@ class RegistrationController extends BaseController
      * @Rest\Post(path="/account/creation", name="account_creation")
      * @ParamConverter(name="submittedClient", converter="fos_rest.request_body", options={"validator"={ "groups"={"client_account_creation"} }})
      * @ParamConverter(name="client", options={"converter":"App\ParamConverter\RegistrationTokenParamConverter"})
-     * @ParamConverter(name="device", converter="fos_rest.request_body", options={"validator"={ "groups"={"device_uid"} }})
      *
      * @Rest\View(serializerGroups={"all", "include_id", "phone_registration", "client_account_creation"})
      *
