@@ -344,7 +344,7 @@ class RegistrationController extends BaseController
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
             ->setDevice($device)
-            ->setEnabled(true)
+            //->setEnabled(true)
         ;
         $this->em->persist($client);
         $this->em->flush();
