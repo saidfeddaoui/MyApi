@@ -48,7 +48,7 @@ class DeviceController extends Controller
         ]);
     }
     /**
-     * @Route(path="/add", name="content_types_add_device", options={"expose"=true})
+     * @Route(path="/add", name="add_device", options={"expose"=true})
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -77,7 +77,7 @@ class DeviceController extends Controller
         return  $this->redirect($this->generateUrl('content_types_devices'));
     }
     /**
-     * @Route(path="/edit/{id}", name="content_types_edit_device", options={"expose"=true})
+     * @Route(path="/edit/{id}", name="edit_device", options={"expose"=true})
      *
      * @param Device $device
      * @param Request $request
@@ -103,7 +103,7 @@ class DeviceController extends Controller
         ]);
     }
     /**
-     * @Route(path="/delete/{id}", name="content_types_delete_device", options={"expose"=true})
+     * @Route(path="/delete/{id}", name="delete_device", options={"expose"=true})
      *
      * @param Device $device
      * @return JsonResponse
