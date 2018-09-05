@@ -35,7 +35,7 @@
                         <tbody>
                         {% for element in data %}
                         <tr data-id="{{ element.id }}">
-                            <td> {{ element.raison }} </td>
+                            <td> {{ element.raison.title }} </td>
                             <td> {{ element.comment }} </td>
                             <td> <i class="icon-dislike emodisLike"></i></td>
                         </tr>
