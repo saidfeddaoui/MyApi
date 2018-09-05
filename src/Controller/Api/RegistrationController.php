@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
+use App\Entity\AssistanceRequest;
 use App\Entity\Client;
 use App\Entity\Device;
 use App\Entity\Group;
@@ -22,6 +23,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Rest\Route(path="/public/registration", name="api_public_registration")
@@ -260,7 +262,7 @@ class RegistrationController extends BaseController
      *     ),
      *     @SWG\Parameter(
      *        name="device_uid",
-     *        in="formData",
+     *        in="header",
      *        description="Id Device",
      *        required=true,
      *        type="string"
@@ -317,12 +319,12 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param string $device_uid
+     * @param Request $request
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,string $device_uid, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,Request $request, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
@@ -331,6 +333,7 @@ class RegistrationController extends BaseController
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
+        $device_uid=$request->headers->get('device_uid');
         $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
         $client
             ->setFamilyName($submittedClient->getFamilyName())
