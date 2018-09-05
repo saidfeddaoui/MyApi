@@ -334,6 +334,7 @@ class RegistrationController extends BaseController
         }
         $device_uid=$request->headers->get('device_uid');
         $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
+        var_dump($device);die;
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
