@@ -263,7 +263,7 @@ class RegistrationController extends BaseController
      *        in="body",
      *        description="Id Device",
      *        required=true,
-     *        type="integer"
+     *        @SWG\Schema(type="integer")
      *     ),
      *     @SWG\Response(
      *         response=202,
