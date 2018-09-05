@@ -124,6 +124,8 @@ class Client extends User
 
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_account_creation"})
      * @ORM\OneToOne(targetEntity="Device")
      */
     protected $device;
