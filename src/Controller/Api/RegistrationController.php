@@ -260,7 +260,7 @@ class RegistrationController extends BaseController
      *     ),
      *     @SWG\Parameter(
      *        name="device_uid",
-     *        in="body",
+     *        in="formData",
      *        description="Id Device",
      *        required=true,
      *        @SWG\Schema(type="string")
