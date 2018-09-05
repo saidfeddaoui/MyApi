@@ -37,7 +37,7 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThan(0 , groups={"client_pre_declaration"})
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
