@@ -263,8 +263,7 @@ class RegistrationController extends BaseController
      *        in="body",
      *        description="Id Device",
      *        required=true,
-     *        type="string",
-     *        @Model(type="App\Entity\Device", groups={"device_uid"})
+     *        type="string"
      *     ),
      *     @SWG\Response(
      *         response=202,
@@ -318,12 +317,12 @@ class RegistrationController extends BaseController
      *
      * @param Client $client
      * @param Client $submittedClient
-     * @param Device $device
+     * @param $device_uid
      * @param ConstraintViolationListInterface $violations
      *
      * @return ApiResponse
      */
-    public function accountCreation(Client $client, Client $submittedClient,Device $device, ConstraintViolationListInterface $violations)
+    public function accountCreation(Client $client, Client $submittedClient,$device_uid, ConstraintViolationListInterface $violations)
     {
 
         if ($client->isUnverified()) {
@@ -332,7 +331,7 @@ class RegistrationController extends BaseController
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
-        //$device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device->getId()));
+        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
