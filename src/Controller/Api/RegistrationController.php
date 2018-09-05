@@ -332,10 +332,10 @@ class RegistrationController extends BaseController
         if ($client->isUnconfirmed() || $client->isConfirmed()) {
             return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
         }
-        $device_uid=$request->headers->get('device_uid');
-        var_dump($request->headers);
-        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$device_uid));
-        var_dump($device);die;
+       // $device_uid=$request->headers->get('device_uid');
+        //var_dump($request->headers);
+        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
+      //  var_dump($device);die;
         $client
             ->setFamilyName($submittedClient->getFamilyName())
             ->setFirstName($submittedClient->getFirstName())
@@ -346,6 +346,7 @@ class RegistrationController extends BaseController
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
             ->setDevice($device)
+
             //->setEnabled(true)
         ;
         $this->em->persist($client);
