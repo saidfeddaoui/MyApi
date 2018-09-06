@@ -27,12 +27,9 @@ class DeviceController extends Controller
 
     /**
      * @Route(path="/devices",name="devices")
-     *
-     * @param Request $request
-     * @param SessionInterface $session
      * @return Response
      */
-    public function index(Request $request, SessionInterface $session)
+    public function index()
     {
         $form = $this->createForm(DeviceType::class, new Device(), [
             'action' => $this->generateUrl('content_types_add_device'),
@@ -47,6 +44,7 @@ class DeviceController extends Controller
             'form' => $form->createView()
         ]);
     }
+
     /**
      * @Route(path="/add", name="add_device", options={"expose"=true})
      *

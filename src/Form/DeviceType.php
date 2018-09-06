@@ -15,7 +15,7 @@ class DeviceType extends AbstractType
     {
         $builder
             ->add('device_uid', TextType::class, ['label' => 'device uid '])
-            ->add('min_version', TextType::class, ['label' => 'version min '])
+            ->add('$model', TextType::class, ['label' => 'Model '])
             ->add('version_code', TextType::class, ['label' => 'Version code '])
             ->add('firebase_token', TextType::class, ['label' => 'Firebase Token '])
             ->add('pushable', CheckboxType::class, ['label' => 'Pushable '])
