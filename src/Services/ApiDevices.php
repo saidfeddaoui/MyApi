@@ -28,8 +28,8 @@ class ApiDevices
     public function setDevice($device_params,$dateTime)
     {
         $devices = $this->em->getRepository(Device::class)->findOneBy(array('device_uid'=>$device_params['device_uid']));
-        if (!$devices instanceof Devices){
-            $devices = new Devices();
+        if (!$devices instanceof Device){
+            $devices = new Device();
             $devices->setDeviceUid($device_params['device_uid']);
             $devices->setOs($device_params['os']);
             $devices->setModel($device_params['model']);
