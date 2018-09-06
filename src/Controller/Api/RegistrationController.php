@@ -152,16 +152,29 @@ class RegistrationController extends BaseController
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-        $client
-            ->setEnabled(false)
-            ->setVerificationCode($this->codeGenerator->generate())
-            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-            ->addInsuranceType($insuranceType)
-            ->addRole($role)
-            ->setGroup($group)
-        ;
-        $this->em->persist($client);
-        $this->em->flush();
+        if ($client instanceof Client){
+            $client
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+            ;
+            $this->em->flush();
+        }else{
+            $client
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+            ;
+            $this->em->persist($client);
+            $this->em->flush();
+        }
+
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
