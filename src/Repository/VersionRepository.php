@@ -2,7 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Versions;
+use App\Entity\Version;
+//use App\Entity\Versions;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -16,7 +17,7 @@ class VersionRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Versions::class);
+        parent::__construct($registry, Version::class);
     }
 
 //    /**
