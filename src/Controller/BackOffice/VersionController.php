@@ -2,10 +2,9 @@
 
 namespace App\Controller\BackOffice;
 
-use App\Entity\Attachment;
+
 use App\Entity\Version;
 use App\Form\VersionType;
-use Ramsey\Uuid\Uuid;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +27,9 @@ class VersionController extends Controller
     /**
      * @Route(path="/versions",name="versions")
      *
-     * @param Request $request
-     * @param SessionInterface $session
      * @return Response
      */
-    public function index(Request $request, SessionInterface $session)
+    public function index()
     {
         $form = $this->createForm(VersionType::class, new Version(), [
             'action' => $this->generateUrl('content_types_add_version'),
@@ -48,13 +45,12 @@ class VersionController extends Controller
         ]);
     }
     /**
-     * @Route(path="/add", name="add_version", options={"expose"=true})
+     * @Route(path="/version/add", name="add_version", options={"expose"=true})
      *
      * @param Request $request
-     * @param SessionInterface $session
      * @return Response
      */
-    public function add(Request $request, SessionInterface $session)
+    public function add(Request $request)
     {
         $form = $this->createForm(VersionType::class);
         $form->handleRequest($request);
@@ -77,7 +73,7 @@ class VersionController extends Controller
         return  $this->redirect($this->generateUrl('content_types_versions'));
     }
     /**
-     * @Route(path="/edit/{id}", name="edit_version", options={"expose"=true})
+     * @Route(path="/version/edit/{id}", name="edit_version", options={"expose"=true})
      *
      * @param Version $version
      * @param Request $request
@@ -87,7 +83,7 @@ class VersionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(VersionType::class, $version,[
-            'action' => $this->generateUrl('content_types_edit_versions', ['id' => $version->getId()])
+            'action' => $this->generateUrl('content_types_edit_version', ['id' => $version->getId()])
         ]);
 
 
