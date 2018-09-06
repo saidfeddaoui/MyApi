@@ -78,12 +78,9 @@ class DeviceController extends Controller
             $version_name = $request->request->get('version_name');
             $version_code = $request->request->get('version_code');
             $firebase_token = $request->request->get('firebase_token');
-            $fuseau_horaire = $request->request->get('fuseau_horaire');
-            $resolution = $request->request->get('resolution'); // 480*800
             $pushable = $request->request->get('pushable');
-            $langue = $request->request->get('langue');
             $latitude = $request->request->get('latitude');
-            $longtitude = $request->request->get('longtitude');
+            $longitude = $request->request->get('longitude');
             $device = array(
                 'device_uid'=> $device_uid,
                 'os'=> $os,
@@ -91,12 +88,9 @@ class DeviceController extends Controller
                 'version_name'=> $version_name,
                 'version_code'=> $version_code,
                 'firebase_token'=> $firebase_token,
-                'fuseau_horaire'=> $fuseau_horaire,
-                'resolution'=> $resolution,
                 'pushable'=> $pushable,
-                'langue'=> $langue,
                 'latitude'=> $latitude,
-                'longtitude'=> $longtitude,
+                'longitude'=> $longitude,
             );
 
             $status = $validator->checkParams($device);
