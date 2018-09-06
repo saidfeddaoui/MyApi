@@ -160,7 +160,7 @@ class RegistrationController extends BaseController
             ->addRole($role)
             ->setGroup($group)
         ;
-        //$this->em->persist($client);
+        $this->em->persist($client);
         $this->em->flush();
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
