@@ -63,11 +63,14 @@ class DeviceController extends Controller
      *
      * @param ApiDevices $apiDevices
      * @param Request $request
+     * @param Validator $validator
      * @return JsonResponse
      */
     public function addDeviceAction(Request $request,ApiDevices $apiDevices, Validator $validator)
     {
         // check Method
+        dump($request->getMethod());
+        die();
         $method = $validator->checkMethod($request,'POST');
         if ($method['status'] == 'OK'){
             // Params
