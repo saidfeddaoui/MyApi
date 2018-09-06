@@ -92,6 +92,11 @@ class Device
      */
     private $os;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $version_name;
+
 
     public function __construct()
     {
@@ -244,6 +249,18 @@ class Device
     public function __toString()
     {
         return $this->device_uid;
+    }
+
+    public function getVersionName(): ?string
+    {
+        return $this->version_name;
+    }
+
+    public function setVersionName(string $version_name): self
+    {
+        $this->version_name = $version_name;
+
+        return $this;
     }
 
 
