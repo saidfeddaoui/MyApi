@@ -69,9 +69,7 @@ class DeviceController extends Controller
     public function addDeviceAction(Request $request,ApiDevices $apiDevices, Validator $validator)
     {
         // check Method
-        dump($request->getMethod());
-        die();
-        $method = $validator->checkMethod($request,'POST');
+        $method = $validator->checkMethod('POST');
         if ($method['status'] == 'OK'){
             // Params
             $device_uid = $request->request->get('device_uid');
