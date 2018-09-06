@@ -3,7 +3,6 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\Alert;
-use App\Entity\Attachment;
 use App\Form\AlertType;
 use Ramsey\Uuid\Uuid;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
@@ -90,7 +89,7 @@ class AlertController extends Controller
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
             if ($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-                $alert->setImage(new Attachment($imageFile->getBasename()));
+                $alert->setImage(new Attachmen($imageFile->getBasename()));
             }
             $alert->setInsuranceType($insuranceType);
             $em->persist($alert);
