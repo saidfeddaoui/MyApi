@@ -40,7 +40,7 @@ class ApiDevices
         $devices->setFirebaseToken($device_params['firebase_token']?:'');
         $devices->setPushable($device_params['pushable']);
         $devices->setLatitude($device_params['latitude']);
-        $devices->setLongitude($device_params['longtitude']);
+        $devices->setLongitude($device_params['longitude']);
         $devices->setUpdatedAt($dateTime);
         $this->em->persist($devices);
         $this->em->flush();
