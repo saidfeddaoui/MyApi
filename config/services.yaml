@@ -142,12 +142,3 @@ services:
                 - [ 'Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTFailureException' ]
             tags:
                 - { name: app.normalizer }
-
-    # New Services ( Said Mobiblanc )
-
-    # Checks Params
-    App\Service\CheckParams:
-        public: false
-    app.check.params:
-        alias: App\Services\CheckParams
-        public: true
