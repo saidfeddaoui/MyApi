@@ -91,6 +91,11 @@ class Device
      */
     private $version_name;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $client;
+
 
     public function __construct()
     {
@@ -240,6 +245,18 @@ class Device
     public function setVersionName(string $version_name): self
     {
         $this->version_name = $version_name;
+
+        return $this;
+    }
+
+    public function getClient(): ?int
+    {
+        return $this->client;
+    }
+
+    public function setClient(?int $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
