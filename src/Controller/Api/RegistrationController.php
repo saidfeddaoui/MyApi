@@ -171,6 +171,8 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
             ;
             $this->em->flush();
+            echo "hete";
+            die();
         }else{
             $client
                 ->setEnabled(false)
