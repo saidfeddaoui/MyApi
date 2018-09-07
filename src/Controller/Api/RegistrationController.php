@@ -157,50 +157,19 @@ class RegistrationController extends BaseController
      */
     public function phoneRegistration(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
-        $request = $this->configHostUtils->getCurrentRequest();
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-        if ($client instanceof Client){
-            $client
-                ->setEnabled(false)
-                ->setVerificationCode($this->codeGenerator->generate())
-                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-                ->addInsuranceType($insuranceType)
-                ->addRole($role)
-                ->setGroup($group)
-                ->setDevice(Null)
-            ;
-            $this->em->persist($client);
-            $this->em->flush();
-        }else{
-            $client
-                ->setEnabled(false)
-                ->setVerificationCode($this->codeGenerator->generate())
-                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-                ->addInsuranceType($insuranceType)
-                ->addRole($role)
-                ->setDevice(Null)
-                ->setGroup($group)
-            ;
-            $this->em->persist($client);
-            $this->em->flush();
-        }
-        // Relation between client and device
-        $device_uid = $request->request->get('device_uid')?:'';
-        if ($device_uid){
-        $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
-        if ($device instanceof Device){
-            $client_device = $device->getClient()?:'';
-            if ($client_device instanceof Client){
-                $client_device->setDevice(Null);
-                $this->em->flush();
-            }
-            $client->setDevice($device);
-            $this->em->flush();
-        }
-        }
-
+        $client
+            ->setEnabled(false)
+            ->setVerificationCode($this->codeGenerator->generate())
+            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+            ->addInsuranceType($insuranceType)
+            ->addRole($role)
+            ->setGroup($group)
+        ;
+        $this->em->persist($client);
+        $this->em->flush();
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
@@ -366,7 +335,7 @@ class RegistrationController extends BaseController
        // $device_uid=$request->headers->get('device_uid');
         //var_dump($request->headers);
         //var_dump($submittedClient->getDevice()->getDeviceUid());die;
-        //$device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
+        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
       //  var_dump($device);die;
         $client
             ->setFamilyName($submittedClient->getFamilyName())
@@ -377,7 +346,7 @@ class RegistrationController extends BaseController
             ->setContactPreference($submittedClient->getContactPreference())
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
-            //->setDevice($device)
+            ->setDevice($device)
 
             //->setEnabled(true)
         ;
