@@ -122,12 +122,6 @@ class Client extends User
      */
     private $contrats;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Device", inversedBy="client", cascade={"persist"}, orphanRemoval=true)
-     */
-    private $device;
-
-
 
     public function __construct()
     {
@@ -374,18 +368,6 @@ class Client extends User
                 $contrats->setClient(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDevice(): ?Device
-    {
-        return $this->device;
-    }
-
-    public function setDevice(?Device $device): self
-    {
-        $this->device = $device;
 
         return $this;
     }

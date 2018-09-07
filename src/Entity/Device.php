@@ -91,11 +91,6 @@ class Device
      */
     private $version_name;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", mappedBy="device", cascade={"persist"})
-     */
-    private $client;
-
 
     public function __construct()
     {
@@ -249,23 +244,6 @@ class Device
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newDevice = $client === null ? null : $this;
-        if ($newDevice !== $client->getDevice()) {
-            $client->setDevice($newDevice);
-        }
-
-        return $this;
-    }
 
 
 }
