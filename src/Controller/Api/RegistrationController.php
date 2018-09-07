@@ -193,7 +193,7 @@ class RegistrationController extends BaseController
                 $client_device->setDevice(Null);
                 $this->em->flush();
             }
-            $client->setDevice($device);
+            $device->setClient($client);
             $this->em->flush();
         }
         }
