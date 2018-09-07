@@ -24,8 +24,6 @@ class Tokens
     public function getTokenByClient($phone){
         $client = $this->entitymanager ->getRepository(Client::class)->findOneBy(array('phone'=>$phone));
         if ($client instanceof Client){
-            dump($client->getDevice());
-            die();
             $device = $client->getDevice();
             if($device instanceof Device){
                 return $device->getFirebaseToken();

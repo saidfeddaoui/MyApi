@@ -80,21 +80,20 @@ class SendPushClientCommand extends ContainerAwareCommand
             $retour = $this->pushClient->sendPush(array(
                 'title' => $Notification->getSujet(),
                 'message' => $Notification->getMessage(),
-                'id' => $Notification->getIdPush(),
+                'id' => $Notification->getId(),
             ),$tokens);
-
             if (isset($retour['success'])){
                 $output->writeln([
-                    'Push notification envoi avec succès'
+                    'Push notification envoi avec succès id : '.$Notification->getId()
                 ]);
-                $Notification->setStatus(1);
+                $Notification->setStatut(1);
                 $em->flush();
             }
         }
 
         $output->writeln([
             'Envoi push client end ============ '.date('Y-m-d H:i:s'),
-            '========================================================================================================================'
+            '==========================================================================='
         ]);
     }
 

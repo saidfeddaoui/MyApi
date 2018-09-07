@@ -92,9 +92,10 @@ class Device
     private $version_name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", mappedBy="device", cascade={"persist", "remove"})
      */
     private $client;
+
 
 
     public function __construct()
@@ -249,18 +250,23 @@ class Device
         return $this;
     }
 
-    public function getClient(): ?string
+    public function getClient(): ?Client
     {
         return $this->client;
     }
 
-    public function setClient(?string $client): self
+    public function setClient(?Client $client): self
     {
         $this->client = $client;
 
+        // set (or unset) the owning side of the relation if necessary
+        $newDevice = $client === null ? null : $this;
+        if ($newDevice !== $client->getDevice()) {
+            $client->setDevice($newDevice);
+        }
+
         return $this;
     }
-
 
 
 }
