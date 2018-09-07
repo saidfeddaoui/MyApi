@@ -123,7 +123,7 @@ class Client extends User
     private $contrats;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $device_uid;
 
@@ -382,7 +382,7 @@ class Client extends User
         return $this->device_uid;
     }
 
-    public function setDeviceUid(string $device_uid): self
+    public function setDeviceUid(?string $device_uid): self
     {
         $this->device_uid = $device_uid;
 

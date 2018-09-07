@@ -188,12 +188,13 @@ class RegistrationController extends BaseController
         if ($device_uid){
         $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
         if ($device instanceof Device){
-            $client_device = $device->getClient()?:'';
-            if ($client_device instanceof Client){
-                $client_device->setDevice(Null);
+            $client_device = $device->getClient()?:Null;
+            if (!is_null($client_device)){
+                $client_device->setDeviceUid(Null);
                 $this->em->flush();
             }
-            $client->setDevice($device);
+            $client->setDeviceUid($device_uid);
+            $device->setClient($client->getId());
             $this->em->flush();
         }
         }
