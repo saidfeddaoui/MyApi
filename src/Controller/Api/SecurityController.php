@@ -82,8 +82,6 @@ class SecurityController extends BaseController
         $user = $this->tokenStorage->getToken()->getUser();
         $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
         $device_uid = $request->request->get('device_uid')?:'';
-        echo "$device_uid";
-        die();
         if ($device_uid){
             $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
             if ($device instanceof Device){
@@ -93,8 +91,6 @@ class SecurityController extends BaseController
                     $this->em->flush();
                 }
                 $client = $this->em->getRepository(Client::class)->findOneBy(array('phone' => $user->getPhone()));
-                dump($client);
-                die();
                 if ($client instanceof Client){
                     $client->setDeviceUid($device_uid);
                     $device->setClient($client->getPhone());
