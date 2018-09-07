@@ -82,8 +82,6 @@ class SendPushClientCommand extends ContainerAwareCommand
                 'message' => $Notification->getMessage(),
                 'id' => $Notification->getId(),
             ),$tokens);
-            dump($retour);
-            die();
             if (isset($retour['success'])){
                 $output->writeln([
                     'Push notification envoi avec succès'
