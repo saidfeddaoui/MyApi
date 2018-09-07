@@ -86,7 +86,7 @@ class SendPushClientCommand extends ContainerAwareCommand
                 $output->writeln([
                     'Push notification envoi avec succès'
                 ]);
-                $Notification->setStatus(1);
+                $Notification->setStatut(1);
                 $em->flush();
             }
         }
