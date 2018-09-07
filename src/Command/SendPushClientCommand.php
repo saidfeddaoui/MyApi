@@ -80,7 +80,7 @@ class SendPushClientCommand extends ContainerAwareCommand
             $retour = $this->pushClient->sendPush(array(
                 'title' => $Notification->getSujet(),
                 'message' => $Notification->getMessage(),
-                'id' => $Notification->getIdPush(),
+                'id' => $Notification->getId(),
             ),$tokens);
             dump($retour);
             die();
