@@ -105,6 +105,11 @@ services:
                     - '@eight_points_guzzle.client.api_add_contrat'
                     - '@jms_serializer'
                     - array
+    App\Services\DetailsContratApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_details_contrat'
+                    - '@jms_serializer'
+                    - array
 
 
     # Exception normalizers
