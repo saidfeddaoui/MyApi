@@ -169,7 +169,7 @@ class RegistrationController extends BaseController
                 ->addInsuranceType($insuranceType)
                 ->addRole($role)
                 ->setGroup($group)
-                ->setDevice(Null)
+                //->setDevice(Null)
             ;
             $this->em->flush();
         }else{
@@ -180,7 +180,7 @@ class RegistrationController extends BaseController
                 ->addInsuranceType($insuranceType)
                 ->addRole($role)
                 ->setGroup($group)
-                ->setDevice(Null)
+                //->setDevice(Null)
             ;
             $this->em->persist($client);
             $this->em->flush();
@@ -190,8 +190,6 @@ class RegistrationController extends BaseController
         if ($device_uid){
         $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
         if ($device instanceof Device){
-            echo "here";
-            die();
             $client_device = $device->getClient()?:'';
             if ($client_device instanceof Client){
                 $client_device->setDevice(Null);
