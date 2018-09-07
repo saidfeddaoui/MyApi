@@ -185,6 +185,20 @@ class RegistrationController extends BaseController
             $this->em->persist($client);
             $this->em->flush();
         }
+        // Relation between client and device
+        $device_uid = $request->request->get('device_uid')?:'';
+        if ($device_uid){
+        $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
+        if ($device instanceof Device){
+            $client_device = $device->getClient();
+            if ($client_device instanceof Client){
+                $client_device->setDevice(Null);
+                $em->flush();
+            }
+            $client->setDevice($device);
+            $em->flush();
+        }
+        }
 
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
