@@ -84,7 +84,7 @@ class SendPushClientCommand extends ContainerAwareCommand
             ),$tokens);
             if (isset($retour['success'])){
                 $output->writeln([
-                    'Push notification envoi avec succès'
+                    'Push notification envoi avec succès id : '.$Notification
                 ]);
                 $Notification->setStatut(1);
                 $em->flush();
