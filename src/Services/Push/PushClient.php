@@ -6,7 +6,7 @@
  * Time: 12:55
  */
 
-namespace App\Service\Push;
+namespace App\Services\Push;
 use App\Service\Push\ConfigTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 

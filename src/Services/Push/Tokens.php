@@ -6,7 +6,7 @@
  * Time: 12:26
  */
 
-namespace App\Service\Push;
+namespace App\Services\Push;
 use App\Entity\Device;
 use Doctrine\ORM\EntityManagerInterface;
 class Tokens
@@ -20,7 +20,7 @@ class Tokens
 
     }
 
-    public function getTokensByClient($client){
+    public function getTokenByClient($client){
         $device = $this->entitymanager ->getRepository(Device::class)->findOneBy(array('client'=>$client));
         if($device instanceof Device){
             return $device->getFirebaseToken();

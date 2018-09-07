@@ -6,7 +6,7 @@
  * Time: 12:23
  */
 
-namespace App\Service\Push;
+namespace App\Services\Push;
 
 
 trait ConfigTrait
