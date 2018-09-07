@@ -194,7 +194,7 @@ class RegistrationController extends BaseController
                 $this->em->flush();
             }
             dump($device_uid);
-            dump($client->getId());
+            dump($client);
             die();
             $client->setDeviceUid($device_uid);
             $device->setClient($client->getId());
