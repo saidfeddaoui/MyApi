@@ -123,10 +123,9 @@ class Client extends User
     private $contrats;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Device", inversedBy="client", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $device;
-
+    private $device_uid;
 
 
     public function __construct()
@@ -378,14 +377,14 @@ class Client extends User
         return $this;
     }
 
-    public function getDevice(): ?Device
+    public function getDeviceUid(): ?string
     {
-        return $this->device;
+        return $this->device_uid;
     }
 
-    public function setDevice(?Device $device): self
+    public function setDeviceUid(?string $device_uid): self
     {
-        $this->device = $device;
+        $this->device_uid = $device_uid;
 
         return $this;
     }
