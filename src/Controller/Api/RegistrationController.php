@@ -169,6 +169,7 @@ class RegistrationController extends BaseController
                 ->addInsuranceType($insuranceType)
                 ->addRole($role)
                 ->setGroup($group)
+                ->setDevice(Null)
             ;
             $this->em->flush();
         }else{
@@ -178,6 +179,7 @@ class RegistrationController extends BaseController
                 ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
                 ->addInsuranceType($insuranceType)
                 ->addRole($role)
+                ->setDevice(Null)
                 ->setGroup($group)
             ;
             $this->em->persist($client);
@@ -193,9 +195,7 @@ class RegistrationController extends BaseController
                 $client_device->setDevice(Null);
                 $this->em->flush();
             }
-            echo "here";
-            die();
-            $device->setClient($client);
+            $client->setDevice($device);
             $this->em->flush();
         }
         }
