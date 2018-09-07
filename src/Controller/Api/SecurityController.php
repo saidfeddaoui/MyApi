@@ -14,6 +14,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class SecurityController extends BaseController
 {
@@ -34,6 +35,10 @@ class SecurityController extends BaseController
      * @var ConfigHostUtils
      */
     private $configHostUtils;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
 
     /**
      * SecurityController constructor.
@@ -45,13 +50,15 @@ class SecurityController extends BaseController
         TokenStorageInterface $tokenStorage,
         JWTEncoderInterface $jwtEncoder,
         EventDispatcherInterface $eventDispatcher,
-        ConfigHostUtils $configHostUtils
+        ConfigHostUtils $configHostUtils,
+        EntityManagerInterface $entityManager
     )
     {
         $this->tokenStorage = $tokenStorage;
         $this->jwtEncoder = $jwtEncoder;
         $this->eventDispatcher = $eventDispatcher;
         $this->configHostUtils = $configHostUtils;
+        $this->em = $entityManager;
     }
 
     /**
