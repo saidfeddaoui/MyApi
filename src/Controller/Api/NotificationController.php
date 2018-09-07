@@ -91,7 +91,7 @@ class NotificationController extends Controller
                           array(
                               'id' => $notificationDetail->getId(),
                               'sujet' => $notificationDetail->getSujet(),
-                              'message' => $notificationDetail->setMessage(),
+                              'message' => $notificationDetail->getMessage(),
                               'get_id_societaire' => $notificationDetail->getIdSocietaire(),
                           )
                       );
