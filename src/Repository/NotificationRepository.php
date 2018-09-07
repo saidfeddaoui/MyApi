@@ -21,7 +21,7 @@ class NotificationRepository extends ServiceEntityRepository
     public function getPushClient()
     {
         return $this->createQueryBuilder('p')
-            ->where('p.status = :val')
+            ->where('p.statut = :val')
             ->andWhere('p.client is not null')
             ->setParameter('val', false)
             ->orderBy('p.created_at', 'ASC')
