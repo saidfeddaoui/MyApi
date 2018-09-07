@@ -171,8 +171,6 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
             ;
             $this->em->flush();
-            echo "hete";
-            die();
         }else{
             $client
                 ->setEnabled(false)
@@ -195,6 +193,8 @@ class RegistrationController extends BaseController
                 $client_device->setDevice(Null);
                 $this->em->flush();
             }
+            echo "here";
+            die();
             $device->setClient($client);
             $this->em->flush();
         }
