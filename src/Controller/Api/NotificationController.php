@@ -34,7 +34,7 @@ class NotificationController extends Controller
      *        in="body",
      *        description="Notication object",
      *        required=true,
-     *        @Model(type="App\Entity\Notication", groups={"all"})
+     *        @Model(type="App\Entity\Notification", groups={"all"})
      *     ),
      *     @SWG\Response(
      *         response=200,
