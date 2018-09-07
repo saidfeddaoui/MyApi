@@ -24,7 +24,7 @@ class NotificationRepository extends ServiceEntityRepository
             ->where('p.statut = :val')
             ->andWhere('p.client is not null')
             ->setParameter('val', false)
-            ->orderBy('p.created_at', 'ASC')
+            ->orderBy('p.dateCreation', 'ASC')
             //->setMaxResults(10)
             ->getQuery()
             ->getResult();
