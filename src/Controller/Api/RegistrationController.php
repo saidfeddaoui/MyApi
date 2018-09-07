@@ -172,14 +172,15 @@ class RegistrationController extends BaseController
             ;
             $this->em->flush();
         }else{
+            dump($client);
+            die();
             $client
                 ->setEnabled(false)
                 ->setVerificationCode($this->codeGenerator->generate())
                 ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
                 ->addInsuranceType($insuranceType)
                 ->addRole($role)
-                ->setGroup($group)
-            ;
+                ->setGroup($group);
             $this->em->persist($client);
             $this->em->flush();
         }
