@@ -39,6 +39,7 @@ class SendPushClientCommand extends ContainerAwareCommand
      */
     public function __construct(EntityManagerInterface $entityManager, Tokens $tokens, PushClient $pushClient)
     {
+        parent::__construct();
         $this->entitymanager = $entityManager;
         $this->tokens = $tokens;
         $this->pushClient = $pushClient;
