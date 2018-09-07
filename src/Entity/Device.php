@@ -92,7 +92,7 @@ class Device
     private $version_name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $client;
 
@@ -249,12 +249,12 @@ class Device
         return $this;
     }
 
-    public function getClient(): ?int
+    public function getClient(): ?string
     {
         return $this->client;
     }
 
-    public function setClient(?int $client): self
+    public function setClient(?string $client): self
     {
         $this->client = $client;
 
