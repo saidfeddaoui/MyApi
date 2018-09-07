@@ -78,12 +78,12 @@ class SecurityController extends BaseController
      */
     public function login()
     {
-        echo "here";
-        die();
         $request = $this->configHostUtils->getCurrentRequest();
         $user = $this->tokenStorage->getToken()->getUser();
         $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
         $device_uid = $request->request->get('device_uid')?:'';
+        echo "$device_uid";
+        die();
         if ($device_uid){
             $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
             if ($device instanceof Device){
