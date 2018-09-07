@@ -46,6 +46,22 @@ class PreDeclarationController extends BaseController
         $this->eventDispatcher = $eventDispatcher;
     }
 
+
+
+    /**
+     * @Rest\Get(path = "/list/{police}", name = "list")
+     * @Rest\View
+     * @param PreDeclaration $preDeclaration
+     * @param InsuranceType $insuranceType
+     * @return ApiResponse
+     */
+    public function listPreDeclaration(PreDeclaration $preDeclaration)
+    {
+       // $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findBy([]);
+
+        return $this->respondWith($preDeclaration, ApiResponse::OK);
+    }
+
     /**
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
