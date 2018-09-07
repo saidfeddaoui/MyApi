@@ -197,7 +197,7 @@ class RegistrationController extends BaseController
             }
             $client->setDevice($device);
             $this->em->flush();
-            echo "update --force";
+            dump($client->getDevice());
             die();
         }
         }
