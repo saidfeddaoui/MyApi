@@ -23,6 +23,8 @@ class Tokens
 
     public function getTokenByClient($phone){
         $client = $this->entitymanager ->getRepository(Client::class)->findOneBy(array('phone'=>$phone));
+        dump($client);
+        die();
         if ($client instanceof Client){
             $device = $client->getDevice();
             if($device instanceof Device){
