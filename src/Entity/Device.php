@@ -91,10 +91,6 @@ class Device
      */
     private $version_name;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $client;
 
 
     public function __construct()
@@ -248,19 +244,6 @@ class Device
 
         return $this;
     }
-
-    public function getClient(): ?string
-    {
-        return $this->client;
-    }
-
-    public function setClient(?string $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
 
 
 }
