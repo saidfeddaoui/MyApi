@@ -7,7 +7,7 @@
  */
 
 namespace App\Services\Push;
-use App\Service\Push\ConfigTrait;
+use App\Services\Push\ConfigTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 class PushClient
