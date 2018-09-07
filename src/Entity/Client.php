@@ -122,13 +122,12 @@ class Client extends User
      */
     private $contrats;
 
-
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"client_account_creation"})
-     * @ORM\OneToOne(targetEntity="Device")
+     * @ORM\OneToOne(targetEntity="App\Entity\Device", mappedBy="client", cascade={"persist", "remove"})
      */
-    protected $device;
+    private $device;
+
+
 
     public function __construct()
     {
@@ -346,22 +345,6 @@ class Client extends User
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDevice()
-    {
-        return $this->device;
-    }
-
-    /**
-     * @param mixed $device
-     */
-    public function setDevice($device)
-    {
-        $this->device = $device;
-    }
-
 
 
     /**
@@ -390,6 +373,24 @@ class Client extends User
             if ($contrats->getClient() === $this) {
                 $contrats->setClient(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getDevice(): ?Device
+    {
+        return $this->device;
+    }
+
+    public function setDevice(?Device $device): self
+    {
+        $this->device = $device;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newClient = $device === null ? null : $this;
+        if ($newClient !== $device->getClient()) {
+            $device->setClient($newClient);
         }
 
         return $this;

@@ -80,17 +80,21 @@ class Device
     private $longitude;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
-     */
-    private $client;
-
-    /**
      * @Serializer\Expose()
      * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $os;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $version_name;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device", cascade={"persist", "remove"})
+     */
+    private $client;
 
 
     public function __construct()
@@ -216,19 +220,6 @@ class Device
         return $this;
     }
 
-    public function getClient(): ?Clients
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Clients $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-
     public function getOs(): ?string
     {
         return $this->os;
@@ -244,6 +235,30 @@ class Device
     public function __toString()
     {
         return $this->device_uid;
+    }
+
+    public function getVersionName(): ?string
+    {
+        return $this->version_name;
+    }
+
+    public function setVersionName(string $version_name): self
+    {
+        $this->version_name = $version_name;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
     }
 
 

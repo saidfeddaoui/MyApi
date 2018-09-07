@@ -13,6 +13,7 @@ use App\Entity\Role;
 use App\Event\ApplicationEvents;
 use App\Event\PhoneRegistrationEvent;
 use App\Services\VerificationCodeGeneratorInterface;
+use App\Utils\ConfigHostUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
@@ -53,6 +54,11 @@ class RegistrationController extends BaseController
     private $eventDispatcher;
 
     /**
+     * @var ConfigHostUtils
+     */
+    private $configHostUtils;
+
+    /**
      * RegistrationController constructor.
      * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $encoder
@@ -65,7 +71,8 @@ class RegistrationController extends BaseController
         UserPasswordEncoderInterface $encoder,
         JWTEncoderInterface $jwtEncoder,
         VerificationCodeGeneratorInterface $codeGenerator,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ConfigHostUtils $configHostUtils
     )
     {
         $this->em = $em;
@@ -73,6 +80,7 @@ class RegistrationController extends BaseController
         $this->jwtEncoder = $jwtEncoder;
         $this->codeGenerator = $codeGenerator;
         $this->eventDispatcher = $eventDispatcher;
+        $this->configHostUtils = $configHostUtils;
     }
 
     /**
@@ -149,19 +157,49 @@ class RegistrationController extends BaseController
      */
     public function phoneRegistration(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
+        $request = $this->configHostUtils->getCurrentRequest();
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-        $client
-            ->setEnabled(false)
-            ->setVerificationCode($this->codeGenerator->generate())
-            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-            ->addInsuranceType($insuranceType)
-            ->addRole($role)
-            ->setGroup($group)
-        ;
-        $this->em->persist($client);
-        $this->em->flush();
+        if ($client instanceof Client){
+            $client
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+                ->setDevice(Null)
+            ;
+            $this->em->flush();
+        }else{
+            $client
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+                ->setDevice(Null)
+            ;
+            $this->em->persist($client);
+            $this->em->flush();
+        }
+        // Relation between client and device
+        $device_uid = $request->request->get('device_uid')?:'';
+        if ($device_uid){
+        $device  = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
+        if ($device instanceof Device){
+            $client_device = $device->getClient();
+            if ($client_device instanceof Client){
+                $client_device->setDevice(Null);
+                $this->em->flush();
+            }
+            $client->setDevice($device);
+            $this->em->flush();
+        }
+        }
+
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
