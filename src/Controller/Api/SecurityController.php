@@ -78,6 +78,8 @@ class SecurityController extends BaseController
      */
     public function login()
     {
+        echo "here";
+        die();
         $request = $this->configHostUtils->getCurrentRequest();
         $user = $this->tokenStorage->getToken()->getUser();
         $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
