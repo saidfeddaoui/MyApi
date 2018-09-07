@@ -85,8 +85,6 @@ class PushClient
         ));
         $response = curl_exec($ch);
         curl_close($ch);
-        dump($response);
-        die();
         $obj = json_decode($response);
         if (isset($obj->{'success'})) {
             $array = array("success" => $obj->{'success'}, "failure" => ($obj->{'failure'}));
