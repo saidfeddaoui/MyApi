@@ -80,12 +80,6 @@ class Device
     private $longitude;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
-     */
-    private $client;
-
-    /**
      * @Serializer\Expose()
      * @Serializer\Groups({"all"})
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -220,19 +214,6 @@ class Device
 
         return $this;
     }
-
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
 
     public function getOs(): ?string
     {

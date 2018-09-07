@@ -123,12 +123,6 @@ class Client extends User
     private $contrats;
 
 
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"client_account_creation"})
-     * @ORM\OneToOne(targetEntity="Device")
-     */
-    protected $device;
 
     public function __construct()
     {
@@ -344,22 +338,6 @@ class Client extends User
     public function isConfirmed()
     {
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDevice()
-    {
-        return $this->device;
-    }
-
-    /**
-     * @param mixed $device
-     */
-    public function setDevice($device)
-    {
-        $this->device = $device;
     }
 
 
