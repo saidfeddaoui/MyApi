@@ -336,7 +336,7 @@ class RegistrationController extends BaseController
        // $device_uid=$request->headers->get('device_uid');
         //var_dump($request->headers);
         //var_dump($submittedClient->getDevice()->getDeviceUid());die;
-        $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
+       // $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
       //  var_dump($device);die;
         $client
             ->setFamilyName($submittedClient->getFamilyName())
@@ -347,7 +347,7 @@ class RegistrationController extends BaseController
             ->setContactPreference($submittedClient->getContactPreference())
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
-            ->setDevice($device)
+           // ->setDevice($device)
 
             //->setEnabled(true)
         ;
