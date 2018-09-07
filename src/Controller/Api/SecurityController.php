@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\Security\LoginResponse;
 use App\Entity\Client;
+use App\Entity\Device;
 use App\Event\ApplicationEvents;
 use App\Event\SuccessLoginEvent;
 use App\Utils\ConfigHostUtils;
