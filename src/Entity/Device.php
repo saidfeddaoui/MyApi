@@ -221,12 +221,12 @@ class Device
         return $this;
     }
 
-    public function getClient(): ?Clients
+    public function getClient(): ?Client
     {
         return $this->client;
     }
 
-    public function setClient(?Clients $client): self
+    public function setClient(?Client $client): self
     {
         $this->client = $client;
 
