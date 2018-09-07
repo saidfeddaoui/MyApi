@@ -34,7 +34,7 @@ class Contrats
     private $police;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="idSocietaire")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="idSocietaire",cascade={"persist", "remove"})
      */
     private $client;
 
