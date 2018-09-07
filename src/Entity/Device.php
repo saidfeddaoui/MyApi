@@ -91,6 +91,11 @@ class Device
      */
     private $version_name;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="device", cascade={"persist", "remove"})
+     */
+    private $client;
+
 
     public function __construct()
     {
@@ -240,6 +245,18 @@ class Device
     public function setVersionName(string $version_name): self
     {
         $this->version_name = $version_name;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

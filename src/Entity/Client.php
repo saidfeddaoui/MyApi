@@ -122,6 +122,11 @@ class Client extends User
      */
     private $contrats;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Device", mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $device;
+
 
 
     public function __construct()
@@ -368,6 +373,24 @@ class Client extends User
             if ($contrats->getClient() === $this) {
                 $contrats->setClient(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getDevice(): ?Device
+    {
+        return $this->device;
+    }
+
+    public function setDevice(?Device $device): self
+    {
+        $this->device = $device;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newClient = $device === null ? null : $this;
+        if ($newClient !== $device->getClient()) {
+            $device->setClient($newClient);
         }
 
         return $this;
