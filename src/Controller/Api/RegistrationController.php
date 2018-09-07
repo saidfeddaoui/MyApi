@@ -171,6 +171,7 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
                 ->setDevice(Null)
             ;
+            $this->em->persist($client);
             $this->em->flush();
         }else{
             $client
