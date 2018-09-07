@@ -91,6 +91,8 @@ class SecurityController extends BaseController
                     $this->em->flush();
                 }
                 $client = $this->em->getRepository(Client::class)->findOneBy(array('phone' => $user->getPhone()));
+                dump($client);
+                die();
                 if ($client instanceof Client){
                     $client->setDeviceUid($device_uid);
                     $device->setClient($client->getPhone());
