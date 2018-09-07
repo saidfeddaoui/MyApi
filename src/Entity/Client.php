@@ -123,7 +123,7 @@ class Client extends User
     private $contrats;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Device", mappedBy="client", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Device", inversedBy="client", cascade={"persist"}, orphanRemoval=true)
      */
     private $device;
 
@@ -386,12 +386,6 @@ class Client extends User
     public function setDevice(?Device $device): self
     {
         $this->device = $device;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newClient = $device === null ? null : $this;
-        if ($newClient !== $device->getClient()) {
-            $device->setClient($newClient);
-        }
 
         return $this;
     }
