@@ -330,19 +330,6 @@ class ContentController extends BaseController
 
 
     /**
-     * @Rest\Get(path = "/list/{client_id}", name = "list")
-     * @Rest\View(serializerGroups={"listePredeclaration"})
-     * @param  $client_id
-     * @param ObjectManager $em
-     * @return ApiResponse
-     */
-    public function listPreDeclaration(ObjectManager $em,$client_id)
-    {
-        $listPredeclaration = $em->getRepository("App:PreDeclaration")->findByClient($client_id);
-        return $this->respondWith($listPredeclaration);
-    }
-
-    /**
      * @SWG\Get(
      *     tags={"Content Types"},
      *     description="modeles",

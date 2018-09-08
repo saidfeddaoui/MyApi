@@ -48,6 +48,53 @@ class PreDeclarationController extends BaseController
     }
 
 
+
+    /**
+     *
+     * @SWG\Post(
+     *     tags={"Pré-déclaration"},
+     *     description="Pre-declaration process",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success response",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Not Found Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Resource Not Found"
+     *             }
+     *         }
+     *     )
+     * )
+     * @Rest\Get(path = "/list/{client_id}", name = "list")
+     * @Rest\View
+     * @param Client $client
+     * @return ApiResponse
+     */
+    public function listPreDeclaration(Client $client)
+    {
+        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
+
+        return $this->respondWith($listPredeclaration);
+    }
+
     /**
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
