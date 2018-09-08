@@ -158,7 +158,7 @@ class PreDeclaration
 
 
     /**
-     *  * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     *  * @ORM\OneToMany(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
      *
      */
 
