@@ -261,13 +261,6 @@ class PreDeclarationController extends BaseController
      *         required=true,
      *         description="Bearer auth",
      *     ),
-     *     @SWG\Parameter(
-     *         name="client_id",
-     *         in="formData",
-     *         type="string",
-     *         required=true,
-     *         description="id client",
-     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="Return attachments list",
