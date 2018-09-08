@@ -18,7 +18,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 /**
  * @Rest\Route(path="/public/get/notification", name="api_notification_")
  */
-class NotificationController extends Controller
+class NotificationController extends BaseController
 {
     /**
      * @SWG\Post(
