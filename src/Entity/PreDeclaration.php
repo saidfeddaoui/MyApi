@@ -61,7 +61,7 @@ class PreDeclaration
      *
      * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\DateTime(groups={"client_pre_declaration"}, format="Y-m-d H:i:s")
@@ -71,7 +71,7 @@ class PreDeclaration
     private $dateSinistre;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"show_predeclaration","listPreDeclaration"})
+     * @Serializer\Groups("show_predeclaration")
      *
      * @ORM\Column(type="smallint")
      */
@@ -82,7 +82,7 @@ class PreDeclaration
     private $description;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups(groups={"client_pre_declaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
