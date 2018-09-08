@@ -61,9 +61,9 @@ class PreDeclaration
      *
      * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups(groups={"client_pre_declaration","listPreDeclaration"})
      *
-     * @Assert\NotNull(groups={"client_pre_declaration","listPreDeclaration"})
+     * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\DateTime(groups={"client_pre_declaration"}, format="Y-m-d H:i:s")
      *
      * @ORM\Column(type="datetime")
