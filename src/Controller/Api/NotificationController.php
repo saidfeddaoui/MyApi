@@ -22,7 +22,7 @@ class NotificationController extends BaseController
 {
     /**
      * @SWG\Post(
-     *     tags={"Notication"},
+     *     tags={"Notification"},
      *     description="getNotification Process",
      *     @SWG\Parameter(
      *         name="X-ENTITY",
