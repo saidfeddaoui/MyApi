@@ -49,10 +49,9 @@ class PreDeclarationController extends BaseController
 
 
     /**
-     * @Rest\Get(path = "/list/{police}", name = "list")
+     * @Rest\Get(path = "/list/{client}", name = "list")
      * @Rest\View
      * @param PreDeclaration $preDeclaration
-     * @param InsuranceType $insuranceType
      * @return ApiResponse
      */
     public function listPreDeclaration(PreDeclaration $preDeclaration)
