@@ -50,10 +50,10 @@ class PreDeclarationController extends BaseController
 
 
     /**
-     *
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
      *     description="Pre-declaration process",
+     *
      *     @SWG\Parameter(
      *         name="Authorization",
      *         in="header",
