@@ -15,6 +15,8 @@ class Contrats
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     * @Serializer\Groups({"listPreDeclaration"})
      */
     private $id;
 
