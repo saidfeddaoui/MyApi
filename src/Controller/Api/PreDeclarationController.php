@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\Entity\CircumstanceAttachment;
+use App\Entity\Client;
 use App\Entity\InsuranceType;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
