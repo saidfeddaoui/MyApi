@@ -60,7 +60,11 @@ class PreDeclarationController extends BaseController
      *         required=true,
      *         description="Bearer auth",
      *     ),
-     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success response",
+     *     )
+     * )
      * @Rest\Get(path = "/list/{client_id}", name = "list")
      * @Rest\View
      * @param Client $client
