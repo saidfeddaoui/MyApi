@@ -71,7 +71,7 @@ class PreDeclaration
     private $dateSinistre;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("show_predeclaration")
+     * @Serializer\Groups({"show_predeclaration","listPreDeclaration"})
      *
      * @ORM\Column(type="smallint")
      */
@@ -82,7 +82,7 @@ class PreDeclaration
     private $description;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
@@ -93,8 +93,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
@@ -104,7 +103,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
