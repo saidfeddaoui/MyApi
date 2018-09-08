@@ -47,35 +47,6 @@ class PreDeclarationController extends BaseController
         $this->eventDispatcher = $eventDispatcher;
     }
 
-
-
-    /**
-     * @SWG\Post(
-     *     tags={"Pré-déclaration"},
-     *     description="Pre-declaration liste",
-     *     @SWG\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         type="string",
-     *         required=true,
-     *         description="Bearer auth",
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="Success response",
-     *     )
-     * )
-     * @Rest\Get(path = "/list/{client_id}", name = "list")
-     * @Rest\View
-     * @param Client $client
-     * @return ApiResponse
-     */
-    public function listPreDeclaration(Client $client)
-    {
-        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
-        return $this->respondWith($listPredeclaration);
-    }
-
     /**
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
@@ -277,6 +248,33 @@ class PreDeclarationController extends BaseController
             $tiersAttachments[] = ['id' => $tiersAttachment->getId(), 'type' => $types];
         }
         return $this->respondWith($tiersAttachments);
+    }
+
+    /**
+     * @SWG\Post(
+     *     tags={"Pré-déclaration"},
+     *     description="Pre-declaration liste",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Success response",
+     *     )
+     * )
+     * @Rest\Get(path = "/list/{client_id}", name = "list")
+     * @Rest\View
+     * @param Client $client
+     * @return ApiResponse
+     */
+    public function listPreDeclaration(Client $client)
+    {
+        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
+        return $this->respondWith($listPredeclaration);
     }
 
 
