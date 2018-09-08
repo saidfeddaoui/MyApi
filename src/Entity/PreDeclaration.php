@@ -28,6 +28,9 @@ class PreDeclaration
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     * @Serializer\Groups({"listPreDeclaration"})
+     *
      */
     private $id;
 
@@ -35,7 +38,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
@@ -46,7 +49,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
@@ -60,7 +63,7 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_pre_declaration"})
      *
-     * @Assert\NotNull(groups={"client_pre_declaration"})
+     * @Assert\NotNull(groups={"client_pre_declaration","listPreDeclaration"})
      * @Assert\DateTime(groups={"client_pre_declaration"}, format="Y-m-d H:i:s")
      *
      * @ORM\Column(type="datetime")
@@ -68,7 +71,7 @@ class PreDeclaration
     private $dateSinistre;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("show_predeclaration")
+     * @Serializer\Groups("show_predeclaration","listPreDeclaration")
      *
      * @ORM\Column(type="smallint")
      */
@@ -79,7 +82,7 @@ class PreDeclaration
     private $description;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups(groups={"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
