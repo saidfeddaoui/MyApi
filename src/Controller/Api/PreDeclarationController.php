@@ -268,7 +268,7 @@ class PreDeclarationController extends BaseController
      * )
      *
      * @Rest\Post(path="/list/{client_id}", name="list")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"all","listPreDeclaration"})
      * @param $client_id
      * @return ApiResponse
      */
