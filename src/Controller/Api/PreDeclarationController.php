@@ -264,18 +264,6 @@ class PreDeclarationController extends BaseController
      *     @SWG\Response(
      *         response=200,
      *         description="Return attachments list",
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="Failure response",
-     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
-     *         examples={
-     *             "Missing requirement Error (Http Code: 400)":
-     *             {
-     *                 "code"=408,
-     *                 "status"="Missing required file: ..."
-     *             }
-     *         }
      *     )
      * )
      *
