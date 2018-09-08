@@ -53,7 +53,6 @@ class PreDeclarationController extends BaseController
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
      *     description="Pre-declaration process",
-     *
      *     @SWG\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -91,7 +90,6 @@ class PreDeclarationController extends BaseController
     public function listPreDeclaration(Client $client)
     {
         $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
-
         return $this->respondWith($listPredeclaration);
     }
 
