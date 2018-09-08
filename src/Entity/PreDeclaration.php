@@ -156,6 +156,30 @@ class PreDeclaration
      */
     private $updatedAt;
 
+
+    /**
+     *  * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
+     *
+     */
+
+    private $client;
+
+    /**
+     * @return mixed
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param mixed $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
     public function getId()
     {
         return $this->id;
