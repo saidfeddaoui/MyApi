@@ -253,7 +253,8 @@ class PreDeclarationController extends BaseController
     /**
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
-     *     description="Pre-declaration liste",
+     *     description="upload tiers's attachments",
+     *     consumes={"multipart/form-data"},
      *     @SWG\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -261,21 +262,76 @@ class PreDeclarationController extends BaseController
      *         required=true,
      *         description="Bearer auth",
      *     ),
+     *     @SWG\Parameter(
+     *         name="permis",
+     *         in="formData",
+     *         type="file",
+     *         required=true,
+     *         description="Driver's license picture",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="attestation_assurance",
+     *         in="formData",
+     *         type="file",
+     *         required=true,
+     *         description="Insurance's attestation picture",
+     *     ),
+     *    @SWG\Parameter(
+     *         name="constat_amiable",
+     *         in="formData",
+     *         type="file",
+     *         required=false,
+     *         description="Friendly report picture",
+     *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Success response",
+     *         description="Return attachments list",
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Missing requirement Error (Http Code: 400)":
+     *             {
+     *                 "code"=408,
+     *                 "status"="Missing required file: ..."
+     *             }
+     *         }
      *     )
      * )
-     * @Rest\Get(path = "/list/{client_id}", name = "list")
-     * @Rest\View
-     * @param Client $client
+     *
+     * @Rest\Post(path="/list/{client_id}", name="list")
+     * @Rest\View()
+     *
+     * @param Request $request
      * @return ApiResponse
+     * @throws MissingRequiredFileException
      */
-    public function listPreDeclaration(Client $client)
+    public function listPredeclaration(Request $request)
     {
-        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
-        return $this->respondWith($listPredeclaration);
+        $types ="predeclaration";
+        if (!count($request->files)) {
+            throw new MissingRequiredFileException("no image");
+        }
+
+        $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
+        $tiersAttachments = [];
+        foreach ($request->files as $type) {
+            /**
+             * @var UploadedFile $attachment
+             */
+            $attachment = $type;
+            $file = $attachment->move($directory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
+            $tiersAttachment = new TiersAttachment($types, $file->getBasename());
+            $this->em->persist($tiersAttachment);
+            $this->em->flush();
+            $tiersAttachments[] = ['id' => $tiersAttachment->getId(), 'type' => $types];
+        }
+        return $this->respondWith($tiersAttachments);
     }
+
+
 
 
   /*  public function uploadTiersAttachments(Request $request)
