@@ -144,7 +144,7 @@ class NotificationController extends Controller
      */
     public function listNotification(ObjectManager $em,  $preDeclaration_id)
     {
-        $listNotification = $em->getRepository("App:PreDeclaration")->findByidPredeclaration($preDeclaration_id);
+        $listNotification = $em->getRepository("App:Notification")->findByidPredeclaration($preDeclaration_id);
         return $this->respondWith($listNotification);
     }
 
