@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\Alert;
+use App\Entity\Client;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Entity\Societaire;
@@ -326,6 +327,21 @@ class ContentController extends BaseController
     {
         return $this->respondWith($insuranceType->getMarqueVehicules());
     }
+
+
+    /**
+     * @Rest\Get(path = "/list/{client_id}", name = "list")
+     * @Rest\View
+     * @param Client $client
+     * @return ApiResponse
+     */
+    public function listPreDeclaration(Client $client)
+    {
+        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
+
+        return $this->respondWith($listPredeclaration);
+    }
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},

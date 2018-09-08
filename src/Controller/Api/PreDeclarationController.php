@@ -48,22 +48,6 @@ class PreDeclarationController extends BaseController
     }
 
 
-
-    /**
-     * @Rest\Get(path = "/list/{client_id}", name = "list")
-     * @Rest\View
-     * @param Client $client
-     * @return ApiResponse
-     */
-    public function listPreDeclaration(Client $client)
-    {
-        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findById($client->getId());
-
-        dump($listPredeclaration);
-        die();
-        return $this->respondWith($listPredeclaration);
-    }
-
     /**
      * @SWG\Post(
      *     tags={"Pré-déclaration"},
