@@ -7,6 +7,7 @@ use App\DTO\Api\ApiResponse;
 use App\Entity\Notification;
 use App\Entity\NotificationDetail;
 use App\Services\Validator;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -138,11 +139,12 @@ class NotificationController extends Controller
      * @Rest\Post(path="/list/{preDeclaration_id}", name="list")
      * @Rest\View()
      * @param $preDeclaration_id
+     * @param ObjectManager $em
      * @return ApiResponse
      */
-    public function listNotification($preDeclaration_id)
+    public function listNotification(ObjectManager $em,  $preDeclaration_id)
     {
-        $listNotification = $this->em->getRepository("App:PreDeclaration")->findByidPredeclaration($preDeclaration_id);
+        $listNotification = $em->getRepository("App:PreDeclaration")->findByidPredeclaration($preDeclaration_id);
         return $this->respondWith($listNotification);
     }
 
