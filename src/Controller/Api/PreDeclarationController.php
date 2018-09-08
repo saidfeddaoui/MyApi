@@ -279,6 +279,8 @@ class PreDeclarationController extends BaseController
     }
 
 
+
+
   /*  public function uploadTiersAttachments(Request $request)
     {
         foreach (TiersAttachment::getRequiredAttachmentTypes() as $type) {

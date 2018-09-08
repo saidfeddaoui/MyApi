@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 
+use App\DTO\Api\ApiResponse;
 use App\Entity\Notification;
 use App\Entity\NotificationDetail;
 use App\Services\Validator;
@@ -111,6 +112,38 @@ class NotificationController extends Controller
             $response['results'] = array();
             return new JsonResponse($response);
         }
+    }
+
+
+
+    //liste Notification
+
+    /**
+     * @SWG\Post(
+     *     tags={"Notification"},
+     *     description="Notifiocation list",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Return attachments list",
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/list/{preDeclaration_id}", name="list")
+     * @Rest\View()
+     * @param $preDeclaration_id
+     * @return ApiResponse
+     */
+    public function listNotification($preDeclaration_id)
+    {
+        $listNotification = $this->em->getRepository("App:PreDeclaration")->findByidPredeclaration($preDeclaration_id);
+        return $this->respondWith($listNotification);
     }
 
 
