@@ -11,6 +11,7 @@ use App\Entity\TiersAttachment;
 use App\Event\ApplicationEvents;
 use App\Event\NewPreDeclarationEvent;
 use App\Exception\MissingRequiredFileException;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -45,6 +46,20 @@ class PreDeclarationController extends BaseController
     {
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+
+    /**
+     * @Rest\Get(path = "/list/{client_id}", name = "list")
+     * @Rest\View(serializerGroups={"listePredeclaration"})
+     * @param  $client_id
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function listPreDeclaration(ObjectManager $em,$client_id)
+    {
+        $listPredeclaration = $em->getRepository("App:PreDeclaration")->findByClient($client_id);
+        return $this->respondWith($listPredeclaration);
     }
 
 
