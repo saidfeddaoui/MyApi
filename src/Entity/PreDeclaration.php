@@ -71,7 +71,7 @@ class PreDeclaration
     private $dateSinistre;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("show_predeclaration","listPreDeclaration")
+     * @Serializer\Groups(groups={"show_predeclaration","listPreDeclaration"})
      *
      * @ORM\Column(type="smallint")
      */
