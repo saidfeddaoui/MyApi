@@ -164,6 +164,7 @@ class PreDeclaration
      * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="PreDeclaration",cascade={"persist", "remove"})
+     * @ORM\Column(type="datetime")
      */
     private $client;
 
