@@ -190,19 +190,21 @@ class PreDeclaration
     }
 
     /**
-     * @return mixed
+     * @return Client|null
      */
-    public function getClients()
+    public function getClients(): ?Client
     {
         return $this->clients;
     }
 
     /**
-     * @param mixed $client
+     * @param Client |null $clients
+     * @return static
      */
-    public function setClients(Client $clients)
+    public function setClients(?Client $clients): self
     {
         $this->clients = $clients;
+        return $this;
     }
 
     public function getId()
