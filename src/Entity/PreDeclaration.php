@@ -165,6 +165,7 @@ class PreDeclaration
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Client",cascade={"persist", "remove"})
      */
     private $clients;

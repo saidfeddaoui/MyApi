@@ -132,7 +132,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processClient(PreDeclaration $preDeclaration)
     {
         // $id = $preDeclaration->getContrat()->getId();
-        $idclient = $preDeclaration->getClient()->getId();
+        $idclient = $preDeclaration->getClients()->getId();
         $client = $this->em->getRepository('App:Client')->findOneById($idclient);
 
 
