@@ -123,7 +123,7 @@ class NotificationController extends BaseController
     /**
      * @SWG\Post(
      *     tags={"Notification"},
-     *     description="Notifiocation list",
+     *     description="detail Notifiocation",
      *     @SWG\Parameter(
      *         name="Authorization",
      *         in="header",
@@ -133,11 +133,11 @@ class NotificationController extends BaseController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return attachments list",
+     *         description="Return detail Notification",
      *     )
      * )
      *
-     * @Rest\Post(path="/list/{notification_id}", name="list")
+     * @Rest\Post(path="/detail/{notification_id}", name="detail")
      * @Rest\View()
      * @param $notification_id
      * @param ObjectManager $em
