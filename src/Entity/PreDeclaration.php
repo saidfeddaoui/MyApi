@@ -172,7 +172,7 @@ class PreDeclaration
      * @Type("App\Entity\Client")
      *
      */
-    private $clients;
+    private $client;
 
     /**
      * @Serializer\Expose()
@@ -200,18 +200,18 @@ class PreDeclaration
     /**
      * @return Client|null
      */
-    public function getClients(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->clients;
+        return $this->client;
     }
 
     /**
-     * @param Client |null $clients
+     * @param Client |null $client
      * @return static
      */
-    public function setClients(?Client $clients): self
+    public function setClient(?Client $client): self
     {
-        $this->clients = $clients;
+        $this->client = $client;
         return $this;
     }
 

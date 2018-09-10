@@ -132,13 +132,13 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processClient(PreDeclaration $preDeclaration)
     {
         // $id = $preDeclaration->getContrat()->getId();
-        $idclient = $preDeclaration->getClients()->getId();
+        $idclient = $preDeclaration->getClient()->getId();
         $client = $this->em->getRepository('App:Client')->findOneById($idclient);
 
         if (!$client) {
             throw new NotFoundHttpException("No client with reference: {$client} was found");
         }
-        $preDeclaration->setClients($client);
+        $preDeclaration->setClient($client);
     }
     /**
      * @param PreDeclaration $preDeclaration
