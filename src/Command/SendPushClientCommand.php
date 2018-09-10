@@ -75,7 +75,7 @@ class SendPushClientCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $Notifications = $em->getRepository(Notification::class)->getPushClient();
         foreach ($Notifications as $Notification){
-            $tokens[0] = $this->tokens->getTokenByClient($Notification->getClient());
+            $tokens[0] = $this->tokens->getTokenByClient($Notification->getClient()->getPhone());
             if(empty($tokens[0])) continue;
             $retour = $this->pushClient->sendPush(array(
                 'title' => $Notification->getSujet(),
