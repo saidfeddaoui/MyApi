@@ -19,6 +19,9 @@ class Notification
     private $id;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", cascade={"persist"})
+     * @ORM\JoinColumn(name="IdCompteMobile", referencedColumnName="id")
      * @ORM\Column(type="string", length=255)
      */
     private $client;

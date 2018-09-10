@@ -19,24 +19,14 @@ class NotificationDetail
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $client;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $idSocietaire;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $sujet;
+    private $libelle;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $message;
+    private $valeur;
 
     /**
      * @ORM\Column(type="datetime")
@@ -44,13 +34,8 @@ class NotificationDetail
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $statut;
-
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Notification", inversedBy="notificationDetails")
+     * @ORM\JoinColumn(name="IdNotification", referencedColumnName="id")
      * @ORM\JoinColumn(nullable=false)
      */
     private $notification;
@@ -107,33 +92,33 @@ class NotificationDetail
     /**
      * @return mixed
      */
-    public function getSujet()
+    public function getLibelle()
     {
-        return $this->sujet;
+        return $this->libelle;
     }
 
     /**
-     * @param mixed $sujet
+     * @param mixed $libelle
      */
-    public function setSujet($sujet)
+    public function setLibelle($libelle)
     {
-        $this->sujet = $sujet;
+        $this->libelle = $libelle;
     }
 
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getValeur()
     {
-        return $this->message;
+        return $this->valeur;
     }
 
     /**
-     * @param mixed $message
+     * @param mixed $valeur
      */
-    public function setMessage($message)
+    public function setValeur($valeur)
     {
-        $this->message = $message;
+        $this->valeur = $valeur;
     }
 
     /**
