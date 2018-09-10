@@ -135,11 +135,10 @@ class PreDeclarationParamConverter implements ParamConverterInterface
         $idclient = $preDeclaration->getClients()->getId();
         $client = $this->em->getRepository('App:Client')->findOneById($idclient);
 
-
         if (!$client) {
-            throw new NotFoundHttpException("No Contrat with reference: {$client} was found");
+            throw new NotFoundHttpException("No client with reference: {$client} was found");
         }
-        $preDeclaration->setContrat($client);
+        $preDeclaration->setClients($client);
     }
     /**
      * @param PreDeclaration $preDeclaration
