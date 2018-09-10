@@ -93,6 +93,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
 
         $this->processDamagedParts($preDeclaration);
         $this->processTiersAttachments($preDeclaration);
+        $this->processClient($preDeclaration);
 
       /*  switch ($type) {
             case PreDeclaration::TYPE_ACCIDENT:
@@ -122,6 +123,21 @@ class PreDeclarationParamConverter implements ParamConverterInterface
             throw new NotFoundHttpException("No Contrat with reference: {$police} was found");
         }
         $preDeclaration->setContrat($contrat);
+    }
+
+    /**
+     * @param PreDeclaration $preDeclaration
+     * @throws NotFoundHttpException
+     */
+    private function processClient(PreDeclaration $preDeclaration)
+    {
+        // $id = $preDeclaration->getContrat()->getId();
+        $idclient = $preDeclaration->getClient()->getId();
+        $client = $this->em->getRepository('App:Client')->findOneById($idclient);
+        if (!$client) {
+            throw new NotFoundHttpException("No Contrat with reference: {$client} was found");
+        }
+        $preDeclaration->setContrat($client);
     }
     /**
      * @param PreDeclaration $preDeclaration
