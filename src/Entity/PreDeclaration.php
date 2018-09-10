@@ -93,7 +93,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
