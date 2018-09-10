@@ -160,6 +160,7 @@ class PreDeclaration
 
 
     /**
+     * @var Client
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
@@ -169,6 +170,9 @@ class PreDeclaration
      * @ORM\ManyToOne(targetEntity="App\Entity\Client",cascade={"persist", "remove"})
      */
     private $clients;
+
+
+
 
     /**
      * @Serializer\Expose()
