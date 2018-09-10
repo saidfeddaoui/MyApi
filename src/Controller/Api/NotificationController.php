@@ -61,7 +61,7 @@ class NotificationController extends BaseController
      *     )
      * )
      *
-     * @Rest\Post(path="/detail",name="detail")
+     * @Rest\Post(path="/detailss",name="detailss")
      * @Rest\View(serializerGroups={"all"})
      *
      * @param ApiDevices $apiDevices
@@ -113,6 +113,40 @@ class NotificationController extends BaseController
             $response['results'] = array();
             return new JsonResponse($response);
         }
+    }
+
+
+
+
+    //liste Notification
+
+    /**
+     * @SWG\Post(
+     *     tags={"Notification"},
+     *     description="Notifiocation list",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Return attachments list",
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/list/{notification_id}", name="list")
+     * @Rest\View()
+     * @param $notification_id
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function detailsNotification(ObjectManager $em,  $notification_id)
+    {
+        $notifications = $em->getRepository("App:Notification")->findOneById($notification_id);
+        return $this->respondWith($notifications);
     }
 
 
