@@ -171,22 +171,22 @@ class PreDeclaration
      * @Serializer\Groups({"listPreDeclaration"})
      * @ORM\Column(type="string", nullable=true)
      */
-    private $references;
+    private $reference;
 
     /**
      * @return mixed
      */
-    public function getReferences()
+    public function getReference()
     {
-        return $this->references;
+        return $this->reference;
     }
 
     /**
-     * @param mixed $references
+     * @param mixed $reference
      */
-    public function setReferences($references)
+    public function setReference($reference)
     {
-        $this->references = $references;
+        $this->reference = $reference;
     }
 
     /**
