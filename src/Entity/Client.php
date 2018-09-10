@@ -51,7 +51,7 @@ class Client extends User
      * @var string
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"phone_registration","login_response"})
+     * @Serializer\Groups({"phone_registration","login_response","listPreDeclaration"})
      *
      * @Assert\NotBlank(groups={"phone_registration"})
      * @Assert\Regex(pattern="/^0[0-9]{9}$/", groups={"phone_registration"})
