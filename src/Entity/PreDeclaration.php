@@ -38,7 +38,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      *
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
@@ -49,7 +49,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      *
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
@@ -160,11 +160,37 @@ class PreDeclaration
 
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_pre_declaration"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
-     *
      */
 
     private $client;
+
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"listPreDeclaration"})
+     *  @ORM\Column(type="string", nullable=true)
+     */
+
+    private $reference;
+
+    /**
+     * @return mixed
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param mixed $reference
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
 
     /**
      * @return mixed

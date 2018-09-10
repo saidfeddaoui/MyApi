@@ -24,15 +24,16 @@ class Item implements TranslatableInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups({"sinistre", "client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"sinistre", "client_pre_declaration"})
      */
     private $id;
 
     /**
+     *
      * @ORM\Column(type="string", length=255,nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider", "products", "modes", "sinistre", "emergency"})
+     * @Serializer\Groups({"slider", "products", "modes", "sinistre", "emergency","listPreDeclaration"})
      * @Gedmo\Translatable
      */
     private $title;

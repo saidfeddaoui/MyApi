@@ -15,10 +15,10 @@ class Contrats
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Serializer\Expose()
-     * @Serializer\Groups({"listPreDeclaration"})
+     *
      */
     private $id;
+
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -30,8 +30,7 @@ class Contrats
     /**
      * @ORM\Column(type="string", length=255)
      * @Serializer\Expose()
-     * @Serializer\Groups("contrats")
-     * @Serializer\Groups("contrats")
+     * @Serializer\Groups({"contrats","listPreDeclaration"})
      */
     private $police;
 
