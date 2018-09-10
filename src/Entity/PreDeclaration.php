@@ -164,9 +164,8 @@ class PreDeclaration
      * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="PreDeclaration",cascade={"persist", "remove"})
-     * @ORM\Column(type="datetime")
      */
-    private $client;
+    private $clients;
 
 
     /**
@@ -195,17 +194,17 @@ class PreDeclaration
     /**
      * @return mixed
      */
-    public function getClient()
+    public function getClients()
     {
-        return $this->client;
+        return $this->clients;
     }
 
     /**
-     * @param mixed $client
+     * @param mixed $clients
      */
-    public function setClient($client)
+    public function setClients($clients)
     {
-        $this->client = $client;
+        $this->clients = $clients;
     }
 
     public function getId()
