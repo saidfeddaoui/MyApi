@@ -18,7 +18,7 @@ class CirconstanceSinistre implements TranslatableInterface
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"circonstance-sinistre","listPreDeclaration"})
+     * @Serializer\Groups({"circonstance-sinistre"})
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
