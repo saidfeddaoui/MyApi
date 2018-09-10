@@ -121,7 +121,7 @@ class NotificationController extends BaseController
     //liste Notification
 
     /**
-     * @SWG\Post(
+     * @SWG\Get(
      *     tags={"Notification"},
      *     description="detail Notifiocation",
      *     @SWG\Parameter(
@@ -170,7 +170,7 @@ class NotificationController extends BaseController
      *     )
      * )
      *
-     * @Rest\Post(path="/list/{preDeclaration_id}", name="list")
+     * @Rest\Get(path="/list/{preDeclaration_id}", name="list")
      * @Rest\View()
      * @param $preDeclaration_id
      * @param ObjectManager $em
