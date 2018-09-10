@@ -20,7 +20,7 @@ class Notification
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Client", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="Notification",cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="IdCompteMobile", referencedColumnName="id")
      * @ORM\Column(type="string", length=255)
      */
