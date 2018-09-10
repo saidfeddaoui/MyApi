@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Notification
 {
@@ -36,11 +37,16 @@ class Notification
     private $idPredeclaration;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sujet;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $message;
@@ -56,6 +62,8 @@ class Notification
     private $statut;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\OneToMany(targetEntity="App\Entity\NotificationDetail", mappedBy="notification", cascade={"persist","remove"})
      */
     private $notificationDetails;

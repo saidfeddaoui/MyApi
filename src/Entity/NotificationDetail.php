@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationDetailRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class NotificationDetail
 {
@@ -19,11 +20,15 @@ class NotificationDetail
     private $id;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelle;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $valeur;
