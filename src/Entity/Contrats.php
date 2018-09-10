@@ -30,7 +30,7 @@ class Contrats
     /**
      * @ORM\Column(type="string", length=255)
      * @Serializer\Expose()
-     * @Serializer\Groups({"contrats","listPreDeclaration"})
+     * @Serializer\Groups({"contrats","listPreDeclaration","client_pre_declaration"})
      */
     private $police;
 
