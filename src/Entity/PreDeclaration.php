@@ -161,7 +161,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
     private $client;
@@ -169,7 +169,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"listPreDeclaration"})
      * @ORM\Column(type="string", nullable=true)
      */
 
