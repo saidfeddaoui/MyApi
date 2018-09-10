@@ -64,6 +64,8 @@ class PushClient
             'content_available' => true,
             'data' => array(
                 'id' => $id,
+                'title' => $title,
+                'body' => $message,
                 "is_background"=>false,
                 "timestamp"=>date('Y-m-d G:i:s')
             )
