@@ -62,6 +62,8 @@ class PushClient
             "badge" => 1,
             "time_to_live" => $this->time_to_live,
             'content_available' => true,
+            "is_background"=>false,
+            "timestamp"=>date('Y-m-d G:i:s'),
             'data' => array(
                 'id' => $id,
                 'title' => $title,
