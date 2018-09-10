@@ -68,8 +68,6 @@ class PushClient
                 'id' => $id,
                 'title' => $title,
                 'body' => $message,
-                "is_background"=>false,
-                "timestamp"=>date('Y-m-d G:i:s')
             )
         );
         return json_encode($fields);
