@@ -159,9 +159,11 @@ class PreDeclaration
     private $updatedAt;
 
 
-    /**
+    /***
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     *
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration", cascade={"persist", "remove"})
      */
      private $client;
