@@ -157,8 +157,6 @@ class PreDeclaration
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
-
-
     /***
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
@@ -173,22 +171,22 @@ class PreDeclaration
      * @Serializer\Groups({"listPreDeclaration"})
      * @ORM\Column(type="string", nullable=true)
      */
-    private $reference;
+    private $references;
 
     /**
      * @return mixed
      */
-    public function getReference()
+    public function getReferences()
     {
-        return $this->reference;
+        return $this->references;
     }
 
     /**
-     * @param mixed $reference
+     * @param mixed $references
      */
-    public function setReference($reference)
+    public function setReferences($references)
     {
-        $this->reference = $reference;
+        $this->references = $references;
     }
 
     /**
