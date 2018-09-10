@@ -169,7 +169,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     * @Serializer\Groups({"client_pre_declaration"})
      * @ORM\Column(type="string", nullable=true)
      */
     private $reference;

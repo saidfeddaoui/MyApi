@@ -34,6 +34,8 @@ class PushClient
              *
              * Envoi pour un seul paquet de device (max = 1000)
              */
+
+
             $retour = $this->send_push_one($messageJson, $headers);
             $success = $success + $retour["success"];
             $failure = $failure + $retour["failure"];
