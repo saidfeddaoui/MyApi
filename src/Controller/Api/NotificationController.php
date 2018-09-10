@@ -145,7 +145,7 @@ class NotificationController extends BaseController
      */
     public function detailsNotification(ObjectManager $em,  $notification_id)
     {
-        $notifications = $em->getRepository("App:Notification")->findOById($notification_id);
+        $notifications = $em->getRepository("App:Notification")->findById($notification_id);
         return $this->respondWith($notifications);
     }
 
