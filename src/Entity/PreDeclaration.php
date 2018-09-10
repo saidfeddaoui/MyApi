@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Type;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PreDeclarationRepository")
@@ -167,6 +169,8 @@ class PreDeclaration
      *
      * @var Client
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration")
+     * @Type("App\Entity\Client")
+     *
      */
     private $clients;
 

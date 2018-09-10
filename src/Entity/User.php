@@ -20,8 +20,8 @@ class User implements UserInterface, EquatableInterface
 {
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups({"include_id","listPreDeclaration"})
-     * @Serializer\Groups({"client_account_creation","login_response","client_pre_declaration"})
+     * @Serializer\Groups({"include_id"})
+     * @Serializer\Groups({"client_account_creation","login_response","client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\Id()
      * @ORM\GeneratedValue()
