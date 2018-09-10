@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
- * @Serializer\ExclusionPolicy("all")
  */
 class User implements UserInterface, EquatableInterface
 {
