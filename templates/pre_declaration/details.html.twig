@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <div style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
+                        <div class="bg_damages" style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
                             {% for part in preDeclaration.vehiculeDamage.damagedParts %}
                                 <img {% if not loop.first %} class="vehicle-zone" {% endif %}
                                         src="{{ asset('img/vehicle_zones/' ~ part.code ~ '.png') }}"

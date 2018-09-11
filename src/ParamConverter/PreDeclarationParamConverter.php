@@ -176,6 +176,7 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     private function processDamagedParts(PreDeclaration $preDeclaration)
     {
+
         $codes = $preDeclaration->getVehiculeDamage()
             ->getDamagedParts()
             ->map(function ($c) {return $c->getCode();})
