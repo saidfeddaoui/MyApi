@@ -59,3 +59,8 @@
     max-width: 100%;
 }
 
+.bloc_mgs {
+border-right: 1px solid #a9a3a3;
+text-align: center;
+padding: 40px;
+}
