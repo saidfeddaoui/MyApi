@@ -79,6 +79,9 @@ class PreDeclarationController extends Controller
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
 
+        
+          var_dump($attachements);
+          die();
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
