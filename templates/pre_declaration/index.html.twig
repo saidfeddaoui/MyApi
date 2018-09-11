@@ -48,11 +48,11 @@
                                 <td>{{ preDeclaration.contrat.client.phone }}</td>
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
                                  {% if preDeclaration.status == 0 %}
-                                    <td>En cours</td>
+                                    <td style="background: #ffa01f;">En cours</td>
                                  {% elseif preDeclaration.status == 1%}
-                                     <td>Acceptées</td>
+                                     <td style="background: #3cc12f;">Acceptées</td>
                                  {% elseif preDeclaration.status == 2%}
-                                     <td>Rejetées</td>
+                                     <td style="background:#ff4646;">Rejetées</td>
                                  {% endif %}
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
