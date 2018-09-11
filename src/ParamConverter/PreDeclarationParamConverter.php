@@ -205,8 +205,6 @@ class PreDeclarationParamConverter implements ParamConverterInterface
             );
         }
 
-        dump($attachments);
-        die();
         $preDeclaration->setAttachments($attachments);
     }
     /**
