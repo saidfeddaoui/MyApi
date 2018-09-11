@@ -29,11 +29,50 @@
                 {% endif %}
 
             </div>
-            
+
             <div class="tab-pane" id="circonstances_tab">
                 <h4>circonstances_tab.</h4>
-                <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
-                    The onChange event handler is used to update the view in the preview pane. </p>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#localisation_tab" data-toggle="tab">Localisation</a>
+                    </li>
+                    {% if attachements %}
+                        {% for photo in attachements %}
+                            <li>
+                                <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="localisation_tab">
+                        <h4>An example implementing a preview pane.</h4>
+                        <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
+                            The onChange event handler is used to update the view in the preview pane. </p>
+                    </div>
+                    {% if attachements %}
+                        {% for photo in attachements %}
+                            <div class="tab-pane" id="photo_{{ photo.id }}_tab">
+                                <h4>Photo {{ loop.index }}</h4>
+                                <div class="row">
+                                    <div class="col-md-6 responsive-1024">
+                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                    </div>
+                                    {#  <div class="col-md-6 responsive-1024">
+                                          <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
+                                              <div class="preview-container">
+                                                  <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                              </div>
+                                          </div>
+                                      </div> #}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+
             </div>
 
             <div class="tab-pane" id="dommages_tab">
@@ -44,20 +83,7 @@
 
         </div>
 
-        <!-- BEGIN Informations Génarales TABLE PORTLET-->
-        <div class="portlet light portlet-fit">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
-                    <span class="caption-subject font-{{ app.session.get('insuranceType').themeColor }} sbold uppercase">Informations Génarales</span>
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="expand" data-original-title="" title=""></a>
-                </div>
-            </div>
 
-        </div>
-        <!-- END Informations Génarales TABLE PORTLET-->
         <!-- BEGIN Circonstances TABLE PORTLET-->
         <div class="portlet light portlet-fit">
             <div class="portlet-title">
@@ -71,44 +97,8 @@
             </div>
             <div class="portlet-body" >
                 <div class="tabbable-line boxless margin-bottom-20">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#localisation_tab" data-toggle="tab">Localisation</a>
-                        </li>
-                        {% if attachements %}
-                            {% for photo in attachements %}
-                                <li>
-                                    <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="localisation_tab">
-                            <h4>An example implementing a preview pane.</h4>
-                            <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
-                                The onChange event handler is used to update the view in the preview pane. </p>
-                        </div>
-                        {% if attachements %}
-                            {% for photo in attachements %}
-                                <div class="tab-pane" id="photo_{{ photo.id }}_tab">
-                                    <h4>Photo {{ loop.index }}</h4>
-                                    <div class="row">
-                                        <div class="col-md-6 responsive-1024">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
-                                        </div>
-                                      {#  <div class="col-md-6 responsive-1024">
-                                            <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
-                                                <div class="preview-container">
-                                                    <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
-                                                </div>
-                                            </div>
-                                        </div> #}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
+                  kkk
+
                 </div>
             </div>
         </div>
