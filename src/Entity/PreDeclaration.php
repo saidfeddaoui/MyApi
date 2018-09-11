@@ -166,8 +166,6 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
-     *
-     * @var Client
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration")
      * @Type("App\Entity\Client")
      *

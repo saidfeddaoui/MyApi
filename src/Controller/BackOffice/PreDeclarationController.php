@@ -58,10 +58,7 @@ class PreDeclarationController extends Controller
      */
     public function in_progress(InsuranceType $insuranceType)
     {
-        $preDeclarations = $this->em->getRepository('App:PreDeclaration')->findByStatusAndInsuranceType(
-            PreDeclaration::STATUS_IN_PROGRESS,
-            $insuranceType
-        );
+        $preDeclarations = $this->em->getRepository('App:PreDeclaration')->findByInsuranceType($insuranceType);
         return $this->render('pre_declaration/index.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '(En cours)',
