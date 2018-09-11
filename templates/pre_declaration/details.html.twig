@@ -16,16 +16,18 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
-                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
-                <p>{{ preDeclaration.circumstance.adress }}</p>
-                {#<dd>{{ preDeclaration.circumstance.latitude }}</dd>
-                <dd>{{ preDeclaration.circumstance.longitude }}</dd>#}
-                <p>Type de sinistre : {{ preDeclaration.typeSinistre.title }}</p>
-                <p>Nombre de véhicules : {{ preDeclaration.nbVehicule }}</p>
-                <p>Nombre de blessées : {{ preDeclaration.nbInjured }}</p>
-                {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
-                    <p>Raison de rejet : {{ preDeclaration.description }}</p>
-                {% endif %}
+                <div class="general_details">
+                    <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
+                    <p>{{ preDeclaration.circumstance.adress }}</p>
+                    {#<dd>{{ preDeclaration.circumstance.latitude }}</dd>
+                    <dd>{{ preDeclaration.circumstance.longitude }}</dd>#}
+                    <p>Type de sinistre : {{ preDeclaration.typeSinistre.title }}</p>
+                    <p>Nombre de véhicules : {{ preDeclaration.nbVehicule }}</p>
+                    <p>Nombre de blessées : {{ preDeclaration.nbInjured }}</p>
+                    {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
+                        <p>Raison de rejet : {{ preDeclaration.description }}</p>
+                    {% endif %}
+                </div>
 
             </div>
 
@@ -102,7 +104,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="pull-right">
+        <div class="pull-right action_footer" >
             <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark">Retour</a>
         {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
             <button type="button" class="btn red reject" data-id= "{{ preDeclaration.id }}" >Rejeter</button>
