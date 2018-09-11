@@ -17,9 +17,19 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
-                <h4>Ainformations_tab.</h4>
-                <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
-                    The onChange event handler is used to update the view in the preview pane. </p>
+                <h4>{{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
+                <p>{{ preDeclaration.circumstance.adress }}</p>
+                {#<dd>{{ preDeclaration.circumstance.latitude }}</dd>
+                <dd>{{ preDeclaration.circumstance.longitude }}</dd>#}
+                <p>Type de sinistre : {{ preDeclaration.typeSinistre.title }}</p>
+                <p>Nombre de véhicules : {{ preDeclaration.nbVehicule }}</p>
+                <p>Nombre de blessées : {{ preDeclaration.nbInjured }}</p>
+                {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
+                    <p>Raison de rejet : {{ preDeclaration.description }}</p>
+                {% endif %}
+
+                </div>
+
             </div>
 
             <div class="tab-pane" id="circonstances_tab">
@@ -47,21 +57,7 @@
                     <a href="javascript:;" class="expand" data-original-title="" title=""></a>
                 </div>
             </div>
-            <div class="portlet-body">
-                <dl class="dl-horizontal">
-                    <dt>Nom</dt><dd>{{ preDeclaration.contrat.client.firstName }}</dd>
-                    <dt>Prenom</dt><dd>{{ preDeclaration.contrat.client.familyName }}</dd>
-                    <dt>Adresse</dt><dd>{{ preDeclaration.circumstance.adress }}</dd>
-                    <dt>Latitude</dt><dd>{{ preDeclaration.circumstance.latitude }}</dd>
-                    <dt>Longitude</dt><dd>{{ preDeclaration.circumstance.longitude }}</dd>
-                    <dt>Type de sinistre</dt><dd>{{ preDeclaration.typeSinistre.title }}</dd>
-                    <dt>Nombre de véhicules</dt><dd>{{ preDeclaration.nbVehicule }}</dd>
-                    <dt>Nombre de blessées</dt><dd>{{ preDeclaration.nbInjured }}</dd>
-                    {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
-                        <dt>Raison de rejet</dt><dd>{{ preDeclaration.description }}</dd>
-                    {% endif %}
-                </dl>
-            </div>
+
         </div>
         <!-- END Informations Génarales TABLE PORTLET-->
         <!-- BEGIN Circonstances TABLE PORTLET-->
