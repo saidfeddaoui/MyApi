@@ -37,7 +37,7 @@
                     {% set activeli = false %}
                     {% if attachements %}
                         {% for photo in attachements %}
-                        {% if activeli %}
+                        {% if activeli == true %}
                             <li>
                                 <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
                             </li>
@@ -57,7 +57,7 @@
                     {% set active = false %}
                     {% if attachements %}
                         {% for photo in attachements %}
-                          {% if active %}
+                          {% if active == true %}
                             <div class="tab-pane " id="photo_{{ photo.id }}_tab">
                           {% else %}
                              <div class="tab-pane active" id="photo_{{ photo.id }}_tab">
