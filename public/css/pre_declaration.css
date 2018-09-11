@@ -51,3 +51,7 @@
 .bg_damages{
     min-height: 650px;
 }
+
+.detail{
+    cursor: pointer;
+}
