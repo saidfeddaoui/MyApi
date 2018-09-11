@@ -77,8 +77,22 @@
 
             <div class="tab-pane" id="dommages_tab">
                 <h4>dommages_tab.</h4>
-                <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
-                    The onChange event handler is used to update the view in the preview pane. </p>
+                {% if preDeclaration.vehiculeDamage %}
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
+                            {% for part in preDeclaration.vehiculeDamage.damagedParts %}
+                                <img {% if not loop.first %} class="vehicle-zone" {% endif %}
+                                        src="{{ asset('img/vehicle_zones/' ~ part.code ~ '.png') }}"
+                                />
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+
+
+                {% endif %}
             </div>
 
         </div>
