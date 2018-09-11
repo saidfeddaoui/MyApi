@@ -31,11 +31,9 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                             <tr>
-                                <th>Police</th>
                                 <th>Client</th>
-                                <th>Téléphone</th>
+                                <th>N° du contrat</th>
                                 <th>Date de sinistre</th>
-                                <th>Statut</th>
                                 <th>Date de pré-déclaration</th>
                                 <th>Actions</th>
                             </tr>
@@ -43,25 +41,16 @@
                         <tbody>
                         {% for preDeclaration in preDeclarations %}
                             <tr data-id="{{ preDeclaration.id }}">
+                                <td>{{ preDeclaration.contrat.client.firstName }}</td>
                                 <td>{{ preDeclaration.contrat.police }}</td>
-                                <td>{{ preDeclaration.contrat.client.familyName }} {{ preDeclaration.contrat.client.firstName }}</td>
-                                <td>{{ preDeclaration.contrat.client.phone }}</td>
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
-                                 {% if preDeclaration.status == 0 %}
-                                    <td style="background: #ffa01f;">En cours</td>
-                                 {% elseif preDeclaration.status == 1%}
-                                     <td style="background: #3cc12f;">Acceptées</td>
-                                 {% elseif preDeclaration.status == 2%}
-                                     <td style="background:#ff4646;">Rejetées</td>
-                                 {% endif %}
-
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
                                 <td>
                                     <a class="text-info bs-tooltip details" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                 {#   {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
+                                    {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
                                         <a class="text-success bs-tooltip accept" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Accepter" title="Accepter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ok-circle"></span></a>
                                         <a class="text-danger bs-tooltip reject" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Rejeter" title="Rejeter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ban-circle"></span></a>
-                                    {% endif %} #}
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
