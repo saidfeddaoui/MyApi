@@ -121,9 +121,8 @@ class PreDeclarationController extends BaseController
         $tiersAttachement = $preDeclaration->getImages();
 
         foreach ($tiersAttachement as $attachement){
-         $attachement=$this->em->getRepository("App:TiersAttachment")->findOneById($attachement->getId());
+       //  $attachement=$this->em->getRepository("App:TiersAttachment")->findOneById($attachement->getId());
          $attachement->setPreDeclaration($preDeclaration);
-
         }
 
         $event = new NewPreDeclarationEvent($preDeclaration);
