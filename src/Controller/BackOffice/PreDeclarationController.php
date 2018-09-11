@@ -77,17 +77,7 @@ class PreDeclarationController extends Controller
      */
     public function displayDetails(PreDeclaration $preDeclaration)
     {
-       $test=  $preDeclaration->getVehiculeDamage()->getDamagedParts();
-
-       foreach ( $test as $s)
-       var_dump($s);
-
-       die();
-
-
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-
-
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
