@@ -78,6 +78,9 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
 
+        var_dump("hi");
+        die();
+
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
 
 
