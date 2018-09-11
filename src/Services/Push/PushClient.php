@@ -57,15 +57,17 @@ class PushClient
 
         $fields = array(
             'registration_ids' => $reg,
-            'notification' => $notification,
+            //'notification' => $notification,
             "priority" => "high",
             "badge" => 1,
             "time_to_live" => $this->time_to_live,
             'content_available' => true,
+            "is_background"=>false,
+            "timestamp"=>date('Y-m-d G:i:s'),
             'data' => array(
                 'id' => $id,
-                "is_background"=>false,
-                "timestamp"=>date('Y-m-d G:i:s')
+                'title' => $title,
+                'body' => $message,
             )
         );
         return json_encode($fields);
