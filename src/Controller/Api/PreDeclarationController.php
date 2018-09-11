@@ -117,6 +117,12 @@ class PreDeclarationController extends BaseController
         $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS)->setInsuranceType($inType);
         $this->em->persist($preDeclaration);
         $this->em->flush();
+
+        $tiers = $preDeclaration->getImages();
+
+        var_dump($tiers);
+        die();
+
         $event = new NewPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
         return $this->respondWith($preDeclaration, ApiResponse::CREATED);

@@ -400,9 +400,6 @@ class PreDeclaration
     {
         if (!$this->images->contains($attachment)) {
             $this->images[] = $attachment;
-
-            var_dump($this);
-            die();
             $attachment->setPreDeclaration($this);
         }
 
