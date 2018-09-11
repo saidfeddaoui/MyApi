@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
    $('.detail').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('pre_declarations_details', {id: id}),
+            url: Routing.generate('pre_declarations_display_details', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);

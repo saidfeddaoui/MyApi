@@ -78,9 +78,6 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
 
-        var_dump("hi");
-        die();
-
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
 
 
@@ -145,8 +142,6 @@ class PreDeclarationController extends Controller
     public function details(PreDeclaration $preDeclaration)
     {
 
-        var_dump("hi");
-        die();
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
 
         return $this->render('pre_declaration/details.html.twig', [

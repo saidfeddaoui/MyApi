@@ -17,6 +17,24 @@
     <!-- END PAGE LEVEL SCRIPTS -->
 {% endblock %}
 {% block body %}
-mmmmmmmmmmmmmmmmmmmmm
-gggg
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase">{{ portlet_title }}</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="pre-declaration-details">
+                        {% include 'pre_declaration/details.html.twig' with {'preDeclaration': preDeclaration} only %}
+                    </div>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
 {% endblock %}
