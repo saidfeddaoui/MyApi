@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
        window.open(url, '_blank');
     });
 
-   /* $('.details').on('click', function () {
+   $('.detail').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
             url: Routing.generate('pre_declarations_details', {id: id}),
@@ -111,7 +111,7 @@ jQuery(document).ready(function() {
                 }
             }
         });
-    }); */
+    });
     $('body').on('click', '.reject', function () {
         var td = $(this);
         var id = td.data('id');
