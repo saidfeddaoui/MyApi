@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
 
     $('.details').on('click', function () {
        var id = $(this).data('id');
-       url= Routing.generate('pre_declarations_details', {id: id});
+       url= Routing.generate('pre_declarations_display_details', {id: id});
 
        console.log(url);
        window.open(url, '_blank');
@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
    $('.detail').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('pre_declarations_display_details', {id: id}),
+            url: Routing.generate('pre_declarations_details', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
