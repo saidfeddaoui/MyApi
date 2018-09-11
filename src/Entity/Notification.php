@@ -31,10 +31,14 @@ class Notification
      */
     private $idSocietaire;
 
+
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\PreDeclaration", inversedBy="Notification",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="idPredeclaration", referencedColumnName="id")
      */
-    private $idPredeclaration;
+    private $predeclaration;
 
     /**
      * @Serializer\Expose()
@@ -147,21 +151,22 @@ class Notification
     }
 
     /**
-     * @return mixed
+     * @return PreDeclaration|null
      */
-    public function getIdPredeclaration()
+    public function getPredeclaration(): ?PreDeclaration
     {
-        return $this->idPredeclaration;
+        return $this->predeclaration;
     }
 
     /**
-     * @param mixed $idPredeclaration
+     * @param PreDeclaration |null $predeclaration
+     * @return static
      */
-    public function setIdPredeclaration($idPredeclaration)
+    public function setPredeclaration(?PreDeclaration $predeclaration): self
     {
-        $this->idPredeclaration = $idPredeclaration;
+        $this->predeclaration = $predeclaration;
+        return $this;
     }
-
 
     /**
      * @return mixed
