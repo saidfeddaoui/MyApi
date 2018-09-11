@@ -14,7 +14,6 @@
             </li>
         </ul>
 
-
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
                 <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
@@ -102,7 +101,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="modal-footer">
+    <div class="col-md-12">
         {% if app.request.isXmlHttpRequest() %}
             <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
         {% else %}
