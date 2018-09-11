@@ -35,18 +35,32 @@
                 <h4 style="margin-bottom: 15px">Circonstances .</h4>
                 <ul class="nav nav-tabs">
                     {% if attachements %}
+                        {% set activeli = false %}
                         {% for photo in attachements %}
+                          {% if activeli %}
                             <li>
                                 <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
                             </li>
+                          {% else %}
+                              <li class="active">
+                                  <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo {{ loop.index }} </a>
+                              </li>
+                              {% set activeli = true %}
+                          {% endif %}
                         {% endfor %}
                     {% endif %}
                 </ul>
 
                 <div class="tab-content">
+                    {% set active = false %}
                     {% if attachements %}
                         {% for photo in attachements %}
-                            <div class="tab-pane active" id="photo_{{ photo.id }}_tab">
+                          {% if active %}
+                            <div class="tab-pane" id="photo_{{ photo.id }}_tab">
+                          {% else %}
+                             <div class="tab-pane active" id="photo_{{ photo.id }}_tab">
+                                 {% set active = true %}
+                          {% endif %}
                                 <h4>Photo {{ loop.index }}</h4>
                                 <div class="row">
                                     <div class="col-md-6 responsive-1024">
