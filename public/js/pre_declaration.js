@@ -79,12 +79,16 @@ jQuery(document).ready(function() {
             [0, "asc"]
         ] // set first column as a default sort by asc
     });
+
     $('.details').on('click', function () {
-        url = Routing.generate('content_types_list_produit');
-        window.open(url, '_blank');
+       url = Routing.generate('content_types_list_produit');
+       window.open(url, '_blank');
+    });
+
+   /* $('.details').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('content_types_list_produit'),
+            url: Routing.generate('pre_declarations_details', {id: id}),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
@@ -104,7 +108,7 @@ jQuery(document).ready(function() {
                 }
             }
         });
-    });
+    }); */
     $('body').on('click', '.reject', function () {
         var td = $(this);
         var id = td.data('id');
