@@ -102,15 +102,13 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        {% if app.request.isXmlHttpRequest() %}
-            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
-        {% else %}
-            <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark pull-left">Retour</a>
-        {% endif %}
+        <div class="pull-right">
+            <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark">Retour</a>
         {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
-            <button type="button" class="btn red reject"data-id= "{{ preDeclaration.id }}" >Rejeter</button>
-            <button type="button" class="btn green accept"data-id= "{{ preDeclaration.id }}" >Accepter</button>
+            <button type="button" class="btn red reject" data-id= "{{ preDeclaration.id }}" >Rejeter</button>
+            <button type="button" class="btn green accept" data-id= "{{ preDeclaration.id }}" >Accepter</button>
         {% endif %}
+        </div>
     </div>
 </div>
 
