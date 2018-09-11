@@ -56,10 +56,10 @@
                 <div class="tab-content">
                     {% if attachements %}
                     <div class="tab-pane" id="photo_Sinistre_tab">
+                        <div class="row">
                         {% for photo in attachements %}
                                 <h4>Photo Sinistre</h4>
-                                <div class="row">
-                                    <div class="col-md-6 responsive-1024">
+                                    <div class="col-md-4 responsive-1024">
                                         <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                     </div>
                                     {#  <div class="col-md-6 responsive-1024">
@@ -69,19 +69,20 @@
                                               </div>
                                           </div>
                                       </div> #}
-                                </div>
                         {% endfor %}
+                        </div>
                     </div>
                     {% endif %}
-                    
+
                     {#--------------------- pre_declaration_tab ---------------------#}
                     {% if attachements %}
                         <div class="tab-pane" id="pre_declaration_tab">
-                            {% for photo in attachements %}
+                            <div class="row">
+                            {% for photos in attachements %}
                                 <h4>Photo Sinistre</h4>
-                                <div class="row">
-                                    <div class="col-md-6 responsive-1024">
-                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+
+                                    <div class="col-md-4 responsive-1024">
+                                        <img src="{{ asset('img/tiers/' ~ photos.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                     </div>
                                     {#  <div class="col-md-6 responsive-1024">
                                           <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
@@ -90,8 +91,8 @@
                                               </div>
                                           </div>
                                       </div> #}
-                                </div>
                             {% endfor %}
+                            </div>
                         </div>
                     {% endif %}
                 </div>
