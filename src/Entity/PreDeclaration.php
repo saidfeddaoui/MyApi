@@ -31,7 +31,7 @@ class PreDeclaration
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Groups({"listPreDeclaration"})
+     * @Serializer\Groups({"listPreDeclaration","client_pre_declaration"})
      *
      */
     private $id;
