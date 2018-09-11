@@ -80,9 +80,11 @@ jQuery(document).ready(function() {
         ] // set first column as a default sort by asc
     });
     $('.details').on('click', function () {
+        url = Routing.generate('content_types_list_produit');
+        window.open(url, '_blank');
         var id = $(this).data('id');
         $.ajax({
-            url: Routing.generate('pre_declarations_details', {id: id}),
+            url: Routing.generate('content_types_list_produit'),
             type: "POST",
             error: function (request, status, error) {
                 console.log(request.responseText);
