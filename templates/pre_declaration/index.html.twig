@@ -43,6 +43,9 @@
                         <tbody>
                         {% for preDeclaration in preDeclarations %}
                             <tr data-id="{{ preDeclaration.id }}">
+                                <a href="{{ path('content_types_list_produit') }}" class="nav-link ">
+
+
                                 <td>{{ preDeclaration.contrat.police }}</td>
                                 <td>{{ preDeclaration.contrat.client.familyName }} {{ preDeclaration.contrat.client.firstName }}</td>
                                 <td>{{ preDeclaration.contrat.client.phone }}</td>
@@ -57,13 +60,15 @@
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
                                 <td>
-                                    <a class="text-info bs-tooltip details" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
-                                    {#   {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
-                                           <a class="text-success bs-tooltip accept" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Accepter" title="Accepter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ok-circle"></span></a>
-                                           <a class="text-danger bs-tooltip reject" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Rejeter" title="Rejeter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ban-circle"></span></a>
-                                       {% endif %} #}
+                                    {#  <a class="text-info bs-tooltip detail" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
+                                         {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
+                                             <a class="text-success bs-tooltip accept" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Accepter" title="Accepter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ok-circle"></span></a>
+                                             <a class="text-danger bs-tooltip reject" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Rejeter" title="Rejeter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ban-circle"></span></a>
+                                         {% endif %} #}
                                 </td>
+                                </a>
                             </tr>
+
                         {% endfor %}
                         </tbody>
                     </table>
