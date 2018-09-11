@@ -78,7 +78,10 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
        $test=  $preDeclaration->getVehiculeDamage()->getDamagedParts();
-       var_dump($test);
+
+       foreach ( $test as $s)
+       var_dump($s);
+       
        die();
 
 
