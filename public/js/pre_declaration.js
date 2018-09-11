@@ -63,6 +63,14 @@ jQuery(document).ready(function() {
                 "orderable": true,
             },
             {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
                 "searchable": false,
                 "orderable": false,
             }
