@@ -55,3 +55,7 @@
 .details{
     cursor: pointer;
 }
+.bloc_mgs img{
+    max-width: 100%;
+}
+
