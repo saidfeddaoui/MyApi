@@ -82,7 +82,9 @@ jQuery(document).ready(function() {
 
     $('.details').on('click', function () {
        var id = $(this).data('id');
-       url: Routing.generate('pre_declarations_details', {id: id});
+       url= Routing.generate('pre_declarations_details', {id: id});
+
+       console.log(url);
        window.open(url, '_blank');
     });
 
