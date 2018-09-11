@@ -17,7 +17,7 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
-                <h4>{{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
+                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
                 <p>{{ preDeclaration.circumstance.adress }}</p>
                 {#<dd>{{ preDeclaration.circumstance.latitude }}</dd>
                 <dd>{{ preDeclaration.circumstance.longitude }}</dd>#}
@@ -28,7 +28,7 @@
                     <p>Raison de rejet : {{ preDeclaration.description }}</p>
                 {% endif %}
 
-                </div>
+            </div>
 
             </div>
 
