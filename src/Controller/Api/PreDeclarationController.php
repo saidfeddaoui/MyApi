@@ -118,10 +118,13 @@ class PreDeclarationController extends BaseController
         $this->em->persist($preDeclaration);
         $this->em->flush();
 
-        $tiers = $preDeclaration->getImages();
+        $tiersAttachement = $preDeclaration->getImages();
 
-        var_dump($tiers);
-        die();
+        foreach ($tiersAttachement as $attachement){
+         $attachement=$this->em->getRepository("App:TiersAttachment")->findOneById($attachement->getId());
+         $attachement->setPreDeclaration($preDeclaration);
+
+        }
 
         $event = new NewPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
