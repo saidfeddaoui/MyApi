@@ -36,16 +36,16 @@
                 <ul class="nav nav-tabs">
                     {% if attachements %}
                         <li>
-                            <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Photo Sinistre </a>
+                            <a href="#photo_Sinistre_tab" data-toggle="tab"> Photo Sinistre </a>
                         </li>
                         <li >
-                            <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Document de pré-déclaration </a>
+                            <a href="#pre_declaration_tab" data-toggle="tab"> Document de pré-déclaration </a>
                         </li>
                         <li >
-                            <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Attestation de l'assurance de l'adversaire </a>
+                            <a href="#attestation_assurance_adversaire_tab" data-toggle="tab"> Attestation de l'assurance de l'adversaire </a>
                         </li>
                         <li class="active">
-                            <a href="#photo_{{ photo.id }}_tab" data-toggle="tab"> Permis de conduire de l'adversaire </a>
+                            <a href="#Permis_conduire_adversaire_tab" data-toggle="tab"> Permis de conduire de l'adversaire </a>
                         </li>
 
 
@@ -54,16 +54,10 @@
                 </ul>
 
                 <div class="tab-content">
-                    {% set active = false %}
                     {% if attachements %}
+                    <div class="tab-pane" id="photo_Sinistre_tab">
                         {% for photo in attachements %}
-                          {% if active %}
-                            <div class="tab-pane" id="photo_{{ photo.id }}_tab">
-                          {% else %}
-                             <div class="tab-pane active" id="photo_{{ photo.id }}_tab">
-                                 {% set active = true %}
-                          {% endif %}
-                                <h4>Photo {{ loop.index }}</h4>
+                                <h4>Photo Sinistre</h4>
                                 <div class="row">
                                     <div class="col-md-6 responsive-1024">
                                         <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
@@ -76,8 +70,29 @@
                                           </div>
                                       </div> #}
                                 </div>
-                            </div>
                         {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {#--------------------- pre_declaration_tab ---------------------#}
+                    {% if attachements %}
+                        <div class="tab-pane" id="pre_declaration_tab">
+                            {% for photo in attachements %}
+                                <h4>Photo Sinistre</h4>
+                                <div class="row">
+                                    <div class="col-md-6 responsive-1024">
+                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                    </div>
+                                    {#  <div class="col-md-6 responsive-1024">
+                                          <div id="preview-pane" class="preview-photo-attachment-circumstance-{{ loop.index }}">
+                                              <div class="preview-container">
+                                                  <img src="{{ asset('img/tiers/' ~ photo.path) }}" class="jcrop-preview" alt="Preview" />
+                                              </div>
+                                          </div>
+                                      </div> #}
+                                </div>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                 </div>
 
