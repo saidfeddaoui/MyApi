@@ -42,10 +42,10 @@
                         </thead>
                         <tbody>
                         {% for preDeclaration in preDeclarations %}
-                            <tr data-id="{{ preDeclaration.id }}">
-                                <a href="{{ path('content_types_list_produit') }}" class="nav-link ">
-                                    
+                            <tr  class="details" data-id="{{ preDeclaration.id }}">
+
                                 <td>{{ preDeclaration.contrat.police }}</td>
+                                    
                                 <td>{{ preDeclaration.contrat.client.familyName }} {{ preDeclaration.contrat.client.firstName }}</td>
                                 <td>{{ preDeclaration.contrat.client.phone }}</td>
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
@@ -65,7 +65,7 @@
                                              <a class="text-danger bs-tooltip reject" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Rejeter" title="Rejeter"><span style="font-size:1.5em;" class="glyphicon glyphicon-ban-circle"></span></a>
                                          {% endif %} #}
                                 </td>
-                                </a>
+
                             </tr>
 
                         {% endfor %}
