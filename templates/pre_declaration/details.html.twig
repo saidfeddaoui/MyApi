@@ -58,8 +58,7 @@
                     <div class="tab-pane active" id="photo_Sinistre_tab">
                         <div class="row">
                         {% for photo in attachements %}
-                                <h4>Photo Sinistre</h4>
-                                    <div class="col-md-4 responsive-1024">
+                                    <div class="col-md-3 responsive-1024 bloc_mgs">
                                         <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                     </div>
                                     {#  <div class="col-md-6 responsive-1024">
@@ -79,7 +78,7 @@
                         <div class="tab-pane" id="pre_declaration_tab">
                             <div class="row">
                             {% for photos in attachements %}
-                                    <div class="col-md-4 responsive-1024 bloc_mgs">
+                                    <div class="col-md-3 responsive-1024 bloc_mgs">
                                         <img src="{{ asset('img/tiers/' ~ photos.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                     </div>
                                     {#  <div class="col-md-6 responsive-1024">
