@@ -38,7 +38,12 @@
   margin-right: 20px;
 }
 
-.general_details{
+.general_details {
+    padding: 20px 10px;
+    line-height: 12px;
+}
 
-
+.general_details h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
 }

@@ -47,14 +47,15 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="localisation_tab">
-                        <h4>An example implementing a preview pane.</h4>
-                        <p> Obviously the most visual demo, the preview pane is accomplished entirely outside of Jcrop with a simple jQuery-flavored callback. This type of interface could be useful for creating a thumbnail or avatar.
-                            The onChange event handler is used to update the view in the preview pane. </p>
-                    </div>
+                    {% set active = false %}
                     {% if attachements %}
                         {% for photo in attachements %}
-                            <div class="tab-pane" id="photo_{{ photo.id }}_tab">
+                          {% if active %}
+                            <div class="tab-pane active" id="photo_{{ photo.id }}_tab">
+                          {% else %}
+                             <div class="tab-pane" id="photo_{{ photo.id }}_tab">
+                                 {% set active = true %}
+                          {% endif %}
                                 <h4>Photo {{ loop.index }}</h4>
                                 <div class="row">
                                     <div class="col-md-6 responsive-1024">
