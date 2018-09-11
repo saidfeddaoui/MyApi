@@ -78,9 +78,9 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
        $test=  $preDeclaration->getVehiculeDamage()->getDamagedParts();
-       var_dump( count($test));
+       var_dump($test);
        die();
-           
+
 
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
 
