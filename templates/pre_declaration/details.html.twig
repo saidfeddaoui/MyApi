@@ -98,58 +98,7 @@
         </div>
 
 
-        <!-- BEGIN Circonstances TABLE PORTLET-->
-        <div class="portlet light portlet-fit">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-camera font-{{ app.session.get('insuranceType').themeColor }}"></i>
-                    <span class="caption-subject font-{{ app.session.get('insuranceType').themeColor }} sbold uppercase">Circonstances</span>
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="expand" data-original-title="" title=""></a>
-                </div>
-            </div>
-            <div class="portlet-body" >
-                <div class="tabbable-line boxless margin-bottom-20">
-                  kkk
 
-                </div>
-            </div>
-        </div>
-        <!-- END Circonstances TABLE PORTLET-->
-        <!-- BEGIN Vehicle Damage TABLE PORTLET-->
-        {% if preDeclaration.vehiculeDamage %}
-            <div class="portlet light portlet-fit">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="fa fa-car font-{{ app.session.get('insuranceType').themeColor }}"></i>
-                        <span class="caption-subject font-{{ app.session.get('insuranceType').themeColor }} sbold uppercase">Dommages au véhicule</span>
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="expand" data-original-title="" title=""></a>
-                    </div>
-                </div>
-                <div class="portlet-body" >
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <div style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
-                                {% for part in preDeclaration.vehiculeDamage.damagedParts %}
-                                    <img {% if not loop.first %} class="vehicle-zone" {% endif %}
-                                            src="{{ asset('img/vehicle_zones/' ~ part.code ~ '.png') }}"
-                                    />
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        <!-- END Vehicle Damage TABLE PORTLET-->
-        <!-- BEGIN Adversaire TABLE PORTLET-->
-
-        <!-- END Adversaire TABLE PORTLET-->
     </div>
 </div>
 <div class="row">
@@ -164,4 +113,6 @@
             <button type="button" class="btn green accept"data-id= "{{ preDeclaration.id }}" >Accepter</button>
         {% endif %}
     </div>
+</div>
+
 </div>
