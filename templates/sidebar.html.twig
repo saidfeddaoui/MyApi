@@ -172,31 +172,31 @@
             {% endif %}
             {% if is_granted('ROLE_PRE_DECLARATION') %}
                 <li class="nav-item">
-                    <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
+                    <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-book-open"></i>
                         <span class="title">Pré-déclaration</span>
                         <span class="arrow"></span>
                     </a>
-                    {# <ul class="sub-menu">
-                         <li class="nav-item">
-                              <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
-                                  <i class="icon-clock"></i>
-                                  <span class="title">En cours</span>
-                              </a>
-                          </li>
-                           <li class="nav-item">
-                                <a href="{{ path('pre_declarations_accepted') }}" class="nav-link">
-                                    <i class="icon-check"></i>
-                                    <span class="title">Acceptées</span>
-                                </a>
-                            </li>
+                    <ul class="sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('pre_declarations_in_progress') }}" class="nav-link">
+                                <i class="icon-clock"></i>
+                                <span class="title">En cours</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('pre_declarations_accepted') }}" class="nav-link">
+                                <i class="icon-check"></i>
+                                <span class="title">Acceptées</span>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ path('pre_declarations_rejected') }}" class="nav-link">
                                 <i class="icon-ban"></i>
                                 <span class="title">Rejetées</span>
                             </a>
                         </li>
-                    </ul>#}
+                    </ul>
                 </li>
             {% endif %}
             {% if is_granted('ROLE_ASSISTANCE') %}
