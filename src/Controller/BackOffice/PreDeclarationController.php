@@ -179,9 +179,8 @@ class PreDeclarationController extends Controller
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
         $resp = $pdtas->triggerPredeclaration($dataPre);
-        var_dump($resp);
-        die();
-       // return $this->json(['message' => $resp]);
+
+        return $this->json(['message' => $resp->code]);
 
 
         if ($resp->code == "200"){
