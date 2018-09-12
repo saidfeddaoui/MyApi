@@ -186,6 +186,20 @@ class PreDeclarationController extends Controller
         $this->em->persist($preDeclaration);
         $this->em->persist($notification);
         $this->em->flush();
+
+
+        //pour avoir id notification
+        $datenow=new \dateTime("now");
+        $now=$datenow->format("Y-m-d");
+        $notification_detail = new NotificationDetail();
+        $notification_detail->setLibelle("date");
+        $notification_detail->setValeur($now);
+        $notification_detail->setNotification($notification);
+        $notification_detail->setDateCreation(new \dateTime("now"));;
+
+        $this->em->persist($notification_detail);
+        $this->em->flush();
+
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
@@ -222,9 +236,10 @@ class PreDeclarationController extends Controller
         $this->em->persist($preDeclaration);
         $this->em->persist($notification);
         $this->em->flush();
-        $datenow=new \dateTime("now");
+
 
         //pour avoir id notification
+        $datenow=new \dateTime("now");
         $now=$datenow->format("Y-m-d");
         $notification_detail = new NotificationDetail();
         $notification_detail->setLibelle("date");
