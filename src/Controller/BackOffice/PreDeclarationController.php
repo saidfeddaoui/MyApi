@@ -103,22 +103,6 @@ class PreDeclarationController extends Controller
             PreDeclaration::STATUS_REJECTED,
             $insuranceType
         );
-        $client = $preDeclarations->getClient();
-        $idSocietaire = $preDeclarations->getContrat()->getIdSocietaire();
-        $sujet="Pré-déclaration";
-        $message="Votre pré-déclaration a été refusée";
-
-        $notification= new Notification();
-        $notification->setIdSocietaire($idSocietaire);
-        $notification->setSujet($sujet);
-        $notification->setMessage($message);
-        $notification->setStatut(false);
-        $notification->setClient($client);
-        $notification->setPredeclaration($preDeclarations);
-
-        $this->em->persist($notification);
-        $this->em->flush();
-
 
         return $this->render('pre_declaration/index.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
@@ -202,6 +186,21 @@ class PreDeclarationController extends Controller
         }
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
         $this->em->persist($preDeclaration);
+
+        $client = $preDeclarations->getClient();
+        $idSocietaire = $preDeclarations->getContrat()->getIdSocietaire();
+        $sujet="Pré-déclaration";
+        $message="Votre pré-déclaration a été refusée";
+
+        $notification= new Notification();
+        $notification->setIdSocietaire($idSocietaire);
+        $notification->setSujet($sujet);
+        $notification->setMessage($message);
+        $notification->setStatut(false);
+        $notification->setClient($client);
+        $notification->setPredeclaration($preDeclarations);
+
+        $this->em->persist($notification);
         $this->em->flush();
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
