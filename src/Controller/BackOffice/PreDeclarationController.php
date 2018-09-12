@@ -185,7 +185,7 @@ class PreDeclarationController extends Controller
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
         }
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
-        $this->em->persist($preDeclaration);
+
 
         $client = $preDeclaration->getClient()->getId();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
@@ -201,10 +201,10 @@ class PreDeclarationController extends Controller
         $notification->setStatut(false);
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
-
-
-        $this->em->persist($notification);
+        $this->em->persist($preDeclaration);
         return $this->json(['message' =>  $idSocietaire]);
+        $this->em->persist($notification);
+
         $this->em->flush();
 
         $event = new AcceptPreDeclarationEvent($preDeclaration);
