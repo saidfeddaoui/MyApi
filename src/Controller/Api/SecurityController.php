@@ -90,23 +90,23 @@ class SecurityController extends BaseController
         $user = $this->tokenStorage->getToken()->getUser();
         $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
         // Relation between client and device
-        $device_uid = $request->request->get('device_uid') ?: '';
-        if ($device_uid) {
-            $device = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
-            if ($device instanceof Device) {
-                $client_device = $device->getClient() ?: '';
+       // $device_uid = $request->request->get('device_uid') ?: '';
+       // if ($device_uid) {
+           // $device = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
+            //if ($device instanceof Device) {
+              /*  $client_device = $device->getClient() ?: '';
                 if ($client_device instanceof Client) {
                     $client_device->setDevice(Null);
                     $this->em->flush();
-                }
+                } */
                 $client = $this->em->getRepository(Client::class)->findOneBy(array('phone' => $user->getPhone()));
                 if ($client instanceof Client) {
-                    $client->setDevice($device);
+                    //$client->setDevice($device);
                     $this->em->flush();
                 }
 
-            }
-        }
+          //  }
+       // }
         $this->eventDispatcher->dispatch(ApplicationEvents::SUCCESS_LOGIN, new SuccessLoginEvent($token, $user));
         return $this->respondWith(new LoginResponse($token, $user));
     }

@@ -248,9 +248,6 @@ class PreDeclarationController extends BaseController
             /**
              * @var UploadedFile $attachment
              */
-
-            var_dump($type->getClientOriginalName());
-            die();
             $attachment = $type;
             $file = $attachment->move($directory, Uuid::uuid4()->toString() . '.' . $attachment->guessExtension());
             $tiersAttachment = new TiersAttachment($types, $file->getBasename());
