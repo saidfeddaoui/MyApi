@@ -3,6 +3,7 @@
 namespace App\Controller\BackOffice;
 
 use App\Entity\InsuranceType;
+use App\Entity\Notification;
 use App\Entity\PreDeclaration;
 use App\Event\AcceptPreDeclarationEvent;
 use App\Event\ApplicationEvents;
@@ -102,6 +103,23 @@ class PreDeclarationController extends Controller
             PreDeclaration::STATUS_REJECTED,
             $insuranceType
         );
+        $client = $preDeclarations->getClient();
+        $idSocietaire = $preDeclarations->getContrat()->getIdSocietaire();
+        $sujet="Pré-déclaration";
+        $message="Votre pré-déclaration a été refusée";
+
+        $notification= new Notification();
+        $notification->setIdSocietaire($idSocietaire);
+        $notification->setSujet($sujet);
+        $notification->setMessage($message);
+        $notification->setStatut(false);
+        $notification->setClient($client);
+        $notification->setPredeclaration($preDeclarations);
+
+        $this->em->persist($notification);
+        $this->em->flush();
+
+
         return $this->render('pre_declaration/index.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '(Rejetées)',
