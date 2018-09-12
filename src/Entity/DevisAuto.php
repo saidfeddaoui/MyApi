@@ -163,7 +163,7 @@ class DevisAuto
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
-     * @ORM\Column(type="float", nullable=true, nullable = true)
+     * @ORM\Column(type="string", nullable=true, nullable = true)
      */
     private $vn;
 
