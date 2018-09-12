@@ -347,6 +347,7 @@ class RegistrationController extends BaseController
             ->setContactPreference($submittedClient->getContactPreference())
             ->setCin($submittedClient->getCin())
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
+            ->setEnabled(true)
            // ->setDevice($device)
 
             //->setEnabled(true)
