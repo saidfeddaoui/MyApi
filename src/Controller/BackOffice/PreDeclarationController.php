@@ -192,7 +192,7 @@ class PreDeclarationController extends Controller
         $sujet="Pré-déclaration";
         $message="Votre pré-déclaration a été refusée";
 
-        return $this->json(['message' =>  $client]);
+        return $this->json(['message' =>  $idSocietaire]);
 
         $notification= new Notification();
         $notification->setIdSocietaire($idSocietaire);
