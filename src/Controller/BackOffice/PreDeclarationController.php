@@ -4,6 +4,7 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\InsuranceType;
 use App\Entity\Notification;
+use App\Entity\NotificationDetail;
 use App\Entity\PreDeclaration;
 use App\Event\AcceptPreDeclarationEvent;
 use App\Event\ApplicationEvents;
@@ -167,7 +168,23 @@ class PreDeclarationController extends Controller
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get('description'))
         ;
+        $client = $preDeclaration->getClient();
+        $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
+        $sujet="Pré-déclaration";
+        $message="Votre pré-déclaration a été refusée";
+
+
+
+        $notification = new Notification();
+        $notification->setIdSocietaire($idSocietaire);
+        $notification->setSujet($sujet);
+        $notification->setMessage($message);
+        $notification->setStatut(false);
+        $notification->setClient($client);
+        $notification->setPredeclaration($preDeclaration);
+        $notification->setDateCreation(new \dateTime("now"));
         $this->em->persist($preDeclaration);
+        $this->em->persist($notification);
         $this->em->flush();
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
@@ -190,8 +207,7 @@ class PreDeclarationController extends Controller
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
-        $message="Votre pré-déclaration a été refusée";
-
+        $message="Votre pré-déclaration a été acceptée";
 
 
         $notification = new Notification();
@@ -202,9 +218,24 @@ class PreDeclarationController extends Controller
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
         $notification->setDateCreation(new \dateTime("now"));
+
         $this->em->persist($preDeclaration);
         $this->em->persist($notification);
         $this->em->flush();
+        $datenow=new \dateTime("now");
+
+        //pour avoir id notification
+        $now=$datenow->format("Y-m-d");
+        $notification_detail = new NotificationDetail();
+        $notification_detail->setLibelle("date");
+        $notification_detail->setValeur($now);
+        $notification_detail->setNotification($notification);
+        $notification_detail->setDateCreation(new \dateTime("now"));;
+
+        $this->em->persist($notification_detail);
+        $this->em->flush();
+
+
 
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
