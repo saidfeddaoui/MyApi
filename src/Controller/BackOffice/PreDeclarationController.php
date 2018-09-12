@@ -18,6 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\PreDeclarationTriggerApiService;
 
 /**
  * @Route(path="/pre_declarations", name="pre_declarations_")
@@ -156,7 +157,7 @@ class PreDeclarationController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function reject(PreDeclaration $preDeclaration, Request $request)
+    public function reject(PreDeclaration $preDeclaration, Request $request,PreDeclarationTriggerApiService $pdtas)
     {
         if (PreDeclaration::STATUS_IN_PROGRESS !== $preDeclaration->getStatus()) {
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour la rejeter'], 400);
@@ -168,12 +169,20 @@ class PreDeclarationController extends Controller
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get('description'))
         ;
+
+        $idpredeclaration=$preDeclaration->getId();
+        $preDeclarationInfo= array(
+            "IdPreDeclaration"=>$idpredeclaration,
+            "Statut"=>"r"
+        );
+
+        $dataPre=json_decode($preDeclarationInfo);
+        $resp= $pdtas->triggerPredeclaration($dataPre);
+        if ($resp->code == "200"){
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
         $message="Votre pré-déclaration a été refusée";
-
-
 
         $notification = new Notification();
         $notification->setIdSocietaire($idSocietaire);
@@ -203,14 +212,20 @@ class PreDeclarationController extends Controller
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
+        }else{
+            return $this->json(['message' => $resp->message]);
+        }
     }
+
+
+
     /**
      * @Route(path="/accept/{id}", name="accept", requirements={"id":"\d+"}, options={"expose"=true})
      *
      * @param  PreDeclaration $preDeclaration
      * @return Response
      */
-    public function accept(PreDeclaration $preDeclaration)
+    public function accept(PreDeclaration $preDeclaration,PreDeclarationTriggerApiService $pdtas)
     {
         if (PreDeclaration::STATUS_IN_PROGRESS !== $preDeclaration->getStatus()) {
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
@@ -250,6 +265,15 @@ class PreDeclarationController extends Controller
         $this->em->persist($notification_detail);
         $this->em->flush();
 
+        $idpredeclaration=$preDeclaration->getId();
+
+        $preDeclarationInfo= array(
+            "IdPreDeclaration"=>$idpredeclaration,
+            "Statut"=>"c"
+        );
+
+        $dataPre=json_decode($preDeclarationInfo);
+        $pdtas->triggerPredeclaration($dataPre);
 
 
         $event = new AcceptPreDeclarationEvent($preDeclaration);
