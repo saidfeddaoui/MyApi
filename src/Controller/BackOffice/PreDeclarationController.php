@@ -202,9 +202,10 @@ class PreDeclarationController extends Controller
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
 
-        return $this->json(['message' =>  $idSocietaire]);
+
         $this->em->persist($notification);
         $this->em->flush();
+        return $this->json(['message' =>  $idSocietaire]);
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été acceptée avec succès']);
