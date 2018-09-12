@@ -338,36 +338,36 @@ class DevisAuto
         return $this;
     }
 
-    public function getVn(): ?float
+    public function getVn(): ?string
     {
         return $this->vn;
     }
 
-    public function setVn(?float $vn): self
+    public function setVn(?string $vn): self
     {
         $this->vn = $vn;
 
         return $this;
     }
 
-    public function getVv(): ?float
+    public function getVv(): ?string
     {
         return $this->vv;
     }
 
-    public function setVv(?float $vv): self
+    public function setVv(?string $vv): self
     {
         $this->vv = $vv;
 
         return $this;
     }
 
-    public function getVg(): ?float
+    public function getVg(): ?string
     {
         return $this->vg;
     }
 
-    public function setVg(?float $vg): self
+    public function setVg(?string $vg): self
     {
         $this->vg = $vg;
 
