@@ -187,7 +187,7 @@ class PreDeclarationController extends Controller
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
 
 
-        $client = $preDeclaration->getClient()->getId();
+        $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
         $message="Votre pré-déclaration a été refusée";
