@@ -272,7 +272,7 @@ class PreDeclarationController extends Controller
             "Statut"=>"c"
         );
 
-        $dataPre=json_decode($preDeclarationInfo);
+        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
         $pdtas->triggerPredeclaration($dataPre);
 
 
