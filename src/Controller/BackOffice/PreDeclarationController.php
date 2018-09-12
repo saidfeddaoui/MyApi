@@ -201,10 +201,10 @@ class PreDeclarationController extends Controller
         $notification->setStatut(false);
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
-        $this->em->persist($preDeclaration);
-        $this->em->flush();
-       // $this->em->persist($notification);
+       // $this->em->persist($preDeclaration);
        // $this->em->flush();
+        $this->em->persist($notification);
+        $this->em->flush();
 
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
