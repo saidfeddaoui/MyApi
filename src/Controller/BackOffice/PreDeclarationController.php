@@ -176,7 +176,8 @@ class PreDeclarationController extends Controller
             "Statut"=>"r"
         );
 
-        $dataPre=json_decode($preDeclarationInfo);
+        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
+
         $resp= $pdtas->triggerPredeclaration($dataPre);
         if ($resp->code == "200"){
         $client = $preDeclaration->getClient();
@@ -272,7 +273,7 @@ class PreDeclarationController extends Controller
             "Statut"=>"c"
         );
 
-        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
+        $dataPre=json_decode(json_encode($preDeclarationInfo),true);
         $pdtas->triggerPredeclaration($dataPre);
 
 
