@@ -187,8 +187,8 @@ class PreDeclarationController extends Controller
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
         $this->em->persist($preDeclaration);
 
-        $client = $preDeclarations->getClient();
-        $idSocietaire = $preDeclarations->getContrat()->getIdSocietaire();
+        $client = $preDeclaration->getClient();
+        $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
         $message="Votre pré-déclaration a été refusée";
 
@@ -198,7 +198,7 @@ class PreDeclarationController extends Controller
         $notification->setMessage($message);
         $notification->setStatut(false);
         $notification->setClient($client);
-        $notification->setPredeclaration($preDeclarations);
+        $notification->setPredeclaration($preDeclaration);
 
         $this->em->persist($notification);
         $this->em->flush();
