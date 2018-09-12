@@ -179,6 +179,9 @@ class PreDeclarationController extends Controller
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
         $resp= $pdtas->triggerPredeclaration($dataPre);
+        return $this->json(['message' => $resp]);
+        
+
         if ($resp->code == "200"){
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
