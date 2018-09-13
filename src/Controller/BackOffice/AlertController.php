@@ -90,7 +90,7 @@ class AlertController extends Controller
             $imgDirectory = $this->get('kernel')->getProjectDir() . '/public/img';
             if ($_img) {
                 $imageFile = $_img->move($imgDirectory, Uuid::uuid4()->toString() . '.' . $_img->guessExtension());
-                $alert->setImage(new Attachmen($imageFile->getBasename()));
+                $alert->setImage(new Attachment($imageFile->getBasename()));
             }
             $alert->setInsuranceType($insuranceType);
             $em->persist($alert);
