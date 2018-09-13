@@ -64,3 +64,18 @@ border-right: 1px solid #a9a3a3;
 text-align: center;
 padding: 40px;
 }
+
+span.detail_info {
+    display: inline-block;
+    width: 200px;
+    border: 1px solid #b9b8b8;
+    padding: 10px;
+    text-align: center;
+}
+
+span.detail_label {
+    display: inline-block;
+    width: 200px;
+    padding: 0 10px;
+}
+
