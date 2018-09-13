@@ -97,7 +97,7 @@ class DevisAutoController extends BaseController
         $devi_auto->setSocietaire($societaire);
         $devi_auto->setCivilite($auto->getCivilite());
         $devi_auto->setW($auto->getW());
-        $devi_auto->setDateMec(new \datetime($auto->getDateMec()));
+        $devi_auto->setDateMec($auto->getDateMec());
         $devi_auto->setPuissance($auto->getPuissance());
         $devi_auto->setCombustion($auto->getCombustion());
         $devi_auto->setVn($auto->getVn());
