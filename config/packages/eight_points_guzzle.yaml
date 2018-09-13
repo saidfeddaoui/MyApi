@@ -78,7 +78,7 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         preDeclarationTrigger:
-                    base_url: https://ais.mamda-mcma.ma/WS/api/contrat/det/post/
+                    base_url: https://ais.mamda-mcma.ma/WS/api/predeclaration/reponse/post
                     options:
                         timeout: 30
                         headers:
