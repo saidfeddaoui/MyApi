@@ -85,7 +85,7 @@ class DevisAutoController extends BaseController
     public function normal(DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
     {
         $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$auto->getSocietaire()->getCode(),"type" => "AUTO" ]);
-        $marque = $this->em->getRepository('App:MarqueVehicule')->findOneBy([ "id" =>$auto->getMarque()->getId()]);
+        $marque = $this->em->getRepository('App:MarqueVehicule')->find($auto->getMarque()->getId());
         $pack = $this->em->getRepository('App:Pack')->findOneBy([ "code" =>$auto->getPack()->getCode()]);
         $devi_auto = new DevisAuto();
         $devi_auto->setNom($auto->getNom());
