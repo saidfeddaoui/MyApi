@@ -238,6 +238,20 @@ class PreDeclarationController extends Controller
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
 
 
+        $idpredeclaration=$preDeclaration->getId();
+        $preDeclarationInfo= array(
+            "IdPreDeclaration"=>$idpredeclaration,
+            "Statut"=>"r"
+        );
+
+        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
+
+        $resp = $pdtas->triggerPredeclaration($dataPre);
+
+        //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
+
+        if ($resp->code == "200"){
+
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
@@ -270,20 +284,16 @@ class PreDeclarationController extends Controller
         $this->em->persist($notification_detail);
         $this->em->flush();
 
-        $idpredeclaration=$preDeclaration->getId();
-
-        $preDeclarationInfo= array(
-            "IdPreDeclaration"=>$idpredeclaration,
-            "Statut"=>"c"
-        );
-
-        $dataPre=json_decode(json_encode($preDeclarationInfo),true);
-        $pdtas->triggerPredeclaration($dataPre);
-
-
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
         return $this->json(['message' => 'la pré-declaration a été acceptée avec succès']);
+
+        }else{
+            return $this->json(['message' => $resp->message]);
+        }
+
+
+
     }
 
 }
