@@ -17,8 +17,18 @@
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
                 <div class="general_details">
-                    <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
-                    <p><span class="detail_label">Police : </span><span class="detail_info">{{ preDeclaration.contrat.police }}</span></p>
+                    <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                        {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}
+                        {% if preDeclaration.status == 0 %}
+                            (En cours)</td>
+                        {% elseif preDeclaration.status == 1%}
+                            (Acceptée)
+                        {% elseif preDeclaration.status == 2%}
+                            (Rejetée)
+                        {% endif %}
+                    
+                    </h4>
+                    <p><span class="detail_label">Police : </span><span class="detail_info">{{ preDeclaration.contrat.police }}</span>
                     <p><span class="detail_label">Téléphone: </span> <span class="detail_info">{{ preDeclaration.contrat.client.phone  }}</span></p>
                     <p><span class="detail_label"> adresse: </span> <span class="detail_info">{{ preDeclaration.circumstance.adress }}</span> </p>
                     <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info">{{ preDeclaration.nbVehicule }}</span></p>
