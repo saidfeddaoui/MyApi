@@ -237,7 +237,7 @@ class PreDeclarationController extends BaseController
      */
     public function uploadTiersAttachments(Request $request)
     {
-        $types ="predeclaration";
+       // $types ="predeclaration";
         if (!count($request->files)) {
             throw new MissingRequiredFileException("no image");
         }
@@ -246,7 +246,7 @@ class PreDeclarationController extends BaseController
         $tiersAttachments = [];
         foreach ($request->files as $type) {
 
-            $img_arr = explode(".", $type->getClientOriginalName());
+            $img_arr = explode("-", $type->getClientOriginalName());
             $types=$img_arr[0];
             /**
              * @var UploadedFile $attachment

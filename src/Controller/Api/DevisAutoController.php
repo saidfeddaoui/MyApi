@@ -93,7 +93,7 @@ class DevisAutoController extends BaseController
         $devi_auto->setTel($auto->getTel());
         $devi_auto->setEmail($auto->getEmail());
         $devi_auto->setMarque($marque);
-        $devi_auto->setMarque($pack);
+        $devi_auto->setPack($pack);
         $devi_auto->setSocietaire($societaire);
         $devi_auto->setCivilite($auto->getCivilite());
         $devi_auto->setW($auto->getW());
