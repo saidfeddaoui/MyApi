@@ -52,9 +52,13 @@
                             <td> {{ element.civilite }} </td>
                             {% if element.marque is not null %}
                             <td> {{ element.marque.nom }} </td>
+                            {% else %}
+                            <td> </td>
                             {% endif %}
                             {% if element.pack is not null %}
                             <td> {{ element.pack.code }} </td>
+                            {% else %}
+                                <td> </td>
                             {% endif %}
                             <td> {{ element.puissance }} </td>
                             <td> {{ element.combustion }} </td>
