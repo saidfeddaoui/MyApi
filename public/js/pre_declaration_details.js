@@ -59,10 +59,11 @@ jQuery(document).ready(function() {
             confirmButtonClass: 'btn-success',
             confirmButtonText: 'Confirmer!',
             cancelButtonText: 'Annuler',
-            closeOnConfirm: true,
-            closeOnCancel: true
+            closeOnConfirm: false,
+            closeOnCancel: false
         }, function (inputValue) {
             if (inputValue) {
+                swal.close();
                 deleteRowAction(id, td, 'pre_declarations_reject', inputValue);
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
@@ -80,10 +81,11 @@ jQuery(document).ready(function() {
             confirmButtonClass: 'btn-success',
             confirmButtonText: 'Confirmer!',
             cancelButtonText: 'Annuler',
-            closeOnConfirm: true,
-            closeOnCancel: true
+            closeOnConfirm: false,
+            closeOnCancel: false
         }, function (confirm) {
             if (confirm) {
+                swal.close();
                 deleteRowAction(id, td, 'pre_declarations_accept', '');
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
