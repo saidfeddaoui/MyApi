@@ -165,9 +165,10 @@ class PreDeclarationController extends Controller
         if (!$request->request->has('description')) {
             return $this->json(['message' => 'la description est obligatoire pour rejeter une pré-declaration'], 400);
         }
+        $motif=$request->request->get('description');
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
-            ->setDescription($request->request->get('description'))
+            ->setDescription($request->request->get($motif))
         ;
 
         $idpredeclaration=$preDeclaration->getId();
@@ -183,7 +184,8 @@ class PreDeclarationController extends Controller
         //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
 
 
-        if ($resp->code == "200"){
+        if ($resp->code == "200") {
+
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
@@ -205,13 +207,21 @@ class PreDeclarationController extends Controller
         //pour avoir id notification
         $datenow=new \dateTime("now");
         $now=$datenow->format("Y-m-d");
+
         $notification_detail = new NotificationDetail();
         $notification_detail->setLibelle("date");
         $notification_detail->setValeur($now);
         $notification_detail->setNotification($notification);
-        $notification_detail->setDateCreation(new \dateTime("now"));;
+        $notification_detail->setDateCreation(new \dateTime("now"));
+
+        $notification_detail2 = new NotificationDetail();
+        $notification_detail2->setLibelle("Motif");
+        $notification_detail2->setValeur($motif);
+        $notification_detail2->setNotification($notification);
+        $notification_detail2->setDateCreation(new \dateTime("now"));
 
         $this->em->persist($notification_detail);
+        $this->em->persist($notification_detail2);
         $this->em->flush();
 
         $event = new RejectPreDeclarationEvent($preDeclaration);
