@@ -32,7 +32,7 @@ class PreDeclarationTriggerApiService extends ApiCustomerService
 
         $result = (string) $response->getBody();
         $autoResponse = json_decode($result);
-        return $result;
+        return $autoResponse;
     }
 
 }
