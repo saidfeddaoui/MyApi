@@ -76,6 +76,7 @@ span.detail_info {
     border: 1px solid #b9b8b8;
     padding: 10px;
     text-align: center;
+    overflow: hidden;
 }
 
 span.detail_label {
