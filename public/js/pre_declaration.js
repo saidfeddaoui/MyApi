@@ -155,6 +155,7 @@ jQuery(document).ready(function() {
         });
     });
     function deleteRowAction(id, td, route, description) {
+        swal.close();
         $.ajax({
             url: Routing.generate(route, {id: id}),
             data: {description: description},

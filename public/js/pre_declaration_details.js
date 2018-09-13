@@ -92,6 +92,8 @@ jQuery(document).ready(function() {
     });
     function deleteRowAction(id, td, route, description)
     {
+
+        console.log('hgg');
         swal.close();
         $.ajax({
             url: Routing.generate(route, {id: id}),
