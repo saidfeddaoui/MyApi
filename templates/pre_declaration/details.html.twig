@@ -85,10 +85,10 @@
                     {% if attachements %}
                         <div class="tab-pane" id="pre_declaration_tab">
                             <div class="row">
-                            {% for photos in attachements %}
+                            {% for photo in attachements %}
                                 {% if photo.type =="pre_declaration" %}
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <img src="{{ asset('img/tiers/' ~ photos.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                     </div>
                                {% endif %}
                             {% endfor %}
@@ -100,10 +100,10 @@
                     {% if attachements %}
                         <div class="tab-pane" id="attestation_assurance_adversaire_tab">
                             <div class="row">
-                                {% for photos in attachements %}
+                                {% for photo in attachements %}
                                     {% if photo.type =="attestation_assurance_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <img src="{{ asset('img/tiers/' ~ photos.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -115,10 +115,10 @@
                     {% if attachements %}
                         <div class="tab-pane" id="Permis_conduire_adversaire_tab">
                             <div class="row">
-                                {% for photos in attachements %}
+                                {% for photo in attachements %}
                                     {% if photo.type =="Permis_conduire_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <img src="{{ asset('img/tiers/' ~ photos.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
