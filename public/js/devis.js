@@ -16,6 +16,42 @@ jQuery(document).ready(function() {
             { // set default column settings
                 "searchable": true,
                 "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
             }
         ],
         "order": [
