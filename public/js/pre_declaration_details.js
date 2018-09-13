@@ -59,8 +59,8 @@ jQuery(document).ready(function() {
             confirmButtonClass: 'btn-success',
             confirmButtonText: 'Confirmer!',
             cancelButtonText: 'Annuler',
-            closeOnConfirm: false,
-            closeOnCancel: false
+            closeOnConfirm: true,
+            closeOnCancel: true
         }, function (inputValue) {
             if (inputValue) {
                 deleteRowAction(id, td, 'pre_declarations_reject', inputValue);
@@ -80,8 +80,8 @@ jQuery(document).ready(function() {
             confirmButtonClass: 'btn-success',
             confirmButtonText: 'Confirmer!',
             cancelButtonText: 'Annuler',
-            closeOnConfirm: false,
-            closeOnCancel: false
+            closeOnConfirm: true,
+            closeOnCancel: true
         }, function (confirm) {
             if (confirm) {
                 deleteRowAction(id, td, 'pre_declarations_accept', '');
