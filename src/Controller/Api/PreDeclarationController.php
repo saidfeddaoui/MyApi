@@ -246,7 +246,8 @@ class PreDeclarationController extends BaseController
         $tiersAttachments = [];
         foreach ($request->files as $type) {
 
-            $types = explode(".", $type->getClientOriginalName());
+            $img_arr = explode(".", $type->getClientOriginalName());
+            $types=$img_arr[0];
             /**
              * @var UploadedFile $attachment
              */
