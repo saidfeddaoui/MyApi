@@ -245,6 +245,8 @@ class PreDeclarationController extends BaseController
         $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
         $tiersAttachments = [];
         foreach ($request->files as $type) {
+
+            $types = explode(".", $type->getClientOriginalName());
             /**
              * @var UploadedFile $attachment
              */
