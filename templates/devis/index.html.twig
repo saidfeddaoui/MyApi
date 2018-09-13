@@ -31,6 +31,15 @@
                             <th> Prénom </th>
                             <th> Tél </th>
                             <th> email </th>
+                            <th> civilite </th>
+                            <th> Marque </th>
+                            <th> Pack </th>
+                            <th> puissance </th>
+                            <th> Combustion </th>
+                            <th> Valeur neuf </th>
+                            <th> Valeur venale </th>
+                            <th> Valeur glace </th>
+                            <th> Date mis en circulation </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,6 +49,16 @@
                             <td> {{ element.prenom }} </td>
                             <td> {{ element.tel }} </td>
                             <td> {{ element.email }} </td>
+                            <td> {{ element.civilite }} </td>
+                            <td> {{ element.marque.nom }} </td>
+                            <td> {{ element.pack.code }} </td>
+                            <td> {{ element.puissance }} </td>
+                            <td> {{ element.combustion }} </td>
+                            <td> {{ element.vn }} </td>
+                            <td> {{ element.vv }} </td>
+                            <td> {{ element.vg }} </td>
+                            <td> {{ element.dateMec | date('Y-m-d H:i:s') }} </td>
+
                         </tr>
                         {% endfor %}
                         </tbody>
