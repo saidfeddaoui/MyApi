@@ -18,14 +18,19 @@
             <div class="tab-pane active" id="informations_tab">
                 <div class="general_details">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i> {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}</h4>
-                    <p>{{ preDeclaration.circumstance.adress }}</p>
+                    <p>Police : <span class="detail_info">{{ preDeclaration.contrat.police }}</span></p>
+                    <p>Téléphone: <span class="detail_info">{{ preDeclaration.contrat.client.phone  }}</span></p>
+                    <p>adresse:<span>{{ preDeclaration.circumstance.adress }}</span> </p>
+                    <p>Nombre de véhicules : <span class="detail_info">{{ preDeclaration.nbVehicule }}</span></p>
+                    <p>Nombre de blessées : <span class="detail_info">{{ preDeclaration.nbInjured }}</span></p>
+                    <p>Type de sinistre : <span class="detail_info">{{ preDeclaration.typeSinistre.title }}</span></p>
+                    <p>Date de sinistre : <span class="detail_info">{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</span></p>
+                    <p>Date de pré-déclaration : <span class="detail_info">{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</span></p>
                     {#<dd>{{ preDeclaration.circumstance.latitude }}</dd>
                     <dd>{{ preDeclaration.circumstance.longitude }}</dd>#}
-                    <p>Type de sinistre : {{ preDeclaration.typeSinistre.title }}</p>
-                    <p>Nombre de véhicules : {{ preDeclaration.nbVehicule }}</p>
-                    <p>Nombre de blessées : {{ preDeclaration.nbInjured }}</p>
+
                     {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
-                        <p>Raison de rejet : {{ preDeclaration.description }}</p>
+                        <p>Raison de rejet :<span class="detail_info"> {{ preDeclaration.description }}</span></p>
                     {% endif %}
                 </div>
 

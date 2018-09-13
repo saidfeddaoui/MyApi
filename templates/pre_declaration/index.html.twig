@@ -52,9 +52,9 @@
                                 {% if preDeclaration.status == 0 %}
                                     <td style="background: #ffa01f;">En cours</td>
                                 {% elseif preDeclaration.status == 1%}
-                                    <td style="background: #3cc12f;">Acceptées</td>
+                                    <td style="background: #3cc12f;">Acceptée</td>
                                 {% elseif preDeclaration.status == 2%}
-                                    <td style="background:#ff4646;">Rejetées</td>
+                                    <td style="background:#ff4646;">Rejetée</td>
                                 {% endif %}
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
