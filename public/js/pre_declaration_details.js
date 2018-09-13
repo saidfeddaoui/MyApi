@@ -92,8 +92,8 @@ jQuery(document).ready(function() {
     });
     function deleteRowAction(id, td, route, description)
     {
-        
         swal.close();
+        $('body .loadWrapper').show();
         $.ajax({
             url: Routing.generate(route, {id: id}),
             data: {description: description},
@@ -105,10 +105,12 @@ jQuery(document).ready(function() {
             },
             statusCode: {
                 200: function (response) {
+                    $('body .loadWrapper').hide();
                     $(location).attr('href', Routing.generate('pre_declarations_in_progress'))
                 },
                 400: function (response) {
-                   // swal.close();
+                    swal.close();
+                    $('body .loadWrapper').hide();
                     setTimeout(function() {
                         toastr.error(response.responseJSON.message);
                     }, 500);
