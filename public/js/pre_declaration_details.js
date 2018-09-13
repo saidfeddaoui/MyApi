@@ -63,7 +63,6 @@ jQuery(document).ready(function() {
             closeOnCancel: false
         }, function (inputValue) {
             if (inputValue) {
-                swal.close();
                 deleteRowAction(id, td, 'pre_declarations_reject', inputValue);
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
@@ -85,7 +84,6 @@ jQuery(document).ready(function() {
             closeOnCancel: false
         }, function (confirm) {
             if (confirm) {
-                swal.close();
                 deleteRowAction(id, td, 'pre_declarations_accept', '');
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
@@ -94,6 +92,7 @@ jQuery(document).ready(function() {
     });
     function deleteRowAction(id, td, route, description)
     {
+        swal.close();
         $.ajax({
             url: Routing.generate(route, {id: id}),
             data: {description: description},
@@ -108,7 +107,7 @@ jQuery(document).ready(function() {
                     $(location).attr('href', Routing.generate('pre_declarations_in_progress'))
                 },
                 400: function (response) {
-                    swal.close();
+                   // swal.close();
                     setTimeout(function() {
                         toastr.error(response.responseJSON.message);
                     }, 500);
