@@ -180,7 +180,7 @@ class PreDeclarationController extends Controller
 
         $resp = $pdtas->triggerPredeclaration($dataPre);
 
-        return $this->json(['Code' => $resp->code,'message' => $resp->code]);
+        //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
 
 
         if ($resp->code == "200"){
