@@ -41,10 +41,12 @@
                             <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">{{ preDeclaration.typeSinistre.title }}</span></p>
                             <p><span class="detail_label">Date de sinistre : </span><span class="detail_info">{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</span></p>
                             <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info">{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</span></p>
-
+                            {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
+                                <p>Raison de rejet :<span class="detail_info"> {{ preDeclaration.description }}</span></p>
+                            {% endif %}
                         </div>
                     </div>
-                    
+
 
                    {# <p><span class="detail_label"> adresse: </span> <span class="detail_info">{{ preDeclaration.circumstance.adress }}</span> </p>
                     <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info">{{ preDeclaration.nbVehicule }}</span></p>
@@ -54,9 +56,7 @@
                     <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info">{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</span></p>
                     #}
 
-                    {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
-                        <p>Raison de rejet :<span class="detail_info"> {{ preDeclaration.description }}</span></p>
-                    {% endif %}
+
                 </div>
 
             </div>
