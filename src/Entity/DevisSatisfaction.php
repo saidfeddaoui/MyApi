@@ -44,6 +44,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_refused"})
+     * @Serializer\Groups(groups={"devis_accepted"})
      *
      * @Assert\NotNull(groups={"devis_refused"})
      * @ORM\JoinColumn(name="raison", referencedColumnName="id", nullable=true)
@@ -54,6 +55,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @Serializer\Groups(groups={"devis_accepted"})
      *
      * @Assert\NotNull(groups={"devis_accepted","devis_refused"})
      *
@@ -65,6 +67,12 @@ class DevisSatisfaction
      * @ORM\Column(type="boolean")
      */
     private $statut;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreation;
+
 
     public function getId()
     {
@@ -130,4 +138,21 @@ class DevisSatisfaction
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * @param mixed $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
 }
