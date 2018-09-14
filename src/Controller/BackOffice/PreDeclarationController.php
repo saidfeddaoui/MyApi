@@ -63,7 +63,7 @@ class PreDeclarationController extends Controller
     {
         $preDeclarations = $this->em->getRepository('App:PreDeclaration')->findByInsuranceTypeOrderByPredeclaration($insuranceType);
 
-        dump($preDeclarations[0]);
+        dump($preDeclarations[0]->getContrat);
         die();
         return $this->render('pre_declaration/index.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
