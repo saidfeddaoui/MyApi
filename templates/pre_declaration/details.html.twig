@@ -109,7 +109,9 @@
                         {% for photo in attachements %}
                             {% if photo.type =="photo_sinistre" %}
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                        </a>
                                     </div>
                             {% endif %}
                         {% endfor %}
@@ -123,8 +125,13 @@
                             <div class="row">
                             {% for photo in attachements %}
                                 {% if photo.type =="pre_declaration" %}
+
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+
+                                        </a>
+
                                     </div>
                                {% endif %}
                             {% endfor %}
