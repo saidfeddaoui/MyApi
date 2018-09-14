@@ -122,6 +122,6 @@ class TiersAttachment
         return $this;
     }
 
-   
+
 
 }
