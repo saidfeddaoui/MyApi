@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisSatisfactionRepository")
  * @Serializer\ExclusionPolicy("all")
+ * @ORM\HasLifecycleCallbacks
  */
 class DevisSatisfaction
 {
@@ -72,6 +73,7 @@ class DevisSatisfaction
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreation;
+
 
 
     public function getId()
@@ -153,6 +155,19 @@ class DevisSatisfaction
     public function setDateCreation($dateCreation)
     {
         $this->dateCreation = $dateCreation;
+    }
+
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if ($this->getDateCreation() == null) {
+            $this->setDateCreation(new \DateTime('now'));
+        }
     }
 
 }
