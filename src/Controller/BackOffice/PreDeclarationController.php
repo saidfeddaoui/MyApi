@@ -81,10 +81,8 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-        $typeSinistre = $this->em->getRepository('App:Item')->findAll($preDeclaration->getTypeSinistre());
+        $sinistres = $this->em->getRepository('App:Item')->findAll($preDeclaration->getTypeSinistre());
 
-        var_dump($typeSinistre);
-        die();
 
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
@@ -92,6 +90,7 @@ class PreDeclarationController extends Controller
             'portlet_title' => "Pré-déclaration de {$preDeclaration->getContrat()->getClient()->getFirstName()}",
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
+            'sinistre' => $sinistres,
         ]);
     }
     /**
