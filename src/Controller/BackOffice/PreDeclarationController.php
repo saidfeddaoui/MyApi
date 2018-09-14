@@ -81,8 +81,25 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-        $sinistres = $this->em->getRepository('App:Item')->find($preDeclaration->getTypeSinistre());
-        var_dump($preDeclaration->getTypeSinistre());
+        //$sinistres = $this->em->getRepository('App:Item')->find($preDeclaration->getTypeSinistre());
+
+        $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
+
+        if (!$sinistre) {
+            return $this->respondWith([]);
+        }
+        $serializer = $this->get('jms_serializer');
+        $contextSerializer = $this->get('jms_serializer.serialization_context_factory')
+            ->createSerializationContext()
+            ->setGroups(['all', 'sinistre'])
+            ->setSerializeNull(true);
+        $products = $serializer->toArray($sinistre, $contextSerializer);
+        foreach ($products['items'] as &$value) {
+            $value['active_icon'] = $value['image'];
+            unset($value['image']);
+        }
+
+        var_dump($products);
         die();
         //item_list_id
         return $this->render('pre_declaration/display_details.html.twig', [
