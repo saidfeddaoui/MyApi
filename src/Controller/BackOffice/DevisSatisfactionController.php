@@ -32,9 +32,6 @@ class DevisSatisfactionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $devis = $em->getRepository('App:DevisSatisfaction')->findAll();
-
-        dump($devis);
-        die();
         return $this->render('devis/accepted.html.twig', [
             'page_title' => 'Liste des devis',
             'page_subtitle' => '',
