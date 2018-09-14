@@ -18,7 +18,11 @@
             <div class="tab-pane active" id="informations_tab">
                 <div class="general_details">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                        {% if preDeclaration.client is not null %}
                         {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}
+                        {% else %}
+                            inconnu
+                        {% endif %}
                         {% if preDeclaration.status == 0 %}
                             (En cours)</td>
                         {% elseif preDeclaration.status == 1%}
@@ -31,7 +35,13 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <p><span class="detail_label">Police : </span><span class="detail_info"><input type="text" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}"></span>
+                            <p><span class="detail_label">Police : </span><span class="detail_info">
+                                    {% if preDeclaration.client is not null %}
+                                    <input type="text" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}">
+                                    {% else %}
+                                      <input type="text" name="prepolice" disabled value="">
+                                    {% endif %}
+                                </span>
                             <p><span class="detail_label">Téléphone: </span> <span class="detail_info"><input type="text" name="prephone" disabled value="{{ preDeclaration.contrat.client.phone  }}"></span></p>
                             <p><span class="detail_label"> adresse: </span> <span class="detail_info"><input type="text" name="preadress" value="{{ preDeclaration.circumstance.adress }}"></span> </p>
                             <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info"><input type="text" name="prnbv" value="{{ preDeclaration.nbVehicule }}"></span></p>
