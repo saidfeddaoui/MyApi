@@ -22,7 +22,7 @@ class DevisSatisfactionController extends Controller
     /**
      * @Route("/accepted", name="accepted",options={"expose"=true})
      *
-     * @Breadcrumb(title="Acceptés")
+     * @Breadcrumb(title="Devis")
      *
      * @param Request $request
      * @param SessionInterface $session
@@ -31,11 +31,14 @@ class DevisSatisfactionController extends Controller
     public function accepted(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $devisAccepted = $em->getRepository('App:DevisSatisfaction')->findByStatut(true);
+        $devis = $em->getRepository('App:DevisSatisfaction')->findAll();
+        
+        var_dump($devis);
+        die();
         return $this->render('devis/accepted.html.twig', [
-            'page_title' => 'Liste des devis acceptés',
+            'page_title' => 'Liste des devis',
             'page_subtitle' => '',
-            'data'=>$devisAccepted
+            'data'=>$devis
         ]);
 
     }
