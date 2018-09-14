@@ -81,7 +81,7 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-        $sinistres = $this->em->getRepository('App:Item')->findAll($preDeclaration->getTypeSinistre());
+        $sinistres = $this->em->getRepository('App:Item')->findBy(['type' => 'sinistre']);
 
 
         return $this->render('pre_declaration/display_details.html.twig', [
