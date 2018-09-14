@@ -20,7 +20,7 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 class DevisSatisfactionController extends Controller
 {
     /**
-     * @Route("/accepted", name="accepted",options={"expose"=true})
+     * @Route("/devis/all", name="accepted",options={"expose"=true})
      *
      * @Breadcrumb(title="Devis")
      *
