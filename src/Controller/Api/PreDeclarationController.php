@@ -186,21 +186,21 @@ class PreDeclarationController extends BaseController
      *         name="Authorization",
      *         in="header",
      *         type="string",
-     *         required=true,
+     *         required=false,
      *         description="Bearer auth",
      *     ),
      *     @SWG\Parameter(
      *         name="permis",
      *         in="formData",
      *         type="file",
-     *         required=true,
+     *         required=false,
      *         description="Driver's license picture",
      *     ),
      *     @SWG\Parameter(
      *         name="attestation_assurance",
      *         in="formData",
      *         type="file",
-     *         required=true,
+     *         required=false,
      *         description="Insurance's attestation picture",
      *     ),
      *    @SWG\Parameter(
@@ -244,6 +244,9 @@ class PreDeclarationController extends BaseController
 
         $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
         $tiersAttachments = [];
+
+        var_dump(count($request->files));
+        die();
         foreach ($request->files as $type) {
              //en recois le nom de image xxx-12.png (exp)
             //on prend juste la premier partie avant - pour la mettre comme type(categorie)
