@@ -99,8 +99,7 @@ class PreDeclarationController extends Controller
             unset($value['image']);
         }
 
-        var_dump($products);
-        die();
+        
         //item_list_id
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
