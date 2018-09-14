@@ -94,6 +94,10 @@ span.detail_info input {
     padding: 10px;
 }
 
+span.detail_info input[disabled] {
+    background: #eaeaea;
+}
+
 
 
 
