@@ -64,7 +64,7 @@ class PreDeclarationController extends Controller
         $preDeclarations = $this->em->getRepository('App:PreDeclaration')->findByInsuranceTypeOrderByPredeclaration($insuranceType);
 
         foreach ($preDeclarations as $preDeclaration){
-            dump($preDeclaration->getClient());
+            dump($preDeclaration->getContrat()->getClient()->getFamilyName());
 
         }
 
