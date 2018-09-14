@@ -37,28 +37,28 @@
                         <tbody>
                         {% for element in data %}
                         <tr data-id="{{ element.id }}">
-                            {% if {{ element.echeanceDate  }}  is not null %}
+                            {% if element.echeanceDate is not null %}
                             <td> {{ element.echeanceDate | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
                              <td> </td>
                             {% endif %}
-                            {% if {{ element.agence }}  is not null %}
-                                <td> {{ {{ element.agence }} | date('Y-m-d H:i:s')  }} </td>
+                            {% if  element.agence is not null %}
+                                <td>  {{ element.agence  | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
                                 <td> </td>
                             {% endif %}
-                            {% if {{ element.comment }}  is not null %}
+                            {% if  element.comment is not null %}
                                 <td> {{ element.comment }} </td>
                             {% else %}
                                 <td> </td>
                             {% endif %}
-                            {% if  {{ element.raison.title }} is not null %}
+                            {% if   element.raison.title is not null %}
                                 <td>  {{ element.raison.title }} </td>
                             {% else %}
                                 <td> </td>
                             {% endif %}
 
-                            {% if {{ {{ element.statut }}  }}  %}
+                            {% if  element.statut   %}
                                 <td> <i class="icon-dislike emodisLike"></i></td>
                             {% else %}
                                 <td> <i class="icon-like emoLike"></i> </td>
