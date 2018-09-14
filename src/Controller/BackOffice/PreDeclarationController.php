@@ -81,9 +81,10 @@ class PreDeclarationController extends Controller
     public function displayDetails(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-        $sinistres = $this->em->getRepository('App:Item')->findBy(['id'=>$preDeclaration->getTypeSinistre(),'title' => 'sinistre']);
-
-
+        $sinistres = $this->em->getRepository('App:Item')->find($preDeclaration->getTypeSinistre());
+        var_dump($preDeclaration->getTypeSinistre());
+        die();
+        //item_list_id
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
