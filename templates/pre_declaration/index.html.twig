@@ -45,9 +45,13 @@
                             <tr  class="details" data-id="{{ preDeclaration.id }}">
 
                                 <td>{{ preDeclaration.contrat.police }}</td>
-
+                                {% if preDeclaration.client is not null %}
                                 <td>{{ preDeclaration.client.familyName }} {{ preDeclaration.client.firstName }}</td>
                                 <td>{{ preDeclaration.client.phone }}</td>
+                                {% else %}
+                                    <td></td>
+                                    <td></td>
+                                {% endif %}
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
                                 {% if preDeclaration.status == 0 %}
                                     <td style="background: #ffa01f;">En cours</td>
