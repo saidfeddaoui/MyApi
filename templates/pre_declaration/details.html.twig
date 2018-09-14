@@ -28,6 +28,7 @@
                         {% endif %}
 
                     </h4>
+
                     <div class="row">
                         <div class="col-md-6">
                             <p><span class="detail_label">Police : </span><span class="detail_info"><input type="text" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}"></span>
@@ -40,8 +41,13 @@
                         </div>
                         <div class="col-md-6">
                             <p><span class="detail_label">Nombre de blessées :</span> <span class="detail_info"><input type="text" name="prenbi" value="{{ preDeclaration.nbInjured }}"></span></p>
-                            <p><span class="detail_label">Type de sinistre : </span><span class="detail_info"><input type="text" name="presinistretype" value="{{ preDeclaration.typeSinistre.title }}"></span></p>
-                            <p><span class="detail_label">Date de sinistre : </span><span class="detail_info"><input type="text" name="predatesinistre" disabled value="{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}"></span></p>
+                            <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">
+                                    <select class="select2" name="presinistretype">
+                                      <option value="{{ preDeclaration.typeSinistre.title }}">{{ preDeclaration.typeSinistre.title }}</option>
+                                    </select>
+                                </span></p>
+                            <p><span class="detail_label">Date de sinistre : </span>
+                                <span class="detail_info"><input type="text" name="predatesinistre" disabled value="{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}"></span></p>
                             <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info"><input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span></p>
                         </div>
                     </div>
