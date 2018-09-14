@@ -43,7 +43,7 @@
                             <p><span class="detail_label">Nombre de blessées :</span> <span class="detail_info"><input type="text" name="prenbi" value="{{ preDeclaration.nbInjured }}"></span></p>
                             <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">
                                     <select class="select2" name="presinistretype">
-                                    {% for sinistres in sinistre %}
+                                    {% for sinistre in sinistres %}
                                         {% if sinistre.id == preDeclaration.typeSinistre.id %}
                                       <option selected value="{{sinistre.id }}">{{sinistre.title }}</option>
                                         {% else %}
