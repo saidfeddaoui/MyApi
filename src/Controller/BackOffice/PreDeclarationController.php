@@ -90,7 +90,7 @@ class PreDeclarationController extends Controller
             'portlet_title' => "Pré-déclaration de {$preDeclaration->getContrat()->getClient()->getFirstName()}",
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
-            'sinistre' => $sinistres,
+            'sinistres' => $sinistres,
         ]);
     }
     /**
