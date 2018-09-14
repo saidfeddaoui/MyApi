@@ -245,8 +245,7 @@ class PreDeclarationController extends BaseController
         $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
         $tiersAttachments = [];
 
-        var_dump(count($request->files));
-        die();
+
         foreach ($request->files as $type) {
              //en recois le nom de image xxx-12.png (exp)
             //on prend juste la premier partie avant - pour la mettre comme type(categorie)
