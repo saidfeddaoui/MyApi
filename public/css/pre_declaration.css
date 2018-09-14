@@ -123,7 +123,30 @@ span.detail_info input[disabled] {
 }
 
 
+.fancybox-type-iframe .fancybox-nav {
+    width: 60px;
+}
+
+.fancybox-type-iframe .fancybox-nav span {
+    visibility: visible;
+    opacity: 0.5;
+}
+
+.fancybox-type-iframe .fancybox-nav:hover span {
+    opacity: 1;
+}
+
+.fancybox-type-iframe .fancybox-next {
+    right: -60px;
+}
+
+.fancybox-type-iframe .fancybox-prev {
+    left: -60px;
+}
+
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
