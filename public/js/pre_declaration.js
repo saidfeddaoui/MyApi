@@ -1,5 +1,13 @@
 jQuery(document).ready(function() {
 
+    $("a.fancybox").fancybox({
+      'transitionIn': 'elastic',
+      'transitionOut': 'elastic',
+      'speedIn': 600,
+      'speedOut': 200,
+      'overlayShow': false
+    });
+
     var ImageCrop = {
         init: function(photoPaneId, previewPaneId) {
             // Create variables (in this scope) to hold the API and image size
@@ -194,14 +202,4 @@ jQuery(document).ready(function() {
             }
         });
     }
-
-
-    $("a.fancybox").fancybox({
-      'transitionIn': 'elastic',
-      'transitionOut': 'elastic',
-      'speedIn': 600,
-      'speedOut': 200,
-      'overlayShow': false
-    });
-
 });
