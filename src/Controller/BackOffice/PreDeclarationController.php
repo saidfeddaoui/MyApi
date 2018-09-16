@@ -83,9 +83,9 @@ class PreDeclarationController extends Controller
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
-        $sinistres = $this->em->getRepository('App:Item')->findAll(['itemList'=>$sinistre]);
+        $sinistres = $this->em->getRepository('App:Item')->findAll(['itemList'=>$sinistre->getId()]);
         
-        dump($sinistre);
+        dump($sinistres);
         die();
 
         return $this->render('pre_declaration/display_details.html.twig', [
