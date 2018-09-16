@@ -85,7 +85,7 @@ class PreDeclarationController extends Controller
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
         $sinistres = $this->em->getRepository('App:Item')->findAll(['itemList'=>$sinistre]);
         
-        var_dump($sinistres);
+        dump($sinistres);
         die();
 
         return $this->render('pre_declaration/display_details.html.twig', [
