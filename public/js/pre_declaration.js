@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 
-    $("a..fancybox").fancybox({
+    $("a.fancybox").fancybox({
       'transitionIn': 'elastic',
       'transitionOut': 'elastic',
       'speedIn': 600,
