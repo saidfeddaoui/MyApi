@@ -1,4 +1,16 @@
 jQuery(document).ready(function() {
+
+    $(".fancybox")
+    .attr('rel', 'gallery')
+    .fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+        nextEffect  : 'none',
+        prevEffect  : 'none',
+        padding     : 0,
+        margin      : [20, 60, 20, 60] // Increase left/right margin
+    });
+    
     var ImageCrop = {
         init: function(photoPaneId, previewPaneId) {
             // Create variables (in this scope) to hold the API and image size
