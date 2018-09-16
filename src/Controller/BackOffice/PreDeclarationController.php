@@ -83,7 +83,7 @@ class PreDeclarationController extends Controller
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
         $sinistres = $this->em->getRepository('App:Item')->findAll($preDeclaration->getTypeSinistre()->getItemList()->getId());
-        $sinistre = $em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
+        $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
 
         var_dump($sinistre);
         die();
