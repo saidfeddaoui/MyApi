@@ -85,7 +85,7 @@ class PreDeclarationController extends Controller
         $sinistres = $this->em->getRepository('App:Item')->findAll($preDeclaration->getTypeSinistre()->getItemList()->getId());
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
 
-        var_dump($sinistre);
+        dump($sinistre);
         die();
 
 
