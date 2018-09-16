@@ -190,3 +190,7 @@ textarea.form-control {
     text-align: center;
     color: red;
 }
+
+.fancybox-overlay-fixed {
+    z-index: 99999!important;
+}
