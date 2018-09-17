@@ -339,7 +339,7 @@ class PreDeclarationController extends Controller
         $this->em->flush();
         return  new JsonResponse([
             'id' => $preDeclaration->getId(),
-            'message' => 'Ville modifiée avec succès',
+            'message' => 'pre_declarations modifiée avec succès',
         ]);
 
 
