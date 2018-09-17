@@ -322,8 +322,17 @@ class PreDeclarationController extends Controller
      */
     public function update(PreDeclaration $preDeclaration,Request $request)
     {
+
+
+
         $sinistretype = $request->request->get('sinistretype');
         $sinistre = $this->em->getRepository('App:Item')->find($sinistretype);
+
+        return  new JsonResponse([
+            'id' => $preDeclaration->getId(),
+            'message' =>  $sinistretype,
+        ]);
+
 
         $adress = $request->request->get("adress");
         $nbv = $request->request->get('nbv');
