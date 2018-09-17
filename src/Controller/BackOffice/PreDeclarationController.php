@@ -324,23 +324,10 @@ class PreDeclarationController extends Controller
     {
         $sinistretype = $request->request->get('sinistretype');
         $sinistre = $this->em->getRepository('App:Item')->find($sinistretype);
-        return  new JsonResponse([
-            'id' => $preDeclaration->getId(),
-            'message' =>  $sinistre->getId()
-        ]);
-
-
-
-
-
-
-
         $adress = $request->request->get("adress");
         $nbv = $request->request->get('nbv');
         $nbi = $request->request->get('nbi');
         $description = $request->request->get('description');
-
-
          if ($sinistre){
              $preDeclaration->setTypeSinistre($sinistre);
          }
