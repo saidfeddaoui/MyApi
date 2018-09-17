@@ -16,7 +16,7 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
-                <div class="general_details">
+                <div class="general_details" data-id="{{preDeclaration.id}}">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                         {% if preDeclaration.client is not null %}
                         {{ preDeclaration.contrat.client.firstName }} {{ preDeclaration.contrat.client.familyName }}
@@ -37,22 +37,35 @@
                         <div class="col-md-6">
                             <p><span class="detail_label">Police : </span><span class="detail_info">
                                     {% if preDeclaration.client is not null %}
-                                    <input type="text" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}">
+                                    <input type="text" class="police" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}">
                                     {% else %}
-                                      <input type="text" name="prepolice" disabled value="">
+                                      <input type="text" class="police" name="prepolice" disabled value="">
                                     {% endif %}
                                 </span>
-                            <p><span class="detail_label">Téléphone: </span> <span class="detail_info"><input type="text" name="prephone" disabled value="{{ preDeclaration.contrat.client.phone  }}"></span></p>
-                            <p><span class="detail_label"> adresse: </span> <span class="detail_info"><input type="text" name="preadress" value="{{ preDeclaration.circumstance.adress }}"></span> </p>
-                            <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info"><input type="text" name="prnbv" value="{{ preDeclaration.nbVehicule }}"></span></p>
+                            <p><span class="detail_label">Téléphone: </span>
+                                <span class="detail_info">
+                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.contrat.client.phone  }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label"> adresse: </span>
+                                <span class="detail_info">
+                                    <input type="text" class="adress" name="preadress" value="{{ preDeclaration.circumstance.adress }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label">Nombre de véhicules : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="nbv" name="prnbv" value="{{ preDeclaration.nbVehicule }}">
+                                </span>
+                            </p>
                             {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
-                              <p><span class="detail_label">Raison de rejet : </span><span class="detail_info"><input type="text" name="predescription" value="{{ preDeclaration.description }}"> </span></p>
+                              <p><span class="detail_label">Raison de rejet : </span><span class="detail_info">
+                                      <input type="text" class="description" name="predescription" value="{{ preDeclaration.description }}"> </span></p>
                             {% endif %}
                         </div>
                         <div class="col-md-6">
                             <p><span class="detail_label">Nombre de blessées :</span> <span class="detail_info"><input type="text" name="prenbi" value="{{ preDeclaration.nbInjured }}"></span></p>
                             <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">
-                                    <select class="select2" name="presinistretype">
+                                    <select class="select2 sinistretype" name="presinistretype">
                                     {% for sinistre in sinistres %}
                                         {% if sinistre.id == preDeclaration.typeSinistre.id %}
                                       <option selected value="{{sinistre.id }}">{{sinistre.title }}</option>
@@ -110,7 +123,10 @@
                             {% if photo.type =="photo_sinistre" %}
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
                                         <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                             <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
                                         </a>
                                     </div>
                             {% endif %}
@@ -128,7 +144,10 @@
 
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
                                         <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                            <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
 
                                         </a>
 
@@ -147,7 +166,10 @@
                                     {% if photo.type =="attestation_assurance_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
                                            <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
+                                            <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
 
                                            </a>
                                         </div>
@@ -164,7 +186,10 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="permis_conduire_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance"/>
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
+                                            <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -208,6 +233,7 @@
     <div class="col-md-12">
         <div class="pull-right action_footer" >
             <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark">Retour</a>
+            <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark  btn-warning update">Modifier</a>
         {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
             <button type="button" class="btn red reject" data-id= "{{ preDeclaration.id }}" >Rejeter</button>
             <button type="button" class="btn green accept" data-id= "{{ preDeclaration.id }}" >Accepter</button>

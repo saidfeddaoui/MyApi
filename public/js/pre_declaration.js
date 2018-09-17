@@ -195,6 +195,31 @@ jQuery(document).ready(function() {
         });
     }
 
+
+
+    $('body').on('click', '.update', function () {
+        var $this = $(".general_details");
+        var id = $this.data("id");
+        var police = $this.find(".police").val();
+        var phone = $this.find(".phone").val();
+        var adress = $this.find(".adress").val();
+        var nbv = $this.find(".nbv").val();
+        var description = $this.find(".description").val();
+        var sinistretype = $this.find(".sinistretype").val();
+
+        var DATA = {
+            "police":police,
+            "phone":phone,
+            "adress":adress,
+            "nbv":nbv,
+            "description":description,
+            "sinistretype":sinistretype
+          };
+
+        console.log(DATA);
+
+    });
+
      $("a.fancybox").fancybox({
       'transitionIn': 'elastic',
       'transitionOut': 'elastic',
