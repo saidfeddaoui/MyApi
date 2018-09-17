@@ -249,7 +249,7 @@ jQuery(document).ready(function() {
         $('body .loadWrapper').show();
         $.ajax({
             url: Routing.generate(route, {id: id}),
-            data: {data: data},
+            data: data,
             type: 'POST',
             error: function (request, status, error) {
                 console.log(request.responseText);
