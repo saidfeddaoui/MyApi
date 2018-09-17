@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
                     $('body .loadWrapper').hide();
                     swal.close();
                     console.log(response);
-                    die();
+                    return true;
                     setTimeout(function(){
                         swal({
                             title: "",
