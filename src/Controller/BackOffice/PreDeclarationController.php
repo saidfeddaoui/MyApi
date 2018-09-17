@@ -322,11 +322,10 @@ class PreDeclarationController extends Controller
      */
     public function update(PreDeclaration $preDeclaration,Request $request)
     {
-        var_dump($request->request->get('sinistretype'));
-        die();
+        $sinistretype = $request->request->get('sinistretype');
         return  new JsonResponse([
             'id' => $preDeclaration->getId(),
-            'message' => $sinistretype->getId()
+            'message' => $sinistretype
         ]);
 
 
