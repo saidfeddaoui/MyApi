@@ -325,7 +325,7 @@ class PreDeclarationController extends Controller
         $sinistretype = $request->request->get('sinistretype');
         return  new JsonResponse([
             'id' => $preDeclaration->getId(),
-            'message' => $sinistretype
+            'message' => $preDeclaration->getId()
         ]);
 
 
