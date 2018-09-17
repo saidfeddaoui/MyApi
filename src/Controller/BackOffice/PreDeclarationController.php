@@ -322,7 +322,8 @@ class PreDeclarationController extends Controller
      */
     public function update(PreDeclaration $preDeclaration,Request $request)
     {
-        $sinistretype = $request->request->get('sinistretype');
+        var_dump($request->request->get('sinistretype'));
+        die();
         return  new JsonResponse([
             'id' => $preDeclaration->getId(),
             'message' => $sinistretype->getId()
