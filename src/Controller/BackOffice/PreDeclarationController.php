@@ -323,15 +323,15 @@ class PreDeclarationController extends Controller
     public function update(PreDeclaration $preDeclaration,Request $request)
     {
 
-
+        return  new JsonResponse([
+            'id' => $preDeclaration->getId(),
+            'message' =>  "tatatatta",
+        ]);
 
         $sinistretype = $request->request->get('sinistretype');
         $sinistre = $this->em->getRepository('App:Item')->find($sinistretype);
 
-        return  new JsonResponse([
-            'id' => $preDeclaration->getId(),
-            'message' =>  $sinistretype,
-        ]);
+
 
 
         $adress = $request->request->get("adress");
