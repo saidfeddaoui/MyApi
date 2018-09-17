@@ -233,7 +233,7 @@
     <div class="col-md-12">
         <div class="pull-right action_footer" >
             <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark">Retour</a>
-            <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark  btn-warning update">Modifier</a>
+            <a href="{{ path('pre_declarations_in_progress') }}" class="btn btn-warning update">Modifier</a>
         {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
             <button type="button" class="btn red reject" data-id= "{{ preDeclaration.id }}" >Rejeter</button>
             <button type="button" class="btn green accept" data-id= "{{ preDeclaration.id }}" >Accepter</button>

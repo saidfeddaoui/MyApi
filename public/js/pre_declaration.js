@@ -197,7 +197,8 @@ jQuery(document).ready(function() {
 
 
 
-    $('body').on('click', '.update', function () {
+    $('body').on('click', '.update', function (e) {
+        e.preventDefault();
         var $this = $(".general_details");
         var id = $this.data("id");
         var police = $this.find(".police").val();
