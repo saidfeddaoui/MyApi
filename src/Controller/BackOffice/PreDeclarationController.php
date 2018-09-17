@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -306,6 +307,43 @@ class PreDeclarationController extends Controller
             return $this->json(['message' => $resp->message]);
         }
 
+
+
+    }
+
+
+
+    /**
+     * @Route(path="/update/{id}", name="update", requirements={"id":"\d+"}, options={"expose"=true})
+     *
+     * @param  PreDeclaration $preDeclaration
+     * @param  Request $request
+     * @return JsonResponse
+     */
+    public function update(PreDeclaration $preDeclaration,Request $request)
+    {
+        $sinistretype = $request->request->get('sinistretype');
+        $sinistre = $this->em->getRepository('App:Item')->find($sinistretype);
+
+        $adress = $request->request->get("adress");
+        $nbv = $request->request->get('nbv');
+        $nbi = $request->request->get('nbi');
+        $description = $request->request->get('description');
+
+
+         if ($sinistre){
+             $preDeclaration->setTypeSinistre($sinistre);
+         }
+        $preDeclaration->getCircumstance()->setAdress($adress);
+        $preDeclaration->setNbVehicule($nbv);
+        $preDeclaration->setNbInjured($nbi);
+        $preDeclaration->setDescription($description);
+
+        $this->em->flush();
+        return  new JsonResponse([
+            'id' => $preDeclaration->getId(),
+            'message' => 'Ville modifiée avec succès',
+        ]);
 
 
     }

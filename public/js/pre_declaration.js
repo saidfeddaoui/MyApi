@@ -205,14 +205,17 @@ jQuery(document).ready(function() {
         var phone = $this.find(".phone").val();
         var adress = $this.find(".adress").val();
         var nbv = $this.find(".nbv").val();
+        var nbi = $this.find(".nbi").val();
         var description = $this.find(".description").val();
         var sinistretype = $this.find(".sinistretype").val();
+
 
         var DATA = {
             "police":police,
             "phone":phone,
             "adress":adress,
             "nbv":nbv,
+            "nbi":nbi,
             "description":description,
             "sinistretype":sinistretype
           };
@@ -230,6 +233,7 @@ jQuery(document).ready(function() {
         }, function (confirm) {
             if (confirm) {
                // deleteRowAction(id, td, 'pre_declarations_accept', '');
+                updateAction(id,'pre_declarations_update', DATA);
                 console.log(DATA);
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
@@ -237,6 +241,45 @@ jQuery(document).ready(function() {
         });
 
     });
+
+
+
+    function updateAction(id, route, data) {
+        swal.close();
+        $('body .loadWrapper').show();
+        $.ajax({
+            url: Routing.generate(route, {id: id}),
+            data: {data: data},
+            type: 'POST',
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                200: function (response) {
+                    $('body .loadWrapper').hide();
+                    swal.close();
+                    setTimeout(function(){
+                        swal({
+                            title: "",
+                            text: response.message,
+                            timer: 3000,
+                            showConfirmButton: false,
+                            customClass: 'custom-swal',
+                        });
+                    }, 500);
+                },
+                400: function (response) {
+                    swal.close();
+                    $('body .loadWrapper').hide();
+                    setTimeout(function() {
+                        toastr.error(response.responseJSON.message);
+                    }, 500);
+                }
+            }
+        });
+    }
 
      $("a.fancybox").fancybox({
       'transitionIn': 'elastic',
