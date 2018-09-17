@@ -217,7 +217,24 @@ jQuery(document).ready(function() {
             "sinistretype":sinistretype
           };
 
-        console.log(DATA);
+        swal({
+            title: 'Voulez-vous vraiement Modifier cette pré-déclaration ?',
+            text: '',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn-success',
+            confirmButtonText: 'Confirmer!',
+            cancelButtonText: 'Annuler',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (confirm) {
+            if (confirm) {
+               // deleteRowAction(id, td, 'pre_declarations_accept', '');
+                console.log(DATA);
+            } else {
+                swal('Action annulée', "Aucune action n'a été exécutée", 'error');
+            }
+        });
 
     });
 
