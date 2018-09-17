@@ -200,7 +200,7 @@ jQuery(document).ready(function() {
     $('body').on('click', '.update', function (e) {
         e.preventDefault();
         var $this = $(".general_details");
-        var id = $this.data("id");
+        var id = $this.data("id") * 1;
         var police = $this.find(".police").val();
         var phone = $this.find(".phone").val();
         var adress = $this.find(".adress").val();
