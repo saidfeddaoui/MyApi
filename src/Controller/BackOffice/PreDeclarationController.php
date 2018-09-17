@@ -314,7 +314,7 @@ class PreDeclarationController extends Controller
 
 
     /**
-     * @Route(path="/update/{id}", name="update", requirements={"id":"\d+"}, options={"expose"=true})
+     * @Route(path="/update/{id}", name="update", options={"expose"=true})
      *
      * @param  PreDeclaration $preDeclaration
      * @param  Request $request
@@ -322,13 +322,13 @@ class PreDeclarationController extends Controller
      */
     public function update(PreDeclaration $preDeclaration,Request $request)
     {
-
+        $sinistretype = $request->request->get('sinistretype');
         return  new JsonResponse([
             'id' => $preDeclaration->getId(),
-            'message' =>  "tatatatta",
+            'message' =>  "tatatatta "+$sinistretype,
         ]);
 
-        $sinistretype = $request->request->get('sinistretype');
+
         $sinistre = $this->em->getRepository('App:Item')->find($sinistretype);
 
 
