@@ -260,8 +260,6 @@ jQuery(document).ready(function() {
                 200: function (response) {
                     $('body .loadWrapper').hide();
                     swal.close();
-                    console.log(response);
-                    return true;
                     setTimeout(function(){
                         swal({
                             title: "",
