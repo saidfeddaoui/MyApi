@@ -79,7 +79,16 @@ class DevisSatisfactionController extends BaseController
      */
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
+
         $auto =  strtoupper($devisAccepted->getAuto());
+        if ($auto=="DA"){
+           $da_id = $devisAccepted->getDevisAuto()->getId();
+            $devisAccepted->setDevisAuto($da_id);
+        }else{
+           $da_id = $devisAccepted->getDevisHabitation()->getId();
+            $devisAccepted->setDevisHabitation($da_id);
+        }
+
         $devisAccepted->setAuto($auto);
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
