@@ -82,10 +82,10 @@ class DevisSatisfactionController extends BaseController
 
         $auto =  strtoupper($devisAccepted->getAuto());
         if ($auto=="DA"){
-           $da_id = $devisAccepted->getDevisAuto()->getId();
+           $da_id = $devisAccepted->getDevisAuto();
             $devisAccepted->setDevisAuto($da_id);
         }else{
-           $da_id = $devisAccepted->getDevisHabitation()->getId();
+           $da_id = $devisAccepted->getDevisHabitation();
             $devisAccepted->setDevisHabitation($da_id);
         }
 
