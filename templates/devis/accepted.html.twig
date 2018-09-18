@@ -30,6 +30,7 @@
                             <th> Date de creation </th>
                             <th> Date d'échéance </th>
                             <th> Agence </th>
+                            <th> Phone </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
                             <th> Statut </th>
@@ -50,6 +51,14 @@
                             {% endif %}
                             {% if  element.agence is not null %}
                                 <td>  {{ element.agence }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.auto=="DA" %}
+                                <td>  {{ element.devisAuto.tel }} </td>
+                            {% elseif element.auto=="DH" %}
+                                <td>  {{ element.devisHabitation.tel }} </td>
                             {% else %}
                                 <td>Pas disponible </td>
                             {% endif %}
