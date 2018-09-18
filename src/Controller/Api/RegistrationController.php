@@ -155,6 +155,102 @@ class RegistrationController extends BaseController
      * @return ApiResponse
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
      */
+    public function phoneReset(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
+    {
+
+        if ($client instanceof Client){
+            var_dump("hi");
+        }
+        $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
+        $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
+        $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
+        $client
+            ->setEnabled(false)
+            ->setVerificationCode($this->codeGenerator->generate())
+            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+            ->addInsuranceType($insuranceType)
+            ->addRole($role)
+            ->setGroup($group)
+        ;
+        $this->em->persist($client);
+        $this->em->flush();
+        $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
+        return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
+    }
+
+
+    /**
+     * @SWG\Post(
+     *     tags={"Reset password"},
+     *     description="Client phone number registration",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Client",
+     *         in="body",
+     *         description="Client object",
+     *         required=true,
+     *         @Model(type="App\Entity\Client", groups={"phone_registration"})
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns a registration token",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=201,
+     *                 "status"="Created",
+     *                 "data"={
+     *                     "registration_token"="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1MzEyMjUyNjksImV4..."
+     *                 }
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Insurance Type Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Requested Insurance Name Does Not exist"
+     *             },
+     *             "Token Encoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             }
+     *         }
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/phone", name="phone")
+     * @ParamConverter(name="client", converter="fos_rest.request_body", options={"validator"={ "groups"={"phone_registration"} }})
+     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Rest\View()
+     *
+     * @ThrowViolations()
+     *
+     * @param Client $client
+     * @param InsuranceType $insuranceType
+     * @param ConstraintViolationListInterface $violations
+     *
+     * @return ApiResponse
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
+     */
     public function phoneRegistration(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
