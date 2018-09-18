@@ -158,11 +158,14 @@ class RegistrationController extends BaseController
     public function phoneRegistration(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
     {
 
+        $exClient = $this->em->getRepository("App:Client")->findOneByPhone($client->getPhone());
 
-        if ($client instanceof Client){
-            var_dump("hi");
-            die();
+        if ($exClient){
+            var_dump("yes plz");
+        }else{
+            var_dump("noo plz");
         }
+
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
