@@ -75,6 +75,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $auto;
 
