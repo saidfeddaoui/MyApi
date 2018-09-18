@@ -73,6 +73,7 @@ class DevisSatisfaction
 
 
     /**
+     * @var boolean
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      *
