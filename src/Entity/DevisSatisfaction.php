@@ -72,12 +72,16 @@ class DevisSatisfaction
     private $dateCreation;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      * @ORM\OneToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $devisAuto;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      * @ORM\OneToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
