@@ -445,7 +445,7 @@ class RegistrationController extends BaseController
         if ($exClient){
             $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
 
-            $exClient->setVerificationCode($this->codeGenerator->generate());
+            $exClient->setVerificationCode((string)$this->codeGenerator->generate());
             $this->em->flush();
 
             $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
