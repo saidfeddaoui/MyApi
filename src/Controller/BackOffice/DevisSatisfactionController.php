@@ -31,11 +31,11 @@ class DevisSatisfactionController extends Controller
     public function accepted(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $devis = $em->getRepository("App:DevisSatisfaction")->findAll();
+       // $devis = $em->getRepository("App:DevisSatisfaction")->findAll();
         return $this->render('devis/accepted.html.twig', [
             'page_title' => 'Liste des devis',
             'page_subtitle' => '',
-            'data'=>$devis
+            'data'=>[]
         ]);
 
     }
