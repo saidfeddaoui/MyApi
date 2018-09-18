@@ -189,11 +189,6 @@ class DevisAuto
      */
     private $vg;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\DevisSatisfaction", inversedBy="DevisAuto", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-     private $satisfaction;
 
     public function getId()
     {
@@ -388,16 +383,4 @@ class DevisAuto
         return $this->getPack()->getCode();
     }
 
-
-    public function getSatisfaction(): ?DevisSatisfaction
-    {
-        return $this->satisfaction;
-    }
-
-    public function setSatisfaction(?DevisSatisfaction $satisfaction): self
-    {
-        $this->satisfaction = $satisfaction;
-
-        return $this;
-    }
 }
