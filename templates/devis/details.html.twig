@@ -27,11 +27,6 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th> Nom </th>
-                            <th> Prénom </th>
-                            <th> Tél </th>
-                            <th> email </th>
-                            <th> civilite </th>
                             <th> Marque </th>
                             <th> Pack </th>
                             <th> puissance </th>
@@ -44,29 +39,24 @@
                         </thead>
                         <tbody>
                         {% for element in data %}
-                        <tr data-id="{{ element.id }}">
-                            <td> {{ element.nom }} </td>
-                            <td> {{ element.prenom }} </td>
-                            <td> {{ element.tel }} </td>
-                            <td> {{ element.email }} </td>
-                            <td> {{ element.civilite }} </td>
-                            {% if element.marque is not null %}
-                            <td> {{ element.marque.nom }} </td>
-                            {% else %}
-                            <td> </td>
-                            {% endif %}
-                            {% if element.pack is not null %}
-                            <td> {{ element.pack.code }} </td>
-                            {% else %}
-                                <td> </td>
-                            {% endif %}
-                            <td> {{ element.puissance }} </td>
-                            <td> {{ element.combustion }} </td>
-                            <td> {{ element.vn }} </td>
-                            <td> {{ element.vv }} </td>
-                            <td> {{ element.vg }} </td>
-                            <td> {{ element.dateMec | date('Y-m-d H:i:s') }} </td>
-                        </tr>
+                            <tr data-id="{{ element.id }}">
+                                {% if element.marque is not null %}
+                                    <td> {{ element.marque.nom }} </td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}
+                                {% if element.pack is not null %}
+                                    <td> {{ element.pack.code }} </td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}
+                                <td> {{ element.puissance }} </td>
+                                <td> {{ element.combustion }} </td>
+                                <td> {{ element.vn }} </td>
+                                <td> {{ element.vv }} </td>
+                                <td> {{ element.vg }} </td>
+                                <td> {{ element.dateMec | date('Y-m-d H:i:s') }} </td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>

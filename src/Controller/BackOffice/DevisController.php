@@ -42,4 +42,29 @@ class DevisController extends Controller
         ]);
 
     }
+
+
+    /**
+     * @Route("/auto/details", name="auto_details",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Auto")
+     *
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function details(Request $request, SessionInterface $session)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
+        $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
+        $devis = $em->getRepository('App:DevisAuto')->findBySocietaire($societaire);
+
+        return $this->render('devis/details.html.twig', [
+            'page_title' => 'Liste des devis Auto',
+            'page_subtitle' => '',
+            'data'=>$devis
+        ]);
+
+    }
 }
