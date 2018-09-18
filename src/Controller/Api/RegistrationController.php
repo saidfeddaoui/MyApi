@@ -256,13 +256,16 @@ class RegistrationController extends BaseController
 
         if ($exClient){
             $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
+
+            $client->setVerificationCode($this->codeGenerator->generate());
+            $this->em->flush();
+
             $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
             return $this->respondWith(['registration_token' => $token], ApiResponse::OK);
 
         }else{
             return $this->respondWith(["Message" => "Ce numéro n'existe pas "], ApiResponse::NOT_FOUND);
         }
-
 
     }
 
