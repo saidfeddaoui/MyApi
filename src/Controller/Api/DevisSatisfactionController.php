@@ -96,6 +96,9 @@ class DevisSatisfactionController extends BaseController
 
         $devisAccepted->setAuto($auto);
         $devisAccepted->setStatut(true);
+
+        var_dump( $devisAccepted);
+        die();
         $this->em->persist($devisAccepted);
         $this->em->flush();
         return $this->respondWith();
