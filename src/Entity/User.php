@@ -91,9 +91,10 @@ class User implements UserInterface, EquatableInterface
      * @var string
      * @Serializer\Type("string")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_account_creation"})
+     * @Serializer\Groups(groups={"client_account_creation","update_password"})
      *
      * @Assert\NotBlank(groups={"client_account_creation"})
+     *
      */
     protected $plainPassword;
     /**

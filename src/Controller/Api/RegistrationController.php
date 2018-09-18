@@ -177,97 +177,7 @@ class RegistrationController extends BaseController
 
 
 
-    /**
-     * @SWG\Post(
-     *     tags={"Reset"},
-     *     description="Client phone number reset",
-     *     @SWG\Parameter(
-     *         name="X-ENTITY",
-     *         in="header",
-     *         type="string",
-     *         default="MAMDA",
-     *         description="Specify the user's Entity",
-     *     ),
-     *     @SWG\Parameter(
-     *         name="Client",
-     *         in="body",
-     *         description="Client object",
-     *         required=true,
-     *         @Model(type="App\Entity\Client", groups={"phone_registration"})
-     *     ),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="Returns a registration token",
-     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
-     *         examples={
-     *             "Success response":
-     *             {
-     *                 "code"=201,
-     *                 "status"="Created",
-     *                 "data"={
-     *                     "registration_token"="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1MzEyMjUyNjksImV4..."
-     *                 }
-     *             }
-     *         }
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="Failure response",
-     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
-     *         examples={
-     *             "Validation Error (Http Code: 406)":
-     *             {
-     *                 "code"=406,
-     *                 "status"="Constraint Violation Error"
-     *             },
-     *             "Insurance Type Error (Http Code: 404)":
-     *             {
-     *                 "code"=404,
-     *                 "status"="Requested Insurance Name Does Not exist"
-     *             },
-     *             "Token Encoding Error (Http Code: 401)":
-     *             {
-     *                 "code"=730,
-     *                 "status"="Invalid Token"
-     *             }
-     *         }
-     *     )
-     * )
-     *
-     * @Rest\Post(path="/reset", name="reset")
-     * @ParamConverter(name="client", converter="fos_rest.request_body", options={"validator"={ "groups"={"phone_registration"} }})
-     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
-     *
-     * @Rest\View()
-     *
-     * @ThrowViolations()
-     *
-     * @param Client $client
-     * @param InsuranceType $insuranceType
-     * @param ConstraintViolationListInterface $violations
-     *
-     * @return ApiResponse
-     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
-     */
-    public function phoneReset(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
-    {
 
-        $exClient = $this->em->getRepository("App:Client")->findOneByPhone($client->getPhone());
-
-        if ($exClient){
-            $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
-
-            $client->setVerificationCode($this->codeGenerator->generate());
-            $this->em->flush();
-
-            $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
-            return $this->respondWith(['registration_token' => $token], ApiResponse::OK);
-
-        }else{
-            return $this->respondWith(["Message" => "Ce numéro n'existe pas "], ApiResponse::NOT_FOUND);
-        }
-
-    }
 
     /**
      * @SWG\Post(
@@ -451,5 +361,267 @@ class RegistrationController extends BaseController
         $this->em->flush();
         return $this->respondWith(null, ApiResponse::UPDATED);
     }
+
+
+
+
+    /**
+     * @SWG\Post(
+     *     tags={"Reset"},
+     *     description="Client phone number reset",
+     *     @SWG\Parameter(
+     *         name="X-ENTITY",
+     *         in="header",
+     *         type="string",
+     *         default="MAMDA",
+     *         description="Specify the user's Entity",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Client",
+     *         in="body",
+     *         description="Client object",
+     *         required=true,
+     *         @Model(type="App\Entity\Client", groups={"phone_registration"})
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns a registration token",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=201,
+     *                 "status"="Created",
+     *                 "data"={
+     *                     "registration_token"="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1MzEyMjUyNjksImV4..."
+     *                 }
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Insurance Type Error (Http Code: 404)":
+     *             {
+     *                 "code"=404,
+     *                 "status"="Requested Insurance Name Does Not exist"
+     *             },
+     *             "Token Encoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             }
+     *         }
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/reset", name="reset")
+     * @ParamConverter(name="client", converter="fos_rest.request_body", options={"validator"={ "groups"={"phone_registration"} }})
+     * @ParamConverter(name="insuranceType", options={"converter":"App\ParamConverter\InsuranceTypeParamConverter"})
+     *
+     * @Rest\View()
+     *
+     * @ThrowViolations()
+     *
+     * @param Client $client
+     * @param InsuranceType $insuranceType
+     * @param ConstraintViolationListInterface $violations
+     *
+     * @return ApiResponse
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
+     */
+    public function phoneReset(Client $client, InsuranceType $insuranceType, ConstraintViolationListInterface $violations)
+    {
+
+        $exClient = $this->em->getRepository("App:Client")->findOneByPhone($client->getPhone());
+
+        if ($exClient){
+            $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
+
+            $client->setVerificationCode($this->codeGenerator->generate());
+            $this->em->flush();
+
+            $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
+            return $this->respondWith(['registration_token' => $token], ApiResponse::OK);
+
+        }else{
+            return $this->respondWith(["Message" => "Ce numéro n'existe pas "], ApiResponse::NOT_FOUND);
+        }
+
+    }
+
+
+
+
+    /**
+     * @SWG\Post(
+     *     tags={"Reset"},
+     *     description="Client phone number registration",
+     *     consumes={"application/x-www-form-urlencoded"},
+     *     @SWG\Parameter(
+     *         name="X-REGISTRATION-TOKEN",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Registration Token",
+     *     ),
+     *     @SWG\Parameter(name="code", in="formData", type="string", required=true),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Returns a success response if the verification code is correct",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=200,
+     *                 "status"="Ok"
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Token Decoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             },
+     *             "Already verified Error (Http Code: 406)":
+     *             {
+     *                 "code"=612,
+     *                 "status"="Client is already verified"
+     *             },
+     *             "Verification code Error (Http Code: 400)":
+     *             {
+     *                 "code"=610,
+     *                 "status"="Verification code is not correct"
+     *             }
+     *         }
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/phone/reset/verification", name="phone_reset_verification")
+     * @Rest\RequestParam(name="code", requirements="\d{4}", description="The verification code sent by SMS")
+     * @ParamConverter(name="client", options={"converter":"App\ParamConverter\RegistrationTokenParamConverter"})
+     *
+     * @Rest\View()
+     *
+     * @param Client $client
+     * @param string $code
+     * @return ApiResponse
+     */
+    public function phoneResetVerification(Client $client, string $code)
+    {
+
+        if ($code !== (string)$client->getVerificationCode()) {
+            return $this->respondWith(null, ApiResponse::VERIFICATION_CODE_ERROR);
+        }
+        $client->setStatus(Client::STATUS_VERIFIED_WITH_SMS);
+        $this->em->persist($client);
+        $this->em->flush();
+        return $this->respondWith(null);
+    }
+
+
+    /**
+     * @SWG\Post(
+     *     tags={"Reset"},
+     *     description="Client new numéro de téléphone",
+     *     @SWG\Parameter(
+     *         name="X-REGISTRATION-TOKEN",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Registration Token",
+     *     ),
+     *     @SWG\Parameter(
+     *        name="Client",
+     *        in="body",
+     *        description="Client object",
+     *        required=true,
+     *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
+     *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="Returns a success response if the client account wad successfully completed",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Success response":
+     *             {
+     *                 "code"=202,
+     *                 "status"="Updated"
+     *             }
+     *         }
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Failure response",
+     *         @Model(type="App\DTO\Api\ApiResponse", groups={"all"}),
+     *         examples={
+     *             "Validation Error (Http Code: 406)":
+     *             {
+     *                 "code"=406,
+     *                 "status"="Constraint Violation Error"
+     *             },
+     *             "Token Decoding Error (Http Code: 401)":
+     *             {
+     *                 "code"=730,
+     *                 "status"="Invalid Token"
+     *             },
+     *             "Client Unverified Error (Http Code: 401)":
+     *             {
+     *                 "code"=611,
+     *                 "status"="Unauthorized action for an unverified client"
+     *             },
+     *             "Account already created Error (Http Code: 406)":
+     *             {
+     *                 "code"=613,
+     *                 "status"="Client has already created his account"
+     *             }
+     *         }
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/update/password", name="new_password")
+     * @ParamConverter(name="submittedClient", converter="fos_rest.request_body", options={"validator"={ "groups"={"update_password"} }})
+     * @ParamConverter(name="client", options={"converter":"App\ParamConverter\RegistrationTokenParamConverter"})
+     *
+     * @Rest\View(serializerGroups={"all", "include_id", "phone_registration", "update_password"})
+     *
+     * @ThrowViolations()
+     *
+     * @param Client $client
+     * @param Client $submittedClient
+     * @param ConstraintViolationListInterface $violations
+     *
+     * @return ApiResponse
+     */
+    public function newPassword(Client $client, Client $submittedClient, ConstraintViolationListInterface $violations)
+    {
+
+        $client
+            ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))
+            ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
+            ->setEnabled(true)
+        ;
+        $this->em->persist($client);
+        $this->em->flush();
+        return $this->respondWith(null, ApiResponse::UPDATED);
+    }
+
 
 }
