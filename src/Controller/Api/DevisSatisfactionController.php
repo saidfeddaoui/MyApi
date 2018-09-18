@@ -82,13 +82,15 @@ class DevisSatisfactionController extends BaseController
 
         $auto =  strtoupper($devisAccepted->getAuto());
         if ($auto=="DA"){
-           $da_id = $devisAccepted->getDevisAuto();
-            $devisAccepted->setDevisAuto($da_id);
+            $da_id = $devisAccepted->getDevisAuto()->getId();
+            $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
+            $devisAccepted->setDevisAuto($devis);
         }else{
-           $da_id = $devisAccepted->getDevisHabitation();
-            $devisAccepted->setDevisHabitation($da_id);
+            $da_id = $devisAccepted->getDevisHabitation()->getId();
+            $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
+            $devisAccepted->setDevisHabitation($devis);
         }
-
+        
         $devisAccepted->setAuto($auto);
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
