@@ -91,7 +91,7 @@ class DevisSatisfactionController extends BaseController
             $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
             $devisAccepted->setDevisHabitation($devis);
         }
-        
+
         $devisAccepted->setAuto($auto);
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
