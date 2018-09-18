@@ -82,7 +82,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $devis;
 
@@ -165,12 +165,12 @@ class DevisSatisfaction
         return $this;
     }
 
-    public function getDevis(): ?string
+    public function getDevis(): ?int
     {
         return $this->devis;
     }
 
-    public function setDevis(string $devis): self
+    public function setDevis(int $devis): self
     {
         $this->devis = $devis;
 
