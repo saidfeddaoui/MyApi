@@ -72,6 +72,10 @@ class DevisSatisfaction
     private $dateCreation;
 
 
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     */
     private $auto;
 
 
