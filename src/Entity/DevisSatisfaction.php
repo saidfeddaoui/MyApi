@@ -87,6 +87,7 @@ class DevisSatisfaction
      */
     private $devisHabitation;
 
+
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
