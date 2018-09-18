@@ -79,6 +79,9 @@ class DevisSatisfactionController extends BaseController
      */
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
+
+        dump($devisAccepted);
+        die();
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
         $this->em->flush();
