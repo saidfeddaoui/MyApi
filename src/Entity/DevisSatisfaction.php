@@ -175,24 +175,24 @@ class DevisSatisfaction
         return $this;
     }
 
-    public function getDevisAuto(): ?DevisAuto
+    public function getDevisAuto()
     {
         return $this->devisAuto;
     }
 
-    public function setDevisAuto(?DevisAuto $devisAuto): self
+    public function setDevisAuto($devisAuto)
     {
         $this->devisAuto = $devisAuto;
 
         return $this;
     }
 
-    public function getDevisHabitation(): ?DevisHabitation
+    public function getDevisHabitation()
     {
         return $this->devisHabitation;
     }
 
-    public function setDevisHabitation(?DevisHabitation $devisHabitation): self
+    public function setDevisHabitation($devisHabitation)
     {
         $this->devisHabitation = $devisHabitation;
 
