@@ -600,7 +600,7 @@ class RegistrationController extends BaseController
      * @ParamConverter(name="submittedClient", converter="fos_rest.request_body", options={"validator"={ "groups"={"update_password"} }})
      * @ParamConverter(name="client", options={"converter":"App\ParamConverter\RegistrationTokenParamConverter"})
      *
-     * @Rest\View(serializerGroups={"all", "include_id", "phone_registration", "update_password"})
+     * @Rest\View(serializerGroups={"all","update_password"})
      *
      * @ThrowViolations()
      *
