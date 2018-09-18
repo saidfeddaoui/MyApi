@@ -146,6 +146,19 @@ class DevisSatisfaction
         return $this;
     }
 
+
+    public function getAuto(): ?bool
+    {
+        return $this->auto;
+    }
+
+    public function setAuto(bool $auto): self
+    {
+        $this->auto = $auto;
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */
