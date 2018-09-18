@@ -449,7 +449,6 @@ class RegistrationController extends BaseController
                   ->setVerificationCode($this->codeGenerator->generate())
                   ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
                 ;
-            $this->em->persist($client);
             $this->em->flush();
 
             $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
