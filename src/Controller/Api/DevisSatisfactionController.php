@@ -82,6 +82,7 @@ class DevisSatisfactionController extends BaseController
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
         $this->em->flush();
+
         return $this->respondWith();
     }
 
