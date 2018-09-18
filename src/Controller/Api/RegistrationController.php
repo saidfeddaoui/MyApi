@@ -616,6 +616,13 @@ class RegistrationController extends BaseController
     public function newPassword(Client $client, Client $submittedClient, ConstraintViolationListInterface $violations)
     {
 
+        if ($client->isUnverified()) {
+            return $this->respondWith(null, ApiResponse::CLIENT_NOT_VERIFIED_ERROR);
+        }
+        if ($client->isUnconfirmed() || $client->isConfirmed()) {
+            return $this->respondWith(null, ApiResponse::CLIENT_ACCOUNT_ALREADY_CREATED_ERROR);
+        }
+
         $client
             ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))
             ->setStatus(Client::STATUS_UNCONFIRMED_ACCOUNT)
