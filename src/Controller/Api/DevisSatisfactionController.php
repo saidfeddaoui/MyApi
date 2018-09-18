@@ -82,24 +82,26 @@ class DevisSatisfactionController extends BaseController
 
         $auto =  strtoupper($devisAccepted->getAuto());
 
+        $devisSatisfaction = new DevisSatisfaction();
+        $devisSatisfaction->setEcheanceDate($devisAccepted->getEcheanceDate());
+        $devisSatisfaction->setAgence($devisAccepted->getAgence());
+        $devisSatisfaction->setComment($devisAccepted->getComment());
+        $devisSatisfaction->setAuto($auto);
+        $devisSatisfaction->setStatut(true);
+
         if ($auto == "DA"){
             $da_id = $devisAccepted->getDevisAuto()->getId();
             $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
-            $devisAccepted->setDevisAuto($devis);
-            $devisAccepted->setDevisHabitation(null);
+            $devisSatisfaction->setDevisAuto($devis);
+            $devisSatisfaction->setDevisHabitation(null);
         }else{
             $da_id = $devisAccepted->getDevisHabitation()->getId();
             $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
-            $devisAccepted->setDevisHabitation($devis);
-            $devisAccepted->setDevisAuto(null);
+            $devisSatisfaction->setDevisHabitation($devis);
+            $devisSatisfaction->setDevisAuto(null);
         }
 
-        $devisAccepted->setAuto($auto);
-        $devisAccepted->setStatut(true);
-
-        var_dump( $devisAccepted);
-        die();
-        $this->em->persist($devisAccepted);
+        $this->em->persist($devisSatisfaction);
         $this->em->flush();
         return $this->respondWith();
     }
