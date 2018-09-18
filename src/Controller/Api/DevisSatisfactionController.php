@@ -79,6 +79,8 @@ class DevisSatisfactionController extends BaseController
      */
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
+        $auto =  strtoupper($devisAccepted->getAuto());
+        $devisAccepted->setAuto($auto);
         $devisAccepted->setStatut(true);
         $this->em->persist($devisAccepted);
         $this->em->flush();
@@ -133,6 +135,8 @@ class DevisSatisfactionController extends BaseController
     {
         $idlist= $devisRejected->getRaison()->getId();
         $list = $em->getRepository('App:ListSatisfaction')->find($idlist);
+        $auto =  strtoupper($devisRejected->getAuto());
+        $devisRejected->setAuto($auto);
         $devisRejected->setRaison($list);
         $devisRejected->setStatut(false);
         $this->em->persist($devisRejected);
