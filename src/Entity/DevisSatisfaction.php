@@ -75,10 +75,16 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $auto;
 
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $devis;
 
 
     public function getId()
@@ -147,14 +153,26 @@ class DevisSatisfaction
     }
 
 
-    public function getAuto(): ?bool
+    public function getAuto(): ?string
     {
         return $this->auto;
     }
 
-    public function setAuto(bool $auto): self
+    public function setAuto(string $auto): self
     {
         $this->auto = $auto;
+
+        return $this;
+    }
+
+    public function getDevis(): ?string
+    {
+        return $this->devis;
+    }
+
+    public function setDevis(string $devis): self
+    {
+        $this->devis = $devis;
 
         return $this;
     }
