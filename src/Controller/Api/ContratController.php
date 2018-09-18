@@ -149,7 +149,7 @@ class ContratController extends BaseController
     {
         $contrats=json_decode($request->getContent());
         foreach ($contrats as $contrat) {
-            $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
+            $contra = $this->em->getRepository("App:Contrats")->find($contrat->id);
             $contra->setActif(false);
             $datenow = new \DateTime("now");
             $contra->setDateSuppression($datenow);
