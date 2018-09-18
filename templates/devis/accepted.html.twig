@@ -30,7 +30,7 @@
                             <th> Date de creation </th>
                             <th> Date d'échéance </th>
                             <th> Agence </th>
-                            <th> Phone </th>
+                            <th> Téléphone </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
                             <th> Statut </th>
@@ -61,16 +61,17 @@
                             {% else %}
                                 <td>Pas disponible </td>
                             {% endif %}
-                            {% if  element.comment is not null %}
-                                <td> {{ element.comment }} </td>
-                            {% else %}
-                                <td>Pas disponible </td>
-                            {% endif %}
                             {% if   element.raison is not null %}
                                 <td>  {{ element.raison.title }} </td>
                             {% else %}
                                 <td> Pas disponible </td>
                             {% endif %}
+                            {% if  element.comment is not null %}
+                                <td> {{ element.comment }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %}
+
 
                             {% if  element.statut   %}
                                 <td> <i class="icon-dislike emodisLike"></i></td>
