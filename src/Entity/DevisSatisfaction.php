@@ -78,7 +78,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @Assert\NotNull(groups={"devis_accepted","devis_refused"})
+     * @Serializer\Groups(groups={"devis_accepted"})
      *
      */
     private $auto;
