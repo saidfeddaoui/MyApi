@@ -257,13 +257,13 @@ class RegistrationController extends BaseController
         if ($exClient){
             $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
             $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
-            return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
+            return $this->respondWith(['registration_token' => $token], ApiResponse::OK);
 
         }else{
-            return $this->respondWith(["Message" => "Ce numéro n'existe pas "], ApiResponse::CREATED);
+            return $this->respondWith(["Message" => "Ce numéro n'existe pas "], ApiResponse::NOT_FOUND);
         }
 
-       
+
     }
 
     /**
