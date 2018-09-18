@@ -553,7 +553,7 @@ class RegistrationController extends BaseController
      *        in="body",
      *        description="Client object",
      *        required=true,
-     *        @Model(type="App\Entity\Client", groups={"client_account_creation"})
+     *        @Model(type="App\Entity\Client", groups={"update_password"})
      *     ),
      *     @SWG\Response(
      *         response=202,
