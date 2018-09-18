@@ -71,6 +71,18 @@ class DevisSatisfaction
      */
     private $dateCreation;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $devisAuto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $devisHabitation;
+
 
     /**
      * @Serializer\Expose()
@@ -79,12 +91,6 @@ class DevisSatisfaction
      */
     private $auto;
 
-    /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $devis;
 
 
     public function getId()
@@ -165,17 +171,32 @@ class DevisSatisfaction
         return $this;
     }
 
-    public function getDevis(): ?int
+    public function getDevisAuto(): ?DevisAuto
     {
-        return $this->devis;
+        return $this->devisAuto;
     }
 
-    public function setDevis(int $devis): self
+    public function setDevisAuto(?DevisAuto $devisAuto): self
     {
-        $this->devis = $devis;
+        $this->devisAuto = $devisAuto;
 
         return $this;
     }
+
+    public function getDevisHabitation(): ?DevisHabitation
+    {
+        return $this->devisHabitation;
+    }
+
+    public function setDevisHabitation(?DevisHabitation $devisHabitation): self
+    {
+        $this->devisHabitation = $devisHabitation;
+
+        return $this;
+    }
+
+
+
 
     /**
      * @return mixed

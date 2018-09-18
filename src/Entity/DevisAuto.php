@@ -189,7 +189,6 @@ class DevisAuto
      */
     private $vg;
 
-
     public function getId()
     {
         return $this->id;
@@ -382,5 +381,4 @@ class DevisAuto
     {
         return $this->getPack()->getCode();
     }
-
 }
