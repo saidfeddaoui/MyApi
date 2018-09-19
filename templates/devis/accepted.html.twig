@@ -61,17 +61,16 @@
                             {% else %}
                                 <td>Pas disponible </td>
                             {% endif %}
-                            {% if   element.raison is not null %}
-                                <td>  {{ element.raison.title }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
                             {% if  element.comment is not null %}
                                 <td> {{ element.comment }} </td>
                             {% else %}
                                 <td>Pas disponible </td>
                             {% endif %}
-
+                            {% if   element.raison is not null %}
+                                <td>  {{ element.raison.title }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
 
                             {% if  element.statut   %}
                                 <td> <i class="icon-dislike emodisLike"></i></td>

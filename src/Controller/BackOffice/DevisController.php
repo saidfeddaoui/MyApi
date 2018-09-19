@@ -49,7 +49,7 @@ class DevisController extends Controller
     /**
      * @Route("/auto/details/{id}", name="auto_details",options={"expose"=true})
      *
-     * @Breadcrumb(title="Auto")
+     * @Breadcrumb(title="Info véhicule")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
