@@ -155,12 +155,14 @@ class ContratController extends BaseController
         foreach ($contrats as $contrat) {
             $contra = $this->em->getRepository("App:Contrats")->find($contrat->id);
 
-            var_dump( $contra);
-            die();
+
             $contra->setActif(false);
             $datenow = new \DateTime("now");
             $contra->setDateSuppression($datenow);
         }
+
+        var_dump( $contra);
+        die();
 
         $this->em->flush();
         return new JsonResponse(array(
