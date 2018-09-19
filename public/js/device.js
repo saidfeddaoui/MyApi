@@ -121,7 +121,7 @@ jQuery(document).ready(function() {
         $(this).closest("form").submit();
     });
 
-    $('.detail_devis').on('click', function () {
+    $("body").on('click','.detail_devis', function () {
         var id = $(this).data('id');
         url= Routing.generate('devis_auto_details', {id: id});
 
