@@ -154,7 +154,7 @@ class ContratController extends BaseController
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
-            "message"=>$contrats
+            "message"=>$contrats->params
         ));
 
 
