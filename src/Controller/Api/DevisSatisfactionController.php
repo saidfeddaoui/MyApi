@@ -80,6 +80,11 @@ class DevisSatisfactionController extends BaseController
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
 
+        if ($devisAccepted->getDevisAuto()->getId() && $devisAccepted->getDevisHabitation()->getId()){
+
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "]);
+        }
+
         $auto =  strtoupper($devisAccepted->getAuto());
 
         $devisSatisfaction = new DevisSatisfaction();
@@ -156,6 +161,11 @@ class DevisSatisfactionController extends BaseController
     {
 
         $auto =  strtoupper($devisRejected->getAuto());
+
+        if ($devisRejected->getDevisAuto()->getId() && $devisRejected->getDevisHabitation()->getId()){
+
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "]);
+        }
 
         $devisSatisfaction = new DevisSatisfaction();
         $devisSatisfaction->setComment($devisRejected->getComment());
