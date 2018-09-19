@@ -147,8 +147,7 @@ class ContratController extends BaseController
      */
     public function deleteManyContrat(Request $request)
     {
-        var_dump("eee");
-        die();
+
         $contrats = json_decode($request->getContent());
         $contrats = $contrats->params;
 
