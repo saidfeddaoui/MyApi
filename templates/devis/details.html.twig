@@ -29,88 +29,80 @@
                         <div class="row">
                             <div class="col-md-6 general_details_devis" >
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">marque : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.marque.nom is not null %}
+                                            <input type="text" class="police" name="marque" disabled value="{{ devisAuto.marque.nom }}">
                                         {% else %}
                                             <input type="text" class="police" name="nom" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">Pack : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.pack.name is not null %}
+                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.pack.name }}">
                                         {% else %}
                                             <input type="text" class="police" name="nom" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">Puissance : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.puissance is not null %}
+                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.puissance }}">
                                         {% else %}
                                             <input type="text" class="police" name="nom" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">Combustion : </span>
                                     <span class="detail_info">
                                         {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                            <input type="text" class="combustion" name="combustion" disabled value="{{ devisAuto.combustion }}">
                                         {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
+                                            <input type="text" class="combustion" name="combustion" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
+
 
                             </div>
 
                             <!-- -->
 
                             <div class="col-md-6 general_details_devis" >
+
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">VN : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.vn is not null %}
+                                            <input type="text" class="vn" name="vn" disabled value="{{ devisAuto.vn }}">
                                         {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
+                                            <input type="text" class="vn" name="vn" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">VV : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.vv is not null %}
+                                            <input type="text" class="vv" name="vv" disabled value="{{ devisAuto.vv }}">
                                         {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
+                                            <input type="text" class="vv" name="vv" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Police : </span>
+                                    <span class="detail_label">VG : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
+                                        {% if devisAuto.vg is not null %}
+                                            <input type="text" class="vg" name="vg" disabled value="{{ devisAuto.vg }}">
                                         {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Police : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.nom }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
+                                            <input type="text" class="vg" name="vg" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
