@@ -161,10 +161,12 @@ class ContratController extends BaseController
             $contra->setDateSuppression($datenow);
         }
 
-        var_dump( $contra);
-        die();
 
         $this->em->flush();
+
+
+        var_dump( "hi");
+        die();
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
