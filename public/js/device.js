@@ -22,8 +22,16 @@ jQuery(document).ready(function() {
                 "orderable": false,
             },
             {
-                "searchable": true,
+                "searchable": false,
                 "orderable": false,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
             },
             {
                 "searchable": false,
@@ -112,15 +120,4 @@ jQuery(document).ready(function() {
         var form = $(this).closest("form").serializeArray();
         $(this).closest("form").submit();
     });
-
-    $("body").on('click','.detail_devis', function () {
-        var id = $(this).data('id');
-        url= Routing.generate('devis_auto_details', {id: id});
-
-        console.log(url);
-        window.open(url, '_blank');
-    });
-
-
-
 });
