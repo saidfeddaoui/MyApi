@@ -190,10 +190,12 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="permis_conduire_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
-                                            <div class="image-hover">
-                                                <i class="icon-zoom-in-2"></i>
-                                              </div>
+                                            <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                                <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                                <div class="image-hover">
+                                                    <i class="icon-zoom-in-2"></i>
+                                                </div>
+                                            </a>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
