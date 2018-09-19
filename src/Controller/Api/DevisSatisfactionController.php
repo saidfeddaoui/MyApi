@@ -163,16 +163,18 @@ class DevisSatisfactionController extends BaseController
         $list = $em->getRepository('App:ListSatisfaction')->find($idlist);
         $devisSatisfaction->setRaison($list);
 
+        var_dump($auto);
+        die();
+
         if ($auto == "DA"){
             $da_id = $devisRejected->getDevisAuto()->getId();
             $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
             $devisSatisfaction->setDevisAuto($devis);
             $devisSatisfaction->setDevisHabitation(null);
         }else{
-            var_dump("Hello");
-            die();
+
             $da_id = $devisRejected->getDevisHabitation()->getId();
-            
+
 
             $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
             $devisSatisfaction->setDevisHabitation($devis);
