@@ -102,8 +102,6 @@ class DevisSatisfactionController extends BaseController
 
             $devisSatisfaction->setDevisHabitation($devis);
             $devisSatisfaction->setDevisAuto(null);
-            var_dump("here");
-            die();
         }
         $this->em->persist($devisSatisfaction);
         $this->em->flush();
