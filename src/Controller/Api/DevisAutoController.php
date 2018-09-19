@@ -109,7 +109,7 @@ class DevisAutoController extends BaseController
         $devis = $Auto_api->getDevisAuto($auto);
         $idDevis =$devi_auto->getId();
 
-        var_dump($devis["result"]);
+        var_dump($devis->getResult());
         die();
         return $this->respondWith($devis);
     }
