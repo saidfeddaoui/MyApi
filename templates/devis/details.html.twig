@@ -1,4 +1,12 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{ asset('css/detail_devis.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
