@@ -82,7 +82,7 @@ class DevisSatisfactionController extends BaseController
 
         if (!($devisAccepted->getDevisAuto()->getId() && $devisAccepted->getDevisHabitation()->getId())){
 
-            return $this->respondWith(["Message"=>"vous devez remplire le devis "]);
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
         }
 
         $auto =  strtoupper($devisAccepted->getAuto());
@@ -164,7 +164,7 @@ class DevisSatisfactionController extends BaseController
 
         if (!($devisRejected->getDevisAuto()->getId() && $devisRejected->getDevisHabitation()->getId())){
 
-            return $this->respondWith(["Message"=>"vous devez remplire le devis "]);
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
         }
 
         $devisSatisfaction = new DevisSatisfaction();
