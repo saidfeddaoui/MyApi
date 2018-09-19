@@ -59,7 +59,7 @@ class DevisController extends Controller
         return $this->render('devis/details.html.twig', [
             'page_title' => 'Liste des devis Auto',
             'page_subtitle' => '',
-            'data'=>$devisAuto
+            'devisAuto'=>$devisAuto
         ]);
     }
 }
