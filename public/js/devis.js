@@ -35,8 +35,6 @@ jQuery(document).ready(function() {
     $("body").on('click','.detail_devis', function () {
         var id = $(this).data('id');
         url= Routing.generate('devis_auto_details', {id: id});
-
-        console.log(url);
         window.open(url, '_blank');
     });
 
