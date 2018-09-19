@@ -154,9 +154,9 @@ class ContratController extends BaseController
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
-            "message"=>$request->getContent()
+            "message"=>$contrats
         ));
-        
+
 
         foreach ($contrats as $contrat) {
             $contra = $this->em->getRepository("App:Contrats")->find($contrat->id);
