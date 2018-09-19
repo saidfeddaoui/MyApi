@@ -97,9 +97,10 @@ class DevisSatisfactionController extends BaseController
         }else{
 
             $da_id = $devisAccepted->getDevisHabitation()->getId();
-            var_dump( $da_id);
-            die();
+
             $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
+            var_dump($devis);
+            die();
             $devisSatisfaction->setDevisHabitation($devis);
             $devisSatisfaction->setDevisAuto(null);
         }
