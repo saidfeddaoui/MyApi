@@ -149,13 +149,8 @@ class ContratController extends BaseController
     {
 
 
-        $contrats=json_decode($request->getContent());
-
-        return new JsonResponse(array(
-            "code"=>200,
-            "status"=>"ok",
-            "message"=>$contrats->params
-        ));
+        $contrats = json_decode($request->getContent());
+        $contrats = $contrats->params;
 
 
         foreach ($contrats as $contrat) {
