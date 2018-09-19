@@ -120,4 +120,15 @@ jQuery(document).ready(function() {
         var form = $(this).closest("form").serializeArray();
         $(this).closest("form").submit();
     });
+
+    $('.detail_devis').on('click', function () {
+        var id = $(this).data('id');
+        url= Routing.generate('devis_auto_details', {id: id});
+
+        console.log(url);
+        window.open(url, '_blank');
+    });
+
+
+
 });

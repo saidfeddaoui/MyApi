@@ -3,12 +3,14 @@
 namespace App\Controller\BackOffice;
 
 
+use App\Entity\DevisAuto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+
 
 /**
  * @Route(path="/devis", name="devis_")
@@ -45,16 +47,18 @@ class DevisController extends Controller
 
 
     /**
-     * @Route("/auto/details", name="auto_details",options={"expose"=true})
+     * @Route("/auto/details/{id}", name="auto_details",options={"expose"=true})
      *
      * @Breadcrumb(title="Auto")
-     *
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function details(Request $request, SessionInterface $session)
+    public function details(DevisAuto $devisAuto)
     {
+
+        var_dump($devisAuto);
+        die();
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
         $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
