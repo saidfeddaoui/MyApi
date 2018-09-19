@@ -82,7 +82,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\DevisHabitation", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $devisHabitation;
