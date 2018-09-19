@@ -151,13 +151,31 @@ class DevisSatisfactionController extends BaseController
      */
     public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations,ObjectManager $em)
     {
+
+        $auto =  strtoupper($devisRejected->getAuto());
+
+        $devisSatisfaction = new DevisSatisfaction();
+        $devisSatisfaction->setComment($devisRejected->getComment());
+        $devisSatisfaction->setAuto($auto);
+        $devisSatisfaction->setStatut(false);
+
         $idlist= $devisRejected->getRaison()->getId();
         $list = $em->getRepository('App:ListSatisfaction')->find($idlist);
-        $auto =  strtoupper($devisRejected->getAuto());
-        $devisRejected->setAuto($auto);
-        $devisRejected->setRaison($list);
-        $devisRejected->setStatut(false);
-        $this->em->persist($devisRejected);
+        $devisSatisfaction->setRaison($list);
+
+        if ($auto == "DA"){
+            $da_id = $devisRejected->getDevisAuto()->getId();
+            $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
+            $devisSatisfaction->setDevisAuto($devis);
+            $devisSatisfaction->setDevisHabitation(null);
+        }else{
+            $da_id = $devisRejected->getDevisHabitation()->getId();
+            $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
+            $devisSatisfaction->setDevisHabitation($devis);
+            $devisSatisfaction->setDevisAuto(null);
+        }
+
+        $this->em->persist($devisSatisfaction);
         $this->em->flush();
         return $this->respondWith();
     }
