@@ -56,19 +56,10 @@ class DevisController extends Controller
      */
     public function details(DevisAuto $devisAuto)
     {
-
-        var_dump($devisAuto);
-        die();
-        $em = $this->getDoctrine()->getManager();
-        $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
-        $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
-        $devis = $em->getRepository('App:DevisAuto')->findBySocietaire($societaire);
-
         return $this->render('devis/details.html.twig', [
             'page_title' => 'Liste des devis Auto',
             'page_subtitle' => '',
-            'data'=>$devis
+            'data'=>$devisAuto
         ]);
-
     }
 }
