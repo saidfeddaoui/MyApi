@@ -22,16 +22,8 @@ jQuery(document).ready(function() {
                 "orderable": false,
             },
             {
-                "searchable": false,
+                "searchable": true,
                 "orderable": false,
-            },
-            {
-                "searchable": true,
-                "orderable": true,
-            },
-            {
-                "searchable": true,
-                "orderable": true,
             },
             {
                 "searchable": false,
