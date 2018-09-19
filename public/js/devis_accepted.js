@@ -22,13 +22,4 @@ jQuery(document).ready(function() {
             [0, "asc"]
         ] // set first column as a default sort by asc
     });
-
-
-    $("body").on('click','.detail_devis', function () {
-        var id = $(this).data('id');
-        url= Routing.generate('devis_auto_details', {id: id});
-
-        console.log(url);
-        window.open(url, '_blank');
-    });
 });
