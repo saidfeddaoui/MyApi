@@ -31,7 +31,7 @@
                                 <p>
                                     <span class="detail_label">marque : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.marque.nom is not null %}
+                                        {% if devisAuto.marque is not null %}
                                             <input type="text" class="police" name="marque" disabled value="{{ devisAuto.marque.nom }}">
                                         {% else %}
                                             <input type="text" class="police" name="nom" disabled value="">
@@ -41,7 +41,7 @@
                                 <p>
                                     <span class="detail_label">Pack : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.pack.name is not null %}
+                                        {% if devisAuto.pack is not null %}
                                             <input type="text" class="police" name="nom" disabled value="{{ devisAuto.pack.name }}">
                                         {% else %}
                                             <input type="text" class="police" name="nom" disabled value="">
