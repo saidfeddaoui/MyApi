@@ -79,7 +79,7 @@ class DevisSatisfactionController extends BaseController
      */
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
-        
+
         var_dump(gettype($devisAccepted->getDevisAuto()->getId()));
         var_dump(gettype($devisAccepted->getDevisHabitation()->getId()));
         die();

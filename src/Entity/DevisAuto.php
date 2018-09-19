@@ -18,6 +18,7 @@ class DevisAuto
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      */
     private $id;
