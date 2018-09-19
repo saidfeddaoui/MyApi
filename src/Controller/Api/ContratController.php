@@ -164,9 +164,6 @@ class ContratController extends BaseController
 
         $this->em->flush();
 
-
-        var_dump( "hi");
-        die();
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
