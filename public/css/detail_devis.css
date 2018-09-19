@@ -1,0 +1,28 @@
+.general_details p {
+    display: flex;
+    align-items: center;
+}
+
+span.detail_label {
+    display: inline-block;
+    width: 200px;
+    padding: 0 10px;
+}
+span.detail_info {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    overflow: hidden;
+}
+
+span.detail_info input {
+    width: 200px;
+    margin: 0!important;
+    min-height: 35px;
+    border: 1px solid #b9b8b8;
+    padding: 10px;
+}
+
+span.detail_info input[disabled] {
+    background: #eaeaea;
+}
