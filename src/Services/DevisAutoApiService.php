@@ -19,6 +19,7 @@ class DevisAutoApiService extends ApiCustomerService
             'body' => $requestAuto,
             'headers' => ['Content-type' => 'application/json']
         ]);
+
         return $this->getResult($response);
     }
 
