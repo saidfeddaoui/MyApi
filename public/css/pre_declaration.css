@@ -69,7 +69,7 @@ padding: 40px;
     border-right: none!important;
 }
 
-.general_details_devis p {
+.general_details p {
     display: flex;
     align-items: center;
 }
