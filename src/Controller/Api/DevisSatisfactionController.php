@@ -80,7 +80,7 @@ class DevisSatisfactionController extends BaseController
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
 
-        if (!($devisAccepted->getDevisAuto()->getId() && $devisAccepted->getDevisHabitation()->getId())){
+        if ($devisAccepted->getDevisAuto()->getId() == false && $devisAccepted->getDevisHabitation()->getId()== false){
 
             return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
         }
@@ -162,7 +162,7 @@ class DevisSatisfactionController extends BaseController
 
         $auto =  strtoupper($devisRejected->getAuto());
 
-        if (!($devisRejected->getDevisAuto()->getId() && $devisRejected->getDevisHabitation()->getId())){
+        if ($devisRejected->getDevisAuto()->getId()== false && $devisRejected->getDevisHabitation()->getId()== false){
 
             return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
         }
