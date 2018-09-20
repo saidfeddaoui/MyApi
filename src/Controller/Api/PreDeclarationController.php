@@ -6,6 +6,7 @@ use App\DTO\Api\ApiResponse;
 use App\Entity\CircumstanceAttachment;
 use App\Entity\Client;
 use App\Entity\InsuranceType;
+use App\Entity\Notification;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
 use App\Event\ApplicationEvents;
@@ -20,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Ramsey\Uuid\Uuid;
-
+use App\Utils\ObjectMapper;
 /**
  * @Rest\Route(path="/pre_declaration", name="api_pre_declaration_")
  */
@@ -37,6 +38,11 @@ class PreDeclarationController extends BaseController
     private $eventDispatcher;
 
     /**
+     * @var $config
+     */
+    private $config = null;
+
+    /**
      * RegistrationController constructor.
      * @param EntityManagerInterface $em
      * @param EventDispatcherInterface $eventDispatcher
@@ -45,6 +51,7 @@ class PreDeclarationController extends BaseController
     {
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
+        $this->config = array('EntityName' => 'Notification','NameSpace' => '\App\Entity\\');
     }
 
     /**
@@ -116,6 +123,52 @@ class PreDeclarationController extends BaseController
         $inType = $this->em->getRepository("App:InsuranceType")->findOneById($insuranceType->getId());
         $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS)->setInsuranceType($inType);
         $this->em->persist($preDeclaration);
+        $this->em->flush();
+
+
+
+
+        $client = $preDeclaration->getClient();
+        $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
+        $sujet="Pré-déclaration";
+        $message="Nous avons bien reçu votre dossier de pré-déclaration";
+
+        $data = array(
+            "idSocietaire"=>$idSocietaire,
+            "sujet"=>$sujet,
+            "message"=>$message,
+            "statut"=>false,
+            "client"=>$client,
+            "predeclaration"=>$preDeclaration,
+            "dateCreation"=>new \dateTime("now")
+            );
+        $patient = ObjectMapper::mapObjectToEntity($data,$this->config);
+        $this->em->persist($patient);
+        $this->em->flush();
+
+        die("hi");
+
+       /* $notification = new Notification();
+        $notification->setIdSocietaire($idSocietaire);
+        $notification->setSujet($sujet);
+        $notification->setMessage($message);
+        $notification->setStatut(false);
+        $notification->setClient($client);
+        $notification->setPredeclaration($preDeclaration);
+        $notification->setDateCreation(new \dateTime("now")); */
+
+
+        //pour avoir id notification
+        $datenow=new \dateTime("now");
+        $now=$datenow->format("Y-m-d");
+
+        $notification_detail = new NotificationDetail();
+        $notification_detail->setLibelle("date");
+        $notification_detail->setValeur($now);
+        $notification_detail->setNotification($notification);
+        $notification_detail->setDateCreation(new \dateTime("now"));
+
+        $this->em->persist($notification_detail);
         $this->em->flush();
 
         $tiersAttachement = $preDeclaration->getImages();

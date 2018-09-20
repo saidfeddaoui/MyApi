@@ -208,7 +208,6 @@ class PreDeclarationController extends Controller
         $this->em->persist($notification);
         $this->em->flush();
 
-
         //pour avoir id notification
         $datenow=new \dateTime("now");
         $now=$datenow->format("Y-m-d");
