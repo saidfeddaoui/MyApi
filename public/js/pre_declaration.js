@@ -81,7 +81,7 @@ jQuery(document).ready(function() {
         ] // set first column as a default sort by asc
     });
 
-    $('.details').on('click', function () {
+    $('.predetails').on('click', function () {
        var id = $(this).data('id');
        url= Routing.generate('pre_declarations_display_details', {id: id});
 
