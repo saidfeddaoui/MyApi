@@ -20,8 +20,7 @@ class ObjectMapper {
 
 
         //$post = json_encode($data);
-
-
+        
        // if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
         $fields = get_object_vars($data);// php reflection
         $nameSpace .= $entityName;
