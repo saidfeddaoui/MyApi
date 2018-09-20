@@ -230,7 +230,9 @@ class PreDeclarationController extends Controller
 
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
-        return $this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
+         //$this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
+         return $this->redirectToRoute('pre_declarations_in_progress');
+
         }else{
             return $this->json(['message' => $resp->message]);
         }

@@ -19,7 +19,7 @@
                 <div class="general_details" data-id="{{preDeclaration.id}}">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                         {% if preDeclaration.client is not null %}
-                        {{ preDeclaration.client.firstName }} {{ preDeclaration.contrat.client.familyName }}
+                        {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
                         {% else %}
                             inconnu
                         {% endif %}
