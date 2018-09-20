@@ -57,7 +57,11 @@
                             {% endif %}
 
                             {% if  element.auto=="DA" %}
-                                <td>  {{ element.devisAuto.pack.name }} </td>
+                                {% if  element.devisAuto.pack %}
+                                    <td>  {{ element.devisAuto.pack.name }} </td>
+                                {% else  %}
+                                    <td> Pas diponible </td>
+                                {% endif %}
                             {% elseif element.auto=="DH" %}
                                 <td> Pas diponible </td>
                             {% else %}
