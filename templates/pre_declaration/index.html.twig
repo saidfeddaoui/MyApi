@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                         {% for preDeclaration in preDeclarations %}
-                            <tr  class="predetails" data-id="{{ preDeclaration.id }}">
+                            <tr  class="predetails" data-id="{{ preDeclaration.client.id }}">
 
                                 <td>{{ preDeclaration.contrat.police }}</td>
                                 {% if preDeclaration.client is not null %}
