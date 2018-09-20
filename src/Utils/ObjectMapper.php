@@ -19,10 +19,11 @@ class ObjectMapper {
         if(empty($data) || empty($entityName)) return "invalid entity or data";
 
 
-        //$post = json_encode($data);
-        
-       // if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
-        $fields = get_object_vars($data);// php reflection
+        $post = (Object)$data;
+
+
+        //if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
+        $fields = get_object_vars($post);// php reflection
         $nameSpace .= $entityName;
         $Entity = new $nameSpace();
         if(!$Entity ) return "error in entity object";
