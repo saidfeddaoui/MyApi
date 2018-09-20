@@ -30,6 +30,7 @@
                             <th> Date de creation </th>
                             <th> Date d'échéance </th>
                             <th> Agence </th>
+                            <th> Pack </th>
                             <th> Téléphone </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
@@ -42,24 +43,32 @@
                             {% if element.dateCreation is not null %}
                                 <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
-                                <td>Pas disponible </td>
+                                <td> Pas disponible </td>
                             {% endif %}
                             {% if element.echeanceDate is not null %}
                             <td> {{ element.echeanceDate | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
-                             <td>Pas disponible </td>
+                             <td> Pas disponible </td>
                             {% endif %}
                             {% if  element.agence is not null %}
                                 <td>  {{ element.agence }} </td>
                             {% else %}
-                                <td>Pas disponible </td>
+                                <td> Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.auto=="DA" %}
+                                <td>  {{ element.devisAuto.pack.name }} </td>
+                            {% elseif element.auto=="DH" %}
+                                <td> Pas diponible </td>
+                            {% else %}
+                                <td> Pas disponible </td>
                             {% endif %}
                             {% if  element.auto=="DA" %}
                                 <td>  {{ element.devisAuto.tel }} </td>
                             {% elseif element.auto=="DH" %}
                                 <td>  {{ element.devisHabitation.tel }} </td>
                             {% else %}
-                                <td>Pas disponible </td>
+                                <td> Pas disponible </td>
                             {% endif %}
                             {% if  element.comment is not null %}
                                 <td> {{ element.comment }} </td>
