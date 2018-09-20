@@ -87,14 +87,12 @@ class DevisSatisfaction
      */
     private $devisHabitation;
 
-
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      * @ORM\Column(type="string", nullable=true)
      */
     private $auto;
-
 
 
     public function getId()

@@ -16,10 +16,22 @@ jQuery(document).ready(function() {
             { // set default column settings
                 "searchable": true,
                 "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
+                "searchable": false,
+                "orderable": false,
             }
         ],
         "order": [
-            [0, "asc"]
+            [0, "desc"]
         ] // set first column as a default sort by asc
     });
 });
