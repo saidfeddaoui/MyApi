@@ -19,7 +19,7 @@
                 <div class="general_details" data-id="{{preDeclaration.id}}">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                         {% if preDeclaration.client is not null %}
-                        {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
+                        {{ preDeclaration.client.firstName }} {{ preDeclaration.contrat.client.familyName }}
                         {% else %}
                             inconnu
                         {% endif %}
@@ -44,7 +44,7 @@
                                 </span>
                             <p><span class="detail_label">Téléphone: </span>
                                 <span class="detail_info">
-                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.client.phone  }}">
+                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.contrat.client.phone  }}">
                                 </span>
                             </p>
                             <p><span class="detail_label"> adresse: </span>
@@ -112,7 +112,7 @@
                         <li >
                             <a href="#attestation_assurance_adversaire_tab" data-toggle="tab"> Attestation de l'assurance de l'adversaire </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#permis_conduire_adversaire_tab" data-toggle="tab"> Permis de conduire de l'adversaire </a>
                         </li>
 
