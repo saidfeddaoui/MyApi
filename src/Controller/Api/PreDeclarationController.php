@@ -7,6 +7,7 @@ use App\Entity\CircumstanceAttachment;
 use App\Entity\Client;
 use App\Entity\InsuranceType;
 use App\Entity\Notification;
+use App\Entity\NotificationDetail;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
 use App\Event\ApplicationEvents;
@@ -40,7 +41,13 @@ class PreDeclarationController extends BaseController
     /**
      * @var $config
      */
-    private $config = null;
+    private $configNotif = null;
+
+    /**
+     * @var $config
+     */
+    private $configNotifDetail = null;
+
 
     /**
      * RegistrationController constructor.
@@ -51,7 +58,8 @@ class PreDeclarationController extends BaseController
     {
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
-        $this->config = array('EntityName' => 'Notification','NameSpace' => '\App\Entity\\');
+        $this->configNotif = array('EntityName' => 'Notification','NameSpace' => '\App\Entity\\');
+        $this->configNotifDetail = array('EntityName' => 'NotificationDetail','NameSpace' => '\App\Entity\\');
     }
 
     /**
@@ -125,13 +133,12 @@ class PreDeclarationController extends BaseController
         $this->em->persist($preDeclaration);
         $this->em->flush();
 
-
-
-
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
         $message="Nous avons bien reçu votre dossier de pré-déclaration";
+        $datenow=new \dateTime("now");
+        $now=$datenow->format("Y-m-d");
 
         $data = array(
             "idSocietaire"=>$idSocietaire,
@@ -140,34 +147,20 @@ class PreDeclarationController extends BaseController
             "statut"=>false,
             "client"=>$client,
             "predeclaration"=>$preDeclaration,
-            "dateCreation"=>new \dateTime("now")
-            );
-        $patient = ObjectMapper::mapObjectToEntity($data,$this->config);
-        $this->em->persist($patient);
+            "dateCreation"=>new \dateTime("now"));
+
+        $notification = ObjectMapper::mapObjectToEntity($data,$this->configNotif);
+        $this->em->persist($notification);
         $this->em->flush();
 
-        die("hi");
-
-       /* $notification = new Notification();
-        $notification->setIdSocietaire($idSocietaire);
-        $notification->setSujet($sujet);
-        $notification->setMessage($message);
-        $notification->setStatut(false);
-        $notification->setClient($client);
-        $notification->setPredeclaration($preDeclaration);
-        $notification->setDateCreation(new \dateTime("now")); */
+        $data = array(
+            "libelle"=>"date",
+            "valeur"=>$now,
+            "notification"=>$notification,
+            "dateCreation"=>new \dateTime("now"));
 
 
-        //pour avoir id notification
-        $datenow=new \dateTime("now");
-        $now=$datenow->format("Y-m-d");
-
-        $notification_detail = new NotificationDetail();
-        $notification_detail->setLibelle("date");
-        $notification_detail->setValeur($now);
-        $notification_detail->setNotification($notification);
-        $notification_detail->setDateCreation(new \dateTime("now"));
-
+        $notification_detail = ObjectMapper::mapObjectToEntity($data,$this->configNotifDetail);
         $this->em->persist($notification_detail);
         $this->em->flush();
 
