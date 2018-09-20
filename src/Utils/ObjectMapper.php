@@ -21,9 +21,6 @@ class ObjectMapper {
 
         $post = json_encode($data);
 
-        var_dump(gettype($post));
-        var_dump($post);
-        die();
 
         if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
         $fields = get_object_vars($post);// php reflection
