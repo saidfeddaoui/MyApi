@@ -19,7 +19,7 @@ class ObjectMapper {
         if(empty($data) || empty($entityName)) return "invalid entity or data";
 
 
-        $post = json_encode($data, JSON_FORCE_OBJECT);
+        $post = json_encode($data);
 
         if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
         $fields = get_object_vars($post);// php reflection
