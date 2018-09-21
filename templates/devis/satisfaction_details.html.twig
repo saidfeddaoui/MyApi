@@ -92,16 +92,53 @@
                                         {% endif %}
                                      </span>
                                 </p>
-                                <p>
-                                    <span class="detail_label">Combustion : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisAuto.combustion is not null %}
-                                            <input type="text"  name="combustion" disabled value="{{ element.devisAuto.combustion }}">
+                                
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                   <p>
+                                        <span class="detail_label">Combustion : </span>
+                                        <span class="detail_info">
+                                            {% if element.devisAuto.combustion is not null %}
+                                                <input type="text"  name="combustion" disabled value="{{ element.devisAuto.combustion }}">
+                                            {% else %}
+                                                <input type="text" name="combustion" disabled value="">
+                                            {% endif %}
+                                         </span>
+                                    </p>
+                                    <p><span class="detail_label"> Email: </span>
+                                        <span class="detail_info">
+                                            {% if   element.devisAuto.vn is not null %}
+                                                <input type="text"  name="vn" value="{{ element.devisAuto.vn  }}">
+                                            {% else %}
+                                                 <input type="text" name="vn" disabled value="">
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label">Pack : </span>
+                                        <span class="detail_info">
+                                          {% if   element.devisAuto.vv is not null %}
+                                            <input type="text"  name="vv" value="{{ element.devisAuto.vv  }}">
                                         {% else %}
-                                            <input type="text" name="combustion" disabled value="">
+                                             <input type="text" name="vv" disabled value="">
+                                        {% endif %}
+                                        </span>
+                                    </p>
+
+                                <p>
+                                    <span class="detail_label">Marque : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto.vg is not null %}
+                                            <input type="text" name="vg" disabled value="{{ element.devisAuto.vg }}">
+                                        {% else %}
+                                            <input type="text" name="vg" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
+                               
+                                
                             </div>
 
                             {% elseif element.auto=="DH" %}
@@ -159,23 +196,61 @@
                                     <span class="detail_label">Puissance : </span>
                                     <span class="detail_info">
                                         {% if element.devisHabitation.puissance is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ element.devisHabitation.puissance }}">
+                                            <input type="text" name="puissance" disabled value="{{ element.devisHabitation.puissance }}">
                                         {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
+                                            <input type="text" name="puissance" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
-                                <p>
-                                    <span class="detail_label">Combustion : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisHabitation.combustion is not null %}
-                                            <input type="text" class="combustion" name="combustion" disabled value="{{ element.devisHabitation.combustion }}">
-                                        {% else %}
-                                            <input type="text" class="combustion" name="combustion" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+                                
                             </div>
+
+
+
+                            <div class="col-md-6">
+                                   <p>
+                                        <span class="detail_label">Combustion : </span>
+                                        <span class="detail_info">
+                                            {% if element.devisHabitation.combustion is not null %}
+                                                <input type="text"  name="combustion" disabled value="{{ element.devisHabitation.combustion }}">
+                                            {% else %}
+                                                <input type="text" name="combustion" disabled value="">
+                                            {% endif %}
+                                         </span>
+                                    </p>
+                                    <p><span class="detail_label"> Email: </span>
+                                        <span class="detail_info">
+                                            {% if   element.devisHabitation.vn is not null %}
+                                                <input type="text"  name="vn" value="{{ element.devisHabitation.vn  }}">
+                                            {% else %}
+                                                 <input type="text" name="vn" disabled value="">
+                                            {% endif %}
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label">Pack : </span>
+                                        <span class="detail_info">
+                                          {% if   element.devisHabitation.vv is not null %}
+                                            <input type="text"  name="vv" value="{{ element.devisHabitation.vv  }}">
+                                        {% else %}
+                                             <input type="text" name="vv" disabled value="">
+                                        {% endif %}
+                                        </span>
+                                    </p>
+
+                                <p>
+                                    <span class="detail_label">Marque : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.vg is not null %}
+                                            <input type="text" name="vg" disabled value="{{ element.devisHabitation.vg }}">
+                                        {% else %}
+                                            <input type="text" name="vg" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                               
+                                
+                            </div>
+
 
 
                             {% endif %}
