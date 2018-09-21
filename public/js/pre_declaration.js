@@ -102,8 +102,12 @@ jQuery(document).ready(function() {
             statusCode: {
                 //traitement en cas de succès
                 200: function (response) {
+
+                    JResponse = JSON.parse(response);
+
                     $("#details-pre-declaration-modal .modal-body .pre-declaration-details").html(response);
                     $("#details-pre-declaration-modal").modal();
+                     console.log(JResponse);
                     $('[id*="photo-attachment"]').each(function() {
                         var id = $(this).attr('id');
                         ImageCrop.init('#' + id, '.preview-' + id);

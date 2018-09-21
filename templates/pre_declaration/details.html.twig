@@ -19,9 +19,9 @@
                 <div class="general_details" data-id="{{preDeclaration.id}}">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                         {% if preDeclaration.client is not null %}
-                        {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
+                          {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
                         {% else %}
-                            inconnu
+                             inconnu
                         {% endif %}
                         {% if preDeclaration.status == 0 %}
                             (En cours)</td>
