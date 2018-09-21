@@ -121,7 +121,7 @@
                                             <input type="text" class="nbi" name="prenbi" value="{{ element.dateCreation | date('Y-m-d H:i:s')  }}">
                                         </span>
                                     </p>
-                                    
+
                                     <p><span class="detail_label">Datede d'écheance :</span>
                                         <span class="detail_info">
                                             <input type="text" class="nbi" name="prenbi" value="{{ element.echeanceDate | date('Y-m-d H:i:s')  }}">
@@ -137,7 +137,12 @@
                                     <p>
                                     <span class="detail_label">Raison : </span>
                                     <span class="detail_info">
-                                       <input type="text" name="raison" disabled value="{{ element.raison.title }}">
+                                      {% if   element.raison is not null %}
+                                        <input type="text" name="raison" disabled value="{{ element.raison.title }}">
+                                    {% else %}
+                                         <input type="text" name="raison" disabled value="">
+                                    {% endif %}
+                                      
                                     </span>
                                     </p>
                                 </div>
