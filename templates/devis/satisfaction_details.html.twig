@@ -26,90 +26,131 @@
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
-                        <div class="row">
-                            <div class="col-md-6 general_details_devis" >
-                                <p>
-                                    <span class="detail_label">Marque : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.marque is not null %}
-                                            <input type="text" class="police" name="marque" disabled value="{{ devisAuto.marque.nom }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Pack : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.pack is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.pack.name }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Puissance : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.puissance is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.puissance }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Combustion : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
-                                            <input type="text" class="combustion" name="combustion" disabled value="{{ devisAuto.combustion }}">
-                                        {% else %}
-                                            <input type="text" class="combustion" name="combustion" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+
+                        
+                         <div class="general_details" data-id="{{preDeclaration.id}}">
+                            <div class="row">
+
+                            {% if  element.auto=="DA" %}
+                               <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                    {% if element.devisAuto is not null %}
+                                      {{ element.devisAuto.nom }} {{ element.devisAuto.prenom }}
+                                    {% else %}
+                                         inconnu
+                                    {% endif %}
+                                    {% if element.status %}
+                                        (Acceptée)</td>
+                                    {% else %}
+                                        (Rejetée)
+                                    {% endif %}
+
+                                </h4>
+
+                                <div class="col-md-6">
+                                    <p><span class="detail_label">Civilité : </span><span class="detail_info">
+                                            {% if element.devisAuto.civilite is not null %}
+                                            <input type="text"  name="civilite" disabled value="{{ element.devisAuto.civilite }}">
+                                            {% else %}
+                                              <input type="text"  name="civilite" disabled value="">
+                                            {% endif %}
+                                        </span>
+                                    <p><span class="detail_label">Téléphone: </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="tel" disabled value="{{ element.devisAuto.tel }}">
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label"> Email: </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="email" value="{{ element.devisAuto.email }}">
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label">Pack : </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="pack" value="{{ element.devisAuto.pack.name }}">
+                                        </span>
+                                    </p>
+                                </div>
+
+                            {% elseif element.auto=="DH" %}
+                                 <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                    {% if element.devisHabitation is not null %}
+                                      {{ element.devisHabitation.nom }} {{ element.devisHabitation.prenom }}
+                                    {% else %}
+                                         inconnu
+                                    {% endif %}
+                                    {% if element.status %}
+                                        (Acceptée)</td>
+                                    {% else %}
+                                        (Rejetée)
+                                    {% endif %}
+
+                                </h4>
+
+                                <div class="col-md-6">
+                                    <p><span class="detail_label">Civilité : </span><span class="detail_info">
+                                            {% if element.devisHabitation.civilite is not null %}
+                                            <input type="text" class="police" name="civilite" disabled value="{{ element.devisHabitation.civilite }}">
+                                            {% else %}
+                                              <input type="text"  name="civilite" disabled value="">
+                                            {% endif %}
+                                        </span>
+                                    <p><span class="detail_label">Téléphone: </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="tel" disabled value="{{ element.devisHabitation.tel }}">
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label"> Email: </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="email" value="{{ element.devisHabitation.email }}">
+                                        </span>
+                                    </p>
+                                    <p><span class="detail_label">Pack : </span>
+                                        <span class="detail_info">
+                                            <input type="text"  name="pack" value="{{ element.devisHabitation.pack.name  }}">
+                                        </span>
+                                    </p>
+                                </div>
 
 
+                            {% endif %}
+
+
+                                <div class="col-md-6">
+                                    <p><span class="detail_label">Datede creation :</span>
+                                        <span class="detail_info">
+                                            <input type="text" class="nbi" name="prenbi" value="{{ element.dateCreation | date('Y-m-d H:i:s')  }}">
+                                        </span>
+                                    </p>
+                                    
+                                    <p><span class="detail_label">Datede d'écheance :</span>
+                                        <span class="detail_info">
+                                            <input type="text" class="nbi" name="prenbi" value="{{ element.echeanceDate | date('Y-m-d H:i:s')  }}">
+                                        </span>
+                                    </p>
+
+                                    <p><span class="detail_label">Agence : </span>
+                                        <span class="detail_info">
+                                          <input type="text" name="agence" disabled value="{{ element.agence }}">
+                                        </span>
+                                     </p>
+
+                                    <p>
+                                    <span class="detail_label">Raison : </span>
+                                    <span class="detail_info">
+                                       <input type="text" name="raison" disabled value="{{ element.raison.title }}">
+                                    </span>
+                                    </p>
+                                </div>
                             </div>
 
-                            <!-- -->
 
-                            <div class="col-md-6 general_details_devis" >
 
-                                <p>
-                                    <span class="detail_label">Valeur Neuve : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.vn is not null %}
-                                            <input type="text" class="vn" name="vn" disabled value="{{ devisAuto.vn }}">
-                                        {% else %}
-                                            <input type="text" class="vn" name="vn" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Valeur Vénale  : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.vv is not null %}
-                                            <input type="text" class="vv" name="vv" disabled value="{{ devisAuto.vv }}">
-                                        {% else %}
-                                            <input type="text" class="vv" name="vv" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Valeur des glaces : </span>
-                                    <span class="detail_info">
-                                        {% if devisAuto.vg is not null %}
-                                            <input type="text" class="vg" name="vg" disabled value="{{ devisAuto.vg }}">
-                                        {% else %}
-                                            <input type="text" class="vg" name="vg" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+                </div>
 
-                            </div>
-                            <!-- -->
-                        </div>
+
+
+
+
                     </div>
 
                 </div>
