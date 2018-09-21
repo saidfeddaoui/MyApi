@@ -51,7 +51,7 @@ class PushClient
         $notification = array(
             'title' => $title,
             'body' => $message,
-            'sound' => "Default",
+
             "timestamp"=>date('Y-m-d G:i:s')
         );
 
@@ -64,6 +64,7 @@ class PushClient
             'content_available' => true,
             "is_background"=>false,
             "timestamp"=>date('Y-m-d G:i:s'),
+            'sound' => "Default",
             'data' => array(
                 'id' => $id,
                 'title' => $title,
