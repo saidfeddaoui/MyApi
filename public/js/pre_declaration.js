@@ -186,7 +186,7 @@ jQuery(document).ready(function() {
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
 
-                    if(response.code){
+                    if(response.code =="ok"){
                         $(".action_footer .accept").hide();
                         $(".action_footer .reject").hide();
                     }
