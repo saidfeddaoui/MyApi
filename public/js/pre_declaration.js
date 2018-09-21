@@ -296,7 +296,10 @@ jQuery(document).ready(function() {
         'transitionOut': 'elastic',
         'speedIn': 600,
         'speedOut': 200,
-        'overlayShow': false
+        'overlayShow': false,
+        afterShow: function(){
+            fancyboxRotation();
+        }
     });
 
     $("a.fancybox_declaration").fancybox({
@@ -304,7 +307,10 @@ jQuery(document).ready(function() {
         'transitionOut': 'elastic',
         'speedIn': 600,
         'speedOut': 200,
-        'overlayShow': false
+        'overlayShow': false,
+        afterShow: function(){
+            fancyboxRotation();
+        }
     });
 
     $("a.fancybox_adversaire").fancybox({
@@ -312,7 +318,10 @@ jQuery(document).ready(function() {
         'transitionOut': 'elastic',
         'speedIn': 600,
         'speedOut': 200,
-        'overlayShow': false
+        'overlayShow': false,
+        afterShow: function(){
+            fancyboxRotation();
+        }
     });
 
     $("a.fancybox_conduire").fancybox({
@@ -320,7 +329,10 @@ jQuery(document).ready(function() {
         'transitionOut': 'elastic',
         'speedIn': 600,
         'speedOut': 200,
-        'overlayShow': false
+        'overlayShow': false,
+        afterShow: function(){
+            fancyboxRotation();
+        }
     });
 
 
