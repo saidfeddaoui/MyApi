@@ -1,6 +1,15 @@
-.general_details_devis p {
+
+
+
+.general_details_devis p,.general_details_satisfaction p{
     display: flex;
     align-items: center;
+}
+
+
+.general_details_satisfaction h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 span.detail_label {
