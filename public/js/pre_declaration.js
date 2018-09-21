@@ -188,11 +188,12 @@ jQuery(document).ready(function() {
                     var $row = $('tr[data-id="' + id + '"]');
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
+
+                    $(".action_footer .accept").hide();
+                    $(".action_footer .reject").hide();
                     //console.log(JResponse);
                 },
                 400: function (response) {
-                    console.log(response.code);
-
                     swal.close();
                     $('body .loadWrapper').hide();
                     setTimeout(function() {
