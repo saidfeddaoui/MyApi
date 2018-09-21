@@ -126,7 +126,7 @@
                         {% for photo in attachements %}
                             {% if photo.type =="photo_sinistre" %}
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                        <a rel="gallery" class="fancybox_sinistre" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                              <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -147,7 +147,7 @@
                                 {% if photo.type =="pre_declaration" %}
 
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                        <a rel="gallery" class="fancybox_declaration" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                             <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -169,7 +169,7 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="attestation_assurance_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                           <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                           <a rel="gallery" class="fancybox_adversaire" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
                                             <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -190,7 +190,7 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="permis_conduire_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <a rel="gallery" class="fancybox_conduire" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                                 <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                                 <div class="image-hover">
                                                     <i class="icon-zoom-in-2"></i>
