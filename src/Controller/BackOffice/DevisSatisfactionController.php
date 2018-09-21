@@ -55,7 +55,7 @@ class DevisSatisfactionController extends Controller
         return $this->render('devis/satisfaction_details.html.twig', [
             'page_title' => 'Liste des devis Auto',
             'page_subtitle' => '',
-            'devisAuto'=>$devisSatisfaction
+            'element'=>$devisSatisfaction
         ]);
     }
 
