@@ -184,23 +184,10 @@
                                 <p>
                                     <span class="detail_label">Marque : </span>
                                     <span class="detail_info">
-                                        {% if element.devisHabitation.marque is not null %}
-                                            <input type="text" name="marque" disabled value="{{ element.devisHabitation.marque.nom }}">
-                                        {% else %}
                                             <input type="text" name="nomarquem" disabled value="">
-                                        {% endif %}
                                      </span>
                                 </p>
-                                <p>
-                                    <span class="detail_label">Pack : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisHabitation.pack is not null %}
-                                            <input type="text" name="pack" disabled value="{{ element.devisHabitation.pack.name }}">
-                                        {% else %}
-                                            <input type="text" name="pack" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+        
                                 <p>
                                     <span class="detail_label">Puissance : </span>
                                     <span class="detail_info">
@@ -222,22 +209,23 @@
                                         {% endif %}
                                      </span>
                                 </p>
+
+                                <p>
+                                    <span class="detail_label">Combustion : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.combustion is not null %}
+                                            <input type="text"  name="combustion" disabled value="{{ element.devisHabitation.combustion }}">
+                                        {% else %}
+                                            <input type="text" name="combustion" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
                                 
                             </div>
 
 
-
                             <div class="col-md-6">
-                                   <p>
-                                        <span class="detail_label">Combustion : </span>
-                                        <span class="detail_info">
-                                            {% if element.devisHabitation.combustion is not null %}
-                                                <input type="text"  name="combustion" disabled value="{{ element.devisHabitation.combustion }}">
-                                            {% else %}
-                                                <input type="text" name="combustion" disabled value="">
-                                            {% endif %}
-                                         </span>
-                                    </p>
+                                   
                                     <p><span class="detail_label"> Valeur Neuve: </span>
                                         <span class="detail_info">
                                             {% if   element.devisHabitation.vn is not null %}
