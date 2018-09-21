@@ -171,7 +171,7 @@ jQuery(document).ready(function() {
             statusCode: {
                 200: function (response) {
 
-                    console.log(response);
+                    console.log(response.code);
                    // JResponse = JSON.parse(response);
 
                     $('body .loadWrapper').hide();
@@ -191,8 +191,8 @@ jQuery(document).ready(function() {
                     //console.log(JResponse);
                 },
                 400: function (response) {
-                    JResponse = JSON.parse(response);
-                    console.log(JResponse);
+                    console.log(response.code);
+
                     swal.close();
                     $('body .loadWrapper').hide();
                     setTimeout(function() {
