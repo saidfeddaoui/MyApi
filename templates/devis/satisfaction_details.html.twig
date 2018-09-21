@@ -49,13 +49,13 @@
                                 <div class="col-md-6">
                                     <p><span class="detail_label"> Email: </span>
                                         <span class="detail_info">
-                                            <input type="text"  name="email" value="{{ element.devisAuto.email }}">
+                                            <input type="text"  name="email" disabled value="{{ element.devisAuto.email }}">
                                         </span>
                                     </p>
                                     <p><span class="detail_label">Pack : </span>
                                         <span class="detail_info">
                                           {% if   element.devisAuto.pack is not null %}
-                                            <input type="text"  name="pack" value="{{ element.devisAuto.pack.name  }}">
+                                            <input type="text"  name="pack" disabled value="{{ element.devisAuto.pack.name  }}">
                                         {% else %}
                                              <input type="text" name="raison" disabled value="">
                                         {% endif %}
@@ -111,7 +111,7 @@
                                     <p><span class="detail_label"> Valeur Neuve : </span>
                                         <span class="detail_info">
                                             {% if   element.devisAuto.vn is not null %}
-                                                <input type="text"  name="vn" value="{{ element.devisAuto.vn  }}">
+                                                <input type="text"  name="vn" disabled value="{{ element.devisAuto.vn  }}">
                                             {% else %}
                                                  <input type="text" name="vn" disabled value="">
                                             {% endif %}
@@ -120,7 +120,7 @@
                                     <p><span class="detail_label"> Valeur Vénale  : </span>
                                         <span class="detail_info">
                                           {% if   element.devisAuto.vv is not null %}
-                                            <input type="text"  name="vv" value="{{ element.devisAuto.vv  }}">
+                                            <input type="text"  name="vv" disabled value="{{ element.devisAuto.vv  }}">
                                         {% else %}
                                              <input type="text" name="vv" disabled value="">
                                         {% endif %}
@@ -168,13 +168,13 @@
                                 <div class="col-md-6">
                                     <p><span class="detail_label"> Email: </span>
                                         <span class="detail_info">
-                                            <input type="text"  name="email" value="{{ element.devisHabitation.email }}">
+                                            <input type="text"  name="email" disabled value="{{ element.devisHabitation.email }}">
                                         </span>
                                     </p>
                                     <p><span class="detail_label">Pack : </span>
                                         <span class="detail_info">
                                           {% if   element.devisHabitation.pack is not null %}
-                                            <input type="text"  name="pack" value="{{ element.devisHabitation.pack.name  }}">
+                                            <input type="text"  name="pack" disabled value="{{ element.devisHabitation.pack.name  }}">
                                         {% else %}
                                              <input type="text" name="raison" disabled value="">
                                         {% endif %}
@@ -241,7 +241,7 @@
                                     <p><span class="detail_label"> Valeur Neuve: </span>
                                         <span class="detail_info">
                                             {% if   element.devisHabitation.vn is not null %}
-                                                <input type="text"  name="vn" value="{{ element.devisHabitation.vn  }}">
+                                                <input type="text"  name="vn" disabled value="{{ element.devisHabitation.vn  }}">
                                             {% else %}
                                                  <input type="text" name="vn" disabled value="">
                                             {% endif %}
