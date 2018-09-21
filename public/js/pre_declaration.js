@@ -289,7 +289,10 @@ jQuery(document).ready(function() {
         });
     }
 
-
+    function fancyboxRotation(){
+        $('.fancybox-wrap').css('webkitTransform', rotate("-90 deg"));
+        $('.fancybox-wrap').css('mozTransform', rotate("-90deg"));
+    }
 
     $("a.fancybox_sinistre").fancybox({
         'transitionIn': 'elastic',
@@ -336,10 +339,7 @@ jQuery(document).ready(function() {
     });
 
 
-    function fancyboxRotation(){
-        $('.fancybox-wrap').css('webkitTransform', rotate(-90deg));
-        $('.fancybox-wrap').css('mozTransform', rotate(-90deg));
-    }
+
 
 
 
