@@ -171,9 +171,6 @@ jQuery(document).ready(function() {
             statusCode: {
                 200: function (response) {
 
-                    console.log(response.code);
-                   // JResponse = JSON.parse(response);
-
                     $('body .loadWrapper').hide();
                     swal.close();
                     setTimeout(function(){
@@ -189,9 +186,11 @@ jQuery(document).ready(function() {
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
 
-                    $(".action_footer .accept").hide();
-                    $(".action_footer .reject").hide();
-                    //console.log(JResponse);
+                    if(response.code){
+                        $(".action_footer .accept").hide();
+                        $(".action_footer .reject").hide();
+                    }
+
                 },
                 400: function (response) {
                     swal.close();
