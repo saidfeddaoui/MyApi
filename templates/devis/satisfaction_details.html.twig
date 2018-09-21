@@ -142,7 +142,7 @@
                                     <span class="detail_label">Valeur des glaces : </span>
                                     <span class="detail_info">
                                         {% if element.devisAuto.datemec is not null %}
-                                            <input type="text" name="vg" disabled value="{{ element.datemec | date('Y-m-d H:i:s')  }}">
+                                            <input type="text" name="vg" disabled value="{{element.devisAuto.datemec | date('Y-m-d H:i:s')  }}">
                                         {% else %}
                                             <input type="text" name="vg" disabled value="">
                                         {% endif %}
@@ -208,6 +208,17 @@
                                             <input type="text" name="puissance" disabled value="{{ element.devisHabitation.puissance }}">
                                         {% else %}
                                             <input type="text" name="puissance" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+                                 <p>
+                                    <span class="detail_label">Valeur des glaces : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.datemec is not null %}
+                                            <input type="text" name="vg" disabled value="{{element.devisHabitation.datemec | date('Y-m-d H:i:s')  }}">
+                                        {% else %}
+                                            <input type="text" name="vg" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
