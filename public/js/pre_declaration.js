@@ -170,7 +170,9 @@ jQuery(document).ready(function() {
             },
             statusCode: {
                 200: function (response) {
-                    JResponse = JSON.parse(response);
+
+                    console.log(response);
+                   // JResponse = JSON.parse(response);
 
                     $('body .loadWrapper').hide();
                     swal.close();
@@ -186,7 +188,7 @@ jQuery(document).ready(function() {
                     var $row = $('tr[data-id="' + id + '"]');
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
-                    console.log(JResponse);
+                    //console.log(JResponse);
                 },
                 400: function (response) {
                     JResponse = JSON.parse(response);
