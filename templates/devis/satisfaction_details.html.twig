@@ -137,8 +137,17 @@
                                         {% endif %}
                                      </span>
                                 </p>
-                               
-                                
+
+                                <p>
+                                    <span class="detail_label">Valeur des glaces : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto.datemec is not null %}
+                                            <input type="text" name="vg" disabled value="{{ element.datemec | date('Y-m-d H:i:s')  }}">
+                                        {% else %}
+                                            <input type="text" name="vg" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
                             </div>
 
                             {% elseif element.auto=="DH" %}
