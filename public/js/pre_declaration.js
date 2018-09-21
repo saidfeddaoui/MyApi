@@ -103,11 +103,8 @@ jQuery(document).ready(function() {
                 //traitement en cas de succès
                 200: function (response) {
 
-                    JResponse = JSON.parse(response);
-
                     $("#details-pre-declaration-modal .modal-body .pre-declaration-details").html(response);
                     $("#details-pre-declaration-modal").modal();
-                     console.log(JResponse);
                     $('[id*="photo-attachment"]').each(function() {
                         var id = $(this).attr('id');
                         ImageCrop.init('#' + id, '.preview-' + id);
@@ -173,6 +170,8 @@ jQuery(document).ready(function() {
             },
             statusCode: {
                 200: function (response) {
+                    JResponse = JSON.parse(response);
+
                     $('body .loadWrapper').hide();
                     swal.close();
                     setTimeout(function(){
@@ -187,8 +186,11 @@ jQuery(document).ready(function() {
                     var $row = $('tr[data-id="' + id + '"]');
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
+                    console.log(JResponse);
                 },
                 400: function (response) {
+                    JResponse = JSON.parse(response);
+                    console.log(JResponse);
                     swal.close();
                     $('body .loadWrapper').hide();
                     setTimeout(function() {
