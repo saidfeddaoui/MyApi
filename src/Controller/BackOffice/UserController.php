@@ -32,13 +32,16 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('App:User')->getUsers();;
+        $users = $em->getRepository('App:User')->getUsers();
+        $form = $this->createForm(RegistrationType::class, new User(), [
+            'action' => $this->generateUrl('administration_add_user'),
+        ]);
 
         return $this->render('@FOSUser/Registration/register.html.twig', [
             'page_title' => 'Gestion des utilisateurs',
             'page_subtitle' => '',
             'users' => $users,
-            'form' => '',
+            'form' => $form->createView(),
         ]);
     }
     /**
