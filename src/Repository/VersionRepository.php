@@ -8,10 +8,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Versions|null find($id, $lockMode = null, $lockVersion = null)
- * @method Versions|null findOneBy(array $criteria, array $orderBy = null)
- * @method Versions[]    findAll()
- * @method Versions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Version|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Version|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Version[]    findAll()
+ * @method Version[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class VersionRepository extends ServiceEntityRepository
 {
