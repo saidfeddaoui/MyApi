@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+
     var ImageCrop = {
         init: function(photoPaneId, previewPaneId) {
             // Create variables (in this scope) to hold the API and image size
@@ -63,15 +64,32 @@ jQuery(document).ready(function() {
                 "orderable": true,
             },
             {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
+                "searchable": true,
+                "orderable": true,
+            },
+            {
                 "searchable": false,
                 "orderable": false,
             }
         ],
         "order": [
-            [0, "asc"]
+            [5, "desc"]
         ] // set first column as a default sort by asc
     });
-    $('.details').on('click', function () {
+
+    $('.predetails').on('click', function () {
+       var id = $(this).data('id');
+       url= Routing.generate('pre_declarations_display_details', {id: id});
+
+       console.log(url);
+       window.open(url, '_blank');
+    });
+
+   $('.detail').on('click', function () {
         var id = $(this).data('id');
         $.ajax({
             url: Routing.generate('pre_declarations_details', {id: id}),
@@ -84,6 +102,7 @@ jQuery(document).ready(function() {
             statusCode: {
                 //traitement en cas de succès
                 200: function (response) {
+
                     $("#details-pre-declaration-modal .modal-body .pre-declaration-details").html(response);
                     $("#details-pre-declaration-modal").modal();
                     $('[id*="photo-attachment"]').each(function() {
@@ -138,6 +157,8 @@ jQuery(document).ready(function() {
         });
     });
     function deleteRowAction(id, td, route, description) {
+        swal.close();
+        $('body .loadWrapper').show();
         $.ajax({
             url: Routing.generate(route, {id: id}),
             data: {description: description},
@@ -149,6 +170,8 @@ jQuery(document).ready(function() {
             },
             statusCode: {
                 200: function (response) {
+
+                    $('body .loadWrapper').hide();
                     swal.close();
                     setTimeout(function(){
                         swal({
@@ -162,9 +185,16 @@ jQuery(document).ready(function() {
                     var $row = $('tr[data-id="' + id + '"]');
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
+
+                    if(response.code =="ok"){
+                        $(".action_footer .accept").hide();
+                        $(".action_footer .reject").hide();
+                    }
+
                 },
                 400: function (response) {
                     swal.close();
+                    $('body .loadWrapper').hide();
                     setTimeout(function() {
                         toastr.error(response.responseJSON.message);
                     }, 500);
@@ -172,4 +202,135 @@ jQuery(document).ready(function() {
             }
         });
     }
+
+
+
+    $('body').on('click', '.update', function (e) {
+        e.preventDefault();
+        var $this = $(".general_details");
+        var id = $this.data("id") * 1;
+        var police = $this.find(".police").val();
+        var phone = $this.find(".phone").val();
+        var adress = $this.find(".adress").val();
+        var nbv = $this.find(".nbv").val();
+        var nbi = $this.find(".nbi").val();
+        var description = $this.find(".description").val();
+        var sinistretype = $this.find(".sinistretype").val();
+
+
+        var DATA = {
+            "police":police,
+            "phone":phone,
+            "adress":adress,
+            "nbv":nbv,
+            "nbi":nbi,
+            "description":description,
+            "sinistretype":sinistretype
+          };
+
+        swal({
+            title: 'Voulez-vous vraiement Modifier cette pré-déclaration ?',
+            text: '',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn-success',
+            confirmButtonText: 'Confirmer!',
+            cancelButtonText: 'Annuler',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (confirm) {
+            if (confirm) {
+               // deleteRowAction(id, td, 'pre_declarations_accept', '');
+                updateAction(id,'pre_declarations_update', DATA);
+                console.log(DATA);
+            } else {
+                swal('Action annulée', "Aucune action n'a été exécutée", 'error');
+            }
+        });
+
+    });
+
+
+
+    function updateAction(id, route, data) {
+        swal.close();
+        $('body .loadWrapper').show();
+        $.ajax({
+            url: Routing.generate(route, {id: id}),
+            data: data,
+            type: 'POST',
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                200: function (response) {
+                    $('body .loadWrapper').hide();
+                    swal.close();
+                    setTimeout(function(){
+                        swal({
+                            title: "",
+                            text: response.message,
+                            timer: 3000,
+                            showConfirmButton: false,
+                            customClass: 'custom-swal',
+                        });
+                    }, 500);
+                },
+                400: function (response) {
+                    swal.close();
+                    $('body .loadWrapper').hide();
+                    setTimeout(function() {
+                        toastr.error(response.responseJSON.message);
+                    }, 500);
+                }
+            }
+        });
+    }
+
+    function fancyboxRotation(){
+        $('.fancybox-wrap').css('webkitTransform', rotate("-90 deg"));
+        $('.fancybox-wrap').css('mozTransform', rotate("-90deg"));
+    }
+
+    $("a.fancybox_sinistre").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+    $("a.fancybox_declaration").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+    $("a.fancybox_adversaire").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+    $("a.fancybox_conduire").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+
+
+
+
+
+
+     
 });

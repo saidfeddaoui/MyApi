@@ -18,6 +18,8 @@ class DevisAuto
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
      */
     private $id;
 
@@ -163,7 +165,7 @@ class DevisAuto
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
-     * @ORM\Column(type="float", nullable=true, nullable = true)
+     * @ORM\Column(type="string", nullable=true, nullable = true)
      */
     private $vn;
 
@@ -174,7 +176,7 @@ class DevisAuto
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
-     * @ORM\Column(type="float", nullable=true, nullable = true)
+     * @ORM\Column(type="string", nullable=true, nullable = true)
      */
     private $vv;
 
@@ -185,7 +187,7 @@ class DevisAuto
      *
      * @Assert\NotNull(groups={"devis_auto"})
      *
-     * @ORM\Column(type="float", nullable=true, nullable = true)
+     * @ORM\Column(type="string", nullable=true, nullable = true)
      */
     private $vg;
 
@@ -338,36 +340,36 @@ class DevisAuto
         return $this;
     }
 
-    public function getVn(): ?float
+    public function getVn(): ?string
     {
         return $this->vn;
     }
 
-    public function setVn(?float $vn): self
+    public function setVn(?string $vn): self
     {
         $this->vn = $vn;
 
         return $this;
     }
 
-    public function getVv(): ?float
+    public function getVv(): ?string
     {
         return $this->vv;
     }
 
-    public function setVv(?float $vv): self
+    public function setVv(?string $vv): self
     {
         $this->vv = $vv;
 
         return $this;
     }
 
-    public function getVg(): ?float
+    public function getVg(): ?string
     {
         return $this->vg;
     }
 
-    public function setVg(?float $vg): self
+    public function setVg(?string $vg): self
     {
         $this->vg = $vg;
 

@@ -51,7 +51,7 @@ class Client extends User
      * @var string
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"phone_registration","login_response"})
+     * @Serializer\Groups({"phone_registration","login_response","listPreDeclaration"})
      *
      * @Assert\NotBlank(groups={"phone_registration"})
      * @Assert\Regex(pattern="/^0[0-9]{9}$/", groups={"phone_registration"})
@@ -122,13 +122,12 @@ class Client extends User
      */
     private $contrats;
 
-
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups({"client_account_creation"})
-     * @ORM\OneToOne(targetEntity="Device")
+     * @ORM\OneToOne(targetEntity="App\Entity\Device", inversedBy="client", cascade={"persist", "remove"})
      */
-    protected $device;
+    private $device;
+
+
 
     public function __construct()
     {
@@ -346,22 +345,6 @@ class Client extends User
         return self::STATUS_CONFIRMED_ACCOUNT === $this->getStatus();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDevice()
-    {
-        return $this->device;
-    }
-
-    /**
-     * @param mixed $device
-     */
-    public function setDevice($device)
-    {
-        $this->device = $device;
-    }
-
 
 
     /**
@@ -394,5 +377,18 @@ class Client extends User
 
         return $this;
     }
+
+    public function getDevice(): ?Device
+    {
+        return $this->device;
+    }
+
+    public function setDevice(?Device $device): self
+    {
+        $this->device = $device;
+
+        return $this;
+    }
+
 
 }

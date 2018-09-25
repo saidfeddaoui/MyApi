@@ -31,15 +31,17 @@
                             <th> Prénom </th>
                             <th> Tél </th>
                             <th> email </th>
+                            <th> Plus d'informations</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for element in data %}
-                        <tr data-id="{{ element.id }}">
+                        <tr class="detail_devis_mrh" data-id="{{ element.id }}">
                             <td> {{ element.nom }} </td>
                             <td> {{ element.prenom }} </td>
                             <td> {{ element.tel }} </td>
                             <td> {{ element.email }} </td>
+                            <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
                         </tr>
                         {% endfor %}
                         </tbody>

@@ -29,10 +29,11 @@ class Item implements TranslatableInterface
     private $id;
 
     /**
+     *
      * @ORM\Column(type="string", length=255,nullable=true)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"slider", "products", "modes", "sinistre", "emergency"})
+     * @Serializer\Groups({"slider", "products", "modes", "sinistre", "emergency","listPreDeclaration"})
      * @Gedmo\Translatable
      */
     private $title;

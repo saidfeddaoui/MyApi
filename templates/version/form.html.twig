@@ -1,0 +1,83 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal VersionForm', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.current_version) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.current_version, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.min_version) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.min_version, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.msg_info) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.msg_info, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.msg_bloquer) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.msg_bloquer, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.cache) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.cache, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.path) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.path, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.version_code) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.version_code, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.os) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.os, {'attr': {'class': 'form-control '}} ) }}
+    </div>
+</div>
+
+
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green Saveversion">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}

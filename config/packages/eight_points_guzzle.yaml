@@ -64,14 +64,21 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                             plugin: ~
         api_add_contrat:
-                    base_url: http://demo6081607.mockable.io/addContrat
+                    base_url: https://ais.mamda-mcma.ma/WS/api/contrat/add/post/
                     options:
                         timeout: 30
                         headers:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_details_contrat:
-                    base_url: http://demo6081607.mockable.io/details
+                    base_url: https://ais.mamda-mcma.ma/WS/api/contrat/det/post/
+                    options:
+                        timeout: 30
+                        headers:
+                            User-Agent: MobiblancMamda/7.0
+                    plugin: ~
+        preDeclarationTrigger:
+                    base_url: https://ais.mamda-mcma.ma/WS/api/predeclaration/reponse/post
                     options:
                         timeout: 30
                         headers:

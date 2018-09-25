@@ -15,8 +15,12 @@ class Contrats
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     * @Serializer\Groups({"contrats","listPreDeclaration","client_pre_declaration"})
+     *
      */
     private $id;
+
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -28,13 +32,12 @@ class Contrats
     /**
      * @ORM\Column(type="string", length=255)
      * @Serializer\Expose()
-     * @Serializer\Groups("contrats")
-     * @Serializer\Groups("contrats")
+     * @Serializer\Groups({"contrats","listPreDeclaration","client_pre_declaration"})
      */
     private $police;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="idSocietaire")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="idSocietaire",cascade={"persist", "remove"})
      */
     private $client;
 

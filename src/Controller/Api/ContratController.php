@@ -147,15 +147,23 @@ class ContratController extends BaseController
      */
     public function deleteManyContrat(Request $request)
     {
-        $contrats=json_decode($request->getContent());
+
+        $contrats = json_decode($request->getContent());
+        $contrats = $contrats->params;
+
+
         foreach ($contrats as $contrat) {
-            $contra = $this->em->getRepository("App:Contrats")->findOneByPolice($contrat->nemeroClient);
+            $contra = $this->em->getRepository("App:Contrats")->find($contrat->id);
+
+
             $contra->setActif(false);
             $datenow = new \DateTime("now");
             $contra->setDateSuppression($datenow);
         }
 
+
         $this->em->flush();
+
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",

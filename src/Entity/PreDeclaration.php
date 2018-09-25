@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Type;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PreDeclarationRepository")
@@ -28,6 +30,10 @@ class PreDeclaration
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"listPreDeclaration","client_pre_declaration"})
+     *
      */
     private $id;
 
@@ -58,7 +64,7 @@ class PreDeclaration
      *
      * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\DateTime(groups={"client_pre_declaration"}, format="Y-m-d H:i:s")
@@ -68,7 +74,7 @@ class PreDeclaration
     private $dateSinistre;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("show_predeclaration")
+     * @Serializer\Groups({"show_predeclaration","listPreDeclaration"})
      *
      * @ORM\Column(type="smallint")
      */
@@ -79,7 +85,7 @@ class PreDeclaration
     private $description;
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
@@ -90,8 +96,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
-     *
+     * @Serializer\Groups({"client_pre_declaration"})
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
      *
@@ -101,7 +106,7 @@ class PreDeclaration
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @Assert\NotNull(groups={"client_pre_declaration"})
      * @Assert\Valid(groups={"client_pre_declaration"})
@@ -155,6 +160,58 @@ class PreDeclaration
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+
+    /**
+     * @var Client
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="preDeclaration")
+     * @Type("App\Entity\Client")
+     */
+    private $client;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups({"listPreDeclaration"})
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $reference;
+
+    /**
+     * @return mixed
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param mixed $reference
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
+
+    /**
+     * @return Client|null
+     */
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client |null $client
+     * @return static
+     */
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+        return $this;
+    }
 
     public function getId()
     {

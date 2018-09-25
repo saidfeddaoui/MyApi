@@ -79,8 +79,36 @@ class DevisSatisfactionController extends BaseController
      */
     public function accepted(DevisSatisfaction $devisAccepted, ConstraintViolationListInterface $violations)
     {
-        $devisAccepted->setStatut(true);
-        $this->em->persist($devisAccepted);
+
+        if (($devisAccepted->getDevisAuto()->getId() == false) && ($devisAccepted->getDevisHabitation()->getId()== false)){
+
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
+        }
+
+        $auto =  strtoupper($devisAccepted->getAuto());
+
+        $devisSatisfaction = new DevisSatisfaction();
+        $devisSatisfaction->setEcheanceDate($devisAccepted->getEcheanceDate());
+        $devisSatisfaction->setAgence($devisAccepted->getAgence());
+        $devisSatisfaction->setComment($devisAccepted->getComment());
+        $devisSatisfaction->setAuto($auto);
+        $devisSatisfaction->setStatut(true);
+
+        if ($auto == "DA"){
+            $da_id = $devisAccepted->getDevisAuto()->getId();
+            $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
+            $devisSatisfaction->setDevisAuto($devis);
+            $devisSatisfaction->setDevisHabitation(null);
+        }else{
+
+            $da_id = $devisAccepted->getDevisHabitation()->getId();
+
+            $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
+
+            $devisSatisfaction->setDevisHabitation($devis);
+            $devisSatisfaction->setDevisAuto(null);
+        }
+        $this->em->persist($devisSatisfaction);
         $this->em->flush();
         return $this->respondWith();
     }
@@ -131,11 +159,36 @@ class DevisSatisfactionController extends BaseController
      */
     public function rejected(DevisSatisfaction $devisRejected, ConstraintViolationListInterface $violations,ObjectManager $em)
     {
+
+        $auto =  strtoupper($devisRejected->getAuto());
+
+        if (($devisRejected->getDevisAuto()->getId() == false) && ($devisRejected->getDevisHabitation()->getId()== false)){
+
+            return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
+        }
+
+        $devisSatisfaction = new DevisSatisfaction();
+        $devisSatisfaction->setComment($devisRejected->getComment());
+        $devisSatisfaction->setAuto($auto);
+        $devisSatisfaction->setStatut(false);
+
         $idlist= $devisRejected->getRaison()->getId();
         $list = $em->getRepository('App:ListSatisfaction')->find($idlist);
-        $devisRejected->setRaison($list);
-        $devisRejected->setStatut(false);
-        $this->em->persist($devisRejected);
+        $devisSatisfaction->setRaison($list);
+
+        if ($auto == "DA"){
+            $da_id = $devisRejected->getDevisAuto()->getId();
+            $devis = $this->em->getRepository("App:DevisAuto")->find($da_id);
+            $devisSatisfaction->setDevisAuto($devis);
+            $devisSatisfaction->setDevisHabitation(null);
+        }else{
+            $da_id = $devisRejected->getDevisHabitation()->getId();
+            $devis = $this->em->getRepository("App:DevisHabitation")->find($da_id);
+            $devisSatisfaction->setDevisHabitation($devis);
+            $devisSatisfaction->setDevisAuto(null);
+        }
+
+        $this->em->persist($devisSatisfaction);
         $this->em->flush();
         return $this->respondWith();
     }

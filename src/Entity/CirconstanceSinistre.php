@@ -18,11 +18,12 @@ class CirconstanceSinistre implements TranslatableInterface
 
     /**
      * @Serializer\Expose()
+     * @Serializer\Groups({"circonstance-sinistre"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"circonstance-sinistre"})
+     *
      */
     private $id;
 

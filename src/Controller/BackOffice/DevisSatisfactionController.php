@@ -3,6 +3,7 @@
 namespace App\Controller\BackOffice;
 
 
+use App\Entity\DevisSatisfaction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,27 +21,52 @@ use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
 class DevisSatisfactionController extends Controller
 {
     /**
-     * @Route("/accepted", name="accepted",options={"expose"=true})
+     * @Route("/satisfaction", name="accepted",options={"expose"=true})
      *
-     * @Breadcrumb(title="Acceptés")
+     * @Breadcrumb(title="Devis")
      *
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function accepted(Request $request, SessionInterface $session)
+    public function satisfaction(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $devisAccepted = $em->getRepository('App:DevisSatisfaction')->findByStatut(true);
-        return $this->render('devis/accepted.html.twig', [
-            'page_title' => 'Liste des devis acceptés',
+        $devis = $em->getRepository("App:DevisSatisfaction")->findAll();
+        return $this->render('devis/satisfaction.html.twig', [
+            'page_title' => 'Liste des devis',
             'page_subtitle' => '',
-            'data'=>$devisAccepted
+            'data'=>$devis
         ]);
 
     }
 
+
     /**
+     * @Route("/satisfaction/details/{id}", name="satisfaction_details",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Detail devis satisfaction ")
+     * @param DevisSatisfaction $devisSatisfaction
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function details(DevisSatisfaction $devisSatisfaction)
+    {
+        return $this->render('devis/satisfaction_details.html.twig', [
+            'page_title' => 'Liste des devis Auto',
+            'page_subtitle' => '',
+            'element'=>$devisSatisfaction
+        ]);
+    }
+
+
+
+
+
+
+    /*
+     *  il a ete chaque type dans une view accept and reject
+     *
      * @Route("/rejected", name="rejected",options={"expose"=true})
      *
      * @Breadcrumb(title="Rejetés")
@@ -48,7 +74,7 @@ class DevisSatisfactionController extends Controller
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
-     */
+
     public function rejected(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
@@ -60,4 +86,6 @@ class DevisSatisfactionController extends Controller
         ]);
 
     }
+
+    */
 }

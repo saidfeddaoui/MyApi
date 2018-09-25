@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\ContentType\InfoPratique;
 use App\Entity\Alert;
+use App\Entity\Client;
 use App\Entity\InsuranceType;
 use App\Entity\MarqueVehicule;
 use App\Entity\Societaire;
@@ -326,6 +327,8 @@ class ContentController extends BaseController
     {
         return $this->respondWith($insuranceType->getMarqueVehicules());
     }
+
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},

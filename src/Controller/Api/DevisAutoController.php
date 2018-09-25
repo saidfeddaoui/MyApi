@@ -85,16 +85,31 @@ class DevisAutoController extends BaseController
     public function normal(DevisAuto $auto, ConstraintViolationListInterface $violations, DevisAutoApiService $Auto_api)
     {
         $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$auto->getSocietaire()->getCode(),"type" => "AUTO" ]);
+        $marque = $this->em->getRepository('App:MarqueVehicule')->find($auto->getMarque()->getId());
+        $pack = $this->em->getRepository('App:Pack')->findOneBy([ "code" =>$auto->getPack()->getCode()]);
         $devi_auto = new DevisAuto();
         $devi_auto->setNom($auto->getNom());
         $devi_auto->setPrenom($auto->getPrenom());
         $devi_auto->setTel($auto->getTel());
         $devi_auto->setEmail($auto->getEmail());
-        $devi_auto->setCivilite($auto->getCivilite());
+        $devi_auto->setMarque($marque);
+        $devi_auto->setPack($pack);
         $devi_auto->setSocietaire($societaire);
+        $devi_auto->setCivilite($auto->getCivilite());
+        $devi_auto->setW($auto->getW());
+        $devi_auto->setDateMec($auto->getDateMec());
+        $devi_auto->setPuissance($auto->getPuissance());
+        $devi_auto->setCombustion($auto->getCombustion());
+        $devi_auto->setVn($auto->getVn());
+        $devi_auto->setVv($auto->getVv());
+        $devi_auto->setVg($auto->getVg());
+
         $this->em->persist($devi_auto);
         $this->em->flush();
         $devis = $Auto_api->getDevisAuto($auto);
+        $idDevis =$devi_auto->getId();
+
+        $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
     }
 

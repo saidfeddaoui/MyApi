@@ -6,6 +6,10 @@ sweet-alert
     box-shadow: none!important;
 }
 
+.portlet.light.portlet-fit>.portlet-body {
+    overflow: auto!important;
+}
+
 .sweet-alert {
     background-color: #33414d;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -185,4 +189,8 @@ textarea.form-control {
     font-weight: 300;
     text-align: center;
     color: red;
+}
+
+.fancybox-overlay-fixed {
+    z-index: 99999!important;
 }

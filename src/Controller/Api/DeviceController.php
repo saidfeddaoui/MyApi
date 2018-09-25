@@ -3,8 +3,8 @@
 namespace App\Controller\Api;
 
 
-use App\Entity\Device;
 use App\Services\ApiDevices;
+use App\Services\Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -63,17 +63,19 @@ class DeviceController extends Controller
      *
      * @param ApiDevices $apiDevices
      * @param Request $request
+     * @param Validator $validator
      * @return JsonResponse
      */
-    public function addDeviceAction(Request $request,ApiDevices $apiDevices)
+    public function addDeviceAction(Request $request,ApiDevices $apiDevices, Validator $validator)
     {
         // check Method
-        $method = $this->container->get('app.check.params')->checkMethod($request,'POST');
+        $method = $validator->checkMethod('POST');
         if ($method['status'] == 'OK'){
             // Params
             $device_uid = $request->request->get('device_uid');
             $os = strtolower($request->request->get('os'));
             $model = $request->request->get('model');
+            $version_name = $request->request->get('version_name');
             $version_code = $request->request->get('version_code');
             $firebase_token = $request->request->get('firebase_token');
             $pushable = $request->request->get('pushable');
@@ -83,19 +85,19 @@ class DeviceController extends Controller
                 'device_uid'=> $device_uid,
                 'os'=> $os,
                 'model'=> $model,
-                'firebase_token'=>$firebase_token,
+                'version_name'=> $version_name,
                 'version_code'=> $version_code,
+                'firebase_token'=> $firebase_token,
                 'pushable'=> $pushable,
                 'latitude'=> $latitude,
                 'longitude'=> $longitude,
             );
 
-            $status = $this->container->get('app.check.params')->checkParams($device);
+            $status = $validator->checkParams($device);
             if($status['status'] ==  "OK"){
                 $dateTime=new \DateTime('now');
                 $dateTime->format('Y-m-d H:i:s');
                 $apiDevices->setDevice($device,$dateTime);
-                //$check_version = $apiDevices->checkVersion($os, $version_code);
                 $response['header'] = array('status'=>'OK','message'=>'SUCCESSFULY UPDATED');;
                 $response['results'] =  array();
                 return new JsonResponse($response);

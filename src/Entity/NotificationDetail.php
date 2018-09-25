@@ -5,9 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationDetailRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class NotificationDetail
 {
@@ -19,38 +20,27 @@ class NotificationDetail
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $client;
-
-    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $idSocietaire;
+    private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $sujet;
-
-    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="text", nullable=true)
      */
-    private $message;
+    private $valeur;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $statut;
-
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Notification", inversedBy="notificationDetails")
+     * @ORM\JoinColumn(name="IdNotification", referencedColumnName="id")
      * @ORM\JoinColumn(nullable=false)
      */
     private $notification;
@@ -107,33 +97,33 @@ class NotificationDetail
     /**
      * @return mixed
      */
-    public function getSujet()
+    public function getLibelle()
     {
-        return $this->sujet;
+        return $this->libelle;
     }
 
     /**
-     * @param mixed $sujet
+     * @param mixed $libelle
      */
-    public function setSujet($sujet)
+    public function setLibelle($libelle)
     {
-        $this->sujet = $sujet;
+        $this->libelle = $libelle;
     }
 
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getValeur()
     {
-        return $this->message;
+        return $this->valeur;
     }
 
     /**
-     * @param mixed $message
+     * @param mixed $valeur
      */
-    public function setMessage($message)
+    public function setValeur($valeur)
     {
-        $this->message = $message;
+        $this->valeur = $valeur;
     }
 
     /**

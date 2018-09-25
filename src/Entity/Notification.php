@@ -5,9 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
+ * @Serializer\ExclusionPolicy("all")
  */
 class Notification
 {
@@ -19,7 +20,9 @@ class Notification
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="Notification",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="IdCompteMobile", referencedColumnName="id")
      */
     private $client;
 
@@ -28,17 +31,26 @@ class Notification
      */
     private $idSocietaire;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $idPredeclaration;
+
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\PreDeclaration", inversedBy="Notification",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="idPredeclaration", referencedColumnName="id")
+     */
+    private $predeclaration;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sujet;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $message;
@@ -54,6 +66,8 @@ class Notification
     private $statut;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
      * @ORM\OneToMany(targetEntity="App\Entity\NotificationDetail", mappedBy="notification", cascade={"persist","remove"})
      */
     private $notificationDetails;
@@ -137,21 +151,22 @@ class Notification
     }
 
     /**
-     * @return mixed
+     * @return PreDeclaration|null
      */
-    public function getIdPredeclaration()
+    public function getPredeclaration(): ?PreDeclaration
     {
-        return $this->idPredeclaration;
+        return $this->predeclaration;
     }
 
     /**
-     * @param mixed $idPredeclaration
+     * @param PreDeclaration |null $predeclaration
+     * @return static
      */
-    public function setIdPredeclaration($idPredeclaration)
+    public function setPredeclaration(?PreDeclaration $predeclaration): self
     {
-        $this->idPredeclaration = $idPredeclaration;
+        $this->predeclaration = $predeclaration;
+        return $this;
     }
-
 
     /**
      * @return mixed

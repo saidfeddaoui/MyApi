@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisSatisfactionRepository")
  * @Serializer\ExclusionPolicy("all")
+ * @ORM\HasLifecycleCallbacks
  */
 class DevisSatisfaction
 {
@@ -44,7 +45,6 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_refused"})
-     *
      * @Assert\NotNull(groups={"devis_refused"})
      * @ORM\JoinColumn(name="raison", referencedColumnName="id", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Entity\ListSatisfaction", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
@@ -65,6 +65,35 @@ class DevisSatisfaction
      * @ORM\Column(type="boolean")
      */
     private $statut;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreation;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\DevisAuto", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $devisAuto;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\DevisHabitation", inversedBy="DevisSatisfaction", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $devisHabitation;
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $auto;
+
 
     public function getId()
     {
@@ -130,4 +159,74 @@ class DevisSatisfaction
 
         return $this;
     }
+
+
+    public function getAuto(): ?string
+    {
+        return $this->auto;
+    }
+
+    public function setAuto(string $auto): self
+    {
+        $this->auto = $auto;
+
+        return $this;
+    }
+
+    public function getDevisAuto()
+    {
+        return $this->devisAuto;
+    }
+
+    public function setDevisAuto($devisAuto)
+    {
+        $this->devisAuto = $devisAuto;
+
+        return $this;
+    }
+
+    public function getDevisHabitation()
+    {
+        return $this->devisHabitation;
+    }
+
+    public function setDevisHabitation($devisHabitation)
+    {
+        $this->devisHabitation = $devisHabitation;
+
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * @param mixed $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if ($this->getDateCreation() == null) {
+            $this->setDateCreation(new \DateTime('now'));
+        }
+    }
+
 }

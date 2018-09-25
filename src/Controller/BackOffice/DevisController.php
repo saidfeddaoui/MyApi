@@ -3,12 +3,14 @@
 namespace App\Controller\BackOffice;
 
 
+use App\Entity\DevisAuto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+
 
 /**
  * @Route(path="/devis", name="devis_")
@@ -41,5 +43,23 @@ class DevisController extends Controller
             'data'=>$devis
         ]);
 
+    }
+
+
+    /**
+     * @Route("/auto/details/{id}", name="auto_details",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Info véhicule")
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function details(DevisAuto $devisAuto)
+    {
+        return $this->render('devis/details.html.twig', [
+            'page_title' => 'Liste des devis Auto',
+            'page_subtitle' => '',
+            'devisAuto'=>$devisAuto
+        ]);
     }
 }

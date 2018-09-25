@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{ asset('css/detail_devis_auto.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light portlet-fit ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase">Devis</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6 general_details_devis" >
+                                <p>
+                                    <span class="detail_label">Marque : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.marque is not null %}
+                                            <input type="text" class="police" name="marque" disabled value="{{ devisAuto.marque.nom }}">
+                                        {% else %}
+                                            <input type="text" class="police" name="nom" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Pack : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.pack is not null %}
+                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.pack.name }}">
+                                        {% else %}
+                                            <input type="text" class="police" name="nom" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Puissance : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.puissance is not null %}
+                                            <input type="text" class="police" name="nom" disabled value="{{ devisAuto.puissance }}">
+                                        {% else %}
+                                            <input type="text" class="police" name="nom" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Combustion : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.combustion is not null %}
+                                            <input type="text" class="combustion" name="combustion" disabled value="{{ devisAuto.combustion }}">
+                                        {% else %}
+                                            <input type="text" class="combustion" name="combustion" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+
+                            </div>
+
+                            <!-- -->
+
+                            <div class="col-md-6 general_details_devis" >
+
+                                <p>
+                                    <span class="detail_label">Valeur Neuve : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.vn is not null %}
+                                            <input type="text" class="vn" name="vn" disabled value="{{ devisAuto.vn }}">
+                                        {% else %}
+                                            <input type="text" class="vn" name="vn" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Valeur Vénale  : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.vv is not null %}
+                                            <input type="text" class="vv" name="vv" disabled value="{{ devisAuto.vv }}">
+                                        {% else %}
+                                            <input type="text" class="vv" name="vv" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Valeur des glaces : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.vg is not null %}
+                                            <input type="text" class="vg" name="vg" disabled value="{{ devisAuto.vg }}">
+                                        {% else %}
+                                            <input type="text" class="vg" name="vg" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+                            </div>
+                            <!-- -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
+{% endblock %}

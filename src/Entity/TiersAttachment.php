@@ -122,26 +122,6 @@ class TiersAttachment
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public static function getAttachmentTypes()
-    {
-        return [
-            self::TYPE_DRIVER_LICENSE,
-            self::TYPE_INSURANCE_ATTESTATION,
-            self::TYPE_FRIENDLY_REPORT,
-        ];
-    }
-    /**
-     * @return array
-     */
-    public static function getRequiredAttachmentTypes()
-    {
-        return [
-            self::TYPE_DRIVER_LICENSE,
-            self::TYPE_INSURANCE_ATTESTATION,
-        ];
-    }
+
 
 }

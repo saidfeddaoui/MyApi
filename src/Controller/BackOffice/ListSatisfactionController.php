@@ -23,7 +23,7 @@ class ListSatisfactionController extends Controller
     /**
      * @Route(path="/list-satisfaction", name="list_satisfaction", options={"expose"=true})
      *
-     * @Breadcrumb(title="Liste Satisfaction")
+     * @Breadcrumb(title="Raison")
      *
      * @param Request $request
      * @param SessionInterface $session

@@ -1,0 +1,83 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal DeviceForm', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.device_uid) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.device_uid, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.model) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.model, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.version_code) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.version_code, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.firebase_token) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.firebase_token, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.pushable) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.pushable, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.latitude) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.longitude) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.os) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.os, {'attr': {'class': 'form-control '}} ) }}
+    </div>
+</div>
+
+
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green Savedevice">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}

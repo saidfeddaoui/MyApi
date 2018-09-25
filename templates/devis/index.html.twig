@@ -31,15 +31,22 @@
                             <th> Prénom </th>
                             <th> Tél </th>
                             <th> email </th>
+                            <th> civilite </th>
+                            <th> Date mise en circulation </th>
+                            <th> Info Véhicule </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for element in data %}
-                        <tr data-id="{{ element.id }}">
+                        <tr class="detail_devis" data-id="{{ element.id }}" style="cursor: pointer">
                             <td> {{ element.nom }} </td>
                             <td> {{ element.prenom }} </td>
                             <td> {{ element.tel }} </td>
                             <td> {{ element.email }} </td>
+                            <td> {{ element.civilite }} </td>
+                            <td> {{ element.dateMec | date('Y-m-d H:i:s') }} </td>
+
+                            <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
                         </tr>
                         {% endfor %}
                         </tbody>

@@ -110,6 +110,11 @@ services:
                     - '@eight_points_guzzle.client.api_details_contrat'
                     - '@jms_serializer'
                     - array
+    App\Services\PreDeclarationTriggerApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.preDeclarationTrigger'
+                    - '@jms_serializer'
+                    - array
 
     # Exception normalizers
     app.normalizer.not_found_http_exception:
@@ -142,12 +147,3 @@ services:
                 - [ 'Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTFailureException' ]
             tags:
                 - { name: app.normalizer }
-
-    # New Services ( Said Mobiblanc )
-
-    # Checks Params
-    App\Service\CheckParams:
-        public: false
-    app.check.params:
-        alias: App\Services\CheckParams
-        public: true

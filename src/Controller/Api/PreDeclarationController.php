@@ -4,7 +4,10 @@ namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
 use App\Entity\CircumstanceAttachment;
+use App\Entity\Client;
 use App\Entity\InsuranceType;
+use App\Entity\Notification;
+use App\Entity\NotificationDetail;
 use App\Entity\PreDeclaration;
 use App\Entity\TiersAttachment;
 use App\Event\ApplicationEvents;
@@ -19,7 +22,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Ramsey\Uuid\Uuid;
-
+use App\Utils\ObjectMapper;
 /**
  * @Rest\Route(path="/pre_declaration", name="api_pre_declaration_")
  */
@@ -36,6 +39,17 @@ class PreDeclarationController extends BaseController
     private $eventDispatcher;
 
     /**
+     * @var $config
+     */
+    private $configNotif = null;
+
+    /**
+     * @var $config
+     */
+    private $configNotifDetail = null;
+
+
+    /**
      * RegistrationController constructor.
      * @param EntityManagerInterface $em
      * @param EventDispatcherInterface $eventDispatcher
@@ -44,6 +58,8 @@ class PreDeclarationController extends BaseController
     {
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
+        $this->configNotif = array('EntityName' => 'Notification','NameSpace' => '\App\Entity\\');
+        $this->configNotifDetail = array('EntityName' => 'NotificationDetail','NameSpace' => '\App\Entity\\');
     }
 
     /**
@@ -116,6 +132,45 @@ class PreDeclarationController extends BaseController
         $preDeclaration->setStatus(PreDeclaration::STATUS_IN_PROGRESS)->setInsuranceType($inType);
         $this->em->persist($preDeclaration);
         $this->em->flush();
+
+        $client = $preDeclaration->getClient();
+        $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
+        $sujet="Pré-déclaration";
+        $message="Nous avons bien reçu votre dossier de pré-déclaration";
+        $datenow=new \dateTime("now");
+        $now=$datenow->format("Y-m-d");
+
+        $data = array(
+            "idSocietaire"=>$idSocietaire,
+            "sujet"=>$sujet,
+            "message"=>$message,
+            "statut"=>false,
+            "client"=>$client,
+            "predeclaration"=>$preDeclaration,
+            "dateCreation"=>new \dateTime("now"));
+
+        $notification = ObjectMapper::mapObjectToEntity($data,$this->configNotif);
+        $this->em->persist($notification);
+        $this->em->flush();
+
+        $data = array(
+            "libelle"=>"date",
+            "valeur"=>$now,
+            "notification"=>$notification,
+            "dateCreation"=>new \dateTime("now"));
+
+
+        $notification_detail = ObjectMapper::mapObjectToEntity($data,$this->configNotifDetail);
+        $this->em->persist($notification_detail);
+        $this->em->flush();
+
+        $tiersAttachement = $preDeclaration->getImages();
+
+        foreach ($tiersAttachement as $attachement){
+       //  $attachement=$this->em->getRepository("App:TiersAttachment")->findOneById($attachement->getId());
+         $attachement->setPreDeclaration($preDeclaration);
+        }
+
         $event = new NewPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
         return $this->respondWith($preDeclaration, ApiResponse::CREATED);
@@ -177,21 +232,21 @@ class PreDeclarationController extends BaseController
      *         name="Authorization",
      *         in="header",
      *         type="string",
-     *         required=true,
+     *         required=false,
      *         description="Bearer auth",
      *     ),
      *     @SWG\Parameter(
      *         name="permis",
      *         in="formData",
      *         type="file",
-     *         required=true,
+     *         required=false,
      *         description="Driver's license picture",
      *     ),
      *     @SWG\Parameter(
      *         name="attestation_assurance",
      *         in="formData",
      *         type="file",
-     *         required=true,
+     *         required=false,
      *         description="Insurance's attestation picture",
      *     ),
      *    @SWG\Parameter(
@@ -228,14 +283,22 @@ class PreDeclarationController extends BaseController
      */
     public function uploadTiersAttachments(Request $request)
     {
-        $types ="predeclaration";
+       // $types ="predeclaration";
         if (!count($request->files)) {
             throw new MissingRequiredFileException("no image");
         }
 
         $directory = $this->get('kernel')->getProjectDir() . '/public/img/tiers';
         $tiersAttachments = [];
+
+       // var_dump(count($request->files));
+        //die();
+
         foreach ($request->files as $type) {
+             //en recois le nom de image xxx-12.png (exp)
+            //on prend juste la premier partie avant - pour la mettre comme type(categorie)
+            $img_arr = explode("-", $type->getClientOriginalName());
+            $types=$img_arr[0];
             /**
              * @var UploadedFile $attachment
              */
@@ -248,6 +311,36 @@ class PreDeclarationController extends BaseController
         }
         return $this->respondWith($tiersAttachments);
     }
+
+    /**
+     * @SWG\Post(
+     *     tags={"Pré-déclaration"},
+     *     description="preDeclaration list",
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         type="string",
+     *         required=true,
+     *         description="Bearer auth",
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Return attachments list",
+     *     )
+     * )
+     *
+     * @Rest\Post(path="/list/{client_id}", name="list")
+     * @Rest\View(serializerGroups={"all","listPreDeclaration"})
+     * @param $client_id
+     * @return ApiResponse
+     */
+    public function listPreDeclaration($client_id)
+    {
+        $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findByClient($client_id);
+        return $this->respondWith($listPredeclaration);
+    }
+
+
 
 
   /*  public function uploadTiersAttachments(Request $request)
