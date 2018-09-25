@@ -57,7 +57,7 @@ eight_points_guzzle:
                     User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_devis_habitation:
-                    base_url: http://demo3896531.mockable.io/mrh
+                    base_url: http://ais.mamda-mcma.ma/api/rd/post
                     options:
                          timeout: 30
                          headers:
