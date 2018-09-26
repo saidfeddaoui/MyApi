@@ -27,9 +27,9 @@ jQuery(document).ready(function() {
         ] // set first column as a default sort by asc
     });
 
-    $("body").on('click','.detail_devis', function () {
+    $("body").on('click','.detail_devis_mrh', function () {
         var id = $(this).data('id');
-        url= Routing.generate('', {id: id});
+        url= Routing.generate('devis_habitation_details', {id: id});
         window.open(url, '_blank');
     });
 });

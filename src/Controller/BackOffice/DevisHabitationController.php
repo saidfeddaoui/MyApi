@@ -3,6 +3,7 @@
 namespace App\Controller\BackOffice;
 
 
+use App\Entity\DevisHabitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,5 +42,23 @@ class DevisHabitationController extends Controller
             'data'=>$devis_mrh
         ]);
 
+    }
+
+
+    /**
+     * @Route("/habitation/details/{id}", name="habitation_details",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Info véhicule")
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function details(DevisHabitation $devisHabitation)
+    {
+        return $this->render('mrh/details.html.twig', [
+            'page_title' => 'Liste des devis Auto',
+            'page_subtitle' => '',
+            'devisAuto'=>$devisHabitation
+        ]);
     }
 }
