@@ -98,6 +98,8 @@ class DevisHabitationController extends BaseController
         $em->persist($devisHab);
         $em->flush();
         $devis = $hapitation_api->getDevisHabitation($habitation);
+        $idDevis =$devisHab->getId();
+        $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
     }
 }
