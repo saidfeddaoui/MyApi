@@ -43,7 +43,7 @@
                             <td> {{ element.tel }} </td>
                             <td> {{ element.email }} </td>
                             {% if element.createdAt is not null %}
-                                <td> {{ element.createdAt }} </td>
+                                <td> {{ element.createdAt | date('Y-m-d H:i:s')}} </td>
                             {% else %}
                                 <td>  </td>
                             {% endif %}
