@@ -107,6 +107,17 @@
                                      </span>
                                 </p>
 
+                                <p>
+                                    <span class="detail_label">Date mise en circulation : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.vg is not null %}
+                                            <input type="text" name="mec" disabled value="{{ element.dateMec | date('Y-m-d H:i:s') }}">
+                                        {% else %}
+                                            <input type="text"  name="mec" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
                             </div>
                             <!-- -->
                         </div>
