@@ -98,7 +98,6 @@ class DevisHabitationController extends BaseController
         $devisHab->setCivilite($habitation->getCivilite());
         $devisHab->setContenu($habitation->getContenu());
         $devisHab->setBatiment($habitation->getBatiment());
-        $devisHab->setSituationRisque($habitation->getSituationRisque());
         $devisHab->setSocietaire($societaire);
         $devisHab->setCategorie($categorie);
         $devisHab->setPropriete($propriete);
