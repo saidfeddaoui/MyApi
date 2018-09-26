@@ -163,61 +163,70 @@
                                 <div class="col-md-6">
                                     <p><span class="detail_label"> Email: </span>
                                         <span class="detail_info">
-                                            <input type="text"  name="email" disabled value="{{ element.devisHabitation.email }}">
+                                            {% if element.devisHabitation.email is not null %}
+                                                <input type="text"  name="email" disabled value="{{ element.devisHabitation.email }}">
+                                            {% else %}
+                                                <input type="text" name="email" disabled value="">
+                                            {% endif %}
+
+
                                         </span>
                                     </p>
-                                    <p><span class="detail_label">Pack : </span>
+                                    <p><span class="detail_label">Téléphone : </span>
                                         <span class="detail_info">
-                                             <input type="text" name="raison" disabled value="">
+                                            {% if element.devisHabitation.tel is not null %}
+                                                <input type="text"  name="tel" disabled value="{{ element.devisHabitation.tel }}">
+                                            {% else %}
+                                                <input type="text" name="tel" disabled value="">
+                                            {% endif %}
                                         </span>
                                     </p>
 
                                 <p>
-                                    <span class="detail_label">Marque : </span>
+                                    <span class="detail_label">Contenu : </span>
                                     <span class="detail_info">
-                                            <input type="text" name="nomarquem" disabled value="">
+                                        {% if element.devisHabitation.contenu is not null %}
+                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.contenu }}">
+                                            {% else %}
+                                            <input type="text" name="contenu" disabled value="">
+                                        {% endif %}
                                      </span>
                                 </p>
         
-                                <p>
-                                    <span class="detail_label">Puissance : </span>
-                                    <span class="detail_info">
-                                            <input type="text" name="puissance" disabled value="">
-                                     </span>
-                                </p>
 
-                                 <p>
-                                    <span class="detail_label">Valeur des glaces : </span>
-                                    <span class="detail_info">
-                                            <input type="text" name="vg" disabled value="">
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Combustion : </span>
-                                    <span class="detail_info">
-                                            <input type="text" name="combustion" disabled value="">
-                                     </span>
-                                </p>
-                                
                             </div>
 
                             <div class="col-md-6">
-                                    <p><span class="detail_label"> Valeur Neuve: </span>
-                                        <span class="detail_info">
-                                                 <input type="text" name="vn" disabled value="">
-                                        </span>
-                                    </p>
-                                    <p><span class="detail_label">Valeur Vénale : </span>
-                                        <span class="detail_info">
-                                             <input type="text" name="vv" disabled value="">
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <span class="detail_label">Valeur des glaces : </span>
-                                        <span class="detail_info">
-                                             <input type="text" name="vg" disabled value="">
-                                         </span>
-                                    </p>
+                                <p>
+                                    <span class="detail_label">Proprieté : </span>
+                                    <span class="detail_info">
+                                            {% if element.devisHabitation.propriete is not null %}
+                                                <input type="text"  name="propriete" disabled value="{{ element.devisHabitation.propriete.name }}">
+                                            {% else %}
+                                                <input type="text" name="propriete" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Catégorie : </span>
+                                    <span class="detail_info">
+                                            {% if element.devisHabitation.categorie is not null %}
+                                                <input type="text"  name="categorie" disabled value="{{ element.devisHabitation.categorie.name }}">
+                                            {% else %}
+                                                <input type="text" name="categorie" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Batiment : </span>
+                                    <span class="detail_info">
+                                            {% if element.devisHabitation.batiment is not null %}
+                                                <input type="text"  name="batiment" disabled value="{{ element.devisHabitation.batiment }}">
+                                            {% else %}
+                                                <input type="text" name="batiment" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
                                
                                 
                             </div>
