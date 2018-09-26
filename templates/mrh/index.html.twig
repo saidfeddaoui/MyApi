@@ -31,6 +31,7 @@
                             <th> Prénom </th>
                             <th> Tél </th>
                             <th> email </th>
+                            <th> date de création </th>
                             <th> Plus d'informations</th>
                         </tr>
                         </thead>
@@ -41,6 +42,12 @@
                             <td> {{ element.prenom }} </td>
                             <td> {{ element.tel }} </td>
                             <td> {{ element.email }} </td>
+                            {% if element.createdAt is not null %}
+                                <td> {{ element.createdAt }} </td>
+                            {% else %}
+                                <td>  </td>
+                            {% endif %}
+
                             <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
                         </tr>
                         {% endfor %}
