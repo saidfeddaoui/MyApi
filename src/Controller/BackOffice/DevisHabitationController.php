@@ -58,7 +58,7 @@ class DevisHabitationController extends Controller
         return $this->render('mrh/details.html.twig', [
             'page_title' => 'Liste des devis Auto',
             'page_subtitle' => '',
-            'devisAuto'=>$devisHabitation
+            'devisHabitation'=>$devisHabitation
         ]);
     }
 }
