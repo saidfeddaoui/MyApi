@@ -18,12 +18,16 @@ jQuery(document).ready(function() {
                 "orderable": true,
             },
             { // set default column settings
+                "searchable": true,
+                "orderable": true,
+            },
+            { // set default column settings
                 "searchable": false,
                 "orderable": false,
             }
         ],
         "order": [
-            [0, "asc"]
+            [4, "desc"]
         ] // set first column as a default sort by asc
     });
 
