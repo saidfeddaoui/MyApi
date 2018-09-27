@@ -103,8 +103,19 @@ class DevisHabitationController extends BaseController
         $devisHab->setPropriete($propriete);
 
         $em->persist($devisHab);
-        $em->flush();
+
         $devis = $hapitation_api->getDevisHabitation($habitation);
+
+        $reference = $devis->getTotal()->getId();
+        $primeHT = $devis->getTotal()->getPrimeHT();
+        $primeTTC = $devis->getTotal()->getPrimeTTC();
+
+        $devisHab->setReference($reference);
+        $devisHab->setPrimeHT($primeHT);
+        $devisHab->setPrimeTTC($primeTTC);
+        $this->em->flush();
+
+
         $idDevis =$devisHab->getId();
         $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
