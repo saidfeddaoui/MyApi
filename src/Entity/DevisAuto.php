@@ -201,6 +201,59 @@ class DevisAuto
      */
     private $createdAt;
 
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeHT;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeTTC;
+
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+
+    public function getPrimeHT()
+    {
+        return $this->primeHT;
+    }
+
+    public function setPrimeHT($primeHT)
+    {
+        $this->primeHT = $primeHT;
+
+        return $this;
+    }
+
+    public function getPrimeTTC()
+    {
+        return $this->primeTTC;
+    }
+
+    public function setPrimeTTC($primeTTC)
+    {
+        $this->primeTTC = $primeTTC;
+
+        return $this;
+    }
+
     /**
      * @return \DateTime
      */
