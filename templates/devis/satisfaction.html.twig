@@ -40,6 +40,14 @@
                         <tbody>
                         {% for element in data %}
                         <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
+
+                            {% if  element.auto=="DA" %}
+                                  <td> AUTO  </td>
+                            {% elseif element.auto=="DH"  %}
+                                <td> MRH </td>
+                            {% else %}
+                                <td> </td>
+                            {% endif %}
                             {% if element.dateCreation is not null %}
                                 <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
@@ -74,15 +82,16 @@
                             {% else %}
                                 <td> Pas disponible </td>
                             {% endif %}
-                            {% if  element.comment is not null %}
-                                <td> {{ element.comment }} </td>
-                            {% else %}
-                                <td>Pas disponible </td>
-                            {% endif %}
+
                             {% if   element.raison is not null %}
                                 <td>  {{ element.raison.title }} </td>
                             {% else %}
                                 <td> Pas disponible </td>
+                            {% endif %}
+                            {% if  element.comment is not null %}
+                                <td> {{ element.comment }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
                             {% endif %}
 
                             {% if  element.statut   %}
