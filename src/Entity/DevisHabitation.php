@@ -129,7 +129,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255,, nullable=true)
      */
     private $batiment;
 
@@ -373,12 +373,12 @@ class DevisHabitation
         return $this;
     }
 
-    public function getBatiment(): ?float
+    public function getBatiment()
     {
         return $this->batiment;
     }
 
-    public function setBatiment(float $batiment): self
+    public function setBatiment($batiment)
     {
         $this->batiment = $batiment;
 
