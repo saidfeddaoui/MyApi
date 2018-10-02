@@ -65,31 +65,6 @@ class ContentController extends BaseController
     }
 
 
-
-
-    /**
-     *
-     * @SWG\Get(
-     *  tags={"Content Types"},
-     *  @SWG\Response(
-     *      response=200,
-     *      description="entities successfully returned"
-     *   )
-     *  )
-     *
-     * @Rest\Get(path = "/entities", name = "entities")
-     *
-     * @Rest\View()
-     * @param ObjectManager $em
-     * @return ApiResponse
-     */
-    public function getEntities(ObjectManager $em)
-    {
-        $entities = $em->getRepository('App:InsuranceType')->findAll();
-        return $this->respondWith($entities);
-    }
-
-
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
@@ -903,6 +878,30 @@ class ContentController extends BaseController
     {
         $mrh_batiments = $em->getRepository('App:MrhBatiment')->findAll();
         return $this->respondWith($mrh_batiments);
+    }
+
+
+
+    /**
+     *
+     * @SWG\Get(
+     *  tags={"Content Types"},
+     *  @SWG\Response(
+     *      response=200,
+     *      description="entities successfully returned"
+     *   )
+     *  )
+     *
+     * @Rest\Get(path = "/entities", name = "entities")
+     *
+     * @Rest\View(serializerGroups={"all", "entities"})
+     * @param ObjectManager $em
+     * @return ApiResponse
+     */
+    public function getEntities(ObjectManager $em)
+    {
+        $entities = $em->getRepository('App:InsuranceType')->findAll();
+        return $this->respondWith($entities);
     }
 
 
