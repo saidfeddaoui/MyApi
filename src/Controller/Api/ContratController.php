@@ -116,7 +116,7 @@ class ContratController extends BaseController
      *  )
      *
      * @Rest\Get(path = "/entities", name = "entities")
-     * @Rest\View(serializerGroups={"all", "entities"})
+     * @Rest\View()
      * @return ApiResponse
      */
     public function getEntities()
