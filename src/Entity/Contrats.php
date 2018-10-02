@@ -69,6 +69,24 @@ class Contrats
     private $actif;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $code;
+
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getActif()

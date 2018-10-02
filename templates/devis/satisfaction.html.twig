@@ -27,50 +27,66 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
-                            <th> Type devis </th>
-                            <th> Date de creation </th>
-                            <th> Date d'échéance </th>
-                            <th> Agence </th>
-                            <th> Pack </th>
+                            <th> Type devis  </th>
+                            <th> Nom </th>
+                            <th> Prénom </th>
                             <th> Téléphone </th>
+                            <th> Pack </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
+                            <th> Date de création  </th>
                             <th> Statut </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for element in data %}
+                          {% if  element.auto=="DA" %}
                         <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
+                            <td> AUTO </td>
 
-                            {% if  element.auto=="DA" %}
-                                  <td> AUTO  </td>
-                            {% elseif element.auto=="DH"  %}
-                                <td> MRH </td>
-                            {% else %}
-                                <td> </td>
-                            {% endif %}
-                            {% if element.dateCreation is not null %}
-                                <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
+                            {% if element.devisAuto is not null %}
+                                <td> {{ element.devisAuto.nom }} </td>
                             {% else %}
                                 <td> Pas disponible </td>
                             {% endif %}
-                            {% if element.echeanceDate is not null %}
-                            <td> {{ element.echeanceDate | date('Y-m-d H:i:s')  }} </td>
+
+                            {% if element.devisAuto is not null %}
+                                <td> {{ element.devisAuto.prenom }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.devisAuto is not null %}
+                                <td>  {{ element.devisAuto.tel }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.devisAuto.pack %}
+                                <td>  {{ element.devisAuto.pack.name }} </td>
+                            {% else  %}
+                                <td> Pas diponible </td>
+                            {% endif %}
+
+                            {% if  element.raison is not null %}
+                                <td>  {{ element.raison.title }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.comment is not null %}
+                                <td> {{ element.comment }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %}
+
+                            {% if element.dateCreation is not null %}
+                            <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
                              <td> Pas disponible </td>
                             {% endif %}
-                            {% if  element.agence is not null %}
-                                <td>  {{ element.agence }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
 
-                            {% if  element.auto=="DA" %}
-                                {% if  element.devisAuto.pack %}
-                                    <td>  {{ element.devisAuto.pack.name }} </td>
-                                {% else  %}
-                                    <td> Pas diponible </td>
-                                {% endif %}
+
                             {% elseif element.auto=="DH" %}
                                 <td> Pas diponible </td>
                             {% else %}

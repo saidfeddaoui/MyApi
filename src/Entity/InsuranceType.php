@@ -34,6 +34,11 @@ class InsuranceType extends BaseRole
     private $theme_color;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $code;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="insuranceTypes")
      */
     private $users;
@@ -138,6 +143,18 @@ class InsuranceType extends BaseRole
     public function setThemeColor($theme_color)
     {
         $this->theme_color = $theme_color;
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
         return $this;
     }
 
