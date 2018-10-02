@@ -18,7 +18,8 @@ class MrhPropriete
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose()
-     * @Serializer\Groups("all")
+     * @Serializer\Groups(groups={"all","devis_mrh"})
+     * 
      */
     private $id;
 
@@ -34,7 +35,7 @@ class MrhPropriete
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"all","devis_mrh"})
+     * @Serializer\Groups("all")
      */
     private $code;
 
