@@ -78,12 +78,14 @@ class ContentController extends BaseController
      *  )
      *
      * @Rest\Get(path = "/entities", name = "entities")
+     *
      * @Rest\View()
+     * @param ObjectManager $em
      * @return ApiResponse
      */
-    public function getEntities()
+    public function getEntities(ObjectManager $em)
     {
-        $entities = $this->em->getRepository('App:InsuranceType')->findAll();
+        $entities = $em->getRepository('App:InsuranceType')->findAll();
         return $this->respondWith($entities);
     }
 
