@@ -14,7 +14,8 @@ class MrhBatiment
 {
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups("all")
+     * @Serializer\Groups(groups={"all","devis_mrh"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
