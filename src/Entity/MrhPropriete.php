@@ -19,7 +19,7 @@ class MrhPropriete
      *
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"all","devis_mrh"})
-     * 
+     *
      */
     private $id;
 

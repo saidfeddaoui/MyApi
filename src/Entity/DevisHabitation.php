@@ -129,7 +129,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\MrhBatiment")
      */
     private $batiment;
 
