@@ -88,8 +88,9 @@ class DevisHabitationController extends BaseController
     public function normal(ObjectManager $em, DevisHabitation $habitation, ConstraintViolationListInterface $violations, DevisHabitationApiService $hapitation_api)
     {
         $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$habitation->getSocietaire()->getCode(),"type" => "MRH" ]);
-        $categorie = $this->em->getRepository('App:MrhCategorie')->findOneBy(["code" =>$habitation->getCategorie()->getCode()]);
-        $propriete = $this->em->getRepository('App:MrhPropriete')->findOneBy(["code" =>$habitation->getPropriete()->getCode()]);
+        $categorie = $this->em->getRepository('App:MrhCategorie')->find($habitation->getCategorie()->getId());
+        $propriete = $this->em->getRepository('App:MrhPropriete')->find($habitation->getPropriete()->getId());
+        $valeurBatiment = $this->em->getRepository('App:MrhBatiment')->find($habitation->getValeurBatiment()->getId());
         $devisHab = new DevisHabitation();
         $devisHab->setNom($habitation->getNom());
         $devisHab->setPrenom($habitation->getPrenom());
@@ -97,7 +98,7 @@ class DevisHabitationController extends BaseController
         $devisHab->setEmail($habitation->getEmail());
         $devisHab->setCivilite($habitation->getCivilite());
         $devisHab->setContenu($habitation->getContenu());
-        $devisHab->setBatiment($habitation->getBatiment());
+        $devisHab->setBatiment($valeurBatiment);
         $devisHab->setSocietaire($societaire);
         $devisHab->setCategorie($categorie);
         $devisHab->setPropriete($propriete);
