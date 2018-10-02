@@ -13,6 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
 class MrhBatiment
 {
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups("all")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
