@@ -122,6 +122,9 @@ class ContratController extends BaseController
     public function getEntities()
     {
         $entities = $this->em->getRepository('App:InsuranceType')->findAll();
+
+        dump($entities);
+        die();
         return $this->respondWith($entities);
     }
 
