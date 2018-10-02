@@ -65,6 +65,29 @@ class ContentController extends BaseController
     }
 
 
+
+
+    /**
+     *
+     * @SWG\Get(
+     *  tags={"Content Types"},
+     *  @SWG\Response(
+     *      response=200,
+     *      description="entities successfully returned"
+     *   )
+     *  )
+     *
+     * @Rest\Get(path = "/entities", name = "entities")
+     * @Rest\View()
+     * @return ApiResponse
+     */
+    public function getEntities()
+    {
+        $entities = $this->em->getRepository('App:InsuranceType')->findAll();
+        return $this->respondWith($entities);
+    }
+
+
     /**
      * @SWG\Get(
      *     tags={"Content Types"},
