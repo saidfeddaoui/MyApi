@@ -25,6 +25,8 @@ class InsuranceType extends BaseRole
     private $id;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"entities"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
