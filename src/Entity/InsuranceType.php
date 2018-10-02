@@ -12,9 +12,13 @@ use Symfony\Component\Security\Core\Role\Role as BaseRole;
 class InsuranceType extends BaseRole
 {
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"entities"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
      */
     private $id;
 
@@ -34,6 +38,8 @@ class InsuranceType extends BaseRole
     private $theme_color;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"entities"})
      * @ORM\Column(type="string", length=10)
      */
     private $code;

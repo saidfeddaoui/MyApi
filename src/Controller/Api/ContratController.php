@@ -54,6 +54,7 @@ class ContratController extends BaseController
     public function AddContrat(Request $request, ContratApiService $contratApiService)
     {
         $contrat=json_decode($request->getContent());
+
         $contra = $contratApiService->AddContrat($contrat);
         return  new JsonResponse($contra, 200);
         // return $this->respondWith($contrat);
@@ -103,7 +104,29 @@ class ContratController extends BaseController
     }
 
 
+
     /**
+     *
+     * @SWG\Get(
+     *  tags={"entities"},
+     *  @SWG\Response(
+     *      response=200,
+     *      description="entities successfully returned"
+     *   )
+     *  )
+     *
+     * @Rest\Get(path = "/entities", name = "entities")
+     * @Rest\View(serializerGroups={"all", "entities"})
+     * @return ApiResponse
+     */
+    public function getEntities()
+    {
+        $entities = $this->em->getRepository('App:InsuranceType')->findAll();
+        return $this->respondWith($entities);
+    }
+
+
+    /*
      *
      * @SWG\Delete(
      *  tags={"Contrat"},
@@ -118,7 +141,7 @@ class ContratController extends BaseController
      * @Rest\View(serializerGroups={"all", "contrats"})
      * @param Contrats $police
      * @return JsonResponse
-     */
+
     public function deleteContrat(Contrats $police)
     {
         $this->em->remove($police);
@@ -128,7 +151,7 @@ class ContratController extends BaseController
             "status"=>"ok",
             "message"=>"le contrat a été supprimé avec succès"
         ));
-    }
+    } */
 
     /**
      *
