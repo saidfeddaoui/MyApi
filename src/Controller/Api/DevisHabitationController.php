@@ -90,7 +90,7 @@ class DevisHabitationController extends BaseController
         $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$habitation->getSocietaire()->getCode(),"type" => "MRH" ]);
         $categorie = $this->em->getRepository('App:MrhCategorie')->find($habitation->getCategorie()->getId());
         $propriete = $this->em->getRepository('App:MrhPropriete')->find($habitation->getPropriete()->getId());
-        $valeurBatiment = $this->em->getRepository('App:MrhBatiment')->find($habitation->getValeurBatiment()->getId());
+        $valeurBatiment = $this->em->getRepository('App:MrhBatiment')->find($habitation->getBatiment()->getId());
         $devisHab = new DevisHabitation();
         $devisHab->setNom($habitation->getNom());
         $devisHab->setPrenom($habitation->getPrenom());
