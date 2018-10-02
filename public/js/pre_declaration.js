@@ -102,6 +102,7 @@ jQuery(document).ready(function() {
             statusCode: {
                 //traitement en cas de succès
                 200: function (response) {
+
                     $("#details-pre-declaration-modal .modal-body .pre-declaration-details").html(response);
                     $("#details-pre-declaration-modal").modal();
                     $('[id*="photo-attachment"]').each(function() {
@@ -169,6 +170,7 @@ jQuery(document).ready(function() {
             },
             statusCode: {
                 200: function (response) {
+
                     $('body .loadWrapper').hide();
                     swal.close();
                     setTimeout(function(){
@@ -183,6 +185,12 @@ jQuery(document).ready(function() {
                     var $row = $('tr[data-id="' + id + '"]');
                     $('.datatable').DataTable().row($row).remove().draw();
                     $("#details-pre-declaration-modal").hide();
+
+                    if(response.code =="ok"){
+                        $(".action_footer .accept").hide();
+                        $(".action_footer .reject").hide();
+                    }
+
                 },
                 400: function (response) {
                     swal.close();
@@ -281,13 +289,48 @@ jQuery(document).ready(function() {
         });
     }
 
-     $("a.fancybox").fancybox({
-      'transitionIn': 'elastic',
-      'transitionOut': 'elastic',
-      'speedIn': 600,
-      'speedOut': 200,
-      'overlayShow': false
+    function fancyboxRotation(){
+        $('.fancybox-wrap').css('webkitTransform', rotate("-90 deg"));
+        $('.fancybox-wrap').css('mozTransform', rotate("-90deg"));
+    }
+
+    $("a.fancybox_sinistre").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
     });
+
+    $("a.fancybox_declaration").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+    $("a.fancybox_adversaire").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+    $("a.fancybox_conduire").fancybox({
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'overlayShow': false
+    });
+
+
+
+
+
+
 
      
 });

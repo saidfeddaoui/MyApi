@@ -230,11 +230,9 @@ class PreDeclarationController extends Controller
 
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
-         //$this->json(['message' => 'la pré-declaration a été rejetée avec succès']);
-         return $this->redirectToRoute('pre_declarations_in_progress');
-
+        $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
         }else{
-            return $this->json(['message' => $resp->message]);
+            return $this->json(['code'=>'ko','message' => $resp->message]);
         }
     }
 
@@ -302,10 +300,10 @@ class PreDeclarationController extends Controller
 
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
-        return $this->json(['message' => 'la pré-declaration a été acceptée avec succès']);
+        return $this->json(['code'=>'ok','message' => 'la pré-declaration a été acceptée avec succès']);
 
         }else{
-            return $this->json(['message' => $resp->message]);
+            return $this->json(['code'=>'ko','message' => $resp->message]);
         }
 
 

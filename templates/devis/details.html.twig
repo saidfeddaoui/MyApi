@@ -61,7 +61,7 @@
                                 <p>
                                     <span class="detail_label">Combustion : </span>
                                     <span class="detail_info">
-                                        {% if devisAuto.nom is not null %}
+                                        {% if devisAuto.combustion is not null %}
                                             <input type="text" class="combustion" name="combustion" disabled value="{{ devisAuto.combustion }}">
                                         {% else %}
                                             <input type="text" class="combustion" name="combustion" disabled value="">
@@ -103,6 +103,17 @@
                                             <input type="text" class="vg" name="vg" disabled value="{{ devisAuto.vg }}">
                                         {% else %}
                                             <input type="text" class="vg" name="vg" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+                                <p>
+                                    <span class="detail_label">Date mise en circulation : </span>
+                                    <span class="detail_info">
+                                        {% if devisAuto.vg is not null %}
+                                            <input type="text" name="mec" disabled value="{{ devisAuto.dateMec | date('Y-m-d H:i:s') }}">
+                                        {% else %}
+                                            <input type="text"  name="mec" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>

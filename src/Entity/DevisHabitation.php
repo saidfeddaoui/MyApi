@@ -5,15 +5,16 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  *
  * @ORM\Entity(repositoryClass="App\Repository\DevisHabitationRepository")
  *
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("CodeSocietaire"), @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\SerializedName("CodeCategorie"), @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\SerializedName("CodePropriete"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("Type"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\SerializedName("Catgorie"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\SerializedName("Propriete"), @Serializer\Groups("request_mrh") })
  */
 class DevisHabitation
 {
@@ -80,8 +81,9 @@ class DevisHabitation
     private $email;
 
     /**
+     * @Serializer\SerializedName("ValeurContenu")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh"})
+     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
@@ -119,6 +121,7 @@ class DevisHabitation
      */
     private $societaire;
 
+
     /**
      * @Serializer\SerializedName("ValeurBatiment")
      * @Serializer\Expose()
@@ -126,7 +129,7 @@ class DevisHabitation
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $batiment;
 
@@ -137,6 +140,76 @@ class DevisHabitation
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $situationRisque;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeHT;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeTTC;
+
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+
+    public function getPrimeHT()
+    {
+        return $this->primeHT;
+    }
+
+    public function setPrimeHT($primeHT)
+    {
+        $this->primeHT = $primeHT;
+
+        return $this;
+    }
+
+    public function getPrimeTTC()
+    {
+        return $this->primeTTC;
+    }
+
+    public function setPrimeTTC($primeTTC)
+    {
+        $this->primeTTC = $primeTTC;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
     /**
      * @return mixed
@@ -300,12 +373,12 @@ class DevisHabitation
         return $this;
     }
 
-    public function getBatiment(): ?float
+    public function getBatiment()
     {
         return $this->batiment;
     }
 
-    public function setBatiment(float $batiment): self
+    public function setBatiment($batiment)
     {
         $this->batiment = $batiment;
 

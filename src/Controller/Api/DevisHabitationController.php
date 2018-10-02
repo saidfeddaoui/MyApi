@@ -88,16 +88,36 @@ class DevisHabitationController extends BaseController
     public function normal(ObjectManager $em, DevisHabitation $habitation, ConstraintViolationListInterface $violations, DevisHabitationApiService $hapitation_api)
     {
         $societaire = $this->em->getRepository('App:Societaire')->findOneBy([ "code" =>$habitation->getSocietaire()->getCode(),"type" => "MRH" ]);
+        $categorie = $this->em->getRepository('App:MrhCategorie')->findOneBy(["code" =>$habitation->getCategorie()->getCode()]);
+        $propriete = $this->em->getRepository('App:MrhPropriete')->findOneBy(["code" =>$habitation->getPropriete()->getCode()]);
         $devisHab = new DevisHabitation();
         $devisHab->setNom($habitation->getNom());
         $devisHab->setPrenom($habitation->getPrenom());
         $devisHab->setTel($habitation->getTel());
         $devisHab->setEmail($habitation->getEmail());
         $devisHab->setCivilite($habitation->getCivilite());
+        $devisHab->setContenu($habitation->getContenu());
+        $devisHab->setBatiment($habitation->getBatiment());
         $devisHab->setSocietaire($societaire);
+        $devisHab->setCategorie($categorie);
+        $devisHab->setPropriete($propriete);
+
         $em->persist($devisHab);
-        $em->flush();
+
         $devis = $hapitation_api->getDevisHabitation($habitation);
+
+        $reference = $devis->getTotal()->getId();
+        $primeHT = $devis->getTotal()->getPrimeHT();
+        $primeTTC = $devis->getTotal()->getPrimeTTC();
+
+        $devisHab->setReference($reference);
+        $devisHab->setPrimeHT($primeHT);
+        $devisHab->setPrimeTTC($primeTTC);
+        $this->em->flush();
+
+
+        $idDevis =$devisHab->getId();
+        $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
     }
 }

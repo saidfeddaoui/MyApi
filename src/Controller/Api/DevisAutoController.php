@@ -105,10 +105,18 @@ class DevisAutoController extends BaseController
         $devi_auto->setVg($auto->getVg());
 
         $this->em->persist($devi_auto);
-        $this->em->flush();
+        //$this->em->flush();
         $devis = $Auto_api->getDevisAuto($auto);
-        $idDevis =$devi_auto->getId();
+        $reference = $devis->getTotal()->getId();
+        $primeHT = $devis->getTotal()->getPrimeHT();
+        $primeTTC = $devis->getTotal()->getPrimeTTC();
 
+        $devi_auto->setReference($reference);
+        $devi_auto->setPrimeHT($primeHT);
+        $devi_auto->setPrimeTTC($primeTTC);
+        $this->em->flush();
+
+        $idDevis =$devi_auto->getId();
         $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
     }

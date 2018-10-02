@@ -86,18 +86,18 @@ class NotificationController extends BaseController
                 $em = $this->getDoctrine()->getManager();
                 $notification = $em->getRepository(Notification::class)->find($id);
                 if ($notification instanceof Notification){
-                  foreach ($notification->getNotificationDetails() as $notificationDetail){
-                      if ($notificationDetail instanceof NotificationDetail)
-                      array_push(
-                          $detailNotifications,
-                          array(
-                              'id' => $notificationDetail->getId(),
-                              'sujet' => $notificationDetail->getSujet(),
-                              'message' => $notificationDetail->getMessage(),
-                              'get_id_societaire' => $notificationDetail->getIdSocietaire(),
-                          )
-                      );
-                  }
+                    foreach ($notification->getNotificationDetails() as $notificationDetail){
+                        if ($notificationDetail instanceof NotificationDetail)
+                            array_push(
+                                $detailNotifications,
+                                array(
+                                    'id' => $notificationDetail->getId(),
+                                    'sujet' => $notificationDetail->getSujet(),
+                                    'message' => $notificationDetail->getMessage(),
+                                    'get_id_societaire' => $notificationDetail->getIdSocietaire(),
+                                )
+                            );
+                    }
                 }
                 $response['header'] = array('status'=>'OK','message'=>'');;
                 $response['results'] = $detailNotifications;

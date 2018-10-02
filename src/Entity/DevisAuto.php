@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DevisAutoRepository")
@@ -190,6 +191,76 @@ class DevisAuto
      * @ORM\Column(type="string", nullable=true, nullable = true)
      */
     private $vg;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeHT;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable = true)
+     */
+    private $primeTTC;
+
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+
+    public function getPrimeHT()
+    {
+        return $this->primeHT;
+    }
+
+    public function setPrimeHT($primeHT)
+    {
+        $this->primeHT = $primeHT;
+
+        return $this;
+    }
+
+    public function getPrimeTTC()
+    {
+        return $this->primeTTC;
+    }
+
+    public function setPrimeTTC($primeTTC)
+    {
+        $this->primeTTC = $primeTTC;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
     public function getId()
     {

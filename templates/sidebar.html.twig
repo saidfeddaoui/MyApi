@@ -205,7 +205,7 @@
                 </li>
             {% endif %}
             {% if is_granted('ROLE_ASSISTANCE') %}
-                <li class="nav-item">
+              {#  <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-docs"></i>
                         <span class="title">Demandes d'assistance</span>
@@ -225,7 +225,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>#}
             {% endif %}
             {% if is_granted('ROLE_DEVIS') %}
                 <li class="nav-item">

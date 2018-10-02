@@ -19,9 +19,9 @@
                 <div class="general_details" data-id="{{preDeclaration.id}}">
                     <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                         {% if preDeclaration.client is not null %}
-                        {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
+                          {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
                         {% else %}
-                            inconnu
+                             inconnu
                         {% endif %}
                         {% if preDeclaration.status == 0 %}
                             (En cours)</td>
@@ -44,7 +44,7 @@
                                 </span>
                             <p><span class="detail_label">Téléphone: </span>
                                 <span class="detail_info">
-                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.contrat.client.phone  }}">
+                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.client.phone  }}">
                                 </span>
                             </p>
                             <p><span class="detail_label"> adresse: </span>
@@ -126,7 +126,7 @@
                         {% for photo in attachements %}
                             {% if photo.type =="photo_sinistre" %}
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                        <a rel="gallery" class="fancybox_sinistre" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                              <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -147,7 +147,7 @@
                                 {% if photo.type =="pre_declaration" %}
 
                                     <div class="col-md-3 responsive-1024 bloc_mgs">
-                                        <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                        <a rel="gallery" class="fancybox_declaration" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                             <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -169,7 +169,7 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="attestation_assurance_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                           <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                           <a rel="gallery" class="fancybox_adversaire" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                             <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
                                             <div class="image-hover">
                                                 <i class="icon-zoom-in-2"></i>
@@ -190,7 +190,7 @@
                                 {% for photo in attachements %}
                                     {% if photo.type =="permis_conduire_adversaire" %}
                                         <div class="col-md-3 responsive-1024 bloc_mgs">
-                                            <a rel="gallery" class="fancybox" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <a rel="gallery" class="fancybox_conduire" href="{{ asset('img/tiers/' ~ photo.path) }}">
                                                 <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
                                                 <div class="image-hover">
                                                     <i class="icon-zoom-in-2"></i>
