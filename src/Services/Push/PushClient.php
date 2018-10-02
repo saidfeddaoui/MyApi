@@ -57,7 +57,7 @@ class PushClient
 
         $fields = array(
             'registration_ids' => $reg,
-            //'notification' => $notification,
+            'notification' => $notification,
             "priority" => "high",
             "badge" => 1,
             "time_to_live" => $this->time_to_live,
