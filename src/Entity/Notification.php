@@ -73,6 +73,15 @@ class Notification
     private $notificationDetails;
 
 
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
+     *
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $type;
+
+
 
     /**
      * Constructor
@@ -198,6 +207,24 @@ class Notification
     public function setSujet($sujet)
     {
         $this->sujet = $sujet;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $sujet
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**
