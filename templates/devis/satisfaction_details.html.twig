@@ -47,21 +47,6 @@
                                 </h4>
 
                                 <div class="col-md-4">
-                                    <p><span class="detail_label"> Nom: </span>
-                                        <span class="detail_info">
-                                            <input type="text"  name="nom" disabled value="{{ element.devisAuto.nom }}">
-                                        </span>
-                                    </p>
-                                    <p><span class="detail_label">Prenom : </span>
-                                        <span class="detail_info">
-                                          {% if   element.devisAuto is not null %}
-                                              <input type="text"  name="prenom" disabled value="{{ element.devisAuto.prenom  }}">
-                                        {% else %}
-                                              <input type="text" name="prenom" disabled value="">
-                                          {% endif %}
-                                        </span>
-                                    </p>
-
                                     <p>
                                         <span class="detail_label">Téléphone : </span>
                                         <span class="detail_info">
