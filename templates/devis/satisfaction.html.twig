@@ -92,7 +92,7 @@
                                 <td> <i class="icon-dislike emodisLike"></i> </td>
                             {% endif %}
                          </tr>
-                      {% if  element.auto=="DH" %}
+                      {% elseif  element.auto=="DH" %}
                           <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
                               <td> MRH </td>
 
@@ -140,7 +140,6 @@
                                   <td> <i class="icon-dislike emodisLike"></i> </td>
                               {% endif %}
                           </tr>
-
                        {% endif %}
                         {% endfor %}
                         </tbody>
