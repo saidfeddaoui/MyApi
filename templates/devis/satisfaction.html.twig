@@ -34,6 +34,8 @@
                             <th> Pack </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
+                            <th> Observation </th>
+                            <th> Action </th>
                             <th> Date de création  </th>
                             <th> Statut </th>
                         </tr>
@@ -124,6 +126,18 @@
 
                               {% if  element.comment is not null %}
                                   <td> {{ element.comment }} </td>
+                              {% else %}
+                                  <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.observation is not null %}
+                                  <td> {{ element.observation }} </td>
+                              {% else %}
+                                  <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.action is not null %}
+                                  <td> {{ element.action }} </td>
                               {% else %}
                                   <td>Pas disponible </td>
                               {% endif %}
