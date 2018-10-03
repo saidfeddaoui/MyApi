@@ -75,6 +75,7 @@ class Contrats
 
 
     /**
+     * @Serializer\SerializedName("IdCode")
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="Contrats",cascade={"persist", "remove"})
      */
     private $type;
