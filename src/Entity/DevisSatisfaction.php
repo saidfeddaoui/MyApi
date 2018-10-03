@@ -94,6 +94,21 @@ class DevisSatisfaction
      */
     private $auto;
 
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\Column(type="string",length=255 nullable=true)
+     */
+    private $action;
+
+
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $observation;
+
 
     public function getId()
     {
@@ -112,6 +127,7 @@ class DevisSatisfaction
         return $this;
     }
 
+
     public function getAgence(): ?string
     {
         return $this->agence;
@@ -120,6 +136,30 @@ class DevisSatisfaction
     public function setAgence(string $agence): self
     {
         $this->agence = $agence;
+
+        return $this;
+    }
+
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    public function getObservation()
+    {
+        return $this->observation;
+    }
+
+    public function setObservation($observation)
+    {
+        $this->observation = $observation;
 
         return $this;
     }
