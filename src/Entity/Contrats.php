@@ -74,6 +74,24 @@ class Contrats
     private $code;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="Contrats",cascade={"persist", "remove"})
+     */
+    private $idCode;
+
+    public function getIdCode()
+    {
+        return $this->idCode;
+    }
+
+    public function setIdCode($idCode)
+    {
+        $this->idCode = $idCode;
+
+        return $this;
+    }
+
+
     public function getCode(): ?string
     {
         return $this->code;
