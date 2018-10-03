@@ -82,6 +82,18 @@
                                 <td>Pas disponible </td>
                             {% endif %}
 
+                            {% if  element.observation is not null %}
+                                <td> {{ element.observation }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %}
+
+                            {% if  element.action is not null %}
+                                <td> {{ element.action }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %}
+
                             {% if element.dateCreation is not null %}
                             <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
