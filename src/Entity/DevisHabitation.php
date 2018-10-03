@@ -12,9 +12,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="App\Repository\DevisHabitationRepository")
  *
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="societaire_code", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("Type"), @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="categorie_code", exp="object.getCategorieCode()", options={ @Serializer\SerializedName("Catgorie"), @Serializer\Groups("request_mrh") })
- * @Serializer\VirtualProperty(name="propriete_code", exp="object.getProprieteCode()", options={ @Serializer\SerializedName("Propriete"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="societaire_id", exp="object.getSocietaireCode()", options={ @Serializer\SerializedName("Type"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="categorie_id", exp="object.getCategorieId()", options={ @Serializer\SerializedName("Catgorie"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="propriete_id", exp="object.getProprieteId()", options={ @Serializer\SerializedName("Propriete"), @Serializer\Groups("request_mrh") })
+ * @Serializer\VirtualProperty(name="batiment_code", exp="object.getBatimentId()", options={ @Serializer\SerializedName("ValeurBatiment"), @Serializer\Groups("request_mrh") })
  */
 class DevisHabitation
 {
@@ -402,14 +403,19 @@ class DevisHabitation
         return $this->getSocietaire()->getCode();
     }
 
-    public function getCategorieCode()
+    public function getCategorieId()
     {
-        return $this->getCategorie()->getCode();
+        return $this->getCategorie()->getId();
     }
 
-    public function getProprieteCode()
+    public function getProprieteId()
     {
-        return $this->getPropriete()->getCode();
+        return $this->getPropriete()->getId();
+    }
+
+    public function getBatimentId()
+    {
+        return $this->getBatiment()->getId();
     }
 
 
