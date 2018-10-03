@@ -75,8 +75,8 @@
                                     <p>
                                         <span class="detail_label">Pack : </span>
                                         <span class="detail_info">
-                                        {% if element.devisAuto is not null %}
-                                            <input type="text" name="comment" disabled value="{{ element.devisAuto.comment }}">
+                                        {% if element.comment is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.comment }}">
                                         {% else %}
                                             <input type="text" name="comment" disabled value="">
                                         {% endif %}
