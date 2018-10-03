@@ -94,7 +94,7 @@ class DevisHabitation
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
+     * @Serializer\Groups(groups={"devis_mrh"})
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
@@ -104,7 +104,7 @@ class DevisHabitation
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
+     * @Serializer\Groups(groups={"devis_mrh"})
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
@@ -126,7 +126,7 @@ class DevisHabitation
     /**
      * @Serializer\SerializedName("ValeurBatiment")
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"devis_mrh", "request_mrh" })
+     * @Serializer\Groups(groups={"devis_mrh"})
      *
      * @Assert\NotNull(groups={"devis_mrh"})
      *
