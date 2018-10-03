@@ -203,6 +203,7 @@ class PreDeclarationController extends Controller
         $notification->setStatut(false);
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
+        $notification->setType("R");
         $notification->setDateCreation(new \dateTime("now"));
         $this->em->persist($preDeclaration);
         $this->em->persist($notification);
@@ -279,6 +280,7 @@ class PreDeclarationController extends Controller
         $notification->setStatut(false);
         $notification->setClient($client);
         $notification->setPredeclaration($preDeclaration);
+        $notification->setType("V");
         $notification->setDateCreation(new \dateTime("now"));
 
         $this->em->persist($preDeclaration);
