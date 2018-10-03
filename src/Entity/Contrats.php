@@ -77,16 +77,16 @@ class Contrats
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="Contrats",cascade={"persist", "remove"})
      */
-    private $idCode;
+    private $idCod;
 
     public function getIdCode()
     {
-        return $this->idCode;
+        return $this->idCod;
     }
 
     public function setIdCode($idCode)
     {
-        $this->idCode = $idCode;
+        $this->idCod = $idCode;
 
         return $this;
     }
