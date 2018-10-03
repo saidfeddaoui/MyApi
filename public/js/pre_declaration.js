@@ -81,7 +81,7 @@ jQuery(document).ready(function() {
             }
         ],
         "order": [
-            [5, "desc"]
+            [6, "desc"]
         ] // set first column as a default sort by asc
     });
 
