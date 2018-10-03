@@ -97,7 +97,7 @@ class DevisSatisfaction
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"devis_accepted", "devis_refused"})
-     * @ORM\Column(type="string",length=255 nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $action;
 
