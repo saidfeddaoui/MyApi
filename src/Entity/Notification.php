@@ -77,11 +77,9 @@ class Notification
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_notification"})
      *
-     * @ORM\Column(type="string", length=2, nullable=true)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
     private $type;
-
-
 
     /**
      * Constructor
