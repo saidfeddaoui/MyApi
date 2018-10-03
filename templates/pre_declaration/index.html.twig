@@ -55,11 +55,11 @@
                                 {% endif %}
                                 <td>{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</td>
                                 {% if preDeclaration.status == 0 %}
-                                    <td style="background: #ffa01f;">En cours</td>
+                                    <td style="background: #ffa01f!important;">En cours</td>
                                 {% elseif preDeclaration.status == 1%}
-                                    <td style="background: #3cc12f;">Acceptée</td>
+                                    <td style="background: #3cc12f!important;">Acceptée</td>
                                 {% elseif preDeclaration.status == 2%}
-                                    <td style="background:#ff4646;">Rejetée</td>
+                                    <td style="background:#ff4646!important;">Rejetée</td>
                                 {% endif %}
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
