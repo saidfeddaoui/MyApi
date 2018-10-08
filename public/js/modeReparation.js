@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
                             customClass: 'custom-swal',
                         });
                     }, 500);
-                    $('.datatable').DataTable().row( td.parents('tr') ).remove().draw();
+                    $('.table').DataTable().row( td.parents('tr') ).remove().draw();
                 }
             }
         });
