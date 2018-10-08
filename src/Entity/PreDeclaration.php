@@ -173,6 +173,53 @@ class PreDeclaration
     private $client;
 
     /**
+     * @ORM\OneToMany(targetEntity="ChoixMDR", mappedBy="preDeclaration")
+     */
+    protected $preDeclaration_modeReparation_associations;
+
+
+    public function __construct()
+    {
+        $this->preDeclaration_modeReparation_associations = new ArrayCollection();
+    }
+
+
+
+    /**
+     * Add preDeclaration_modeReparation_associations
+     *
+     * @param ChoixMDR  $preDeclaration_modeReparation_associations
+     * @return PreDeclaration
+     */
+    public function addUserRecipeAssociation(ChoixMDR $preDeclaration_modeReparation_associations)
+    {
+        $this->preDeclaration_modeReparation_associations[] = $preDeclaration_modeReparation_associations;
+
+        return $this;
+    }
+
+    /**
+     * Remove preDeclaration_modeReparation_associations
+     *
+     * @param ChoixMDR $preDeclaration_modeReparation_associations
+     */
+    public function removeUserRecipeAssociation(ChoixMDR $preDeclaration_modeReparation_associations)
+    {
+        $this->preDeclaration_modeReparation_associations->removeElement($preDeclaration_modeReparation_associations);
+    }
+
+    /**
+     * Get preDeclaration_modeReparation_associations
+     *
+     * @return ArrayCollection
+     */
+    public function getPreDeclaration_modeReparation_associations()
+    {
+        return $this->preDeclaration_modeReparation_associations;
+    }
+
+
+    /**
      * @Serializer\Expose()
      * @Serializer\Groups({"listPreDeclaration"})
      * @ORM\Column(type="string", nullable=true)

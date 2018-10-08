@@ -127,13 +127,58 @@ class Client extends User
      */
     private $device;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ChoixMDR", mappedBy="Client")
+     */
+    protected $client_modeReparation_associations;
+
 
 
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
         $this->contrats = new ArrayCollection();
+        $this->client_modeReparation_associations = new ArrayCollection();
+
     }
+
+
+
+    /**
+     * Add client_modeReparation_associations
+     *
+     * @param ChoixMDR  $client_modeReparation_associations
+     * @return Client
+     */
+    public function addUserRecipeAssociation(ChoixMDR $client_modeReparation_associations)
+    {
+        $this->client_modeReparation_associations[] = $client_modeReparation_associations;
+
+        return $this;
+    }
+
+    /**
+     * Remove client_modeReparation_associations
+     *
+     * @param ChoixMDR $client_modeReparation_associations
+     */
+    public function removeUserRecipeAssociation(ChoixMDR $client_modeReparation_associations)
+    {
+        $this->client_modeReparation_associations->removeElement($client_modeReparation_associations);
+    }
+
+    /**
+     * Get client_modeReparation_associations
+     *
+     * @return ArrayCollection
+     */
+    public function getPreDeclaration_modeReparation_associations()
+    {
+        return $this->client_modeReparation_associations;
+    }
+
+
+
 
     /**
      * @return string

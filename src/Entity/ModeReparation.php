@@ -24,7 +24,6 @@ class ModeReparation
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Serializer\Expose()
-     * @Serializer\Expose()
      * @Serializer\Groups(groups={"modeReparation"})
      */
     private $id;
@@ -35,6 +34,55 @@ class ModeReparation
      * @Serializer\Groups({"all"})
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ChoixMDR", mappedBy="modeReparation")
+     */
+    protected $modeReparation_associations;
+
+
+
+    public function __construct()
+    {
+        $this->modeReparation_associations = new ArrayCollection();
+    }
+
+
+
+    /**
+     * Add modeReparation_associations
+     *
+     * @param ChoixMDR  $modeReparation_associations
+     * @return ModeReparation
+     */
+    public function addUserRecipeAssociation(ChoixMDR $modeReparation_associations)
+    {
+        $this->modeReparation_associations[] = $modeReparation_associations;
+
+        return $this;
+    }
+
+    /**
+     * Remove modeReparation_associations
+     *
+     * @param ChoixMDR $modeReparation_associations
+     */
+    public function removeUserRecipeAssociation(ChoixMDR $modeReparation_associations)
+    {
+        $this->modeReparation_associations->removeElement($modeReparation_associations);
+    }
+
+    /**
+     * Get modeReparation_associations
+     *
+     * @return ArrayCollection
+     */
+    public function getPreDeclaration_modeReparation_associations()
+    {
+        return $this->modeReparation_associations;
+    }
+
+
 
     /**
      * @return mixed
