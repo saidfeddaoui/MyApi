@@ -54,7 +54,7 @@ class ModeReparationController extends Controller
      */
     public function detailsNotification(ObjectManager $em,  $id_predeclaration)
     {
-        $preDeclaration = $em->getRepository("App:PreDeclaration")->findById($id_predeclaration);
+        $preDeclaration = $em->getRepository("App:PreDeclaration")->findOneBy(array("id",$id_predeclaration));
         $listModesReparation=array();
         if($preDeclaration instanceof PreDeclaration){
             $modesReparations=$preDeclaration->getPreDeclaration_modeReparation_associations();
