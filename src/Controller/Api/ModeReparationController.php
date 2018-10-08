@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Rest\Route(path="/public/get/modesReparationActifs", name="api_modeReparation")
