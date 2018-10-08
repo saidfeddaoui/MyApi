@@ -65,7 +65,7 @@ class NewModeReparationController extends Controller
         $em = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
             /**
-             * @var Device $device
+             * @var ModeReparation $mode
              */
             $mode = $form->getData();
 
@@ -91,7 +91,7 @@ class NewModeReparationController extends Controller
     public function edit(ModeReparation $mode, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(DeviceType::class, $mode,[
+        $form = $this->createForm(NewModeReparationType::class, $mode,[
             'action' => $this->generateUrl('modes_reparation_edit', ['id' => $mode->getId()])
         ]);
 
