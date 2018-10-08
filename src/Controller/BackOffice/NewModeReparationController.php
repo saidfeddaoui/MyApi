@@ -31,7 +31,7 @@ class NewModeReparationController extends Controller
 {
 
     /**
-     * @Route(path="/mode_reparation",name="index")
+     * @Route(path="/",name="index")
      * @return Response
      */
     public function index()
