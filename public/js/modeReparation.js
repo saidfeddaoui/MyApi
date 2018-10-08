@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
         ] // set first column as a default sort by asc
     });
     $('.edit').on('click', function () {
+        console.log("entrer !!");
         var id = $(this).data('id');
         $.ajax({
             url: Routing.generate('modes_reparation_edit', {id: id}),
