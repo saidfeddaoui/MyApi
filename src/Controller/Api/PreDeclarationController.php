@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\DTO\Api\ApiResponse;
+use App\Entity\ChoixMDR;
 use App\Entity\CircumstanceAttachment;
 use App\Entity\Client;
 use App\Entity\InsuranceType;
@@ -133,6 +134,21 @@ class PreDeclarationController extends BaseController
         $this->em->persist($preDeclaration);
         $this->em->flush();
 
+
+        $modesReparation=$this->em->getRepository("App:ModeReparation")->findAll();
+
+        foreach ($modesReparation as $mode){
+            $choixMDR=new ChoixMDR();
+            $choixMDR->setPreDeclaration($preDeclaration);
+            $choixMDR->setStatut(true);
+            $choixMDR->setModeReparation($mode);
+            $choixMDR->setClient(null);
+            $this->em->persist($choixMDR);
+            $this->em->flush();
+        }
+
+
+
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
@@ -174,6 +190,9 @@ class PreDeclarationController extends BaseController
 
         $event = new NewPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::NEW_PRE_DECLARATION, $event);
+
+
+
         return $this->respondWith($preDeclaration, ApiResponse::CREATED);
     }
     /**
