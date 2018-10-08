@@ -16,7 +16,7 @@ class NewModeReparationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descritpion', TextType::class, ['label' => 'Description',])
+            ->add('description', TextType::class, ['label' => 'Description',])
         ;
     }
 
