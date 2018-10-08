@@ -9,6 +9,11 @@
 namespace App\Entity;
 
 
+/**
+ * @ORM\Entity()
+ *
+ * @Serializer\ExclusionPolicy("all")
+ */
 class ModeReparation
 {
 
