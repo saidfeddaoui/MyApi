@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\Type;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  * @Serializer\ExclusionPolicy("all")
@@ -30,7 +31,6 @@ class Notification
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $idSocietaire;
-
 
 
     /**
@@ -58,7 +58,7 @@ class Notification
     /**
      * @Serializer\Expose()
      * @Serializer\Groups(groups={"client_notification"})
-     * @JMS("DateTime<'Y-m-d'>")
+     * @Type("DateTime<'Y-m-d'>")
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
