@@ -19,11 +19,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+
+/**
+ * @Route(path="/modes_reparation", name="modes_reparation_")
+ * @Security("is_granted('ROLE_CONTENT_MANAGEMENT')")
+ *
+ * @Breadcrumb(title="Accueil")
+ * @Breadcrumb(title="Mode Réparation")
+ */
 class NewModeReparationController extends Controller
 {
 
     /**
-     * @Route(path="/mode_reparation",name="modes_reparation_")
+     * @Route(path="/mode_reparation",name="index")
      * @return Response
      */
     public function index()
