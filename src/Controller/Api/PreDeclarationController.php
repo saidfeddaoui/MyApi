@@ -142,7 +142,7 @@ class PreDeclarationController extends BaseController
             $choixMDR->setPreDeclaration($preDeclaration);
             $choixMDR->setStatut(true);
             $choixMDR->setModeReparation($mode);
-            $choixMDR->setClient(null);
+            $choixMDR->setClient($preDeclaration->getClient());
             $this->em->persist($choixMDR);
             $this->em->flush();
         }
