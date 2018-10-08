@@ -41,7 +41,7 @@ class ModeReparationController extends Controller
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Return detail Notification",
+     *         description="Return Modes Reparation",
      *     )
      * )
      *
