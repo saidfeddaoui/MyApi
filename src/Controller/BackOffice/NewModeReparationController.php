@@ -23,7 +23,7 @@ class NewModeReparationController extends Controller
 {
 
     /**
-     * @Route(path="/mode_reparation",name="modes_reparation")
+     * @Route(path="/mode_reparation",name="modes_reparation_")
      * @return Response
      */
     public function index()
