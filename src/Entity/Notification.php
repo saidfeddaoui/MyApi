@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\Type as JMS;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  * @Serializer\ExclusionPolicy("all")
@@ -56,6 +57,9 @@ class Notification
     private $message;
 
     /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
+     * @JMS("DateTime<'Y-m-d'>")
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
@@ -73,6 +77,13 @@ class Notification
     private $notificationDetails;
 
 
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"client_notification"})
+     *
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $type;
 
     /**
      * Constructor
@@ -198,6 +209,24 @@ class Notification
     public function setSujet($sujet)
     {
         $this->sujet = $sujet;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $sujet
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**
