@@ -1,0 +1,17 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal ModeForm', 'role':'form'}}) }}
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        {{ form_label(form.description) }}
+    </div>
+    <div class="col-md-8 ">
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Fermer</button>
+    <button type="submit" class="btn green SaveMode">Enregistrer</button>
+</div>
+
+{{ form_end(form) }}
