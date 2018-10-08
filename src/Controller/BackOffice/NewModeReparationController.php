@@ -78,7 +78,7 @@ class NewModeReparationController extends Controller
                 break;
             }
         }
-        return  $this->redirect($this->generateUrl('modes_reparation'));
+        return  $this->redirect($this->generateUrl('modes_reparation_index'));
     }
 
     /**
@@ -101,7 +101,7 @@ class NewModeReparationController extends Controller
 
             //$em->persist($mode);
             $em->flush();
-            return $this->redirect($this->generateUrl('modes_reparation'));
+            return $this->redirect($this->generateUrl('modes_reparation_index'));
         }
         return  $this->render('modeReparation/form.html.twig', [
             'form' => $form->createView()
