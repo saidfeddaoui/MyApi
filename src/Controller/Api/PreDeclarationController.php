@@ -147,6 +147,7 @@ class PreDeclarationController extends BaseController
             "statut"=>false,
             "client"=>$client,
             "predeclaration"=>$preDeclaration,
+            "type"=>"I",
             "dateCreation"=>new \dateTime("now"));
 
         $notification = ObjectMapper::mapObjectToEntity($data,$this->configNotif);
