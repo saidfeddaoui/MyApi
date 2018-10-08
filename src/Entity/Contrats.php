@@ -74,6 +74,25 @@ class Contrats
     private $code;
 
 
+    /**
+     * @Serializer\SerializedName("IdCode")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InsuranceType", inversedBy="Contrats",cascade={"persist", "remove"})
+     */
+    private $type;
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+
     public function getCode(): ?string
     {
         return $this->code;

@@ -117,8 +117,8 @@ class PreDeclarationParamConverter implements ParamConverterInterface
     private function processContrat(PreDeclaration $preDeclaration)
     {
        // $id = $preDeclaration->getContrat()->getId();
-        $police = $preDeclaration->getContrat()->getPolice();
-        $contrat = $this->em->getRepository('App:Contrats')->findOneByPolice($police);
+        $police = $preDeclaration->getContrat()->getid();
+        $contrat = $this->em->getRepository('App:Contrats')->find($police);
         if (!$contrat) {
             throw new NotFoundHttpException("No Contrat with reference: {$police} was found");
         }

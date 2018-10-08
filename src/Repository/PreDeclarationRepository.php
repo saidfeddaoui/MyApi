@@ -39,11 +39,11 @@ class PreDeclarationRepository extends ServiceEntityRepository
 
 
 
-    /**
+    /*
      * @param int $status
      * @param int|InsuranceType $insuranceType
      * @return PreDeclaration[] Returns an array of PreDeclaration objects
-     */
+
     public function findByInsuranceTypeOrderByPredeclaration($insuranceType)
     {
         $query = $this->createQueryBuilder('p')
@@ -52,7 +52,7 @@ class PreDeclarationRepository extends ServiceEntityRepository
             ->orderBy('p.createdAt', 'DESC')
         ;
         return $query->getQuery()->getResult();
-    }
+    }*/
 
 
     /*

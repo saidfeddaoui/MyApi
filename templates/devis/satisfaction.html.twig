@@ -34,6 +34,8 @@
                             <th> Pack </th>
                             <th> Raison </th>
                             <th> Commentaire </th>
+                            <th> Observation </th>
+                            <th> Action </th>
                             <th> Date de création  </th>
                             <th> Statut </th>
                         </tr>
@@ -80,35 +82,22 @@
                                 <td>Pas disponible </td>
                             {% endif %}
 
+                            {% if  element.observation is not null %}
+                                <td> {{ element.observation }} </td>
+                            {% else %}
+                                <td> </td>
+                            {% endif %}
+
+                            {% if  element.action is not null %}
+                                <td> {{ element.action }} </td>
+                            {% else %}
+                                <td>  </td>
+                            {% endif %}
+
                             {% if element.dateCreation is not null %}
                             <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                             {% else %}
                              <td> Pas disponible </td>
-                            {% endif %}
-
-
-                            {% elseif element.auto=="DH" %}
-                                <td> Pas diponible </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
-                            {% if  element.auto=="DA" %}
-                                <td>  {{ element.devisAuto.tel }} </td>
-                            {% elseif element.auto=="DH" %}
-                                <td>  {{ element.devisHabitation.tel }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
-
-                            {% if   element.raison is not null %}
-                                <td>  {{ element.raison.title }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
-                            {% if  element.comment is not null %}
-                                <td> {{ element.comment }} </td>
-                            {% else %}
-                                <td>Pas disponible </td>
                             {% endif %}
 
                             {% if  element.statut   %}
@@ -116,8 +105,68 @@
                             {% else %}
                                 <td> <i class="icon-dislike emodisLike"></i> </td>
                             {% endif %}
+                         </tr>
+                      {% elseif  element.auto=="DH" %}
+                          <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
+                              <td> MRH </td>
 
-                        </tr>
+                              {% if element.devisHabitation is not null %}
+                                  <td> {{ element.devisHabitation.nom }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+                              {% if element.devisHabitation is not null %}
+                                  <td> {{ element.devisHabitation.prenom }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.devisHabitation is not null %}
+                                  <td>  {{ element.devisHabitation.tel }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+                              <td> Pas diponible </td>
+
+                              {% if  element.raison is not null %}
+                                  <td>  {{ element.raison.title }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.comment is not null %}
+                                  <td> {{ element.comment }} </td>
+                              {% else %}
+                                  <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.observation is not null %}
+                                  <td> {{ element.observation }} </td>
+                              {% else %}
+                                  <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.action is not null %}
+                                  <td> {{ element.action }} </td>
+                              {% else %}
+                                  <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if element.dateCreation is not null %}
+                                  <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.statut   %}
+                                  <td> <i class="icon-like emoLike "></i></td>
+                              {% else %}
+                                  <td> <i class="icon-dislike emodisLike"></i> </td>
+                              {% endif %}
+                          </tr>
+                       {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
