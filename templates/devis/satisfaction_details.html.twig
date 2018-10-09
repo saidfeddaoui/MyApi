@@ -266,7 +266,7 @@
                                     <span class="detail_label">Batiment : </span>
                                     <span class="detail_info">
                                             {% if element.devisHabitation.batiment is not empty %}
-                                                <input type="text"  name="batiment" disabled value="{{ element.devisHabitation.batiment }}">
+                                                <input type="text"  name="batiment" disabled value="{{ element.devisHabitation.batiment.value }}">
                                             {% else %}
                                                 <input type="text" name="batiment" disabled value="">
                                             {% endif %}
