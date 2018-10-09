@@ -29,6 +29,7 @@ class VerificationSmsSenderEventSubscriber implements EventSubscriberInterface
         $client = $event->getClient();
         $this->sender->sendSms($client->getPhone(), $client->getVerificationCode());
     }
+
     /**
      * Returns an array of event names this subscriber wants to listen to.
      *

@@ -74,6 +74,10 @@ class DeviceController extends Controller
         }
         return  $this->redirect($this->generateUrl('content_types_devices'));
     }
+
+
+
+
     /**
      * @Route(path="/edit/{id}", name="edit_device", options={"expose"=true})
      *

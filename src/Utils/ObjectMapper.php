@@ -18,14 +18,13 @@ class ObjectMapper {
 
         if(empty($data) || empty($entityName)) return "invalid entity or data";
 
-
         $post = (Object)$data;
-
 
         //if (json_last_error() !== JSON_ERROR_NONE) return "invalid json";
         $fields = get_object_vars($post);// php reflection
         $nameSpace .= $entityName;
         $Entity = new $nameSpace();
+
         if(!$Entity ) return "error in entity object";
 
         foreach($fields as $name => $value ) {
@@ -36,6 +35,7 @@ class ObjectMapper {
                 return $name.' field not found in entity object';
             }
         }
+
         return $Entity;
     }
 
