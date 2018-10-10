@@ -63,17 +63,19 @@ class DevisSatisfactionController extends Controller
     }
 
     /**
-     * @Route("/satisfaction/update/action/{id}/{action}", name="satisfaction_update_action",options={"expose"=true})
+     * @Route("/satisfaction/update/action/{id}/{action}/{observation}", name="satisfaction_update_action",options={"expose"=true})
      *
      * @Breadcrumb(title="Update action devis satisfaction ")
      * @param DevisSatisfaction $devisSatisfaction
      * @param int $action
+     * @param strig $observation
      *
      * @return JsonResponse
      */
-    public function updateActionDevis(DevisSatisfaction $devisSatisfaction,$action){
+    public function updateActionDevis(DevisSatisfaction $devisSatisfaction,$action,$observation){
         $em = $this->getDoctrine()->getManager();
         $devisSatisfaction->setAction($action);
+        $devisSatisfaction->setObservation($observation);
         $em->flush();
         return  new JsonResponse(['message' => 'Action devis satisfaction modifié avec succés !!']);
     }

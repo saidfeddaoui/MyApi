@@ -32,7 +32,7 @@
                         
                          <div class="general_details_satisfaction" data-id="{{element.id}}">
                             <div class="row">
-
+                            <input type="hidden" name="idDevis" id="idDevis" value="{{ element.id }}"/>
                             {% if  element.auto=="DA" %}
                                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                                     {% if element.devisAuto is not null %}
@@ -56,31 +56,6 @@
                                             <input type="text" name="tel" disabled value="{{ element.devisAuto.tel }}">
                                         {% else %}
                                             <input type="text" name="tel" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                    </p>
-
-                                    <p>
-                                        <span class="detail_label">Action : </span>
-                                        <span class="detail_info">
-
-                                            <select name="actionDevis" class="actionDevis" data-id="{{ element.id }}">
-                                                <option {% if element.action not in [1,2,0] %} selected {% endif %}>-----Action-----</option>
-                                                <option value="1" {% if element.action==1 %} selected {% endif %}>Déjà Appelé</option>
-                                                <option value="0" {% if element.action==0 %} selected {% endif %}>Injoignable</option>
-                                                <option value="2" {% if element.action==2 %} selected {% endif %}>Contacté</option>
-                                            </select>
-
-                                     </span>
-                                    </p>
-
-                                    <p>
-                                        <span class="detail_label">Observation : </span>
-                                        <span class="detail_info">
-                                        {% if element.observation is not null %}
-                                            <input type="text" name="observation" disabled value="{{ element.observation }}">
-                                        {% else %}
-                                            <input type="text" name="observation" disabled value="">
                                         {% endif %}
                                      </span>
                                     </p>
@@ -309,6 +284,27 @@
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        <p>
+            <span class="detail_label">Observation :</span>
+            <span class="detail_info">
+                {% if element.observation is not null %}
+                    <input type="text" name="observation" class="observation" value="{{ element.observation }}">
+                {% else %}
+                    <input type="text" name="observation" class="observation" value="">
+                {% endif %}
+            </span>
+        </p>
+        </div>
+        <div class="col-md-6">
+            <p class="pull-right">
+                <a class="btn btn-error actionDevis" data-val="0">Injoignable</a>
+                <a class="btn btn-warning actionDevis"  data-val="1">Déjà appelé</a>
+                <a class="btn btn-success actionDevis"  data-val="2">Contacté</a>
+            </p>
         </div>
     </div>
 {% endblock %}
