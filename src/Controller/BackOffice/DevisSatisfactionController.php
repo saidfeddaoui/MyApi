@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use APY\BreadcrumbTrailBundle\Annotation\Breadcrumb;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route(path="/devis", name="devis_")
@@ -59,6 +60,22 @@ class DevisSatisfactionController extends Controller
             'page_subtitle' => '',
             'element'=>$devisSatisfaction
         ]);
+    }
+
+    /**
+     * @Route("/satisfaction/update/action/{id}/{action}", name="satisfaction_update_action",options={"expose"=true})
+     *
+     * @Breadcrumb(title="Update action devis satisfaction ")
+     * @param DevisSatisfaction $devisSatisfaction
+     * @param int $action
+     *
+     * @return JsonResponse
+     */
+    public function updateActionDevis(DevisSatisfaction $devisSatisfaction,$action){
+        $em = $this->getDoctrine()->getManager();
+        $devisSatisfaction->setAction($action);
+        $em->flush();
+        return  new JsonResponse(['message' => 'Action devis satisfaction modifié avec succés !!']);
     }
 
 
