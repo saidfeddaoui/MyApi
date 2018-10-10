@@ -159,6 +159,7 @@
                               {% endif %}
 
                               {% if  element.action is not null %}
+                                  <td>
                                   {% if element.action == 2 %}
                                       <p class="label-success">Contacté</p>
                                   {% elseif element.action == 1 %}
@@ -168,6 +169,7 @@
                                   {% else %}
                                       <p>Aucune Action</p>
                                   {% endif %}
+                                  </td>
                               {% else %}
                                   <td>Pas disponible </td>
                               {% endif %}
