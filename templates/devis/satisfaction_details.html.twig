@@ -63,14 +63,14 @@
                                     <p>
                                         <span class="detail_label">Action : </span>
                                         <span class="detail_info">
-                                        {% if element.action is not null %}
+
                                             <select name="actionDevis" class="actionDevis" data-id="{{ element.id }}">
                                                 <option {% if element.action not in [1,2,0] %} selected {% endif %}>-----Action-----</option>
                                                 <option value="1" {% if element.action==1 %} selected {% endif %}>Déjà Appelé</option>
                                                 <option value="0" {% if element.action==0 %} selected {% endif %}>Injoignable</option>
                                                 <option value="2" {% if element.action==2 %} selected {% endif %}>Contacté</option>
                                             </select>
-                                        {% endif %}
+
                                      </span>
                                     </p>
 
