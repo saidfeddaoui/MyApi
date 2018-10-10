@@ -91,11 +91,11 @@
                             {% if  element.action is not null %}
                                 <td>
                                 {% if element.action == 2 %}
-                                    <p class="alert alert-success">Contacté</p>
+                                    <p class="label-success">Contacté</p>
                                 {% elseif element.action == 1 %}
-                                    <p class="alert alert-warning">Déjà appelé</p>
+                                    <p class="label-warning">Déjà appelé</p>
                                 {% elseif element.action == 0 %}
-                                    <p class="alert alert-error">Injoignable</p>
+                                    <p class="label-error">Injoignable</p>
                                 {% else %}
                                     <p>Aucune Action</p>
                                 {% endif %}
@@ -160,11 +160,11 @@
 
                               {% if  element.action is not null %}
                                   {% if element.action == 2 %}
-                                      <p class="alert alert-success">Contacté</p>
+                                      <p class="label-success">Contacté</p>
                                   {% elseif element.action == 1 %}
-                                      <p class="alert alert-warning">Déjà appelé</p>
+                                      <p class="label-warning">Déjà appelé</p>
                                   {% elseif element.action == 0 %}
-                                      <p class="alert alert-error">Injoignable</p>
+                                      <p class="label-danger">Injoignable</p>
                                   {% else %}
                                       <p>Aucune Action</p>
                                   {% endif %}
