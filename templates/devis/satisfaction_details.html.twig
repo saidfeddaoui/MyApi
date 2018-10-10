@@ -266,18 +266,14 @@
                                             {% endif %}
                                      </span>
                                 </p>
-                               
-                                
+
                             </div>
-
-
 
                             {% endif %}
 
                             </div>
 
                      </div>
-
 
                     </div>
 
@@ -290,18 +286,16 @@
         <div class="col-md-6">
         <p>
             <span class="detail_label">Observation :</span>
-            <span class="detail_info">
                 {% if element.observation is not null %}
-                    <input type="text" name="observation" class="observation" value="{{ element.observation }}">
+                    <textarea type="text" name="observation" class="observation form-control">{{ element.observation }}</textarea>
                 {% else %}
-                    <input type="text" name="observation" class="observation" value="">
+                    <textarea type="text" name="observation" class="observation form-control"></textarea>
                 {% endif %}
-            </span>
         </p>
         </div>
         <div class="col-md-6">
             <p class="pull-right">
-                <a class="btn btn-error actionDevis" data-val="0">Injoignable</a>
+                <a class="btn btn-danger actionDevis" data-val="0">Injoignable</a>
                 <a class="btn btn-warning actionDevis"  data-val="1">Déjà appelé</a>
                 <a class="btn btn-success actionDevis"  data-val="2">Contacté</a>
             </p>
