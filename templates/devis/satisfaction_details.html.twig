@@ -276,29 +276,29 @@
                      </div>
 
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <span class="detail_label">Observation :</span>
+                                {% if element.observation is not null %}
+                                    <textarea type="text" name="observation" class="observation form-control">{{ element.observation }}</textarea>
+                                {% else %}
+                                    <textarea type="text" name="observation" class="observation form-control"></textarea>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="pull-right">
+                                <a class="btn btn-danger actionDevis" data-val="0">Injoignable</a>
+                                <a class="btn btn-warning actionDevis"  data-val="1">Déjà appelé</a>
+                                <a class="btn btn-success actionDevis"  data-val="2">Contacté</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-        <p>
-            <span class="detail_label">Observation :</span>
-                {% if element.observation is not null %}
-                    <textarea type="text" name="observation" class="observation form-control">{{ element.observation }}</textarea>
-                {% else %}
-                    <textarea type="text" name="observation" class="observation form-control"></textarea>
-                {% endif %}
-        </p>
-        </div>
-        <div class="col-md-6">
-            <p class="pull-right">
-                <a class="btn btn-danger actionDevis" data-val="0">Injoignable</a>
-                <a class="btn btn-warning actionDevis"  data-val="1">Déjà appelé</a>
-                <a class="btn btn-success actionDevis"  data-val="2">Contacté</a>
-            </p>
-        </div>
-    </div>
+
 {% endblock %}
