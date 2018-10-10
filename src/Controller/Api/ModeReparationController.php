@@ -71,6 +71,7 @@ class ModeReparationController extends Controller
                             array(
                                 'id_modes_reparation' => $mode->getModeReparation()->getId(),
                                 'description_modes_reparation' => $mode->getModeReparation()->getDescription(),
+                                'code_modes_reparation'=> $mode->getModeReparation()->getCode()
                             )
                         );
                     }

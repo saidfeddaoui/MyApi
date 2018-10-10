@@ -36,6 +36,15 @@ class ModeReparation
      */
     private $description;
 
+
+    /**
+     * @ORM\Column(type="string", length=5)
+     * @Serializer\Expose()
+     * @Serializer\Groups({"all"})
+     */
+    private $code;
+
+
     /**
      * @ORM\OneToMany(targetEntity="ChoixMDR", mappedBy="modeReparation")
      */
@@ -116,6 +125,23 @@ class ModeReparation
     {
         $this->description = $description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
 
 
 

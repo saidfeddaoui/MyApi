@@ -31,7 +31,9 @@
                     <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                         <thead>
                         <tr>
+
                             <th> Description </th>
+                            <th> Code </th>
                             <th> Editer</th>
                             <th> Supprimer</th>
                         </tr>
@@ -40,6 +42,7 @@
                         {% for element in data %}
                             <tr data-id="{{ element.id }}">
                                 <td> {{ element.description }} </td>
+                                <td> {{ element.code }} </td>
                                 <td>
                                     <a class="btn btn-xs btn-primary bs-tooltip edit" data-id="{{ element.id }}"
                                        data-placement="top" data-original-title="Editer">

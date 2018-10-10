@@ -17,6 +17,7 @@ class NewModeReparationType extends AbstractType
     {
         $builder
             ->add('description', TextType::class, ['label' => 'Description',])
+            ->add('code', TextType::class, ['label' => 'Code',])
         ;
     }
 
