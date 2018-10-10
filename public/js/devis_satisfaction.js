@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
         window.open(url, '_blank');
     });
 
-    $("body").on('click','.actionDevis', function () {
+    $("body").on('change','.actionDevis', function () {
         var id = $(this).data('id');
         var action=$(this).val();
         console.log(id);
