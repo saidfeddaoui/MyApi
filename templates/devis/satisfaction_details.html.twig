@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block page_title %}{{ "Détail Devis Satisfaction" }}{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -57,16 +59,7 @@
                                         {% endif %}
                                      </span>
                                     </p>
-                                    <p>
-                                        <span class="detail_label">Pack : </span>
-                                        <span class="detail_info">
-                                        {% if element.comment is not null %}
-                                            <input type="text" name="comment" disabled value="{{ element.comment }}">
-                                        {% else %}
-                                            <input type="text" name="comment" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                    </p>
+
                                     <p>
                                         <span class="detail_label">Observation : </span>
                                         <span class="detail_info">
@@ -85,6 +78,17 @@
                                             <input type="text" name="observation" disabled value="{{ element.action }}">
                                         {% else %}
                                             <input type="text" name="observation" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                    </p>
+
+                                    <p>
+                                        <span class="detail_label">Commentaire : </span>
+                                        <span class="detail_info">
+                                        {% if element.comment is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.comment }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
                                         {% endif %}
                                      </span>
                                     </p>
