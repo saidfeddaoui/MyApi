@@ -232,27 +232,7 @@
                                      </span>
                                 </p>
 
-                                    <p>
-                                        <span class="detail_label">situation Risque : </span>
-                                        <span class="detail_info">
-                                        {% if element.devisHabitation.situationRisque is not null %}
-                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.situationRisque }}">
-                                            {% else %}
-                                            <input type="text" name="contenu" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                    </p>
 
-                                    <p>
-                                        <span class="detail_label">Réference : </span>
-                                        <span class="detail_info">
-                                        {% if element.devisHabitation.reference is not null %}
-                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.reference }}">
-                                            {% else %}
-                                            <input type="text" name="contenu" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                    </p>
 
                                     <p>
                                         <span class="detail_label">Prime HT: </span>
@@ -306,6 +286,28 @@
                                             {% else %}
                                                 <input type="text" name="batiment" disabled value="">
                                             {% endif %}
+                                     </span>
+                                </p>
+
+                                <p>
+                                    <span class="detail_label">situation Risque : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.situationRisque is not null %}
+                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.situationRisque }}">
+                                            {% else %}
+                                            <input type="text" name="contenu" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+                                <p>
+                                    <span class="detail_label">Réference : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.reference is not null %}
+                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.reference }}">
+                                            {% else %}
+                                            <input type="text" name="contenu" disabled value="">
+                                        {% endif %}
                                      </span>
                                 </p>
 
