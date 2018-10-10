@@ -96,6 +96,17 @@
                                      </span>
                                     </p>
 
+                                    <p>
+                                        <span class="detail_label">Prime HT: </span>
+                                        <span class="detail_info">
+                                        {% if element.devisAuto.primeHT is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.devisAuto.primeHT }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                    </p>
+
                                 </div>
 
                                 <div class="col-md-4">
@@ -125,16 +136,6 @@
                                      </span>
                                 </p>
                                 <p>
-                                    <span class="detail_label">Pack : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisAuto.pack is not null %}
-                                            <input type="text" name="pack" disabled value="{{ element.devisAuto.pack.name }}">
-                                        {% else %}
-                                            <input type="text" name="pack" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
                                     <span class="detail_label">Puissance : </span>
                                     <span class="detail_info">
                                         {% if element.devisAuto.puissance is not null %}
@@ -144,6 +145,17 @@
                                         {% endif %}
                                      </span>
                                 </p>
+
+                                    <p>
+                                        <span class="detail_label">Prime TTC: </span>
+                                        <span class="detail_info">
+                                        {% if element.devisAuto.primeTTC is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.devisAuto.primeTTC }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                    </p>
                                 
                             </div>
 
