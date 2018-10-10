@@ -159,7 +159,15 @@
                               {% endif %}
 
                               {% if  element.action is not null %}
-                                  <td> {{ element.action }} </td>
+                                  {% if element.action == 2 %}
+                                      <p class="alert alert-success">Contacté</p>
+                                  {% elseif element.action == 1 %}
+                                      <p class="alert alert-warning">Déjà appelé</p>
+                                  {% elseif element.action == 0 %}
+                                      <p class="alert alert-error">Injoignable</p>
+                                  {% else %}
+                                      <p>Aucune Action</p>
+                                  {% endif %}
                               {% else %}
                                   <td>Pas disponible </td>
                               {% endif %}
