@@ -56,7 +56,7 @@ class DevisSatisfactionController extends Controller
 
         //dump($devisSatisfaction->getDevisHabitation());die;
         return $this->render('devis/satisfaction_details.html.twig', [
-            'page_title' => 'Liste des devis Auto',
+            'page_title' => 'Détail devis',
             'page_subtitle' => '',
             'element'=>$devisSatisfaction
         ]);

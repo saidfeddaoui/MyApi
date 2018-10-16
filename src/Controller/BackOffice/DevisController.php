@@ -57,7 +57,7 @@ class DevisController extends Controller
     public function details(DevisAuto $devisAuto)
     {
         return $this->render('devis/details.html.twig', [
-            'page_title' => 'Liste des devis Auto',
+            'page_title' => 'Détail devis Auto',
             'page_subtitle' => '',
             'devisAuto'=>$devisAuto
         ]);

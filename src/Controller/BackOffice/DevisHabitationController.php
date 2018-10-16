@@ -56,7 +56,7 @@ class DevisHabitationController extends Controller
     public function details(DevisHabitation $devisHabitation)
     {
         return $this->render('mrh/details.html.twig', [
-            'page_title' => 'Liste des devis Auto',
+            'page_title' => 'Détail devis Mrh',
             'page_subtitle' => '',
             'devisHabitation'=>$devisHabitation
         ]);

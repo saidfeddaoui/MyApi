@@ -27,6 +27,7 @@
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
+                            <div class="col-md-12">
                             <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                                 {% if  devisHabitation is not null %}
                                     {{ devisHabitation.civilite }}. {{ devisHabitation.nom }} {{ devisHabitation.prenom }}
@@ -34,6 +35,7 @@
                                     inconnu
                                 {% endif %}
                             </h4>
+                            </div>
                             <div class="col-md-6 general_details_devis" >
 
                                 <p>
