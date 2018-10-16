@@ -27,7 +27,52 @@
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-6 general_details_devis" >
+                            <div class="col-md-4 general_details_devis" >
+                                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                    {% if element.devisAuto is not null %}
+                                        {{ element.devisAuto.civilite }}. {{ element.devisAuto.nom }} {{ element.devisAuto.prenom }}
+                                    {% else %}
+                                        inconnu
+                                    {% endif %}
+
+                                </h4>
+                                <p><span class="detail_label"> Email: </span>
+                                    <span class="detail_info">
+                                            <input type="text"  name="email" disabled value="{{ element.devisAuto.email }}">
+                                        </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Téléphone : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto is not null %}
+                                            <input type="text" name="tel" disabled value="{{ element.devisAuto.tel }}">
+                                        {% else %}
+                                            <input type="text" name="tel" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Prime HT: </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto.primeHT is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.devisAuto.primeHT }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Prime TTC: </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto.primeTTC is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.devisAuto.primeTTC }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+                                <div class="col-md-4">
                                 <p>
                                     <span class="detail_label">Marque : </span>
                                     <span class="detail_info">
@@ -38,6 +83,7 @@
                                         {% endif %}
                                      </span>
                                 </p>
+
                                 <p>
                                     <span class="detail_label">Pack : </span>
                                     <span class="detail_info">
@@ -74,7 +120,8 @@
 
                             <!-- -->
 
-                            <div class="col-md-6 general_details_devis" >
+                            <div class="col-md-4 general_details_devis" >
+
 
                                 <p>
                                     <span class="detail_label">Valeur Neuve : </span>
