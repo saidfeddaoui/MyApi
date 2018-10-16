@@ -48,7 +48,7 @@ class DevisHabitationController extends Controller
     /**
      * @Route("/habitation/details/{id}", name="habitation_details",options={"expose"=true})
      *
-     * @Breadcrumb(title="Info véhicule")
+     * @Breadcrumb(title="Info Devis Mrh")
      * @param Request $request
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\Response
