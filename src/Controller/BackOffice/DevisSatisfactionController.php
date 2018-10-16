@@ -33,7 +33,7 @@ class DevisSatisfactionController extends Controller
     public function satisfaction(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $devis = $em->getRepository("App:DevisSatisfaction")->findBy(array(),array('dateCreation' => 'DESC'));
+        $devis = $em->getRepository("App:DevisSatisfaction")->findAllByOrder();
         return $this->render('devis/satisfaction.html.twig', [
             'page_title' => 'Liste des devis',
             'page_subtitle' => '',

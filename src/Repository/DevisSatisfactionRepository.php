@@ -22,19 +22,17 @@ class DevisSatisfactionRepository extends ServiceEntityRepository
 //    /**
 //     * @return DevisSatisfaction[] Returns an array of DevisSatisfaction objects
 //     */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllByOrder()
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
+            ->orderBy('d.dateCreation', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?DevisSatisfaction
