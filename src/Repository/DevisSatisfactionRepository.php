@@ -26,8 +26,10 @@ class DevisSatisfactionRepository extends ServiceEntityRepository
     public function findAllByOrder()
     {
         return $this->createQueryBuilder('d')
-            ->orderBy('d.dateCreation', 'DESC')
-            ->setMaxResults(10)
+            ->leftJoin('d.devisAuto', 'a')
+            ->leftJoin('d.devisHabitation', 'h')
+            ->orderBy('a.createdAt', 'DESC')
+            ->addOrderBy('h.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;
