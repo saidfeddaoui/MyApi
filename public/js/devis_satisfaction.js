@@ -45,10 +45,10 @@ jQuery(document).ready(function() {
                 "searchable": false,
                 "orderable": false,
             }
-        ]
-        /*"order": [
+        ],
+        "order": [
             [0, "asc"]
-        ]*/ // set first column as a default sort by asc
+        ] // set first column as a default sort by asc
     });
 
 
