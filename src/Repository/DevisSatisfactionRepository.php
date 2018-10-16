@@ -28,6 +28,7 @@ class DevisSatisfactionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->leftJoin('d.devisAuto', 'a')
             ->leftJoin('d.devisHabitation', 'h')
+            ->groupBy('d.auto')
             ->orderBy('a.createdAt', 'DESC')
             ->addOrderBy('h.createdAt', 'DESC')
             ->getQuery()
