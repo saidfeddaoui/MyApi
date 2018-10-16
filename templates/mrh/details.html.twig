@@ -28,7 +28,7 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
-                                {% if if devisHabitation is not null %}
+                                {% if  devisHabitation is not null %}
                                     {{ devisHabitation.civilite }}. {{ devisHabitation.nom }} {{ devisHabitation.prenom }}
                                 {% else %}
                                     inconnu
