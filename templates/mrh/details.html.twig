@@ -27,27 +27,15 @@
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
+                            <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                {% if if devisHabitation is not null %}
+                                    {{ devisHabitation.civilite }}. {{ devisHabitation.nom }} {{ devisHabitation.prenom }}
+                                {% else %}
+                                    inconnu
+                                {% endif %}
+                            </h4>
                             <div class="col-md-6 general_details_devis" >
-                                <p>
-                                    <span class="detail_label">Nom : </span>
-                                    <span class="detail_info">
-                                        {% if devisHabitation.nom is not null %}
-                                            <input type="text" class="police" name="marque" disabled value="{{ devisHabitation.nom }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
-                                <p>
-                                    <span class="detail_label">Prenom : </span>
-                                    <span class="detail_info">
-                                        {% if devisHabitation.prenom is not null %}
-                                            <input type="text" class="police" name="nom" disabled value="{{ devisHabitation.prenom }}">
-                                        {% else %}
-                                            <input type="text" class="police" name="nom" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+
                                 <p>
                                     <span class="detail_label">Proprieté : </span>
                                     <span class="detail_info">
@@ -65,6 +53,26 @@
                                             <input type="text" class="combustion" name="combustion" disabled value="{{ devisHabitation.tel }}">
                                         {% else %}
                                             <input type="text" class="combustion" name="combustion" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Prime HT: </span>
+                                    <span class="detail_info">
+                                        {% if devisHabitation.primeHT is not null %}
+                                            <input type="text" name="comment" disabled value="{{ devisHabitation.primeHT }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+                                <p>
+                                    <span class="detail_label">Prime TTC: </span>
+                                    <span class="detail_info">
+                                        {% if devisHabitation.primeTTC is not null %}
+                                            <input type="text" name="comment" disabled value="{{ devisHabitation.primeTTC }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
                                         {% endif %}
                                      </span>
                                 </p>
@@ -100,7 +108,7 @@
                                     <span class="detail_label">Batiment : </span>
                                     <span class="detail_info">
                                         {% if devisHabitation.batiment is not null %}
-                                            <input type="text" class="vg" name="vg" disabled value="{{ devisHabitation.batiment }}">
+                                            <input type="text" class="vg" name="vg" disabled value="{{ devisHabitation.batiment.value }}">
                                         {% else %}
                                             <input type="text" class="vg" name="vg" disabled value="">
                                         {% endif %}
