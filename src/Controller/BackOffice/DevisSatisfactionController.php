@@ -76,7 +76,9 @@ class DevisSatisfactionController extends Controller
     public function updateActionDevis(DevisSatisfaction $devisSatisfaction,$action,$observation){
         $em = $this->getDoctrine()->getManager();
         $devisSatisfaction->setAction($action);
-        $devisSatisfaction->setObservation($observation);
+        if(!empty($observation) and $observation!=''){
+            $devisSatisfaction->setObservation($observation);
+        }
         $em->flush();
         return  new JsonResponse(['message' => 'Action devis satisfaction modifié avec succés !!']);
     }

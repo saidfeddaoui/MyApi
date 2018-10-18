@@ -63,6 +63,10 @@ jQuery(document).ready(function() {
         var action=$(this).data('val');
         var observation=$('.observation').val();
 
+        if(observation===""){
+            observation="NULL";
+        }
+
         $.ajax({
             url: Routing.generate('devis_satisfaction_update_action', {id: id,action: action,observation: observation}),
             type: "POST",

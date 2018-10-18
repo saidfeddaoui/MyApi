@@ -450,7 +450,6 @@ class RegistrationController extends BaseController
                 ;
             $this->em->flush();
 
-
             $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($exClient));
             return $this->respondWith(['registration_token' => $token], ApiResponse::OK);
 
