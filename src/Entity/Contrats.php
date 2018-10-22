@@ -73,6 +73,12 @@ class Contrats
      */
     private $code;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Immatriculation;
+
+
 
     /**
      * @Serializer\SerializedName("IdCode")
@@ -205,6 +211,21 @@ class Contrats
 
         return $this;
     }
+
+
+
+    public function getImmatriculation(): ?string
+    {
+        return $this->Immatriculation;
+    }
+
+    public function setImmatriculation(string $Immatriculation): self
+    {
+        $this->Immatriculation = $Immatriculation;
+
+        return $this;
+    }
+
 
 
 
