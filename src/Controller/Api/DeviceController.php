@@ -81,6 +81,7 @@ class DeviceController extends Controller
             $pushable = $request->request->get('pushable');
             $latitude = $request->request->get('latitude');
             $longitude = $request->request->get('longitude');
+            $canal = strtolower($request->request->get('canal'));
             $device = array(
                 'device_uid'=> $device_uid,
                 'os'=> $os,
@@ -91,6 +92,7 @@ class DeviceController extends Controller
                 'pushable'=> $pushable,
                 'latitude'=> $latitude,
                 'longitude'=> $longitude,
+                'canal'=> $canal,
             );
 
             $status = $validator->checkParams($device);
