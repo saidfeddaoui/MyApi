@@ -6,6 +6,8 @@
  * Time: 12:27
  */
 namespace App\Command;
+use App\Entity\Client;
+use App\Entity\Device;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -75,20 +77,31 @@ class SendPushClientCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $Notifications = $em->getRepository(Notification::class)->getPushClient();
         foreach ($Notifications as $Notification){
-            $tokens[0] = $this->tokens->getTokenByClient($Notification->getClient()->getPhone());
-            if(empty($tokens[0])) continue;
-            $retour = $this->pushClient->sendPush(array(
-                'title' => $Notification->getSujet(),
-                'message' => $Notification->getMessage(),
-                'id' => $Notification->getId(),
-            ),$tokens);
-            if (isset($retour['success'])){
-                $output->writeln([
-                    'Push notification envoi avec succès id : '.$Notification->getId()
-                ]);
-                $Notification->setStatut(1);
-                $em->flush();
+            $client = $Notification->getClient();
+            if ($client instanceof Client){
+                $device = $client->getDevice();
+                if ($device instanceof Device){
+
+                    $tokens[0] = $this->tokens->getTokenByClient($device);
+                    if(empty($tokens[0])) continue;
+                    $retour = $this->pushClient->sendPush(array(
+                        'title' => $Notification->getSujet(),
+                        'message' => $Notification->getMessage(),
+                        'id' => $Notification->getId(),
+                        'canal' => !is_null($device->getCanal())?$device->getCanal():'mamda',
+                    ),$tokens);
+                    if (isset($retour['success'])){
+                        $output->writeln([
+                            'Push notification envoi avec succès id : '.$Notification->getId()
+                        ]);
+                        $Notification->setStatut(1);
+                        $em->flush();
+                    }
+
+                }
+
             }
+
         }
 
         $output->writeln([

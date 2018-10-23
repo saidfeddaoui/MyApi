@@ -81,7 +81,7 @@ class DeviceController extends Controller
             $pushable = $request->request->get('pushable');
             $latitude = $request->request->get('latitude');
             $longitude = $request->request->get('longitude');
-            $canal = strtolower($request->request->get('canal'));
+            $canal = strtolower($request->request->get('canal'))?:'mamda';
             $device = array(
                 'device_uid'=> $device_uid,
                 'os'=> $os,
