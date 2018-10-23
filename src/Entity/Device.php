@@ -96,6 +96,11 @@ class Device
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $canal;
+
 
 
     public function __construct()
@@ -264,6 +269,18 @@ class Device
         if ($newDevice !== $client->getDevice()) {
             $client->setDevice($newDevice);
         }
+
+        return $this;
+    }
+
+    public function getCanal(): ?string
+    {
+        return $this->canal;
+    }
+
+    public function setCanal(?string $canal): self
+    {
+        $this->canal = $canal;
 
         return $this;
     }

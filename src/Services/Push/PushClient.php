@@ -19,9 +19,14 @@ class PushClient
         $success = 0;
         $failure = 0;
 
+        if ($push['canal'] == 'mcma'){
+            $cle_serveur_firebase = $this->cle_serveur_firebase_mcma;
+        }else{
+            $cle_serveur_firebase = $this->cle_serveur_firebase_mamda;
+        }
         $headers = array(
             'Content-Type:application/json',
-            'Authorization:key=' . $this->cle_serveur_firebase
+            'Authorization:key=' . $cle_serveur_firebase
         );
 
 
