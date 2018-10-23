@@ -7,28 +7,14 @@
  */
 
 namespace App\Services\Push;
-use App\Entity\Client;
 use App\Entity\Device;
-use Doctrine\ORM\EntityManagerInterface;
+
 class Tokens
 {
-
-    private $entitymanager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entitymanager = $entityManager;
-
-    }
-
-    public function getTokenByClient($phone){
-        $client = $this->entitymanager ->getRepository(Client::class)->findOneBy(array('phone'=>$phone));
-        if ($client instanceof Client){
-            $device = $client->getDevice();
+    public function getTokenByClient($device){
             if($device instanceof Device){
                 return $device->getFirebaseToken();
             }
-        }
         return '';
     }
 
