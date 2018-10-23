@@ -36,6 +36,7 @@ class ApiDevices
             $devices->setCreatedAt($dateTime);
         }
         $devices->setVersionName($device_params['version_name']);
+        $devices->setCanal($device_params['canal']);
         $devices->setVersionCode($device_params['version_code']);
         $devices->setFirebaseToken($device_params['firebase_token']?:'');
         $devices->setPushable($device_params['pushable']);
