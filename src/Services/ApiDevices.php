@@ -28,7 +28,7 @@ class ApiDevices
     public function setDevice($device_params,$dateTime)
     {
         $devices = $this->em->getRepository(Device::class)->findOneBy(array('device_uid'=>$device_params['device_uid'],'canal'=>$device_params['canal']));
-        dump($devices->getCanal());die;
+        dump($devices);die;
         if (!$devices instanceof Device){
             $devices = new Device();
             $devices->setDeviceUid($device_params['device_uid']);
