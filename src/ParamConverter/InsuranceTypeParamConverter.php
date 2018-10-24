@@ -43,6 +43,10 @@ class InsuranceTypeParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+
+
+        $token = $request->headers->get('Authorization');
+        var_dump($token);
         if ($insuranceType = $this->session->get('insuranceType')) {
             $this->em->getRepository('App:InsuranceType')->find($insuranceType);
             $request->attributes->set($configuration->getName(), $insuranceType);
