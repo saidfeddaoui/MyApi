@@ -76,11 +76,11 @@ class SendPushClientCommand extends ContainerAwareCommand
         ]);
         $em = $this->getContainer()->get('doctrine')->getManager();
         $Notifications = $em->getRepository(Notification::class)->getPushClient();
-        dump($Notifications);die;
         foreach ($Notifications as $Notification){
             $client = $Notification->getClient();
             if ($client instanceof Client){
                 $device = $client->getDevice();
+                dump($device);die;
                 if ($device instanceof Device){
 
                     $tokens[0] = $this->tokens->getTokenByClient($device);
