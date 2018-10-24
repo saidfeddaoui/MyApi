@@ -80,7 +80,6 @@ class SendPushClientCommand extends ContainerAwareCommand
             $client = $Notification->getClient();
             if ($client instanceof Client){
                 $device = $client->getDevice();
-                dump($device);die;
                 if ($device instanceof Device){
 
                     $tokens[0] = $this->tokens->getTokenByClient($device);
