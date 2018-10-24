@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Ramsey\Uuid\Uuid;
 use App\Utils\ObjectMapper;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @Rest\Route(path="/pre_declaration", name="api_pre_declaration_")
  */
