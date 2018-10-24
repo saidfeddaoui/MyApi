@@ -112,7 +112,7 @@ class SecurityController extends BaseController
         $clienttoken = $this->em->getRepository(Client::class)->findOneBy(array('phone' => $user->getPhone()));
         $clienttoken->setToken($token);
         $this->em->flush();
-        
+
         $this->eventDispatcher->dispatch(ApplicationEvents::SUCCESS_LOGIN, new SuccessLoginEvent($token, $user));
         return $this->respondWith(new LoginResponse($token, $user));
     }

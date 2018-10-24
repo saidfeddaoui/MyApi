@@ -134,7 +134,7 @@ class Client extends User
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $token;
 
@@ -192,10 +192,10 @@ class Client extends User
         return $this->familyName;
     }
     /**
-     * @param string $familyName
+     * @param text $familyName
      * @return static
      */
-    public function setFamilyName(?string $familyName): self
+    public function setFamilyName( $familyName)
     {
         $this->familyName = $familyName;
         return $this;
@@ -203,7 +203,7 @@ class Client extends User
 
 
 
-    public function getToken(): ?string
+    public function getToken()
     {
         return $this->token;
     }
