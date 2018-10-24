@@ -89,6 +89,7 @@ class SecurityController extends BaseController
         $request = $this->configHostUtils->getCurrentRequest();
         $user = $this->tokenStorage->getToken()->getUser();
         $token = 'Bearer ' . $this->jwtEncoder->encode(['phone' => $user->getPhone()]);
+
         // Relation between client and device
         $device_uid = $request->request->get('device_uid') ?: '';
         if ($device_uid) {
@@ -107,6 +108,11 @@ class SecurityController extends BaseController
 
             }
         }
+
+        $clienttoken = $this->em->getRepository(Client::class)->findOneBy(array('phone' => $user->getPhone()));
+        $clienttoken->setToken($token);
+        $this->em->flush();
+
         $this->eventDispatcher->dispatch(ApplicationEvents::SUCCESS_LOGIN, new SuccessLoginEvent($token, $user));
         return $this->respondWith(new LoginResponse($token, $user));
     }

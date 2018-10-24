@@ -75,6 +75,8 @@ class Contrats
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Serializer\Expose()
+     * @Serializer\Groups("contrats")
      */
     private $Immatriculation;
 

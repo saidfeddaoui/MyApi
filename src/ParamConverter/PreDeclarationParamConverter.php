@@ -55,6 +55,11 @@ class PreDeclarationParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
+        $token = $request->headers->get('Authorization');
+        $client = $this->em->getRepository('App:Client')->findOneBy(array('token' => $token));
+        if (!$client) {
+            throw new NotFoundHttpException("Invalid Token");
+        }
         /**
          * @var PreDeclaration $preDeclaration
          */

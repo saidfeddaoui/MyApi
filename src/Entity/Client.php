@@ -132,7 +132,11 @@ class Client extends User
      */
     protected $client_modeReparation_associations;
 
-
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $token;
 
     public function __construct()
     {
@@ -188,12 +192,28 @@ class Client extends User
         return $this->familyName;
     }
     /**
-     * @param string $familyName
+     * @param text $familyName
      * @return static
      */
-    public function setFamilyName(?string $familyName): self
+    public function setFamilyName( $familyName)
     {
         $this->familyName = $familyName;
+        return $this;
+    }
+
+
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+    /**
+     * @param string $token
+     * @return static
+     */
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
         return $this;
     }
 
