@@ -48,6 +48,35 @@ class ApiDevices
         return true;
     }
 
+    public function checkVersion($os, $version_name)
+    {
+        $os = $this->em->getRepository(OperatingSystem::class)->findOneBy(array('name' => strtolower($os)));
+        $versions = $this->em->getRepository(Versions::class)->findOneBy(array('os' => $os));
+
+        if ($versions instanceof Versions) {
+            if (version_compare($version_name, $versions->getMinVersion()) <= 0) {
+                return array(
+                    'status' => "ERROR",
+                    'message' => $versions->getMsgBloquer() ?: '',
+                    'url' => $versions->getPath() ?: '',
+                    'cache' => $versions->getCache() ? true : false,
+                );
+            }
+
+            if ((version_compare($version_name, $versions->getMinVersion()) > 0) && (version_compare($version_name, $versions->getCurrentVersion()) < 0)) {
+                return array(
+                    'status' => "WARNING",
+                    'message' => $versions->getMsgInfo(),
+                    'url' => $versions->getPath() ?: '',
+                    'cache' => $versions->getCache() ? true : false,
+                );
+            }
+        }
+
+        return array('status' => 'OK', 'message' => 'SUCCESSFULY UPDATED');
+
+    }
+
 
 
 }
