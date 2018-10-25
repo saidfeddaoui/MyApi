@@ -8,8 +8,8 @@
 namespace App\Services;
 
 use App\Entity\Device;
-use App\Entity\Version;
-
+use App\Entity\OperatingSystem;
+use App\Entity\Versions;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ApiDevices
