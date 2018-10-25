@@ -92,8 +92,9 @@ class SecurityController extends BaseController
 
         // Relation between client and device
         $device_uid = $request->request->get('device_uid') ?: '';
+        $canal = $request->request->get('canal') ?: '';
         if ($device_uid) {
-            $device = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid));
+            $device = $this->em->getRepository(Device::class)->findOneBy(array('device_uid' => $device_uid,'canal' => $canal));
             if ($device instanceof Device) {
                 $client_device = $device->getClient() ?: '';
                 if ($client_device instanceof Client) {
