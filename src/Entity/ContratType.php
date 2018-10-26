@@ -8,6 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratTypeRepository")
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\VirtualProperty(name="InsuranceType", exp="object.getInsuranceId()", options={ @Serializer\SerializedName("id")
  */
 class ContratType
 {
@@ -82,5 +83,10 @@ class ContratType
         $this->insuranceType = $insuranceType;
 
         return $this;
+    }
+
+    public function getInsuranceId()
+    {
+        return $this->insuranceType->getId();;
     }
 }
