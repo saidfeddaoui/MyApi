@@ -36,7 +36,7 @@ class ContratType
 
      /**
      * One Product has One Shipment.
-     * @OneToOne(targetEntity="InsuranceType")
+     * @OneToOne(targetEntity="App\Entity\InsuranceType")
      * @JoinColumn(name="insuranceType", referencedColumnName="id")
      */
     private $insuranceType;
