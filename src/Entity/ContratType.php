@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratTypeRepository")
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="id", exp="object.getInsuranceId()", options={ @Serializer\SerializedName("id")
+ * @Serializer\VirtualProperty(name="insuranceType", exp="object.getInsuranceId()", options={ @Serializer\SerializedName("id"),@Serializer\Groups("entities") })
  */
 class ContratType
 {
@@ -36,9 +36,7 @@ class ContratType
     private $code;
 
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"entities"})
-     * One Product has One Shipment.
+     * 
      * @ORM\OneToOne(targetEntity="App\Entity\InsuranceType")
      * @ORM\JoinColumn(name="insuranceType", referencedColumnName="id")
      */
