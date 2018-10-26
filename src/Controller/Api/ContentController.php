@@ -900,7 +900,7 @@ class ContentController extends BaseController
      */
     public function getEntities(ObjectManager $em)
     {
-        $entities = $em->getRepository('App:InsuranceType')->findAll();
+        $entities = $em->getRepository('App:ContratType')->findAll();
         return $this->respondWith($entities);
     }
 
