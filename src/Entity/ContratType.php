@@ -34,7 +34,9 @@ class ContratType
      */
     private $code;
 
-     /**
+    /**
+     * @Serializer\Expose()
+     * @Serializer\Groups(groups={"entities"})
      * One Product has One Shipment.
      * @ORM\OneToOne(targetEntity="App\Entity\InsuranceType")
      * @ORM\JoinColumn(name="insuranceType", referencedColumnName="id")
