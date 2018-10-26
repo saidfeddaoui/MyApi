@@ -26,7 +26,7 @@ class InsuranceType extends BaseRole
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"entities"})
+     * 
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -43,7 +43,7 @@ class InsuranceType extends BaseRole
 
     /**
      * @Serializer\Expose()
-     * @Serializer\Groups(groups={"entities"})
+     * 
      * @ORM\Column(type="string", length=10)
      */
     private $code;

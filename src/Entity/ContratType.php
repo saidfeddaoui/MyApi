@@ -12,9 +12,6 @@ use JMS\Serializer\Annotation as Serializer;
 class ContratType
 {
     /**
-     * @Serializer\Expose()
-     * @Serializer\Groups(groups={"entities"})
-     * 
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -36,6 +33,13 @@ class ContratType
      * @ORM\Column(type="string", length=10)
      */
     private $code;
+
+     /**
+     * One Product has One Shipment.
+     * @OneToOne(targetEntity="InsuranceType")
+     * @JoinColumn(name="insuranceType", referencedColumnName="id")
+     */
+    private $insuranceType;
 
     public function getId()
     {
@@ -62,6 +66,18 @@ class ContratType
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getInsuranceType()
+    {
+        return $this->insuranceType;
+    }
+
+    public function setInsuranceType($insuranceType)
+    {
+        $this->insuranceType = $insuranceType;
 
         return $this;
     }
