@@ -16,8 +16,7 @@ class CitiesApiService extends ApiCustomerService
     {
         $requestContrat = json_encode($params);
         $response = $this->httpClient->post("cities", [
-            'body' => $requestContrat,
-            'headers' => ['Content-type' => 'application/json']
+            'form_params' => [$params]
         ]);
         return $this->getResult($response);
     }

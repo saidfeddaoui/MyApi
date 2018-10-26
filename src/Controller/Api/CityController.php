@@ -82,7 +82,10 @@ class CityController extends BaseController
      */
     public function getCities(Request $request, CitiesApiService $citiesApiService)
     {
-        $params=json_decode($request->getContent());
+        $params['idCompteclient']=$request->request->get('IdCompteMobile');
+        $params['idPredeclaration']=$request->request->get('IdPreDeclaration');
+        $params['IdTypeDoc']=$request->request->get('IdTypeDoc');
+        $params['CodeTypeDoc']=$request->request->get('CodeTypeDoc');
         $cities = $citiesApiService->getCities($params);
         //return  new JsonResponse($cities, 200);
         return $this->respondWith($cities);
