@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratTypeRepository")
  * @Serializer\ExclusionPolicy("all")
- * @Serializer\VirtualProperty(name="InsuranceType", exp="object.getInsuranceId()", options={ @Serializer\SerializedName("id")
+ * @Serializer\VirtualProperty(name="InsuranceType", exp="object.getInsuranceId()", options={ @Serializer\SerializedName("insuranceType")
  */
 class ContratType
 {
