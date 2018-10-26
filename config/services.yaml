@@ -115,7 +115,11 @@ services:
                     - '@eight_points_guzzle.client.preDeclarationTrigger'
                     - '@jms_serializer'
                     - array
-
+    App\Services\CitiesApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_add_contrat'
+                    - '@jms_serializer'
+                    - array
     # Exception normalizers
     app.normalizer.not_found_http_exception:
             class: App\Normalizer\NotFoundHttpExceptionNormalizer
