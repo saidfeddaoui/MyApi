@@ -87,6 +87,6 @@ class ContratType
 
     public function getInsuranceId()
     {
-        return $this->insuranceType->getId();;
+        return $this->getInsuranceType()->getId();;
     }
 }
