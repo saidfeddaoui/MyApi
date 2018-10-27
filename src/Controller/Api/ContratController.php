@@ -167,7 +167,7 @@ class ContratController extends BaseController
         return new JsonResponse(array(
             "code"=>200,
             "status"=>"ok",
-            "message"=>"les contrat ont été supprimé avec succès"
+            "message"=>"les contrats ont été supprimé avec succès"
         ));
 
     }

@@ -15,7 +15,7 @@ class CitiesApiService extends ApiCustomerService
     public function getCities($params)
     {
         //$requestContrat = json_encode($params);
-        $response = $this->httpClient->post("", [
+        $response = $this->httpClient->post("listVilles", [
             'form_params' => [$params]
         ]);
         return $this->getResult($response);
