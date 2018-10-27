@@ -38,54 +38,19 @@ class CityController extends BaseController
     }
 
     /**
-     *
-     * @SWG\Post(
-     *  tags={"Villes"},
-     *  description="Infos Pratiques",
-     *  @SWG\Parameter(
-     *         name="IdCompteMobile ",
-     *         in="formData",
-     *         type="number",
-     *         required=true,
-     *         description="id compte client",
-     *  ),
-     *  @SWG\Parameter(
-     *         name="IdPreDeclaration ",
-     *         in="formData",
-     *         type="number",
-     *         required=true,
-     *         description="id predeclaration",
-     *  ),
-     *  @SWG\Parameter(
-     *         name="IdTypeDoc",
-     *         in="formData",
-     *         type="number",
-     *         required=true,
-     *         description="Id Type Doc ",
-     *  ),@SWG\Parameter(
-     *         name="CodeTypeDoc",
-     *         in="formData",
-     *         type="string",
-     *         required=true,
-     *         description="Code Type Doc ",
-     *  ),
-     *
-     *  @SWG\Response(
-     *         response=200,
-     *         description="cities successfully listed"
-     *     )
-     *  )
      * @Rest\Post(path="/",name="list")
      * @param  Request $request
      * @param CitiesApiService $citiesApiService
-     * @return JsonResponse
+     * @return ApiResponse
      */
     public function getCities(Request $request, CitiesApiService $citiesApiService)
     {
-        $params['idCompteclient']=$request->request->get('IdCompteMobile');
-        $params['idPredeclaration']=$request->request->get('IdPreDeclaration');
-        $params['IdTypeDoc']=$request->request->get('IdTypeDoc');
-        $params['CodeTypeDoc']=$request->request->get('CodeTypeDoc');
+        $idCompteMobile=$request->request->get('idCompteMobile');
+        $idPredeclaration=$request->request->get('idPredeclaration');
+        $idModeReparation=$request->request->get('idModeReparation');
+        $CodeModeReparation=$request->request->get('CodeModeReparation');
+
+        $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
         $cities = $citiesApiService->getCities($params);
         //return  new JsonResponse($cities, 200);
         return $this->respondWith($cities);

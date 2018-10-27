@@ -18,7 +18,6 @@ class CitiesApiService extends ApiCustomerService
         $response = $this->httpClient->post("cities", [
             'form_params' => [$params]
         ]);
-        var_dump($response);die;
         return $this->getResult($response);
     }
     protected function getResult($response)
