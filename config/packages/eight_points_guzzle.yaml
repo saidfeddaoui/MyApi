@@ -84,7 +84,7 @@ eight_points_guzzle:
                         headers:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
-        api_cities:
+        api_get_cities:
                     base_url: http://demo0230142.mockable.io/listVilles
                     options:
                         timeout: 30

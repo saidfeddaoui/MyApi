@@ -117,7 +117,7 @@ services:
                     - array
     App\Services\CitiesApiService:
                 arguments:
-                    - '@eight_points_guzzle.client.api_add_contrat'
+                    - '@eight_points_guzzle.client.api_get_cities'
                     - '@jms_serializer'
                     - array
     # Exception normalizers
