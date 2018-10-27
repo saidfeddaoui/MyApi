@@ -41,7 +41,7 @@ class CityController extends BaseController
      * @Rest\Post(path="/",name="list")
      * @param  Request $request
      * @param CitiesApiService $citiesApiService
-     * @return ApiResponse
+     * @return JsonResponse
      */
     public function getCities(Request $request, CitiesApiService $citiesApiService)
     {
@@ -52,9 +52,9 @@ class CityController extends BaseController
 
         $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
         $cities = $citiesApiService->getCities($params);
-        var_dump($cities);die;
-        //return  new JsonResponse($cities, 200);
-        return $this->respondWith($cities);
+        //var_dump($cities);die;
+        return  new JsonResponse($cities, 200);
+        //return $this->respondWith($cities);
     }
 
 
