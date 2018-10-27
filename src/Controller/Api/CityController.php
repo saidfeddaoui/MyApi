@@ -52,6 +52,7 @@ class CityController extends BaseController
 
         $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
         $cities = $citiesApiService->getCities($params);
+        var_dump($cities);die;
         //return  new JsonResponse($cities, 200);
         return $this->respondWith($cities);
     }
