@@ -50,7 +50,8 @@ class CityController extends BaseController
         $idModeReparation=$request->request->get('idModeReparation');
         $CodeModeReparation=$request->request->get('CodeModeReparation');
 
-        $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
+        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
+        $params=$request->getContent();
         $cities = $citiesApiService->getCities($params);
         //var_dump($cities);die;
         return  new JsonResponse($cities, 200);
