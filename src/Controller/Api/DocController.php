@@ -13,7 +13,7 @@ use App\Services\DetailsContratApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use Swagger\Annotations as SWG;
@@ -63,7 +63,7 @@ class DocController extends BaseController
      * @Rest\Post(path="/upload",name="upload")
      * @param  Request $request
      * @param UploadDocApiService $uploadDocApiService
-     * @return Response
+     * @return JsonResponse
      */
     public function uploadDocument(Request $request, UploadDocApiService $uploadDocApiService)
     {
@@ -75,8 +75,14 @@ class DocController extends BaseController
         $params=json_decode($request->getContent());
         //var_dump($params);die;
         $data = $uploadDocApiService->UploadDocs($params);
+        if($data){
+            $result=array("statut"=>Response::OK,"message"=>"fichier bien charger !!","file"=>$data);
+        }else{
+            $result=array("statut"=>Response::KO,"message"=>"problème chargement fichier","file"=>"");
+        }
+
         //var_dump($cities);die;
-        return  new Response($data, 200);
+        return  new JsonResponse($result, 200);
         //return $this->respondWith($cities);
     }
 
