@@ -63,7 +63,7 @@ class DocController extends BaseController
      * @Rest\Post(path="/upload",name="upload")
      * @param  Request $request
      * @param UploadDocApiService $uploadDocApiService
-     * @return JsonResponse
+     * @return Response
      */
     public function uploadDocument(Request $request, UploadDocApiService $uploadDocApiService)
     {
@@ -76,7 +76,7 @@ class DocController extends BaseController
         var_dump($params);die;
         $data = $uploadDocApiService->UploadDocs($params);
         //var_dump($cities);die;
-        return  new JsonResponse($data, 200);
+        return  new Response($data, 200);
         //return $this->respondWith($cities);
     }
 
