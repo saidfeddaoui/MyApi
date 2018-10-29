@@ -46,13 +46,14 @@ class GarageController extends BaseController
      */
     public function getGarages(Request $request, GaragesApiService $garagesApiService)
     {
-        $idCompteMobile=$request->request->get('idCompteMobile');
+        /*$idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
         $idModeReparation=$request->request->get('idModeReparation');
         $CodeModeReparation=$request->request->get('CodeModeReparation');
         $idVille=$request->request->get('idVille');
         //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation,"idVille"=>$idVille);
-        $params=$request->getContent();
+        */
+        $params=json_decode($request->getContent());
         $garages = $garagesApiService->getGarages($params);
         //var_dump($cities);die;
         return  new JsonResponse($garages, 200);

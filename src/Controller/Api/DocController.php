@@ -47,11 +47,11 @@ class DocController extends BaseController
      */
     public function getListDocs(Request $request, DocApiService $docApiService)
     {
-        $idCompteMobile=$request->request->get('idCompteMobile');
+        /*$idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
 
-        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration);
-        $params=$request->getContent();
+        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration);*/
+        $params=json_decode($request->getContent());
         $documents = $docApiService->getListDocs($params);
         //var_dump($cities);die;
         return  new JsonResponse($documents, 200);
@@ -67,13 +67,12 @@ class DocController extends BaseController
      */
     public function uploadDocument(Request $request, UploadDocApiService $uploadDocApiService)
     {
-        $idCompteMobile=$request->request->get('idCompteMobile');
+        /*$idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
         $idTypeDoc=$request->request->get('idTypeDoc');
         $CodeTypeDoc=$request->request->get('CodeTypeDoc');
-
-        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idTypeDoc"=>$idTypeDoc,"CodeTypeDoc"=>$CodeTypeDoc);
-        $params=$request->getContent();
+        $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idTypeDoc"=>$idTypeDoc,"CodeTypeDoc"=>$CodeTypeDoc);*/
+        $params=json_decode($request->getContent());
         $data = $uploadDocApiService->UploadDocs($params);
         //var_dump($cities);die;
         return  new JsonResponse($data, 200);

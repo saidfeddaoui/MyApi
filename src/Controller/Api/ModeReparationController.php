@@ -98,7 +98,7 @@ class ModeReparationController extends BaseController
      */
     public function envoiMDR(Request $request, MDRApiService $MDRApiService)
     {
-        $idCompteMobile=$request->request->get('idCompteMobile');
+        /*$idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
         $idModeReparation=$request->request->get('idModeReparation');
         $CodeModeReparation=$request->request->get('CodeModeReparation');
@@ -114,8 +114,8 @@ class ModeReparationController extends BaseController
         //"idVille"=>$idVille,
         //"idGarage"=>$idGarage,
         //"commentaire"=>$commentaire,
-        //);
-        $params=$request->getContent();
+        //);*/
+        $params=json_decode($request->getContent());
         $data = $MDRApiService->sendMDR($params);
         //var_dump($cities);die;
         return  new JsonResponse($data, 200);
