@@ -30,7 +30,6 @@ class UploadDocApiService extends ApiCustomerService
             return null;
         }
         $data = (string)($response->getBody());
-        //var_dump($data);die;
         $result=json_decode($data);
         return $result;
     }

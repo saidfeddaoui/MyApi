@@ -81,7 +81,7 @@ class DocController extends BaseController
             $result=array("statut"=>Response::KO,"message"=>"problème chargement fichier","file"=>"");
         }
 
-        //var_dump($cities);die;
+        var_dump($result);die;
         return  new JsonResponse($result);
         //return $this->respondWith($cities);
     }
