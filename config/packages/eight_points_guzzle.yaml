@@ -99,7 +99,7 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_send_MDR:
-                    base_url: http://demo0230142.mockable.io/send
+                    base_url: http://demo0949329.mockable.io/send
                     options:
                         timeout: 30
                         headers:
