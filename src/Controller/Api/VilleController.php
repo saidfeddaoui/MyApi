@@ -45,13 +45,13 @@ class VilleController extends BaseController
      */
     public function getCities(Request $request, VillesApiService $citiesApiService)
     {
-        $idCompteMobile=$request->request->get('idCompteMobile');
+        /*$idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
         $idModeReparation=$request->request->get('idModeReparation');
         $CodeModeReparation=$request->request->get('CodeModeReparation');
 
-        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
-        $params=$request->getContent();
+        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);*/
+        $params=json_decode($request->getContent());
         $cities = $citiesApiService->getCities($params);
         //var_dump($cities);die;
         return  new JsonResponse($cities, 200);

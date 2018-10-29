@@ -14,9 +14,10 @@ class GaragesApiService extends ApiCustomerService
 
     public function getGarages($params)
     {
-        //$requestContrat = json_encode($params);
+        $requestGarages = json_encode($params);
         $response = $this->httpClient->post("", [
-            'form_params' => [$params]
+            'body' => $requestGarages,
+            'headers' => ['Content-type' => 'application/json']
         ]);
         return $this->getResult($response);
     }

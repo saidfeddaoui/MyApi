@@ -14,9 +14,10 @@ class MDRApiService extends ApiCustomerService
 
     public function sendMDR($params)
     {
-        //$requestContrat = json_encode($params);
+        $requestMDR = json_encode($params);
         $response = $this->httpClient->post("", [
-            'form_params' => [$params]
+            'body' => $requestMDR,
+            'headers' => ['Content-type' => 'application/json']
         ]);
         return $this->getResult($response);
     }

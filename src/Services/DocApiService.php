@@ -14,9 +14,10 @@ class DocApiService extends ApiCustomerService
 
     public function getListDocs($params)
     {
-        //$requestContrat = json_encode($params);
+        $requestDocs = json_encode($params);
         $response = $this->httpClient->post("", [
-            'form_params' => [$params]
+            'body' => $requestDocs,
+            'headers' => ['Content-type' => 'application/json']
         ]);
         return $this->getResult($response);
     }

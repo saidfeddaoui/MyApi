@@ -14,9 +14,10 @@ class VillesApiService extends ApiCustomerService
 
     public function getCities($params)
     {
-        //$requestContrat = json_encode($params);
+        $requestVille = json_encode($params);
         $response = $this->httpClient->post("", [
-            'form_params' => [$params]
+            'body' => $requestVille,
+            'headers' => ['Content-type' => 'application/json']
         ]);
         return $this->getResult($response);
     }
