@@ -29,7 +29,7 @@ class DocApiService extends ApiCustomerService
             'body' => $requestDocsUpload,
             'headers' => ['Content-type' => 'application/json']
         ]);
-        var_dump($response);die;
+        //var_dump($this->getResult($response));die;
         return $this->getResult($response);
     }
 
@@ -39,6 +39,7 @@ class DocApiService extends ApiCustomerService
             return null;
         }
         $data = (string)($response->getBody());
+        var_dump($data);die;
         $result=json_decode($data);
         return $result;
     }
