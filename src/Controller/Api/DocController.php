@@ -82,7 +82,7 @@ class DocController extends BaseController
         }
 
         //var_dump($cities);die;
-        return  new JsonResponse($result, 200);
+        return  new JsonResponse($result);
         //return $this->respondWith($cities);
     }
 
