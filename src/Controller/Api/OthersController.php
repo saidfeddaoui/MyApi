@@ -38,7 +38,7 @@ class OthersController extends BaseController
     }
 
     /**
-     * @Rest\Post(path="/Listvilles",name="list_villes")
+     * @Rest\Post(path="/listVilles",name="list_villes")
      * @param  Request $request
      * @param OthersApiService $citiesApiService
      * @return JsonResponse
