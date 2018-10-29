@@ -24,6 +24,7 @@ class DocApiService extends ApiCustomerService
 
     public function UploadDocs($params)
     {
+        var_dump("die");die;
         $requestDocsUpload = json_encode($params);
         $response = $this->httpClient->post("", [
             'body' => $requestDocsUpload,
