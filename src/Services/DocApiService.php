@@ -36,7 +36,7 @@ class DocApiService extends ApiCustomerService
     protected function getResult($response)
     {
         if (200 !== $response->getStatusCode()) {
-            return null;
+            return "test";
         }
         $data = (string)($response->getBody());
         var_dump($data);die;
