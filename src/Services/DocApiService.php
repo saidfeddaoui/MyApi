@@ -22,19 +22,6 @@ class DocApiService extends ApiCustomerService
         return $this->getResult($response);
     }
 
-    public function UploadDocs($params)
-    {
-        var_dump("die");die;
-        $requestDocsUpload = json_encode($params);
-        $response = $this->httpClient->post("", [
-            'body' => $requestDocsUpload,
-            'headers' => ['Content-type' => 'application/json']
-        ]);
-        //var_dump($this->getResult($response));die;
-        var_dump((string)($response->getBody()));die;
-        return $this->getResult($response);
-    }
-
     protected function getResult($response)
     {
         if (200 !== $response->getStatusCode()) {
