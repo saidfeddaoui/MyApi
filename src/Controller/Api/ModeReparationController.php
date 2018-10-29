@@ -91,7 +91,7 @@ class ModeReparationController extends BaseController
 
 
     /**
-     * @Rest\Post(path="/envoi_MDR",name="send")
+     * @Rest\Post(path="MDR/envoi",name="send")
      * @param  Request $request
      * @param MDRApiService $mdrApiService
      * @return JsonResponse
