@@ -125,6 +125,11 @@ services:
                     - '@eight_points_guzzle.client.api_get_garages'
                     - '@jms_serializer'
                     - array
+    App\Services\MDRApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_get_garages'
+                    - '@jms_serializer'
+                    - array
   # Exception normalizers
     app.normalizer.not_found_http_exception:
             class: App\Normalizer\NotFoundHttpExceptionNormalizer

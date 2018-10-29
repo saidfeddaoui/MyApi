@@ -50,8 +50,8 @@ class GarageController extends BaseController
         $idPredeclaration=$request->request->get('idPredeclaration');
         $idModeReparation=$request->request->get('idModeReparation');
         $CodeModeReparation=$request->request->get('CodeModeReparation');
-
-        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation);
+        $idVille=$request->request->get('idVille');
+        //$params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idModeReparation"=>$idModeReparation,"CodeModeReparation"=>$CodeModeReparation,"idVille"=>$idVille);
         $params=$request->getContent();
         $garages = $garagesApiService->getGarages($params);
         //var_dump($cities);die;

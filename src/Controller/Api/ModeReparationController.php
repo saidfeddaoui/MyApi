@@ -11,6 +11,7 @@ namespace App\Controller\Api;
 use App\Entity\ChoixMDR;
 use App\Entity\PreDeclaration;
 use App\DTO\Api\ApiResponse;
+use App\Services\MDRApiService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +22,9 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Rest\Route(path="/public/get/modesReparationActifs", name="api_modeReparation")
+ * @Rest\Route(path="/public", name="api_modeReparation_")
  */
-class ModeReparationController extends Controller
+class ModeReparationController extends BaseController
 {
 
 
@@ -46,7 +47,7 @@ class ModeReparationController extends Controller
      *     )
      * )
      *
-     * @Rest\Get(path="/{id_predeclaration}", name="modesReparationsActifs")
+     * @Rest\Get(path="/get/modesReparationActifs/{id_predeclaration}", name="modesReparationsActifs")
      * @Rest\View()
      * @param $id_predeclaration
      * @param ObjectManager $em
@@ -89,5 +90,36 @@ class ModeReparationController extends Controller
     }
 
 
+    /**
+     * @Rest\Post(path="/envoi_MDR",name="send")
+     * @param  Request $request
+     * @param MDRApiService $mdrApiService
+     * @return JsonResponse
+     */
+    public function envoiMDR(Request $request, MDRApiService $MDRApiService)
+    {
+        $idCompteMobile=$request->request->get('idCompteMobile');
+        $idPredeclaration=$request->request->get('idPredeclaration');
+        $idModeReparation=$request->request->get('idModeReparation');
+        $CodeModeReparation=$request->request->get('CodeModeReparation');
+        $idVille=$request->request->get('idVille');
+        $idGarage=$request->request->get('idGarage');
+        $commentaire=$request->request->get('commentaire');
+
+        //$params=array(
+        //"idCompteMobile"=>$idCompteMobile,
+        //"idPredeclaration"=>$idPredeclaration,
+        //"idModeReparation"=>$idModeReparation,
+        //"CodeModeReparation"=>$CodeModeReparation,
+        //"idVille"=>$idVille,
+        //"idGarage"=>$idGarage,
+        //"commentaire"=>$commentaire,
+        //);
+        $params=$request->getContent();
+        $data = $MDRApiService->sendMDR($params);
+        //var_dump($cities);die;
+        return  new JsonResponse($data, 200);
+        //return $this->respondWith($cities);
+    }
 
 }
