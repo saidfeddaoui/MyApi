@@ -85,7 +85,7 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_get_cities:
-                    base_url: http://demo0230142.mockable.io/listVilles
+                    base_url: http://ais.mamda-mcma.ma/WS/api/mode/reparation/getville
                     options:
                         timeout: 30
                         headers:
