@@ -106,14 +106,14 @@ eight_points_guzzle:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_get_doc:
-                    base_url: http://demo0949329.mockable.io/download
+                    base_url: https://ais.mamda-mcma.ma/WS/api/mode/reparation/getdocs
                     options:
                         timeout: 30
                         headers:
                             User-Agent: MobiblancMamda/7.0
                     plugin: ~
         api_upload_doc:
-                    base_url: http://demo3201186.mockable.io/uploadDoc
+                    base_url: https://ais.mamda-mcma.ma/WS/api/mode/reparation/getdoc
                     options:
                         timeout: 30
                         headers:
