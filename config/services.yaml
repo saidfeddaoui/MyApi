@@ -130,6 +130,16 @@ services:
                     - '@eight_points_guzzle.client.api_send_MDR'
                     - '@jms_serializer'
                     - array
+    App\Services\DocApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_get_doc'
+                    - '@jms_serializer'
+                    - array
+    App\Services\UploadDocApiService:
+                arguments:
+                    - '@eight_points_guzzle.client.api_upload_doc'
+                    - '@jms_serializer'
+                    - array
   # Exception normalizers
     app.normalizer.not_found_http_exception:
             class: App\Normalizer\NotFoundHttpExceptionNormalizer
