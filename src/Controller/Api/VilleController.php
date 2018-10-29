@@ -5,7 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Client;
 use App\Entity\Contrats;
 use App\DTO\Api\ApiResponse;
-use App\Services\OthersApiService;
+use App\Services\VillesApiService;
 use App\Services\ContratApiService;
 use App\Services\DetailsContratApiService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,9 +19,9 @@ use Swagger\Annotations as SWG;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
- * @Rest\Route(path="/public/autres", name="api_autres_")
+ * @Rest\Route(path="/public/villes", name="api_")
  */
-class OthersController extends BaseController
+class VilleController extends BaseController
 {
 
     /**
@@ -38,12 +38,12 @@ class OthersController extends BaseController
     }
 
     /**
-     * @Rest\Post(path="/listVilles",name="list_villes")
+     * @Rest\Post(path="/list",name="list_villes")
      * @param  Request $request
-     * @param OthersApiService $citiesApiService
+     * @param VillesApiService $citiesApiService
      * @return JsonResponse
      */
-    public function getCities(Request $request, OthersApiService $citiesApiService)
+    public function getCities(Request $request, VillesApiService $citiesApiService)
     {
         $idCompteMobile=$request->request->get('idCompteMobile');
         $idPredeclaration=$request->request->get('idPredeclaration');
@@ -57,6 +57,8 @@ class OthersController extends BaseController
         return  new JsonResponse($cities, 200);
         //return $this->respondWith($cities);
     }
+
+
 
 
 

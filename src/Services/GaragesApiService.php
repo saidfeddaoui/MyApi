@@ -9,10 +9,10 @@
 namespace App\Services;
 
 
-class OthersApiService extends ApiCustomerService
+class GaragesApiService extends ApiCustomerService
 {
 
-    public function getCities($params)
+    public function getGarages($params)
     {
         //$requestContrat = json_encode($params);
         $response = $this->httpClient->post("", [
