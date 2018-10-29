@@ -179,6 +179,72 @@ class PreDeclaration
     protected $preDeclaration_modeReparation_associations;
 
 
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdVille;
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdGarage;
+
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $IdModeReparation;
+
+
+    /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="string",length=10, nullable=true)
+     */
+    private $CodeModeReparation;
+
+
+    /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="string",length=255, nullable=true)
+     */
+    private $commentaire;
+
+
+
     public function __construct()
     {
         $this->preDeclaration_modeReparation_associations = new ArrayCollection();
@@ -511,5 +577,87 @@ class PreDeclaration
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return int
+     */
+    public function getIdVille(): int
+    {
+        return $this->IdVille;
+    }
+
+    /**
+     * @param int $IdVille
+     */
+    public function setIdVille(int $IdVille): void
+    {
+        $this->IdVille = $IdVille;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdGarage(): int
+    {
+        return $this->IdGarage;
+    }
+
+    /**
+     * @param int $IdGarage
+     */
+    public function setIdGarage(int $IdGarage): void
+    {
+        $this->IdGarage = $IdGarage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdModeReparation(): int
+    {
+        return $this->IdModeReparation;
+    }
+
+    /**
+     * @param int $IdModeReparation
+     */
+    public function setIdModeReparation(int $IdModeReparation): void
+    {
+        $this->IdModeReparation = $IdModeReparation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodeModeReparation(): string
+    {
+        return $this->CodeModeReparation;
+    }
+
+    /**
+     * @param string $CodeModeReparation
+     */
+    public function setCodeModeReparation(string $CodeModeReparation): void
+    {
+        $this->CodeModeReparation = $CodeModeReparation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentaire(): string
+    {
+        return $this->commentaire;
+    }
+
+    /**
+     * @param string $commentaire
+     */
+    public function setCommentaire(string $commentaire): void
+    {
+        $this->commentaire = $commentaire;
+    }
+
+
 
 }
