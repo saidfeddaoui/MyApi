@@ -115,7 +115,7 @@ services:
                     - '@eight_points_guzzle.client.preDeclarationTrigger'
                     - '@jms_serializer'
                     - array
-    App\Services\CitiesApiService:
+    App\Services\OthersApiService:
                 arguments:
                     - '@eight_points_guzzle.client.api_get_cities'
                     - '@jms_serializer'

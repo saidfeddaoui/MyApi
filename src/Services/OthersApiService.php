@@ -9,7 +9,7 @@
 namespace App\Services;
 
 
-class CitiesApiService extends ApiCustomerService
+class OthersApiService extends ApiCustomerService
 {
 
     public function getCities($params)
