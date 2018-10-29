@@ -127,7 +127,7 @@ services:
                     - array
     App\Services\MDRApiService:
                 arguments:
-                    - '@eight_points_guzzle.client.api_get_garages'
+                    - '@eight_points_guzzle.client.api_send_MDR'
                     - '@jms_serializer'
                     - array
   # Exception normalizers
