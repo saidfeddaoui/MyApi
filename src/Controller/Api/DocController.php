@@ -73,7 +73,7 @@ class DocController extends BaseController
         $CodeTypeDoc=$request->request->get('CodeTypeDoc');
         $params=array("idCompteMobile"=>$idCompteMobile,"idPredeclaration"=>$idPredeclaration,"idTypeDoc"=>$idTypeDoc,"CodeTypeDoc"=>$CodeTypeDoc);*/
         $params=json_decode($request->getContent());
-        var_dump($params);
+        var_dump($params);die;
         $data = $uploadDocApiService->UploadDocs($params);
         //var_dump($cities);die;
         return  new JsonResponse($data, 200);
