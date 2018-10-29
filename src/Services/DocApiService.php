@@ -30,7 +30,7 @@ class DocApiService extends ApiCustomerService
             'headers' => ['Content-type' => 'application/json']
         ]);
         //var_dump($this->getResult($response));die;
-        var_dump($response->getBody());die;
+        var_dump((string)($response->getBody()));die;
         return $this->getResult($response);
     }
 
