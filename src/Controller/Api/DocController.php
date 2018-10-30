@@ -27,6 +27,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class DocController extends BaseController
 {
 
+    const DISPOSITION_ATTACHEMENT='attachement';
+    const DISPOSITION_INLINE='inline';
+
+
     /**
      * @var EntityManagerInterface
      */
@@ -84,7 +88,7 @@ class DocController extends BaseController
         $file="newFile".date('Y-m-d H:i:s');
         $response=new Response($data,Response::HTTP_OK,[
             'content-type'=> 'application/pdf',
-            'content-disposition'=>'inline;filename="'.$file.'"'
+            'content-disposition'=>'disposition="'.self::DISPOSITION_ATTACHEMENT.'";filename="'.$file.'"'
         ]);
 
         return  $response;
