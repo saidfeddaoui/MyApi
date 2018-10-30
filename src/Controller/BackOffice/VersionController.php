@@ -31,7 +31,7 @@ class VersionController extends Controller
      */
     public function index()
     {
-        $form = $this->createForm(VersionType::class, new Version(), [
+        $form = $this->createForm(VersionType::class, new Versions(), [
             'action' => $this->generateUrl('content_types_add_version'),
         ]);
         $em = $this->getDoctrine()->getManager();
