@@ -343,9 +343,15 @@ class RegistrationController extends BaseController
         //var_dump($submittedClient->getDevice()->getDeviceUid());die;
        // $device=$this->em->getRepository(Device::class)->findOneBy(array("device_uid"=>$submittedClient->getDevice()->getDeviceUid()));
       //  var_dump($device);die;
+
+
+        $nom = strtoupper($submittedClient->getFamilyName());
+        $prenom = ucfirst($submittedClient->getFirstName());
+
+
         $client
-            ->setFamilyName($submittedClient->getFamilyName())
-            ->setFirstName($submittedClient->getFirstName())
+            ->setFamilyName($nom)
+            ->setFirstName($prenom)
             ->setEmail($submittedClient->getEmail())
             ->setEmailCanonical($submittedClient->getEmailCanonical())
             ->setPassword($this->encoder->encodePassword($client, $submittedClient->getPlainPassword()))
