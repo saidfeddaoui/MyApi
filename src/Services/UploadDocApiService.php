@@ -15,15 +15,6 @@ class UploadDocApiService extends ApiCustomerService
 
     public function UploadDocs($params)
     {
-        /*£$requestDoc = json_encode($params);
-        $response = $this->httpClient->post("", [
-            'body' => $requestDoc,
-            'headers' => ['Content-type' => 'application/json']
-        ]);
-        //var_dump($response->getBody());die;
-        return $this->getResult($response);*/
-
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
