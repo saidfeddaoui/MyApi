@@ -20,7 +20,7 @@ class UploadDocApiService extends ApiCustomerService
             'body' => $requestDoc,
             'headers' => ['Content-type' => 'application/json']
         ]);
-        var_dump($response->getBody());die;
+        //var_dump($response->getBody());die;
         return $this->getResult($response);
     }
 
