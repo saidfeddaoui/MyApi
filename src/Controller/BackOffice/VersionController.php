@@ -67,9 +67,11 @@ class VersionController extends Controller
         if ($errors = $form->getErrors()) {
             foreach ($errors as $error) {
                 $this->addFlash('add.product.error', $error->getMessage());
+                $request->getSession()->getFlashBag()->add('error', 'une erreur est survenue lors de l\'ajout du controle de version !!');
                 break;
             }
         }
+        $request->getSession()->getFlashBag()->add('success', 'Controle de version bien ajouté !!');
         return  $this->redirect($this->generateUrl('content_types_versions'));
     }
     /**
@@ -92,6 +94,7 @@ class VersionController extends Controller
 
             $em->persist($version);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'Controle de version bien modifié!!');
             return $this->redirect($this->generateUrl('content_types_versions'));
         }
         return  $this->render('version/form.html.twig', [
