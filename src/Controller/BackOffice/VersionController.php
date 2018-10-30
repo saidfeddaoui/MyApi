@@ -61,6 +61,8 @@ class VersionController extends Controller
              */
             $version = $form->getData();
 
+            $version->setCreatedAt(date('Y-m-d H:i:s'));
+            $version->setUpdatedAt(date('Y-m-d H:i:s'));
             $em->persist($version);
             $em->flush();
         }
@@ -89,7 +91,7 @@ class VersionController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $version->setUpdatedAt(date('Y-m-d H:i:s'));
             $em->persist($version);
             $em->flush();
             return $this->redirect($this->generateUrl('content_types_versions'));
