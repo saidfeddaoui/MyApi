@@ -61,8 +61,6 @@ class VersionController extends Controller
              */
             $version = $form->getData();
 
-            $version->setCreatedAt(date('Y-m-d H:i:s'));
-            $version->setUpdatedAt(date('Y-m-d H:i:s'));
             $em->persist($version);
             $em->flush();
         }
