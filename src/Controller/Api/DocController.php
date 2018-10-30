@@ -64,7 +64,7 @@ class DocController extends BaseController
      * @Rest\Post(path="/upload",name="upload")
      * @param  Request $request
      * @param UploadDocApiService $uploadDocApiService
-     * @return string
+     * @return Response
      */
     public function uploadDocument(Request $request, UploadDocApiService $uploadDocApiService)
     {
@@ -81,8 +81,13 @@ class DocController extends BaseController
         }else{
             $result=array("statut"=>"KO","message"=>"problème chargement fichier","file"=>"");
         }*/
+        $file="newFile".date('Y-m-d H:i:s');
+        $response=new Response($data,Response::HTTP_OK,[
+            'content-type'=> 'application/pdf',
+            'content-disposition'=>'inline;filename="'.$file.'"'
+        ]);
 
-        return  $data;
+        return  $response;
         //return $this->respondWith($cities);
     }
 
