@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\OperatingSystem;
 use App\Entity\Version;
 use App\Entity\Versions;
 use Symfony\Component\Form\AbstractType;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class VersionType extends AbstractType
 {
@@ -29,7 +31,10 @@ class VersionType extends AbstractType
                 'label' => 'Code version ',
                 'required' => false,
             ])
-            ->add('os', TextType::class, ['label' => 'Os ',])
+            ->add('os', EntityType::class, array(
+                'class' => OperatingSystem::class,
+                'choice_label' => 'OS',
+            ))
         ;
     }
 
