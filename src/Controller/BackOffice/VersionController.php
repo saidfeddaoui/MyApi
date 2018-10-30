@@ -75,11 +75,11 @@ class VersionController extends Controller
     /**
      * @Route(path="/version/edit/{id}", name="edit_version", options={"expose"=true})
      *
-     * @param Version $version
+     * @param Versions $version
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Version $version, Request $request)
+    public function edit(Versions $version, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(VersionType::class, $version,[
@@ -101,10 +101,10 @@ class VersionController extends Controller
     /**
      * @Route(path="/delete/{id}", name="delete_version", options={"expose"=true})
      *
-     * @param Version $version
+     * @param Versions $version
      * @return JsonResponse
      */
-    public function delete(Version $version)
+    public function delete(Versions $version)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($version);
