@@ -64,7 +64,7 @@ class DocController extends BaseController
      * @Rest\Post(path="/upload",name="upload")
      * @param  Request $request
      * @param UploadDocApiService $uploadDocApiService
-     * @return Response
+     * @return string
      */
     public function uploadDocument(Request $request, UploadDocApiService $uploadDocApiService)
     {
@@ -82,7 +82,7 @@ class DocController extends BaseController
             $result=array("statut"=>"KO","message"=>"problème chargement fichier","file"=>"");
         }*/
 
-        return  new Response($data);
+        return  $data;
         //return $this->respondWith($cities);
     }
 
