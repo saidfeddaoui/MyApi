@@ -76,7 +76,7 @@ class DocController extends BaseController
         $params=json_decode($request->getContent());
         //var_dump($params);die;
         $data = $uploadDocApiService->UploadDocs($params);
-        if($data){
+        if($data != NULL and !empty($data)){
             $result=array("statut"=>"OK","message"=>"fichier bien charger !!","file"=>$data);
         }else{
             $result=array("statut"=>"KO","message"=>"problème chargement fichier","file"=>"");
