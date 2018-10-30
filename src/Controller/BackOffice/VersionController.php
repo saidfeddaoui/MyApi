@@ -35,7 +35,7 @@ class VersionController extends Controller
             'action' => $this->generateUrl('content_types_add_version'),
         ]);
         $em = $this->getDoctrine()->getManager();
-        $version = $em->getRepository('App:Version')->findAll();
+        $version = $em->getRepository('App:Versions')->findAll();
 
         return $this->render('version/index.html.twig', [
             'page_title' => 'Version',
