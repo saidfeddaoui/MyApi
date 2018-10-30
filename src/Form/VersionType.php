@@ -33,7 +33,7 @@ class VersionType extends AbstractType
             ])
             ->add('os', EntityType::class, array(
                 'class' => OperatingSystem::class,
-                'choice_label' => 'OS',
+                'choice_label' => 'os',
             ))
         ;
     }
