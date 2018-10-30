@@ -346,7 +346,8 @@ class RegistrationController extends BaseController
 
 
         $nom = strtoupper($submittedClient->getFamilyName());
-        $prenom = ucfirst($submittedClient->getFirstName());
+        $prenom = ucfirst(strtolower($submittedClient->getFirstName()));
+
 
 
         $client
