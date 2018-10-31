@@ -89,13 +89,12 @@
 
                             <label>Choisir le mode de réparation :</label>
                             <div class="form-control">
-                                {{ list_mdr }}
-                                {#{% for list_mdr in mdr %}
+                                {% for mdr in list_mdr %}
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="mdr[]" class="custom-control-input" id="defaultUnchecked">
                                         <label class="custom-control-label" for="defaultUnchecked">{{ mdr.description }}</label>
                                     </div>
-                                {% endfor %}#}
+                                {% endfor %}
                             </div>
 
                     </div>
