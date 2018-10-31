@@ -149,10 +149,11 @@ class PreDeclarationController extends Controller
     public function details(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-
+        $listMDR=$this->em->getRepository('App:ModeReparation')->finAll();
         return $this->render('pre_declaration/details.html.twig', [
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
+            'list_mdr' => $listMDR,
         ]);
     }
     /**
@@ -252,7 +253,6 @@ class PreDeclarationController extends Controller
         }
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
 
-
         $idpredeclaration=$preDeclaration->getId();
         $preDeclarationInfo= array(
             "IdPreDeclaration"=>$idpredeclaration,
@@ -266,6 +266,8 @@ class PreDeclarationController extends Controller
         //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
 
         if ($resp->code == "200"){
+
+
 
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();

@@ -85,6 +85,20 @@
                         </div>
                     </div>
 
+                    <div class="row">
+
+                            <label>Choisir le mode de réparation :</label>
+                            <div class="form-control">
+                                {% for list_mdr in mdr %}
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="mdr[]" class="custom-control-input" id="defaultUnchecked">
+                                        <label class="custom-control-label" for="defaultUnchecked">{{ mdr.description }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                    </div>
+
 
                    {# <p><span class="detail_label"> adresse: </span> <span class="detail_info">{{ preDeclaration.circumstance.adress }}</span> </p>
                     <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info">{{ preDeclaration.nbVehicule }}</span></p>
