@@ -85,6 +85,7 @@ class PreDeclarationController extends Controller
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
         $sinistres = $this->em->getRepository('App:Item')->findBy(['itemList'=>$sinistre->getId()]);
+        $listMDR=$this->em->getRepository('App:ModeReparation')->findAll();
 
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
@@ -93,6 +94,7 @@ class PreDeclarationController extends Controller
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
             'sinistres' => $sinistres,
+            'list_mdr' => $listMDR,
         ]);
     }
     /**
@@ -149,11 +151,11 @@ class PreDeclarationController extends Controller
     public function details(PreDeclaration $preDeclaration)
     {
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
-        $listMDR=$this->em->getRepository('App:ModeReparation')->findAll();
+
         return $this->render('pre_declaration/details.html.twig', [
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
-            'list_mdr' => $listMDR,
+
         ]);
     }
     /**
