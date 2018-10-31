@@ -65,7 +65,7 @@
                             {% for mdr in list_mdr %}
                             <p>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="mdr[]" value="{{ mdr.id }}">{{ mdr.description }}
+                                    <input type="checkbox" class="mdr" name="mdr" value="{{ mdr.id }}">{{ mdr.description }}
                                 </label>
                             </p>
                             {% endfor %}

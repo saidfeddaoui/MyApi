@@ -41,3 +41,13 @@
         <div class="loader"></div>
     </div>
 {% endblock %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('body').on('click', '.mdr', function (e) {
+            e.preventDefault();
+            var i=$("input:checked").length;
+            console.log(i);
+        });
+    });
+</script>
