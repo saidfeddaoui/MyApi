@@ -84,21 +84,21 @@
                             <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info"><input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span></p>
                         </div>
 
-                        <div class="col-md-6">
 
-                            <label>Choisir le mode de réparation :</label>
-                            <div class="form-control">
-                                {% for mdr in list_mdr %}
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="mdr[]" class="custom-control-input" id="defaultUnchecked">
-                                        <label class="custom-control-label" for="defaultUnchecked">{{ mdr.description }}</label>
-                                    </div>
-                                {% endfor %}
-                            </div>
-
-                        </div>
                     </div>
+                    <div class="row">
 
+                        <label>Choisir le mode de réparation :</label>
+                        <div class="form-control">
+                            {% for mdr in list_mdr %}
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="mdr[]" class="custom-control-input" id="defaultUnchecked">
+                                    <label class="custom-control-label" for="defaultUnchecked">{{ mdr.description }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
 
 
 
