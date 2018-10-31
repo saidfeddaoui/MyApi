@@ -47,8 +47,9 @@
     $(document).ready(function(){
         $('body').on('click', '.mdr', function (e) {
             e.preventDefault();
-            var i=$("input:checked").length;
-            console.log(i);
+            $("input[type=checkbox]:checked").each(function() {
+                alert($(this).is(':checked'));
+            });
         });
     });
 </script>
