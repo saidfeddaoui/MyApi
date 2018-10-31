@@ -82,7 +82,6 @@ class PreDeclarationController extends Controller
      */
     public function displayDetails(PreDeclaration $preDeclaration)
     {
-        var_dump("die");die;
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
         $sinistres = $this->em->getRepository('App:Item')->findBy(['itemList'=>$sinistre->getId()]);
@@ -95,7 +94,7 @@ class PreDeclarationController extends Controller
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
             'sinistres' => $sinistres,
-            'list_mdr' => "test",
+            'list_mdr' => $listMDR,
         ]);
     }
     /**
