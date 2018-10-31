@@ -45,7 +45,8 @@
 {% block javascript %}
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.checker').click(function() {
+        $('body').on('click', '.checker', function (e) {
+            e.preventDefault();
             alert("tt");
             //e.preventDefault();
             /*$("input[type=checkbox]:checked").each(function() {
