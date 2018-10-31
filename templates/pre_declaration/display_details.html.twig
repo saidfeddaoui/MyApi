@@ -40,19 +40,20 @@
     <div class="loadWrapper" style="display: none">
         <div class="loader"></div>
     </div>
-{% endblock %}
 
-{% block javascript %}
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('body').on('click', '.checker', function (e) {
-            e.preventDefault();
-            alert("tt");
-            //e.preventDefault();
-            /*$("input[type=checkbox]:checked").each(function() {
-                alert($(this).is(':checked'));
-            });*/
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('body').on('click', '.checker', function (e) {
+                e.preventDefault();
+                alert("tt");
+                //e.preventDefault();
+                /*$("input[type=checkbox]:checked").each(function() {
+                 alert($(this).is(':checked'));
+                 });*/
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
