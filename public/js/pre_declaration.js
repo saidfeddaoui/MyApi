@@ -210,11 +210,10 @@ jQuery(document).ready(function() {
 
     $('body').on('click', 'div.checker', function (e) {
         e.preventDefault();
-        alert("tt");
-        //e.preventDefault();
-        /*$("input[type=checkbox]:checked").each(function() {
+
+        $("input[type=checkbox]:checked").each(function() {
          alert($(this).is(':checked'));
-         });*/
+         });
     });
 
 
