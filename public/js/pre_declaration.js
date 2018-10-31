@@ -213,7 +213,7 @@ jQuery(document).ready(function() {
 
         $("input[type=checkbox]:checked").each(function() {
 
-                alert($(this).is(':checked'));
+                alert($(this).val());
 
          });
     });
