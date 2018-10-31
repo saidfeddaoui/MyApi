@@ -94,7 +94,7 @@ class PreDeclarationController extends Controller
             'preDeclaration' => $preDeclaration,
             'attachements' => $attachements,
             'sinistres' => $sinistres,
-            'list_mdr' => $listMDR,
+            'list_mdr' => "test",
         ]);
     }
     /**
