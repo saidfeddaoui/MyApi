@@ -45,11 +45,12 @@
 {% block javascript %}
 <script type="text/javascript">
     $(document).ready(function(){
-        $('input[type=checkbox]').click(function() {
+        $('.checker').click(function() {
+            alert("tt");
             //e.preventDefault();
-            $("input[type=checkbox]:checked").each(function() {
+            /*$("input[type=checkbox]:checked").each(function() {
                 alert($(this).is(':checked'));
-            });
+            });*/
         });
     });
 </script>
