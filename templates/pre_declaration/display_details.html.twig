@@ -42,6 +42,7 @@
     </div>
 {% endblock %}
 
+{% block javascript %}
 <script type="text/javascript">
     $(document).ready(function(){
         $('body').on('click', '.mdr', function (e) {
@@ -51,3 +52,4 @@
         });
     });
 </script>
+{% endblock %}
