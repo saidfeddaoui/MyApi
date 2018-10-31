@@ -45,8 +45,8 @@
 {% block javascript %}
 <script type="text/javascript">
     $(document).ready(function(){
-        $('body').on('click', '.mdr', function (e) {
-            e.preventDefault();
+        $('input[type=checkbox]').click(function() {
+            //e.preventDefault();
             $("input[type=checkbox]:checked").each(function() {
                 alert($(this).is(':checked'));
             });
