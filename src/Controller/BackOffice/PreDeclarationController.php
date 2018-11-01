@@ -267,13 +267,15 @@ class PreDeclarationController extends Controller
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
+        $i=0;
         foreach ($choixMDR as $objetMDR){
 
-            if(in_array($objetMDR->getId(),$valeursMDR)){
+            if($objetMDR->getId()==$valeursMDR[$i]){
                 $objetMDR->setStatut(true);
             }else{
                 $objetMDR->setStatut(false);
             }
+            $i++;
         }
 
 
