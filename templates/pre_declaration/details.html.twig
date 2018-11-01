@@ -65,7 +65,7 @@
                             {% for mdr in list_mdr %}
                             <p>
                                 <label>
-                                    <input type="checkbox" class="mdr" name="mdr[]" value="{{ mdr.modeReparation.id }}" {% if mdr.modeReparation.statut == 1 %} checked {% endif %}>{{ mdr.modeReparation.description }}
+                                    <input type="checkbox" class="mdr" name="mdr[]" value="{{ mdr.modeReparation.id }}" {% if mdr.statut == 1 %} checked {% endif %}>{{ mdr.modeReparation.description }}
                                 </label>
                             </p>
                             {% endfor %}
