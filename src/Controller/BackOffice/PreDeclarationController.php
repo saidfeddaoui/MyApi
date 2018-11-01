@@ -279,6 +279,8 @@ class PreDeclarationController extends Controller
             $i++;
         }
 
+        $this->em->flush();
+
 
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
