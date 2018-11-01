@@ -269,11 +269,9 @@ class PreDeclarationController extends Controller
 
 
         foreach ($choixMDR as $objetMDR){
-
-            if(!in_array($objetMDR->getId(),array_values($valeursMDR))){
+            //if(!in_array($objetMDR->getId(),array_values($valeursMDR))){
                 $objetMDR->setStatut(false);
-            }
-
+            //}
         }
         $this->em->flush();
 
