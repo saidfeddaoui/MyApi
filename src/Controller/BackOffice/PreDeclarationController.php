@@ -264,6 +264,7 @@ class PreDeclarationController extends Controller
         );
 
         $valeursMDR=$request->request->get("mdr");
+        return $this->json(['code'=>'ko','message' => $valeursMDR]);
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
@@ -272,9 +273,11 @@ class PreDeclarationController extends Controller
 
             if($objetMDR->getId()!=$valeursMDR[$i]){
                 $objetMDR->setStatut(false);
+
             }
             $i++;
         }
+
 
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
