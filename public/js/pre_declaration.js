@@ -212,15 +212,14 @@ jQuery(document).ready(function() {
     }
 
 
-    $('body').on('click', 'div.checker', function (e) {
+    /*$('body').on('click', 'div.checker', function (e) {
         e.preventDefault();
 
         var valeurs=[];
         $("input[type=checkbox]:checked").each(function() {
-
             valeurs.push($(this).val());
          });
-    });
+    });*/
 
 
     $('body').on('click', '.update', function (e) {
