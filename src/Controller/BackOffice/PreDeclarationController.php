@@ -264,22 +264,23 @@ class PreDeclarationController extends Controller
         );
 
         $valeursMDR=$request->request->get("mdr");
-        $list=explode(",",$valeursMDR);
+        //$list=explode(",",$valeursMDR);
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
         $i=0;
         foreach ($choixMDR as $objetMDR){
 
-            if($objetMDR->getId()==$list[$i]){
+            if($objetMDR->getId()==$valeursMDR[$i]){
                 $objetMDR->setStatut(true);
             }else{
                 $objetMDR->setStatut(false);
             }
+            $this->em->flush();
             $i++;
         }
 
-        $this->em->flush();
+
 
 
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
