@@ -158,18 +158,21 @@ jQuery(document).ready(function() {
             closeOnCancel: false
         }, function (confirm) {
             if (confirm) {
-                deleteRowAction(id, td, 'pre_declarations_accept', '');
+                deleteRowAction(id, td, 'pre_declarations_accept', '',valeurs);
             } else {
                 swal('Action annulée', "Aucune action n'a été exécutée", 'error');
             }
         });
     });
-    function deleteRowAction(id, td, route, description) {
+    function deleteRowAction(id, td, route, description,listMdr) {
         swal.close();
         $('body .loadWrapper').show();
         $.ajax({
             url: Routing.generate(route, {id: id}),
-            data: {description: description},
+            data: {
+                description: description,
+                mdr: listMdr
+            },
             type: 'POST',
             error: function (request, status, error) {
                 console.log(request.responseText);
