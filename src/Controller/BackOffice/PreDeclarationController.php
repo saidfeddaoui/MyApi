@@ -267,14 +267,15 @@ class PreDeclarationController extends Controller
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
-        $i=0;
+
         foreach ($choixMDR as $objetMDR){
 
-            //if(!in_array($objetMDR->getId(),array_values($valeursMDR))){
+            if(!in_array($objetMDR->getId(),array_values($valeursMDR))){
                 $objetMDR->setStatut(false);
-            //}
-            $i++;
+            }
+
         }
+        $this->em->flush();
 
 
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
