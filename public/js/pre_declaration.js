@@ -142,6 +142,10 @@ jQuery(document).ready(function() {
     $('body').on('click', '.accept', function () {
         var td = $(this);
         var id = td.data('id');
+        var valeurs=[];
+        $("input[type=checkbox]:checked").each(function() {
+            valeurs.push($(this).val());
+        });
         swal({
             title: 'Voulez-vous vraiement accepter cette pré-déclaration ?',
             text: '',
@@ -211,10 +215,10 @@ jQuery(document).ready(function() {
     $('body').on('click', 'div.checker', function (e) {
         e.preventDefault();
 
+        var valeurs=[];
         $("input[type=checkbox]:checked").each(function() {
 
-                alert($(this).val());
-
+            valeurs.push($(this).val());
          });
     });
 

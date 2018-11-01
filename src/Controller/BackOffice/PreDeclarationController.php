@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackOffice;
 
+use App\Entity\ChoixMDR;
 use App\Entity\InsuranceType;
 use App\Entity\Notification;
 use App\Entity\NotificationDetail;
@@ -246,9 +247,10 @@ class PreDeclarationController extends Controller
      * @Route(path="/accept/{id}", name="accept", requirements={"id":"\d+"}, options={"expose"=true})
      *
      * @param  PreDeclaration $preDeclaration
+     * @param  Request $request
      * @return Response
      */
-    public function accept(PreDeclaration $preDeclaration,PreDeclarationTriggerApiService $pdtas)
+    public function accept(PreDeclaration $preDeclaration,PreDeclarationTriggerApiService $pdtas,Request $request)
     {
         if (PreDeclaration::STATUS_IN_PROGRESS !== $preDeclaration->getStatus()) {
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
@@ -269,6 +271,19 @@ class PreDeclarationController extends Controller
 
         if ($resp->code == "200"){
 
+
+        $valeursMDR=$request->request->get("mdr");
+
+        $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
+
+        $i=0;
+        foreach ($choixMDR as $objetMDR){
+
+            if($objetMDR->getId()!=$valeursMDR[$i]){
+                $objetMDR->setStatut(false);
+            }
+            $i++;
+        }
 
 
         $client = $preDeclaration->getClient();
