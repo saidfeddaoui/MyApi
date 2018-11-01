@@ -264,18 +264,16 @@ class PreDeclarationController extends Controller
         );
 
         $valeursMDR=$request->request->get("mdr");
-        return $this->json(['code'=>'ko','message' => $valeursMDR]);
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
-        $i=0;
         foreach ($choixMDR as $objetMDR){
 
-            if($objetMDR->getId()!=$valeursMDR[$i]){
+            if(in_array($objetMDR->getId(),$valeursMDR)){
+                $objetMDR->setStatut(true);
+            }else{
                 $objetMDR->setStatut(false);
-
             }
-            $i++;
         }
 
 
