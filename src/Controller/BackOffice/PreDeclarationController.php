@@ -263,15 +263,6 @@ class PreDeclarationController extends Controller
             "Statut"=>"r"
         );
 
-        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
-
-        $resp = $pdtas->triggerPredeclaration($dataPre);
-
-        //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
-
-        if ($resp->code == "200"){
-
-
         $valeursMDR=$request->request->get("mdr");
 
         $choixMDR = $this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
@@ -285,6 +276,13 @@ class PreDeclarationController extends Controller
             $i++;
         }
 
+        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
+
+        $resp = $pdtas->triggerPredeclaration($dataPre);
+
+        //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
+
+        if ($resp->code == "200"){
 
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
