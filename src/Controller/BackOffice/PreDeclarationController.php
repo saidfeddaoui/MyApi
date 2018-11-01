@@ -271,7 +271,7 @@ class PreDeclarationController extends Controller
         $i=0;
         foreach ($choixMDR as $objetMDR){
 
-            if($objetMDR->getModeReparatuion()->getId()==$valeursMDR[$i]){
+            if($objetMDR->getModeReparation()->getId()==$valeursMDR[$i]){
                 $objetMDR->setStatut(true);
             }else{
                 $objetMDR->setStatut(false);
