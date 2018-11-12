@@ -17,21 +17,35 @@
         <div class="tab-content">
             <div class="tab-pane active" id="informations_tab">
                 <div class="general_details" data-id="{{preDeclaration.id}}">
-                    <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
-                        {% if preDeclaration.client is not null %}
-                          {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
-                        {% else %}
-                             inconnu
-                        {% endif %}
-                        {% if preDeclaration.status == 0 %}
-                            (En cours)</td>
-                        {% elseif preDeclaration.status == 1%}
-                            (Acceptée)
-                        {% elseif preDeclaration.status == 2%}
-                            (Rejetée)
-                        {% endif %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                {% if preDeclaration.client is not null %}
+                                    {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
+                                {% else %}
+                                    inconnu
+                                {% endif %}
+                                {% if preDeclaration.status == 0 %}
+                                    (En cours)</td>
+                                {% elseif preDeclaration.status == 1%}
+                                    (Acceptée)
+                                {% elseif preDeclaration.status == 2%}
+                                    (Rejetée)
+                                {% endif %}
 
-                    </h4>
+                            </h4>
+                        </div>
+                        <div class="col-md-6">
+                            {% if preDeclaration.status==1 %}
+                                {% for mdr in list_mdr %}
+                                    {% if preDeclaration.IdModeReparation==mdr.modeReparation.id %}
+                                        <h2 class="pull-right">mdr.modeReparation.description</h2>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% endif %}
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-6">
