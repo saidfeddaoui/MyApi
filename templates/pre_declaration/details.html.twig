@@ -38,8 +38,10 @@
                         <div class="col-md-6">
                             {% if preDeclaration.status==1 %}
                                 {% for mdr in list_mdr %}
-                                    {% if preDeclaration.IdModeReparation==mdr.modeReparation.id %}
-                                        <h2 class="pull-right" style="border: 1px solid gainsboro;padding: 10px;background: #33495f;color: white;">{{ mdr.modeReparation.description }}</h2>
+                                    {% if preDeclaration.IdModeReparation is not null %}
+                                        {% if  preDeclaration.IdModeReparation==mdr.modeReparation.id %}
+                                            <h2 class="pull-right" style="border: 1px solid gainsboro;padding: 10px;background: #33495f;color: white;">{{ mdr.modeReparation.description }}</h2>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
