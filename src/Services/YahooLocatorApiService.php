@@ -25,7 +25,7 @@ class YahooLocatorApiService extends ApiCustomerService
      */
     public function getLocation($code)
     {
-        $response = $this->httpClient->get("WeatherService;woeids=[{$code}]", [
+        $response = $this->httpClient->get("WeatherService;woeids=[{$code}]", [ 'verify' => false,
             'query' => [
                 'lang' => $this->language,
             ]
@@ -38,5 +38,6 @@ class YahooLocatorApiService extends ApiCustomerService
         $country = $yahooResponse['weathers'][0]['location']['countryName'] ?? null;
         return $city ? compact('city', 'country') : null;
     }
+
 
 }
