@@ -62,7 +62,7 @@ services:
             - '@eight_points_guzzle.client.api_aladhan'
             - '@jms_serializer'
             - App\DTO\AladhanApi\AladhanResponse
-            - '@translator.data_collector'
+            #- '@translator.data_collector'
             - "@=service('request_stack').getCurrentRequest().getLocale()"
     App\Services\YahooWeatherApiService:
         arguments:
