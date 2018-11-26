@@ -52,7 +52,7 @@ class ApiDevices
     public function checkVersion($os, $version_name, $canal)
     {
         $os = $this->em->getRepository(OperatingSystem::class)->findOneBy(array('name' => strtolower($os)));
-        $versions = $this->em->getRepository(Versions::class)->findOneBy(array('os' => $os,'cible' => $os, $canal));
+        $versions = $this->em->getRepository(Versions::class)->findOneBy(array('os' => $os,'cible' => $canal));
 
         if ($versions instanceof Versions) {
             if (version_compare($version_name, $versions->getMinVersion()) <= 0) {
