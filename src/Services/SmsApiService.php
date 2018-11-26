@@ -20,9 +20,17 @@ class SmsApiService extends ApiCustomerService
                 'app_id' => self::APP_ID,
                 'senderid' => self::SENDER_ID,
                 'msg' => $message,
-                'tel' => $phoneNumber
+                'tel' => $this->standardizeTel($phoneNumber)
             ]
         ]);
+    }
+
+    public function standardizeTel($phoneNumber) {
+        if(strpos($phoneNumber, '0') === 0) {
+            $phoneNumber = '212' . substr(str_replace(' ', '', $phoneNumber), 1);
+        }
+
+        return $phoneNumber;
     }
 
 }
