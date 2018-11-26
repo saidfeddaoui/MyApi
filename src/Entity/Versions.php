@@ -72,6 +72,28 @@ class Versions
      */
     private $os;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $cible;
+
+    /**
+     * @return mixed
+     */
+    public function getCible(): ?string
+    {
+        return $this->cible;
+    }
+
+    /**
+     * @param mixed $cible
+     */
+    public function setCible(?string $cible): self
+    {
+        $this->cible = $cible;
+        return $this;
+    }
+
     public function getId()
     {
         return $this->id;
