@@ -14,7 +14,7 @@ class SmsApiService extends ApiCustomerService
      */
     public function sendSms(string $phoneNumber, string $message)
     {
-        dump($phoneNumber);die;
+        var_dump($phoneNumber);die;
         $this->httpClient->get('send', [
             'query' => [
                 'action' => 'SMS',
