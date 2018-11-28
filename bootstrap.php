@@ -1,6 +1,6 @@
 <?php
-
-date_default_timezone_set($_SERVER['APP_TIMEZONE']);
+//test git
+date_default_timezone_set("Africa/Casablanca");
 
 if (!function_exists('dd')) {
     function dd()
