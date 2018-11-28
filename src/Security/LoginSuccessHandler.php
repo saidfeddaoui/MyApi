@@ -59,7 +59,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         if ($url = $this->getTargetPath($request->getSession(), 'main')) {
             return new RedirectResponse($url);
         }
-        return new RedirectResponse($this->router->generate('pre_declarations_in_progress'));
+        return new RedirectResponse($this->router->generate('home'));
     }
 
 }
