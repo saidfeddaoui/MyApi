@@ -118,9 +118,15 @@ class DevisAutoController extends BaseController
         $devi_auto->setPrimeTTC($primeTTC);
         $this->em->flush();
 
-        $garanties = $devis->getGaranties();
-        dump($garanties);
-        die();
+      /*  $garanties = $devis->getGaranties();
+
+        foreach ($garanties as $garantie){
+            $deviGaranties = new DeviGaranties();
+            $deviGaranties->set
+
+        }*/
+
+
 
 
         $idDevis =$devi_auto->getId();
