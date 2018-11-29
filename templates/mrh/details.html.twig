@@ -131,6 +131,38 @@
                             </div>
                             <!-- -->
                         </div>
+
+
+                        <div class="row">
+                            <div class="garantie top">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">GARANTIE</span>
+                                </div>
+                            </div>
+                            {% for garantie in garanties %}
+                                <div class="garanties">
+                                    <div class="col-md-3">
+                                        <div class="cart">
+                                            <div class="header">{{ garantie.garantie }}</div>
+                                            <div class="body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Acquise :<strong> {{ garantie.acquise }} </strong></li>
+                                                    <li class="list-group-item">LibOption : <strong>  {{ garantie.libOption }}</strong></li>
+                                                    <li class="list-group-item">Franchise :  <strong> {{ garantie.franchise }}</strong></li>
+                                                    <li class="list-group-item">Obligatoire :  <strong> {{ garantie.obligatoire }}</strong></li>
+                                                    <li class="list-group-item">IsValeurAssuree : <strong>  {{ garantie.isValeurAssuree }}</strong></li>
+                                                    <li class="list-group-item">LibelleGarantie :<strong>   {{ garantie.libelleGarantie }}</strong></li>
+                                                    <li class="list-group-item">IdDet : <strong>  {{ garantie.det }}</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
                     </div>
 
                 </div>

@@ -57,7 +57,10 @@ class DevisController extends Controller
     public function details(DevisAuto $devisAuto)
     {
         $em = $this->getDoctrine()->getManager();
-        $garanties = $em->getRepository('App:DeviGaranties')->findByDevis($devisAuto);
+        $garanties = $em->getRepository('App:DeviGaranties')->findBy([
+            "devis"=> $devisAuto->getId(),
+            "type"=>"DA"
+        ]);
         return $this->render('devis/details.html.twig', [
             'page_title' => 'Détail devis Auto',
             'page_subtitle' => '',

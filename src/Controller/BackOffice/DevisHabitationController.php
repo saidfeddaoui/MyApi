@@ -55,10 +55,16 @@ class DevisHabitationController extends Controller
      */
     public function details(DevisHabitation $devisHabitation)
     {
+        $em = $this->getDoctrine()->getManager();
+        $garanties = $em->getRepository('App:DeviGaranties')->findBy([
+            "devis"=> $devisHabitation->getId(),
+            "type"=>"DH"
+        ]);
         return $this->render('mrh/details.html.twig', [
             'page_title' => 'Détail devis Mrh',
             'page_subtitle' => '',
-            'devisHabitation'=>$devisHabitation
+            'devisHabitation'=>$devisHabitation,
+            'garanties'=>$garanties
         ]);
     }
 }
