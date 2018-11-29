@@ -6,6 +6,7 @@ use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\Devis\Mesure;
 use App\Entity\DevisAuto;
+use App\Entity\DeviGaranties;
 use App\Services\DevisAutoApiService;
 use App\Services\DevisAutoMesureApiService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -88,6 +89,7 @@ class DevisAutoController extends BaseController
         $marque = $this->em->getRepository('App:MarqueVehicule')->find($auto->getMarque()->getId());
         $pack = $this->em->getRepository('App:Pack')->findOneBy([ "code" =>$auto->getPack()->getCode()]);
         $devi_auto = new DevisAuto();
+        $deviGaranties = new DeviGaranties();
         $devi_auto->setNom($auto->getNom());
         $devi_auto->setPrenom($auto->getPrenom());
         $devi_auto->setTel($auto->getTel());
@@ -115,6 +117,12 @@ class DevisAutoController extends BaseController
         $devi_auto->setPrimeHT($primeHT);
         $devi_auto->setPrimeTTC($primeTTC);
         $this->em->flush();
+
+        $garanties = $devis->getGaranties();
+        dump($garanties);
+        die();
+
+
         $idDevis =$devi_auto->getId();
         $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
