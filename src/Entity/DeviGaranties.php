@@ -70,6 +70,11 @@ class DeviGaranties
      */
     private $devis;
 
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $type;
+
     public function getId()
     {
         return $this->id;
@@ -191,6 +196,18 @@ class DeviGaranties
     public function setDet(?string $det): self
     {
         $this->det = $det;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

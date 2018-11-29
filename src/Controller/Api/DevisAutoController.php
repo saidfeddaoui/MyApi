@@ -133,6 +133,7 @@ class DevisAutoController extends BaseController
             $deviGaranties->setLibelleGarantie($garantie->getLibelleGarantie());
             $deviGaranties->setDet($garantie->getIdDet());
             $deviGaranties->setDevis($devi_auto);
+
             $this->em->persist($deviGaranties);
             $this->em->flush();
         }
