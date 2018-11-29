@@ -44,6 +44,8 @@ span.detail_info select {
 span.detail_info input[disabled] {
     background: #eaeaea;
 }
-.garantie.top{
-    padding: 17px 20px 10px;
+.garantie.top {
+    padding: 17px 20px 17px;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
 }
