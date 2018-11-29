@@ -57,8 +57,8 @@ class DevisController extends Controller
     public function details(DevisAuto $devisAuto)
     {
         $em = $this->getDoctrine()->getManager();
-        $garantie = $em->getRepository('App:Garantie')->findOneByDevis($devisAuto);
-        
+        $garantie = $em->getRepository('App:DeviGaranties')->findOneByDevis($devisAuto);
+
         var_dump($garantie);
         die();
 
