@@ -123,7 +123,7 @@ class DevisHabitationController extends BaseController
             $deviGaranties->setDeviMamda($garantie['ID']);
             $deviGaranties->setGarantie($garantie['Garantie']);
             $deviGaranties->setAcquise($garantie['Acquise']);
-            $deviGaranties->setDevis($devisHab);
+            $deviGaranties->setDevis($devisHab->getId());
             $deviGaranties->setType('DH');
 
             $this->em->persist($deviGaranties);
