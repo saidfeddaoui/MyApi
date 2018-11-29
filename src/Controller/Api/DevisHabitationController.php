@@ -119,19 +119,10 @@ class DevisHabitationController extends BaseController
 
         $garanties = $devis->getGaranties();
         foreach ($garanties as $garantie){
-            dump($garantie);
-            die();
             $deviGaranties = new DeviGaranties();
             $deviGaranties->setDeviMamda($garantie->getIdDevis());
-            $deviGaranties->setGarantie($garantie->getNom());
+            $deviGaranties->setGarantie($garantie->getGarantie());
             $deviGaranties->setAcquise($garantie->getAcquise());
-            $deviGaranties->setLibOption($garantie->getLiboption());
-            $deviGaranties->setFranchise($garantie->getFranchise());
-            $deviGaranties->setObligatoire($garantie->getObligatoire());
-            $deviGaranties->setIsValeurAssuree($garantie->getIsValeurAssuree());
-            $deviGaranties->setValeurAssuree($garantie->getValeurAssuree());
-            $deviGaranties->setLibelleGarantie($garantie->getLibelleGarantie());
-            $deviGaranties->setDet($garantie->getIdDet());
             $deviGaranties->setDevis($devisHab);
             $deviGaranties->setType('DH');
 
