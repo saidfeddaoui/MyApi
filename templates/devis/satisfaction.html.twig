@@ -94,6 +94,12 @@
                                 <td> </td>
                             {% endif %}
 
+                            {% if  element.auto is not null %}
+                                <td> {{ element.auto }} </td>
+                            {% else %}
+                                <td> </td>
+                            {% endif %}
+
                             {% if  element.action is not null %}
                                 <td>
                                 {% if element.action == 2 %}
