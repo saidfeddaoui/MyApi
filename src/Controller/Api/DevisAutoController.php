@@ -122,7 +122,7 @@ class DevisAutoController extends BaseController
         foreach ($garanties as $garantie){
 
             $deviGaranties = new DeviGaranties();
-            
+
             dump($garantie);
             echo($garantie->getIdDevis());
             echo($garantie->getNom());
@@ -131,7 +131,7 @@ class DevisAutoController extends BaseController
             echo($garantie->getFranchise());
            // echo($garantie->getObligatoire());
 
-            echo($garantie->getIsValeurAssuree());
+           // echo($garantie->getIsValeurAssuree());
             echo($garantie->getValeurAssuree());
             echo($garantie->getLibelleGarantie());
             echo ($garantie->getIdDet());
