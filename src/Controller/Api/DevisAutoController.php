@@ -89,7 +89,6 @@ class DevisAutoController extends BaseController
         $marque = $this->em->getRepository('App:MarqueVehicule')->find($auto->getMarque()->getId());
         $pack = $this->em->getRepository('App:Pack')->findOneBy([ "code" =>$auto->getPack()->getCode()]);
         $devi_auto = new DevisAuto();
-        $deviGaranties = new DeviGaranties();
         $devi_auto->setNom($auto->getNom());
         $devi_auto->setPrenom($auto->getPrenom());
         $devi_auto->setTel($auto->getTel());
@@ -121,11 +120,20 @@ class DevisAutoController extends BaseController
         $garanties = $devis->getGaranties();
 
         foreach ($garanties as $garantie){
-            dump($garantie);
 
-            dump($garantie->getNom());
+            $deviGaranties = new DeviGaranties();
+            echo($garantie->getIdDevis());
+            echo($garantie->getNom());
+            echo($garantie->getAcquise());
+            echo($garantie->getLiboption());
+            echo($garantie->getFranchise());
+            echo($garantie->getObligatoire());
 
-            dump($garantie->getIdDevis());
+            echo($garantie->getIsValeurAssuree());
+            echo($garantie->getValeurAssuree());
+            echo($garantie->getLibelleGarantie());
+            echo ($garantie->getIdDet());
+
             die();
 
         }
