@@ -125,7 +125,7 @@ class DevisAutoController extends BaseController
 
             dump($garantie->getNom());
 
-            dump($garantie->getId());
+            dump($garantie->getIdDevis());
             die();
 
         }
