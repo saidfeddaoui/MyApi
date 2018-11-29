@@ -116,6 +116,10 @@ class DevisAutoController extends BaseController
         $devi_auto->setPrimeTTC($primeTTC);
         $this->em->flush();
 
+        
+        dump($devi_auto);
+        die();
+
         $idDevis =$devi_auto->getId();
         $devis->getResult()->setIdDet($idDevis);
         return $this->respondWith($devis);
