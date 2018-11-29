@@ -178,10 +178,20 @@
                           </div>
 
                             {% for garantie in garanties %}
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="cart">
                                     <div class="header">{{ garantie.garantie }}</div>
-                                    <div class="body"></div>
+                                    <div class="body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Acquise : {{ garantie.acquise }}</li>
+                                            <li class="list-group-item">LibOption :   {{ garantie.libOption }}</li>
+                                            <li class="list-group-item">Franchise :   {{ garantie.franchise }}</li>
+                                            <li class="list-group-item">Obligatoire :   {{ garantie.obligatoire }}</li>
+                                            <li class="list-group-item">IsValeurAssuree :   {{ garantie.isValeurAssuree }}</li>
+                                            <li class="list-group-item">LibelleGarantie :   {{ garantie.libelleGarantie }}</li>
+                                            <li class="list-group-item">IdDet :   {{ garantie.det }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                             </div>
