@@ -121,10 +121,7 @@ class DevisAutoController extends BaseController
         $garanties = $devis->getGaranties();
 
         foreach ($garanties as $garantie){
-            echo ($garantie->getId());
-            echo ($garantie->getIdGarantie());
-            echo ($garantie->getGarantie());
-            echo ($garantie->getAcquise());
+            var_dump($garantie);
             die();
 
         }
