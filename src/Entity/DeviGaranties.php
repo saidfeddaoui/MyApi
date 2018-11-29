@@ -66,7 +66,7 @@ class DeviGaranties
     private $det;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\DevisAuto")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $devis;
 
@@ -213,15 +213,14 @@ class DeviGaranties
     }
 
 
-    public function getDevis():?DevisAuto
+    public function getDevis():?int
     {
         return $this->devis;
     }
 
-    public function setDevis(?DevisAuto $devis): self
+    public function setDevis(?int $devis): self
     {
         $this->devis = $devis;
-
         return $this;
     }
 }
