@@ -58,8 +58,6 @@ class DevisController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $garantie = $em->getRepository('App:DeviGaranties')->findByDevis($devisAuto);
-         dump($garantie);
-         die();
         return $this->render('devis/details.html.twig', [
             'page_title' => 'Détail devis Auto',
             'page_subtitle' => '',
