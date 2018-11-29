@@ -178,23 +178,25 @@
                           </div>
 
                             {% for garantie in garanties %}
+                                <div class="garanties">
                             <div class="col-md-3">
                                 <div class="cart">
                                     <div class="header">{{ garantie.garantie }}</div>
                                     <div class="body">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Acquise : {{ garantie.acquise }}</li>
-                                            <li class="list-group-item">LibOption :   {{ garantie.libOption }}</li>
-                                            <li class="list-group-item">Franchise :   {{ garantie.franchise }}</li>
-                                            <li class="list-group-item">Obligatoire :   {{ garantie.obligatoire }}</li>
-                                            <li class="list-group-item">IsValeurAssuree :   {{ garantie.isValeurAssuree }}</li>
-                                            <li class="list-group-item">LibelleGarantie :   {{ garantie.libelleGarantie }}</li>
-                                            <li class="list-group-item">IdDet :   {{ garantie.det }}</li>
+                                            <li class="list-group-item">Acquise :<strong> {{ garantie.acquise }} </strong></li>
+                                            <li class="list-group-item">LibOption : <strong>  {{ garantie.libOption }}</strong></li>
+                                            <li class="list-group-item">Franchise :  <strong> {{ garantie.franchise }}</strong></li>
+                                            <li class="list-group-item">Obligatoire :  <strong> {{ garantie.obligatoire }}</strong></li>
+                                            <li class="list-group-item">IsValeurAssuree : <strong>  {{ garantie.isValeurAssuree }}</strong></li>
+                                            <li class="list-group-item">LibelleGarantie :<strong>   {{ garantie.libelleGarantie }}</strong></li>
+                                            <li class="list-group-item">IdDet : <strong>  {{ garantie.det }}</strong></li>
                                         </ul>
                                     </div>
                                 </div>
 
                             </div>
+                           </div>
                             {% endfor %}
 
                         </div>

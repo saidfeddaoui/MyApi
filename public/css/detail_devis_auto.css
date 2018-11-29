@@ -49,3 +49,21 @@ span.detail_info input[disabled] {
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
 }
+
+.garanties .cart {
+    padding: 10px;
+    background: #efefef;
+    margin-top: 15px;
+    border: 1px solid #d0cdcd;
+}
+
+.garanties .cart .header {
+    text-align: center;
+    padding: 10px;
+    background: #24334c;
+    color: #fff;
+}
+
+.garanties .list-group {
+    margin-bottom: 0!important;
+}
