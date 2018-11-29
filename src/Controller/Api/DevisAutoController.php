@@ -122,21 +122,19 @@ class DevisAutoController extends BaseController
         foreach ($garanties as $garantie){
 
             $deviGaranties = new DeviGaranties();
-
-            dump($garantie);
-            echo($garantie->getIdDevis());
-            echo($garantie->getNom());
-            echo($garantie->getAcquise());
-            echo($garantie->getLiboption());
-            echo($garantie->getFranchise());
-            echo($garantie->getObligatoire());
-            echo($garantie->getIsValeurAssuree());
-            echo($garantie->getValeurAssuree());
-            echo($garantie->getLibelleGarantie());
-            echo ($garantie->getIdDet());
-
-            die();
-
+            $deviGaranties->setDeviMamda($garantie->getIdDevis());
+            $deviGaranties->setGarantie($garantie->getNom());
+            $deviGaranties->setAcquise($garantie->getAcquise());
+            $deviGaranties->setLibOption($garantie->getLiboption());
+            $deviGaranties->setFranchise($garantie->getFranchise());
+            $deviGaranties->setObligatoire($garantie->getObligatoire());
+            $deviGaranties->setIsValeurAssuree($garantie->getIsValeurAssuree());
+            $deviGaranties->setValeurAssuree($garantie->getValeurAssuree());
+            $deviGaranties->setLibelleGarantie($garantie->getLibelleGarantie());
+            $deviGaranties->setDet($garantie->getIdDet());
+            $deviGaranties->setDevis($devi_auto);
+            $this->em->persist($deviGaranties);
+            $this->em->flush();
         }
 
 
