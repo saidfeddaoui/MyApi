@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Annotation\ThrowViolations;
 use App\DTO\Api\ApiResponse;
 use App\DTO\Api\Devis\Mesure;
+use App\Entity\DeviGaranties;
 use App\Entity\DevisAuto;
 use App\Entity\DevisHabitation;
 use App\Services\DevisAutoApiService;
@@ -115,6 +116,26 @@ class DevisHabitationController extends BaseController
         $devisHab->setPrimeHT($primeHT);
         $devisHab->setPrimeTTC($primeTTC);
         $this->em->flush();
+
+        $garanties = $devis->getGaranties();
+        foreach ($garanties as $garantie){
+            $deviGaranties = new DeviGaranties();
+            $deviGaranties->setDeviMamda($garantie->getIdDevis());
+            $deviGaranties->setGarantie($garantie->getNom());
+            $deviGaranties->setAcquise($garantie->getAcquise());
+            $deviGaranties->setLibOption($garantie->getLiboption());
+            $deviGaranties->setFranchise($garantie->getFranchise());
+            $deviGaranties->setObligatoire($garantie->getObligatoire());
+            $deviGaranties->setIsValeurAssuree($garantie->getIsValeurAssuree());
+            $deviGaranties->setValeurAssuree($garantie->getValeurAssuree());
+            $deviGaranties->setLibelleGarantie($garantie->getLibelleGarantie());
+            $deviGaranties->setDet($garantie->getIdDet());
+            $deviGaranties->setDevis($devisHab);
+            $deviGaranties->setType('DH');
+
+            $this->em->persist($deviGaranties);
+            $this->em->flush();
+        }
 
 
         $idDevis =$devisHab->getId();

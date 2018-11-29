@@ -118,9 +118,7 @@ class DevisAutoController extends BaseController
         $this->em->flush();
 
         $garanties = $devis->getGaranties();
-
         foreach ($garanties as $garantie){
-
             $deviGaranties = new DeviGaranties();
             $deviGaranties->setDeviMamda($garantie->getIdDevis());
             $deviGaranties->setGarantie($garantie->getNom());
@@ -133,7 +131,7 @@ class DevisAutoController extends BaseController
             $deviGaranties->setLibelleGarantie($garantie->getLibelleGarantie());
             $deviGaranties->setDet($garantie->getIdDet());
             $deviGaranties->setDevis($devi_auto);
-
+            $deviGaranties->setType('DA');
             $this->em->persist($deviGaranties);
             $this->em->flush();
         }
