@@ -65,6 +65,54 @@ class Garantie
     private $obligatoire;
 
     /**
+     * @return string
+     */
+    public function getObligatoire()
+    {
+        return $this->obligatoire;
+    }
+
+    /**
+     * @param string $obligatoire
+     */
+    public function setObligatoire($obligatoire)
+    {
+        $this->obligatoire = $obligatoire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getisValeurAssuree()
+    {
+        return $this->isValeurAssuree;
+    }
+
+    /**
+     * @param string $isValeurAssuree
+     */
+    public function setIsValeurAssuree($isValeurAssuree)
+    {
+        $this->isValeurAssuree = $isValeurAssuree;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValeurAssuree()
+    {
+        return $this->valeurAssuree;
+    }
+
+    /**
+     * @param string $valeurAssuree
+     */
+    public function setValeurAssuree($valeurAssuree)
+    {
+        $this->valeurAssuree = $valeurAssuree;
+    }
+
+    /**
      * @Serializer\SerializedName("IsValeurAssuree")
      * @Serializer\Type("string")
      * @Serializer\Groups("response_auto")

@@ -129,10 +129,9 @@ class DevisAutoController extends BaseController
             echo($garantie->getAcquise());
             echo($garantie->getLiboption());
             echo($garantie->getFranchise());
-           // echo($garantie->getObligatoire());
-
-           // echo($garantie->getIsValeurAssuree());
-           // echo($garantie->getValeurAssuree());
+            echo($garantie->getObligatoire());
+            echo($garantie->getIsValeurAssuree());
+            echo($garantie->getValeurAssuree());
             echo($garantie->getLibelleGarantie());
             echo ($garantie->getIdDet());
 
