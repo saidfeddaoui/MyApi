@@ -117,7 +117,7 @@ class DevisHabitationController extends BaseController
         $devisHab->setPrimeTTC($primeTTC);
         $this->em->flush();
 
-        $garanties = $devis->getGaranties();
+       /* $garanties = $devis->getGaranties();
         foreach ($garanties as $garantie){
             dump($garantie);
             die();
@@ -137,7 +137,7 @@ class DevisHabitationController extends BaseController
 
             $this->em->persist($deviGaranties);
             $this->em->flush();
-        }
+        } */
 
 
         $idDevis =$devisHab->getId();
