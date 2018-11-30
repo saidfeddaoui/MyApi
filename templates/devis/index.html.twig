@@ -34,6 +34,7 @@
                             <th> email </th>
                             <th> civilite </th>
                             <th> Date de création </th>
+                             <th>Mutuelle</th>
                             <th> Info Véhicule </th>
                         </tr>
                         </thead>
@@ -46,6 +47,11 @@
                             <td> {{ element.email }} </td>
                             <td> {{ element.civilite }} </td>
                             <td> {{ element.createdAt | date('Y-m-d H:i:s') }} </td>
+                            {% if element.devisAuto.societaire is not null %}
+                                <td> {{ element.societaire.codeInsurance }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
 
                             <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
                         </tr>

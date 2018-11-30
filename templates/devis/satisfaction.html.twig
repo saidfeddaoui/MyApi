@@ -38,6 +38,7 @@
                             <th> Agence </th>
                             <th> Action </th>
                             <th> Date de création  </th>
+                            <th> Mutuelle  </th>
                             <th> Statut </th>
                         </tr>
                         </thead>
@@ -117,7 +118,7 @@
                              <td> Pas disponible </td>
                             {% endif %}
 
-                            {% if element.devisAuto is not null %}
+                            {% if element.devisAuto.societaire is not null %}
                                 <td> {{ element.devisAuto.societaire.codeInsurance }} </td>
                             {% else %}
                                 <td> Pas disponible </td>
