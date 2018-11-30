@@ -47,7 +47,7 @@
                             <td> {{ element.email }} </td>
                             <td> {{ element.civilite }} </td>
                             <td> {{ element.createdAt | date('Y-m-d H:i:s') }} </td>
-                            {% if element.devisAuto.societaire is not null %}
+                            {% if element.societaire is not null %}
                                 <td> {{ element.societaire.codeInsurance }} </td>
                             {% else %}
                                 <td> Pas disponible </td>
