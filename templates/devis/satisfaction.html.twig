@@ -77,11 +77,9 @@
                                 <td> Pas disponible raisooon</td>
                             {% endif %}
 
-                            {% if  element.comment is not null %}
-                                <td>commentt </td>
-                            {% else %}
-                                <td>Pas disponible comentttt </td>
-                            {% endif %}
+
+                                <td> {{ element.comment }} </td>
+
 
                             {% if  element.observation is not null %}
                                 <td> {{ element.observation }} </td>
