@@ -20,14 +20,13 @@ class AladhanApiService extends ApiCustomerService
 
     public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', TranslatorInterface $translator, string $language = 'fr')
     {
-        parent::__construct($httpClient, $serializer, $class);
+        parent::__construct($httpClient, $serializer, $class,$translator);
         $this->translator = $translator;
         $this->translator->setLocale($language);
     }
 
     /**
      * @param double $latitude
-     * @param double $longitude
      * @return \App\DTO\AladhanApi\Data|array
      */
     public function getPrayer($latitude = null, $longitude = null)
