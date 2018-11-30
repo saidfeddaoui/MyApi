@@ -288,40 +288,6 @@ class PreDeclarationController extends Controller
         //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
 
         if ($resp->code == "200"){
-
-        $client = $preDeclaration->getClient();
-        $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
-        $sujet="Pré-déclaration";
-        $message="Votre pré-déclaration a été acceptée";
-
-
-        $notification = new Notification();
-        $notification->setIdSocietaire($idSocietaire);
-        $notification->setSujet($sujet);
-        $notification->setMessage($message);
-        $notification->setStatut(false);
-        $notification->setClient($client);
-        $notification->setPredeclaration($preDeclaration);
-        $notification->setType("V");
-        $notification->setDateCreation(new \dateTime("now"));
-
-        $this->em->persist($preDeclaration);
-        $this->em->persist($notification);
-        $this->em->flush();
-
-
-        //pour avoir id notification
-        $datenow=new \dateTime("now");
-        $now=$datenow->format("Y-m-d");
-        $notification_detail = new NotificationDetail();
-        $notification_detail->setLibelle("date");
-        $notification_detail->setValeur($now);
-        $notification_detail->setNotification($notification);
-        $notification_detail->setDateCreation(new \dateTime("now"));;
-
-        $this->em->persist($notification_detail);
-        $this->em->flush();
-
         $event = new AcceptPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::ACCEPT_PRE_DECLARATION, $event);
         return $this->json(['code'=>'ok','message' => 'la pré-declaration a été acceptée avec succès']);
@@ -329,7 +295,6 @@ class PreDeclarationController extends Controller
         }else{
             return $this->json(['code'=>'ko','message' => $resp->message]);
         }
-
 
 
     }
