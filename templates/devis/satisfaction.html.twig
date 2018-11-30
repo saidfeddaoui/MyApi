@@ -33,7 +33,7 @@
                             <th> Téléphone </th>
                             <th> Pack </th>
                             <th> Raison </th>
-
+                            <th> Commentaire </th>
                             <th> Observation </th>
                             <th> Agence </th>
                             <th> Action </th>
@@ -62,35 +62,39 @@
                             {% if  element.devisAuto is not null %}
                                 <td>  {{ element.devisAuto.tel }} </td>
                             {% else %}
-                                <td> Pas disponible  teeeeeeeel</td>
+                                <td> Pas disponible </td>
                             {% endif %}
 
                             {% if  element.devisAuto.pack %}
                                 <td>  {{ element.devisAuto.pack.name }} </td>
                             {% else  %}
-                                <td> Pas diponible paaaaaaaak</td>
+                                <td> Pas diponible </td>
                             {% endif %}
 
                             {% if  element.raison is not null %}
                                 <td>  {{ element.raison.title }} </td>
                             {% else %}
-                                <td> Pas disponible raisooon</td>
+                                <td> Pas disponible </td>
                             {% endif %}
 
+                            {#% if  element.comment is not null %}
+                                <td> {{ element.comment }} </td>
+                            {% else %}
+                                <td>Pas disponible </td>
+                            {% endif %#}
 
-
-
+                            <td>Pas disponible </td>
 
                             {% if  element.observation is not null %}
                                 <td> {{ element.observation }} </td>
                             {% else %}
-                                <td>observationnnnnn </td>
+                                <td> </td>
                             {% endif %}
 
                             {% if  element.agence is not null %}
                                 <td> {{ element.agence }} </td>
                             {% else %}
-                                <td>agenceeeeeeee </td>
+                                <td> </td>
                             {% endif %}
 
                             {% if  element.action is not null %}
@@ -106,7 +110,7 @@
                                 {% endif %}
                                 </td>
                             {% else %}
-                                <td>actionnnnn  </td>
+                                <td>  </td>
                             {% endif %}
 
                             {% if element.dateCreation is not null %}
