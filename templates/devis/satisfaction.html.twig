@@ -155,11 +155,12 @@
                                   <td> Pas disponible </td>
                               {% endif %}
 
-                              {% if  element.comment is not null %}
+                              {#% if  element.comment is not null %}
                                   <td> {{ element.comment }} </td>
                               {% else %}
                                   <td>Pas disponible comment </td>
-                              {% endif %}
+                              {% endif %#}
+                              <td> Comment </td>
 
                               {% if  element.observation is not null %}
                                   <td> {{ element.observation }} </td>
