@@ -200,7 +200,7 @@
                                   <td> Pas disponible </td>
                               {% endif %}
 
-                              {% if element.devisHabitation is not null %}
+                              {% if element.devisHabitation.societaire is not null %}
                                   <td> {{ element.devisHabitation.societaire.codeInsurance }} </td>
                               {% else %}
                                   <td> Pas disponible </td>
