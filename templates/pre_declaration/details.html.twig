@@ -104,7 +104,14 @@
                                 </span></p>
                             <p><span class="detail_label">Date de sinistre : </span>
                                 <span class="detail_info"><input type="text" name="predatesinistre" disabled value="{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}"></span></p>
-                            <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info"><input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span></p>
+                            <p><span class="detail_label">Date de pré-déclaration : </span>
+                                <span class="detail_info">
+                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span>
+                            </p>
+                            <p><span class="detail_label">Circonstance : </span>
+                                <span class="detail_info">
+                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.circonstanceSinistre.title}}"></span>
+                            </p>
 
 
                         </div>
