@@ -71,11 +71,13 @@
                                 <td> Pas diponible </td>
                             {% endif %}
 
-                            {% if  element.raison is not null %}
+                            {#% if  element.raison is not null %}
                                 <td>  {{ element.raison.title }} </td>
                             {% else %}
                                 <td> Pas raison title </td>
-                            {% endif %}
+                            {% endif %#}
+
+                            <td> Pas raison title </td>
 
                             {#% if  element.comment is not null %}
                                 <td> {{ element.comment }} </td>
