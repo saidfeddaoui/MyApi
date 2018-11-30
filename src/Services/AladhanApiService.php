@@ -41,6 +41,8 @@ class AladhanApiService extends ApiCustomerService
             ]
         ]);
         $prayer = $this->getResult($response);
+        if($prayer->getName() == 'Maghrib')
+            $prayer->setName('Al-Maghrib');
         //$prayer->setName($this->translator->trans($prayer->getName(), [], 'salat'));
         return $prayer;
     }
