@@ -20,7 +20,7 @@ class AladhanApiService extends ApiCustomerService
 
     public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', TranslatorInterface $translator, string $language = 'fr')
     {
-        parent::__construct($httpClient, $serializer, $class,$translator);
+        parent::__construct($httpClient, $serializer, $class);
         $this->translator = $translator;
         $this->translator->setLocale($language);
     }
