@@ -32,6 +32,7 @@
                             <th> Tél </th>
                             <th> email </th>
                             <th> date de création </th>
+                            <th> Mutuelle </th>
                             <th> Plus d'informations</th>
                         </tr>
                         </thead>
@@ -46,6 +47,12 @@
                                 <td> {{ element.createdAt | date('Y-m-d H:i:s')}} </td>
                             {% else %}
                                 <td>  </td>
+                            {% endif %}
+
+                            {% if element.societaire is not null %}
+                                <td> {{ element.societaire.codeInsurance }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
                             {% endif %}
 
                             <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
