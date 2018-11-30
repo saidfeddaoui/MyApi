@@ -160,10 +160,18 @@
                                   <td>Pas disponible </td>
                               {% endif %}
 
+                              td
+
                               {% if  element.observation is not null %}
                                   <td> {{ element.observation }} </td>
                               {% else %}
                                   <td>Pas disponible </td>
+                              {% endif %}
+
+                              {% if  element.agence is not null %}
+                                  <td> {{ element.agence }} </td>
+                              {% else %}
+                                  <td> </td>
                               {% endif %}
 
                               {% if  element.action is not null %}
