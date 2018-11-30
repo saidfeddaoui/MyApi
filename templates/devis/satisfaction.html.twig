@@ -194,13 +194,13 @@
                                   <td>Pas disponible </td>
                               {% endif %}
 
-                              {% if element.dateCreation.societaire is not null %}
+                              {% if element.dateCreation is not null %}
                                   <td> {{ element.dateCreation | date('Y-m-d H:i:s')  }} </td>
                               {% else %}
                                   <td> Pas disponible </td>
                               {% endif %}
 
-                              {% if element.devisHabitation.societaire is not null %}
+                              {% if element.devisHabitation is not null %}
                                   <td> {{ element.devisHabitation.societaire.codeInsurance }} </td>
                               {% else %}
                                   <td> Pas disponible </td>
