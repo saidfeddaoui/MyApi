@@ -149,11 +149,13 @@
                                   <td> Pas disponible </td>
                               {% endif %}
 
-                              {% if  element.raison is not null %}
+                              {#% if  element.raison is not null %}
                                   <td>  {{ element.raison.title }} </td>
                               {% else %}
                                   <td> Pas disponible </td>
-                              {% endif %}
+                              {% endif %#}
+
+                              <td> Pas disponible </td>
 
                               {#% if  element.comment is not null %}
                                   <td> {{ element.comment }} </td>
