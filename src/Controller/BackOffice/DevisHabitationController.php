@@ -34,7 +34,7 @@ class DevisHabitationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
 
-        var_dump( $insuranceType);
+        var_dump( $insuranceType->getName());
         die();
         $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "MRH" ]);
         $devis_mrh = $em->getRepository('App:DevisHabitation')->findBySocietaire($societaire);
