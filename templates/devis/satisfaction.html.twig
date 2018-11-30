@@ -117,6 +117,12 @@
                              <td> Pas disponible </td>
                             {% endif %}
 
+                            {% if element.devisAuto is not null %}
+                                <td> {{ element.devisAuto.societaire.codeInsurance }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
+
                             {% if  element.statut   %}
                                 <td> <i class="icon-like emoLike "></i></td>
                             {% else %}
@@ -193,6 +199,14 @@
                               {% else %}
                                   <td> Pas disponible </td>
                               {% endif %}
+
+                              {% if element.devisHabitation is not null %}
+                                  <td> {{ element.devisHabitation.societaire.codeInsurance }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
+
 
                               {% if  element.statut   %}
                                   <td> <i class="icon-like emoLike "></i></td>

@@ -81,7 +81,6 @@ class DevisSatisfactionController extends BaseController
     {
 
         if (($devisAccepted->getDevisAuto()->getId() == false) && ($devisAccepted->getDevisHabitation()->getId()== false)){
-
             return $this->respondWith(["Message"=>"vous devez remplire le devis "],ApiResponse::NOT_FOUND);
         }
 
