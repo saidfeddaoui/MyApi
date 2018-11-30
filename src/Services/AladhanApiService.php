@@ -18,11 +18,11 @@ class AladhanApiService extends ApiCustomerService
      */
     private $translator;
 
-    public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', TranslatorInterface $translator, string $language = 'fr')
+    public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', string $language = 'fr')
     {
         parent::__construct($httpClient, $serializer, $class);
-        $this->translator = $translator;
-        $this->translator->setLocale($language);
+        //$this->translator = $translator;
+        //$this->translator->setLocale($language);
     }
 
     /**
@@ -41,7 +41,7 @@ class AladhanApiService extends ApiCustomerService
             ]
         ]);
         $prayer = $this->getResult($response);
-        $prayer->setName($this->translator->trans($prayer->getName(), [], 'salat'));
+        //$prayer->setName($this->translator->trans($prayer->getName(), [], 'salat'));
         return $prayer;
     }
     /**
