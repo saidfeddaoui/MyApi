@@ -39,6 +39,7 @@ class DevisHabitationController extends Controller
 
         var_dump($societaire);
         die();
+
         $devis_mrh = $em->getRepository('App:DevisHabitation')->findBySocietaire($societaire);
 
         return $this->render('mrh/index.html.twig', [
