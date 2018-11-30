@@ -528,9 +528,6 @@ class ContentController extends BaseController
     public function infosPratiques($latitude, $longitude, AladhanApiService $aladhanApi, YahooWeatherApiService $weatherApi, PharmacieApiService $apiPharmacyApi, Request $request)
     {
         $pharmacy = $apiPharmacyApi->getPharmacy($latitude,$longitude);
-
-        var_dump($pharmacy);
-        die();
         $prayer = $aladhanApi->getPrayer($latitude,$longitude);
         $weather = $weatherApi->getWeather($latitude,$longitude);
         return $this->respondWith(new InfoPratique($prayer, $weather, $pharmacy));
