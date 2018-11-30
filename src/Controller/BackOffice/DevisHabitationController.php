@@ -34,9 +34,11 @@ class DevisHabitationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
 
-        var_dump( $insuranceType->getName());
-        die();
+
         $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "MRH" ]);
+
+        var_dump($societaire);
+        die();
         $devis_mrh = $em->getRepository('App:DevisHabitation')->findBySocietaire($societaire);
 
         return $this->render('mrh/index.html.twig', [
