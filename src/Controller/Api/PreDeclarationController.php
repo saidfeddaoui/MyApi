@@ -135,7 +135,6 @@ class PreDeclarationController extends BaseController
         $this->em->persist($preDeclaration);
         $this->em->flush();
 
-
         $modesReparation=$this->em->getRepository("App:ModeReparation")->findAll();
 
         foreach ($modesReparation as $mode){

@@ -186,23 +186,21 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string",length=100, nullable=true)
+     *
      */
     private $IdVille;
 
     /**
-     * @var integer
+     * @var string
      *
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
-     *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string",length=250, nullable=true)
      */
-    private $IdGarage;
+    private $Garage;
 
 
     /**
@@ -211,11 +209,10 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string",length=250, nullable=true)
      */
-    private $IdModeReparation;
+    private $modeReparation;
 
 
     /**
@@ -224,7 +221,6 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
      * @ORM\Column(type="string",length=10, nullable=true)
      */
@@ -579,51 +575,51 @@ class PreDeclaration
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdVille(): int
+    public function getIdVille(): string
     {
         return $this->IdVille;
     }
 
     /**
-     * @param int $IdVille
+     * @param string $IdVille
      */
-    public function setIdVille(int $IdVille): void
+    public function setIdVille(string $IdVille): void
     {
         $this->IdVille = $IdVille;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdGarage(): int
+    public function getGarage(): string
     {
-        return $this->IdGarage;
+        return $this->Garage;
     }
 
     /**
-     * @param int $IdGarage
+     * @param string $Garage
      */
-    public function setIdGarage(int $IdGarage): void
+    public function setGarage(string $Garage): void
     {
-        $this->IdGarage = $IdGarage;
+        $this->Garage = $Garage;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdModeReparation(): int
+    public function getModeReparation(): string
     {
-        return $this->IdModeReparation;
+        return $this->modeReparation;
     }
 
     /**
-     * @param int $IdModeReparation
+     * @param string $modeReparation
      */
-    public function setIdModeReparation(int $IdModeReparation): void
+    public function setModeReparation(string $modeReparation): void
     {
-        $this->IdModeReparation = $IdModeReparation;
+        $this->modeReparation = $modeReparation;
     }
 
     /**

@@ -16,7 +16,7 @@ class AladhanApiService extends ApiCustomerService
     /**
      * @var TranslatorInterface $translator
      */
-    private $translator;
+    //private $translator;
 
     public function __construct(Client $httpClient, SerializerInterface $serializer, string $class = 'array', string $language = 'fr')
     {
