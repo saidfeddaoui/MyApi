@@ -190,7 +190,7 @@ class PreDeclaration
      * @ORM\Column(type="string",length=100, nullable=true)
      *
      */
-    private $IdVille;
+    private $ville;
 
     /**
      * @var string
@@ -577,17 +577,17 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getIdVille(): string
+    public function getVille(): string
     {
-        return $this->IdVille;
+        return $this->ville;
     }
 
     /**
-     * @param string $IdVille
+     * @param string $ville
      */
-    public function setIdVille(string $IdVille): void
+    public function setVille(string $ville): void
     {
-        $this->IdVille = $IdVille;
+        $this->ville = $ville;
     }
 
     /**
