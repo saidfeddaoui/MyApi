@@ -200,7 +200,7 @@ class PreDeclaration
      *
      * @ORM\Column(type="string",length=250, nullable=true)
      */
-    private $Garage;
+    private $garage;
 
 
     /**
@@ -224,9 +224,8 @@ class PreDeclaration
      *
      * @ORM\Column(type="string",length=10, nullable=true)
      */
-    private $CodeModeReparation;
-
-
+    private $codeModeReparation;
+    
     /**
      * @var string
      *
@@ -595,15 +594,15 @@ class PreDeclaration
      */
     public function getGarage(): string
     {
-        return $this->Garage;
+        return $this->garage;
     }
 
     /**
      * @param string $Garage
      */
-    public function setGarage(string $Garage): void
+    public function setGarage(string $garage): void
     {
-        $this->Garage = $Garage;
+        $this->Garage = $garage;
     }
 
     /**
@@ -627,15 +626,15 @@ class PreDeclaration
      */
     public function getCodeModeReparation(): string
     {
-        return $this->CodeModeReparation;
+        return $this->codeModeReparation;
     }
 
     /**
-     * @param string $CodeModeReparation
+     * @param string $codeModeReparation
      */
-    public function setCodeModeReparation(string $CodeModeReparation): void
+    public function setCodeModeReparation(string $codeModeReparation): void
     {
-        $this->CodeModeReparation = $CodeModeReparation;
+        $this->codeModeReparation = $codeModeReparation;
     }
 
     /**
