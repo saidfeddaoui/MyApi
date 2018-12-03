@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p><span class="detail_label">Police : </span><span class="detail_info">
                                     {% if preDeclaration.client is not null %}
                                     <input type="text" class="police" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}">
@@ -76,16 +76,9 @@
                               <p><span class="detail_label">Raison de rejet : </span><span class="detail_info">
                                       <input type="text" class="description" name="predescription" value="{{ preDeclaration.description }}"> </span></p>
                             {% endif %}
-                            <p>Choisir le mode de réparation:</p>
-                            {% for mdr in list_mdr %}
-                            <p>
-                                <label>
-                                    <input type="checkbox" class="mdr" name="mdr[]" value="{{ mdr.modeReparation.id }}" {% if mdr.statut == 1 %} checked {% endif %}>{{ mdr.modeReparation.description }}
-                                </label>
-                            </p>
-                            {% endfor %}
+
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p><span class="detail_label">Nombre de blessées :</span>
                                 <span class="detail_info">
                                     <input type="text" class="nbi" name="prenbi" value="{{ preDeclaration.nbInjured }}">
@@ -116,7 +109,49 @@
 
                         </div>
 
+                        <div class="col-md-4">
+                            <p><span class="detail_label">Ville reparation : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="ville" name="ville" disabled value="{{ preDeclaration.ville }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label">Garage : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="garage" name="garage" disabled value="{{ preDeclaration.garage }}">
+                                </span>
+                            </p>
 
+                            <p><span class="detail_label">Mode reparation : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="modeReparation" name="modeReparation" disabled value="{{ preDeclaration.modeReparation }}">
+                                </span>
+                            </p>
+
+                            <p><span class="detail_label">Code Mode reparation : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="codeModeReparation" name="codeModeReparation" disabled value="{{ preDeclaration.codeModeReparation }}">
+                                </span>
+                            </p>
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Choisir le mode de réparation:</p>
+                            {% for mdr in list_mdr %}
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="mdr" name="mdr[]" value="{{ mdr.modeReparation.id }}" {% if mdr.statut == 1 %} checked {% endif %}>{{ mdr.modeReparation.description }}
+                                    </label>
+                                </p>
+                            {% endfor %}
+                        </div>
                     </div>
 
 
