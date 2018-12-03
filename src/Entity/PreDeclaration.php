@@ -588,7 +588,7 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getVille(): string
+    public function getVille()
     {
         return $this->ville;
     }
@@ -604,7 +604,7 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getGarage(): string
+    public function getGarage()
     {
         return $this->garage;
     }
@@ -620,7 +620,7 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getModeReparation(): string
+    public function getModeReparation()
     {
         return $this->modeReparation;
     }
@@ -636,7 +636,7 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getCodeModeReparation(): string
+    public function getCodeModeReparation()
     {
         return $this->codeModeReparation;
     }
@@ -652,7 +652,7 @@ class PreDeclaration
     /**
      * @return string
      */
-    public function getCommentaire(): string
+    public function getCommentaire()
     {
         return $this->commentaire;
     }
