@@ -225,7 +225,7 @@ class PreDeclaration
      * @ORM\Column(type="string",length=10, nullable=true)
      */
     private $codeModeReparation;
-    
+
     /**
      * @var string
      *
@@ -237,6 +237,18 @@ class PreDeclaration
      * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $commentaire;
+
+
+    /**
+     * @var string
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"listPreDeclaration"})
+     *
+     *
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $isReparation = false;
 
 
 
@@ -652,6 +664,26 @@ class PreDeclaration
     {
         $this->commentaire = $commentaire;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getIsReparation()
+    {
+        return $this->isReparation;
+    }
+
+    /**
+     * @param boolean $isReparation
+     */
+    public function setIsReparation($isReparation): void
+    {
+        $this->isReparation = $isReparation;
+    }
+
+
+
+
 
 
 
