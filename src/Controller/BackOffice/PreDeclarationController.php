@@ -88,9 +88,6 @@ class PreDeclarationController extends Controller
         $sinistres = $this->em->getRepository('App:Item')->findBy(['itemList'=>$sinistre->getId()]);
         $listMDR=$this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
 
-        var_dump($preDeclaration);
-        die();
-
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
             'page_subtitle' => '',
