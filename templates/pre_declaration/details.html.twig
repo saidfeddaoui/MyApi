@@ -77,6 +77,11 @@
                                       <input type="text" class="description" name="predescription" value="{{ preDeclaration.description }}"> </span></p>
                             {% endif %}
 
+                            <p><span class="detail_label">Circonstance : </span>
+                                <span class="detail_info">
+                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.circonstanceSinistre.title}}"></span>
+                            </p>
+
                         </div>
                         <div class="col-md-4">
                             <p><span class="detail_label">Nombre de blessées :</span>
@@ -101,11 +106,6 @@
                                 <span class="detail_info">
                                     <input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span>
                             </p>
-                            <p><span class="detail_label">Circonstance : </span>
-                                <span class="detail_info">
-                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.circonstanceSinistre.title}}"></span>
-                            </p>
-
 
                         </div>
 
