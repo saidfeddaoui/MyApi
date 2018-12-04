@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
@@ -27,18 +28,23 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
+                            <th> Mutuelle </th>
                             <th> Nom </th>
                             <th> Prénom </th>
                             <th> Tél </th>
                             <th> email </th>
                             <th> date de création </th>
-                            <th> Mutuelle </th>
                             <th> Plus d'informations</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for element in data %}
                         <tr class="detail_devis_mrh" data-id="{{ element.id }}">
+                            {% if element.societaire is not null %}
+                                <td> {{ element.societaire.codeInsurance }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
                             <td> {{ element.nom }} </td>
                             <td> {{ element.prenom }} </td>
                             <td> {{ element.tel }} </td>
@@ -47,12 +53,6 @@
                                 <td> {{ element.createdAt | date('Y-m-d H:i:s')}} </td>
                             {% else %}
                                 <td>  </td>
-                            {% endif %}
-
-                            {% if element.societaire is not null %}
-                                <td> {{ element.societaire.codeInsurance }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
                             {% endif %}
 
                             <td> <span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></td>
