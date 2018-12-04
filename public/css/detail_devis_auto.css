@@ -64,3 +64,8 @@ span.detail_info input[disabled] {
     margin-bottom: 0;
 }
 
+.observation {
+    display: flex;
+    align-items: center;
+}
+
