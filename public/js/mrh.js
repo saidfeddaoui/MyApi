@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
             }
         ],
         "order": [
-            [4, "desc"]
+            [5, "desc"]
         ] // set first column as a default sort by asc
     });
 
