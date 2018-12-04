@@ -295,6 +295,8 @@
                     </div>
                     {% if  element.auto=="DA" %}
 
+                        {% if garanties | length > 0 %}
+
                     <div class="row">
                           <div class="garantie top">
                             <div class="caption">
@@ -326,6 +328,7 @@
 
                     </div>
 
+                  {% endif %}
                  {% endif %}
 
                     <div class="row">
