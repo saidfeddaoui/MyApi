@@ -56,6 +56,7 @@ class DevisSatisfactionController extends Controller
     {
 
         //dump($devisSatisfaction->getDevisHabitation());die;
+        $em = $this->getDoctrine()->getManager();
 
         $garanties = $em->getRepository('App:DeviGaranties')->findBy([
             "devis"=> $devisSatisfaction->getDevisAuto(),
