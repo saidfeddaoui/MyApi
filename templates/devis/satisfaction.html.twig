@@ -27,6 +27,7 @@
                     <table class="table table-striped table-hover table-bordered datatable" id="sample_editable_1">
                         <thead>
                         <tr>
+                            <th> Mutuelle  </th>
                             <th> Type devis  </th>
                             <th> Nom </th>
                             <th> Prénom </th>
@@ -38,7 +39,6 @@
                             <th> Agence </th>
                             <th> Action </th>
                             <th> Date de création  </th>
-                            <th> Mutuelle  </th>
                             <th> Statut </th>
                         </tr>
                         </thead>
@@ -46,6 +46,12 @@
                         {% for element in data %}
                           {% if  element.auto=="DA" %}
                         <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
+                          {% if element.devisAuto.societaire is not null %}
+                                <td> {{ element.devisAuto.societaire.codeInsurance }} </td>
+                            {% else %}
+                                <td> Pas disponible </td>
+                            {% endif %}
+                            
                             <td> AUTO </td>
 
                             {% if element.devisAuto is not null %}
@@ -118,11 +124,6 @@
                              <td> Pas disponible </td>
                             {% endif %}
 
-                            {% if element.devisAuto.societaire is not null %}
-                                <td> {{ element.devisAuto.societaire.codeInsurance }} </td>
-                            {% else %}
-                                <td> Pas disponible </td>
-                            {% endif %}
 
                             {% if  element.statut   %}
                                 <td> <i class="icon-like emoLike "></i></td>
@@ -132,6 +133,12 @@
                          </tr>
                       {% elseif  element.auto=="DH" %}
                           <tr class="devis_satisfaction_details" data-id="{{ element.id }}">
+                            {% if element.devisHabitation.societaire is not null %}
+                                  <td> {{ element.devisHabitation.societaire.codeInsurance }} </td>
+                              {% else %}
+                                  <td> Pas disponible </td>
+                              {% endif %}
+
                               <td> MRH </td>
 
                               {% if element.devisHabitation is not null %}
@@ -200,14 +207,6 @@
                               {% else %}
                                   <td> Pas disponible </td>
                               {% endif %}
-
-                              {% if element.devisHabitation.societaire is not null %}
-                                  <td> {{ element.devisHabitation.societaire.codeInsurance }} </td>
-                              {% else %}
-                                  <td> Pas disponible </td>
-                              {% endif %}
-
-
 
                               {% if  element.statut   %}
                                   <td> <i class="icon-like emoLike "></i></td>
