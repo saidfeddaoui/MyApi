@@ -316,7 +316,11 @@
 
                                     </div>
                                     <div class="col-md-2">
-                                       <span class="label label-success"><strong>{{ garantie.acquise }} </strong></span> 
+                                         {% if garantie.acquise =="O"  %}
+                                       <span class="label label-success pull-right"><strong>{{ garantie.acquise }} </strong></span> 
+                                       {% else %}
+                                        <span class="label label-danger pull-right"><strong>{{ garantie.acquise }} </strong></span> 
+                                       {% endif %}
                                     </div>
                                    
                                 </div>
