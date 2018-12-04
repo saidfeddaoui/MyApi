@@ -58,10 +58,22 @@ class DevisSatisfactionController extends Controller
         //dump($devisSatisfaction->getDevisHabitation());die;
         $em = $this->getDoctrine()->getManager();
 
-        $garanties = $em->getRepository('App:DeviGaranties')->findBy([
-            "devis"=> $devisSatisfaction->getDevisAuto(),
-            "type"=>$devisSatisfaction->getAuto()
-        ]);
+        if ($devisSatisfaction->getAuto() == "DA") {
+                $garanties = $em->getRepository('App:DeviGaranties')->findBy([
+                "devis"=> $devisSatisfaction->getDevisAuto(),
+                "type"=>$devisSatisfaction->getAuto()
+               ]);
+           
+        }else{
+
+                $garanties = $em->getRepository('App:DeviGaranties')->findBy([
+                "devis"=> $devisSatisfaction->getDevisHabitation(),
+                "type"=>$devisSatisfaction->getAuto()
+               ]);
+
+        }
+
+        
         return $this->render('devis/satisfaction_details.html.twig', [
             'page_title' => 'Détail devis',
             'page_subtitle' => '',
