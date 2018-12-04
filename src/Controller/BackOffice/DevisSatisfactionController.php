@@ -56,10 +56,16 @@ class DevisSatisfactionController extends Controller
     {
 
         //dump($devisSatisfaction->getDevisHabitation());die;
+
+        $garanties = $em->getRepository('App:DeviGaranties')->findBy([
+            "devis"=> $devisSatisfaction->getDevisAuto(),
+            "type"=>"DA"
+        ]);
         return $this->render('devis/satisfaction_details.html.twig', [
             'page_title' => 'Détail devis',
             'page_subtitle' => '',
-            'element'=>$devisSatisfaction
+            'element'=>$devisSatisfaction,
+            'garanties'=>$garanties
         ]);
     }
 
