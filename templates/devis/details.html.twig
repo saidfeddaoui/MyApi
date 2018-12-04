@@ -169,7 +169,11 @@
                             <!-- -->
                         </div>
 
-                        <div class="row">
+                        <!-- garantie-->
+
+                        {% if garanties | length > 0 %}
+
+                    <div class="row">
                           <div class="garantie top">
                             <div class="caption">
                                 <i class="icon-settings font-red"></i>
@@ -178,27 +182,37 @@
                           </div>
                          {% for garantie in garanties %}
                           <div class="garanties">
-                            <div class="col-md-3">
+                            <div class="col-md-8">
                                 <div class="cart">
-                                    <div class="header">{{ garantie.garantie }}</div>
-                                    <div class="body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">Acquise :<strong> {{ garantie.acquise }} </strong></li>
-                                            <li class="list-group-item">LibOption : <strong>  {{ garantie.libOption }}</strong></li>
-                                            <li class="list-group-item">Franchise :  <strong> {{ garantie.franchise }}</strong></li>
-                                            <li class="list-group-item">Obligatoire :  <strong> {{ garantie.obligatoire }}</strong></li>
-                                            <li class="list-group-item">IsValeurAssuree : <strong>  {{ garantie.isValeurAssuree }}</strong></li>
-                                            <li class="list-group-item">LibelleGarantie :<strong>   {{ garantie.libelleGarantie }}</strong></li>
-                                            <li class="list-group-item">IdDet : <strong>  {{ garantie.det }}</strong></li>
-                                        </ul>
+                                    <div class="col-md-10">
+                                       <p><strong>{{ garantie.garantie }} </strong></p> 
+                                       {% if garantie.libOption  %}
+                                         <p class="small">{{ garantie.libOption }}</p>
+                                       {% endif %}
+
                                     </div>
+                                    <div class="col-md-2">
+                                         {% if garantie.acquise =="O"  %}
+                                       <span class="label label-success pull-right"><strong>OUI </strong></span> 
+                                       {% else %}
+                                        <span class="label label-danger pull-right"><strong>NON </strong></span> 
+                                       {% endif %}
+                                    </div>
+                                   
                                 </div>
 
                             </div>
                            </div>
-                            {% endfor %}
+                        {% endfor %}
 
-                        </div>
+                    </div>
+
+                  {% endif %}
+                        <!--end garantie-->
+
+                        
+
+
                     </div>
 
                 </div>
