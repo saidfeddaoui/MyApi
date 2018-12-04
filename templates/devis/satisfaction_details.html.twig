@@ -306,20 +306,19 @@
                           </div>
                          {% for garantie in garanties %}
                           <div class="garanties">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="cart">
-                                    <div class="header">{{ garantie.garantie }}</div>
-                                    <div class="body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">Acquise :<strong> {{ garantie.acquise }} </strong></li>
-                                            <li class="list-group-item">LibOption : <strong>  {{ garantie.libOption }}</strong></li>
-                                            <li class="list-group-item">Franchise :  <strong> {{ garantie.franchise }}</strong></li>
-                                            <li class="list-group-item">Obligatoire :  <strong> {{ garantie.obligatoire }}</strong></li>
-                                            <li class="list-group-item">IsValeurAssuree : <strong>  {{ garantie.isValeurAssuree }}</strong></li>
-                                            <li class="list-group-item">LibelleGarantie :<strong>   {{ garantie.libelleGarantie }}</strong></li>
-                                            <li class="list-group-item">IdDet : <strong>  {{ garantie.det }}</strong></li>
-                                        </ul>
+                                    <div class="col-md-6">
+                                       <p><strong>{{ garantie.garantie }} </strong></p> 
+                                       {% if garantie.libOption  %}
+                                         <p class="list-group-item">{{ garantie.libOption }}</p>
+                                       {% endif %}
+
                                     </div>
+                                    <div class="col-md-2">
+                                       <span class="badge"><strong>{{ garantie.acquise }} </strong></span> 
+                                    </div>
+                                   
                                 </div>
 
                             </div>
