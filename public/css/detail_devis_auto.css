@@ -55,15 +55,12 @@ span.detail_info input[disabled] {
     background: #efefef;
     margin-top: 15px;
     border: 1px solid #d0cdcd;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
-.garanties .cart .header {
-    text-align: center;
-    padding: 10px;
-    background: #24334c;
-    color: #fff;
+.garanties p {
+    margin-bottom: 0;
 }
 
-.garanties .list-group {
-    margin-bottom: 0!important;
-}
