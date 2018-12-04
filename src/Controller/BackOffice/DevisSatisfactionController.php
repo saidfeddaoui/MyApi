@@ -60,7 +60,7 @@ class DevisSatisfactionController extends Controller
 
         $garanties = $em->getRepository('App:DeviGaranties')->findBy([
             "devis"=> $devisSatisfaction->getDevisAuto(),
-            "type"=>"DA"
+            "type"=>$devisSatisfaction->getAuto()
         ]);
         return $this->render('devis/satisfaction_details.html.twig', [
             'page_title' => 'Détail devis',
