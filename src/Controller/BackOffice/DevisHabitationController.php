@@ -34,7 +34,7 @@ class DevisHabitationController extends Controller
         $em = $this->getDoctrine()->getManager();
         //$insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
        // $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "MRH" ]);
-        $devis_mrh = $em->getRepository('App:DevisHabitation')->findAll($societaire);
+        $devis_mrh = $em->getRepository('App:DevisHabitation')->findAll();
         return $this->render('mrh/index.html.twig', [
             'page_title' => 'Liste des devis Mrh',
             'page_subtitle' => '',
