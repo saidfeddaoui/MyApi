@@ -580,7 +580,6 @@ class RegistrationController extends BaseController
      *         name="X-REGISTRATION-TOKEN",
      *         in="header",
      *         type="string",
-     *         required=true,
      *         description="Registration Token",
      *     ),
      *     @SWG\Parameter(
