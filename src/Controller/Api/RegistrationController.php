@@ -181,11 +181,21 @@ class RegistrationController extends BaseController
 
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
-        if ($existeClient == null ||
-            $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
-            $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
+        if ($existeClient == null) {
 
-            $this->em->persist($client);
+        $this->em->persist($client);
+        }else if($existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
+                 $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT){
+           
+           $existeClient 
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+            ;
+
         }
 
        
