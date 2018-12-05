@@ -35,7 +35,7 @@ class DevisController extends Controller
         $em = $this->getDoctrine()->getManager();
         $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
         $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
-        $devis = $em->getRepository('App:DevisAuto')->findBySocietaire($societaire);
+        $devis = $em->getRepository('App:DevisAuto')->findAll();
 
         return $this->render('devis/index.html.twig', [
             'page_title' => 'Liste des devis Auto',

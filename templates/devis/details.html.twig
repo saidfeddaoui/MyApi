@@ -173,42 +173,42 @@
 
                         {% if garanties | length > 0 %}
 
-                    <div class="row">
-                          <div class="garantie top">
-                            <div class="caption">
-                                <i class="icon-settings font-red"></i>
-                                <span class="caption-subject font-red sbold uppercase">GARANTIE</span>
-                            </div>
-                          </div>
-                         {% for garantie in garanties %}
-                          <div class="garanties">
-                            <div class="col-md-8">
-                                <div class="cart">
-                                    <div class="col-md-10">
-                                       <p><strong>{{ garantie.garantie }} </strong></p> 
-                                       {% if garantie.libOption  %}
-                                         <p class="small">{{ garantie.libOption }}</p>
-                                       {% endif %}
+                            <div class="row">
+                                  <div class="garantie top">
+                                    <div class="caption">
+                                        <i class="icon-settings font-red"></i>
+                                        <span class="caption-subject font-red sbold uppercase">GARANTIE</span>
+                                    </div>
+                                  </div>
+                                 {% for garantie in garanties %}
+                                  <div class="garanties">
+                                    <div class="col-md-8">
+                                        <div class="cart">
+                                            <div class="col-md-10">
+                                               <p><strong>{{ garantie.garantie }} </strong></p> 
+                                               {% if garantie.libOption  %}
+                                                 <p class="small">{{ garantie.libOption }}</p>
+                                               {% endif %}
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                 {% if garantie.acquise =="O"  %}
+                                               <span class="label label-success pull-right"><strong>OUI </strong></span> 
+                                               {% else %}
+                                                <span class="label label-danger pull-right"><strong>NON </strong></span> 
+                                               {% endif %}
+                                            </div>
+                                           
+                                        </div>
 
                                     </div>
-                                    <div class="col-md-2">
-                                         {% if garantie.acquise =="O"  %}
-                                       <span class="label label-success pull-right"><strong>OUI </strong></span> 
-                                       {% else %}
-                                        <span class="label label-danger pull-right"><strong>NON </strong></span> 
-                                       {% endif %}
-                                    </div>
-                                   
-                                </div>
+                                   </div>
+                                {% endfor %}
 
                             </div>
-                           </div>
-                        {% endfor %}
-
-                    </div>
-
-                  {% endif %}
-                        <!--end garantie-->
+ 
+                     {% endif %}
+                <!--end garantie-->
 
                         
 
