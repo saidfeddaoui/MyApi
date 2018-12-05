@@ -292,11 +292,18 @@
 
                             {% if  element.statut   %}
 
-                                {% if element.echeanceDate is not empty %}
-                                    <input type="text"  name="batiment" disabled value="{{ element.echeanceDate | date('Y-m-d H:i:s')}}">
-                                {% else %}
-                                    <input type="text" name="batiment" disabled value="">
-                                {% endif %}
+                                <p>
+                                    <span class="detail_label">Batiment : </span>
+                                    <span class="detail_info">
+                                            {% if element.echeanceDate is not empty %}
+                                                 <input type="text"  name="batiment" disabled value="{{ element.echeanceDate | date('Y-m-d H:i:s')}}">
+                                            {% else %}
+                                                <input type="text" name="echeanceDate" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+                            
 
                             {% else %}
 
@@ -305,16 +312,7 @@
                               
                             {% endif %}
 
-                                <p>
-                                    <span class="detail_label">Batiment : </span>
-                                    <span class="detail_info">
-                                            {% if element.devisHabitation.batiment is not empty %}
-                                                <input type="text"  name="batiment" disabled value="{{ element.devisHabitation.batiment.value }}">
-                                            {% else %}
-                                                <input type="text" name="batiment" disabled value="">
-                                            {% endif %}
-                                     </span>
-                                </p>
+                                
 
                             </div>
 
