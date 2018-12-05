@@ -169,6 +169,15 @@ class RegistrationController extends BaseController
             ->setGroup($group)
         ;
 
+        $existeClient = $this->em->getRepository('App:Client')->findOneBy(
+            array("phone"=>$client->getPhone(),
+                  "status"=>Client::STATUS_VERIFIED_WITH_SMS));
+
+       var_dump($existeClient);
+       die();
+
+        
+
         // if (condition) {
         //     # code...
         // }
