@@ -167,7 +167,6 @@ class RegistrationController extends BaseController
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
         if ($existeClient == null ||
-
             $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
             $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
 
@@ -181,7 +180,7 @@ class RegistrationController extends BaseController
             ;
 
             $this->em->persist($client);
-            
+
         }else{
 
             $existeClient 
