@@ -475,7 +475,7 @@ class RegistrationController extends BaseController
 
         $exClient = $this->em->getRepository("App:Client")->findOneByPhone($client->getPhone());
 
-        if ($exClient){
+        if ($exClient && $exClient->getStatus != Client::STATUS_UNCONFIRMED_ACCOUNT){
             $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
 
             $exClient->setVerificationCode($this->codeGenerator->generate())
@@ -580,6 +580,7 @@ class RegistrationController extends BaseController
      *         name="X-REGISTRATION-TOKEN",
      *         in="header",
      *         type="string",
+     *         required=true,
      *         description="Registration Token",
      *     ),
      *     @SWG\Parameter(
