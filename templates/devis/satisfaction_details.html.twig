@@ -193,7 +193,7 @@
                                     {% endif %}
                                 </h4>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <p><span class="detail_label"> Email: </span>
                                         <span class="detail_info">
                                             {% if element.devisHabitation.email is not null %}
@@ -215,16 +215,7 @@
                                         </span>
                                     </p>
 
-                                <p>
-                                    <span class="detail_label">Contenu : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisHabitation.contenu is not null %}
-                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.contenu }}">
-                                            {% else %}
-                                            <input type="text" name="contenu" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+                                
 
 
 
@@ -251,7 +242,7 @@
 
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <p>
                                     <span class="detail_label">Proprieté : </span>
                                     <span class="detail_info">
@@ -283,6 +274,47 @@
                                      </span>
                                 </p>
 
+                                <p>
+                                    <span class="detail_label">Contenu : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisHabitation.contenu is not null %}
+                                            <input type="text"  name="contenu" disabled value="{{ element.devisHabitation.contenu }}">
+                                            {% else %}
+                                            <input type="text" name="contenu" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                </p>
+
+
+                            </div>
+
+                            <div class="col-ms-4">
+
+                            {% if  element.statut   %}
+
+                                {% if element.echeanceDate is not empty %}
+                                    <input type="text"  name="batiment" disabled value="{{ element.echeanceDate}}">
+                                {% else %}
+                                    <input type="text" name="batiment" disabled value="">
+                                {% endif %}
+
+                            {% else %}
+
+
+
+                              
+                            {% endif %}
+
+                                <p>
+                                    <span class="detail_label">Batiment : </span>
+                                    <span class="detail_info">
+                                            {% if element.devisHabitation.batiment is not empty %}
+                                                <input type="text"  name="batiment" disabled value="{{ element.devisHabitation.batiment.value }}">
+                                            {% else %}
+                                                <input type="text" name="batiment" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
 
                             </div>
 
