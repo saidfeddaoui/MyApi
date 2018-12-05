@@ -475,6 +475,10 @@ class RegistrationController extends BaseController
 
         $exClient = $this->em->getRepository("App:Client")->findOneByPhone($client->getPhone());
 
+        var_dump($exClient->getStatus());
+        var_dump(Client::STATUS_UNCONFIRMED_ACCOUNT);
+        die();
+
         if ($exClient && $exClient->getStatus() != Client::STATUS_UNCONFIRMED_ACCOUNT){
             $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
 
