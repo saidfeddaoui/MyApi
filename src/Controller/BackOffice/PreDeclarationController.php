@@ -180,20 +180,17 @@ class PreDeclarationController extends Controller
             ->setDescription($request->request->get($motif))
         ;
 
-        $idpredeclaration=$preDeclaration->getId();
-        $preDeclarationInfo= array(
-            "IdPreDeclaration"=>$idpredeclaration,
-            "Statut"=>"r"
-        );
+        // $idpredeclaration=$preDeclaration->getId();
+        // $preDeclarationInfo= array(
+        //     "IdPreDeclaration"=>$idpredeclaration,
+        //     "Statut"=>"r"
+        // );
 
-        $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
+        // $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
-        $resp = $pdtas->triggerPredeclaration($dataPre);
+        // $resp = $pdtas->triggerPredeclaration($dataPre);
 
         //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
-
-
-        if ($resp->code == "200") {
 
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
@@ -236,9 +233,7 @@ class PreDeclarationController extends Controller
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
         $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
-        }else{
-            return $this->json(['code'=>'ko','message' => $resp->message]);
-        }
+        
     }
 
 
