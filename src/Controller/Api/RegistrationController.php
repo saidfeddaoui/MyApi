@@ -160,6 +160,10 @@ class RegistrationController extends BaseController
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
+      
+
+       $client->getVerificationCode();
+
         $client
             ->setEnabled(false)
             ->setVerificationCode($this->codeGenerator->generate())
@@ -168,6 +172,12 @@ class RegistrationController extends BaseController
             ->addRole($role)
             ->setGroup($group)
         ;
+
+        $client->getVerificationCode();
+
+        die();
+
+
 
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
