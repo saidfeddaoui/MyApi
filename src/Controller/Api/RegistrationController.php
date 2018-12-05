@@ -161,23 +161,27 @@ class RegistrationController extends BaseController
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
       
-        $client
-            ->setEnabled(false)
-            ->setVerificationCode($this->codeGenerator->generate())
-            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-            ->addInsuranceType($insuranceType)
-            ->addRole($role)
-            ->setGroup($group)
-        ;
+       
 
 
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
         if ($existeClient == null ||
+
             $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
             $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
 
+             $client
+                ->setEnabled(false)
+                ->setVerificationCode($this->codeGenerator->generate())
+                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+                ->addInsuranceType($insuranceType)
+                ->addRole($role)
+                ->setGroup($group)
+            ;
+
             $this->em->persist($client);
+            
         }else{
 
             $existeClient 
