@@ -230,8 +230,8 @@ class PreDeclarationController extends Controller
         $this->em->persist($notification_detail2);
         $this->em->flush();
 
-        $event = new RejectPreDeclarationEvent($preDeclaration);
-        $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
+       // $event = new RejectPreDeclarationEvent($preDeclaration);
+       // $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
         $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
         
     }
