@@ -192,6 +192,9 @@ class PreDeclarationController extends Controller
 
         //return $this->json(['Code' => $resp->code,'message' => $resp->code]);
 
+
+       // if ($resp->code == "200") {
+
         $client = $preDeclaration->getClient();
         $idSocietaire = $preDeclaration->getContrat()->getIdSocietaire();
         $sujet="Pré-déclaration";
@@ -230,10 +233,13 @@ class PreDeclarationController extends Controller
         $this->em->persist($notification_detail2);
         $this->em->flush();
 
-       // $event = new RejectPreDeclarationEvent($preDeclaration);
-       // $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
-        $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
-        
+        $event = new RejectPreDeclarationEvent($preDeclaration);
+        $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
+
+        return  $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
+        // }else{
+        //     return $this->json(['code'=>'ko','message' => $resp->message]);
+        // }
     }
 
 
