@@ -293,7 +293,7 @@
                             {% if  element.statut   %}
 
                                 <p>
-                                    <span class="detail_label">Batiment : </span>
+                                    <span class="detail_label">Date Echeance : </span>
                                     <span class="detail_info">
                                             {% if element.echeanceDate is not empty %}
                                                  <input type="text"  name="batiment" disabled value="{{ element.echeanceDate | date('Y-m-d H:i:s')}}">
