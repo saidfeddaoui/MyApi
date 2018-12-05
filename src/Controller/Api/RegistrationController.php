@@ -170,19 +170,17 @@ class RegistrationController extends BaseController
             ->setGroup($group)
         ;
 
+
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
-        if ($existeClient == null) {
-
-            var_dump($existeClient);
-            die();
+        if ($existeClient == null ||
+            $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
+            $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
 
             $this->em->persist($client);
+        }else{
 
-        }else if($existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
-                 $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT){
-           
-           $existeClient 
+            $existeClient 
                 ->setEnabled(false)
                 ->setVerificationCode($this->codeGenerator->generate())
                 ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
@@ -190,11 +188,6 @@ class RegistrationController extends BaseController
                 ->addRole($role)
                 ->setGroup($group)
             ;
-
-
-            var_dump($existeClient);
-            die();
-
         }
 
        
