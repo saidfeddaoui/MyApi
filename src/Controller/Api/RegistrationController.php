@@ -171,14 +171,14 @@ class RegistrationController extends BaseController
 
         $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
+        if ($existeClient == null ||
+            $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
+            $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
 
-        var_dump($existeClient);
-        die();
+            $this->em->persist($client);
+        }
 
-        // if (condition) {
-        //     # code...
-        // }STATUS_UNCONFIRMED_ACCOUNT
-        //$this->em->persist($client);
+       
         $this->em->flush();
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
