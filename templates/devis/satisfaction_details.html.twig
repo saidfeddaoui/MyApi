@@ -54,17 +54,13 @@
                                      </span>
                                     </p>
 
-                                    <p>
-                                        <span class="detail_label">Commentaire : </span>
+                                    <p><span class="detail_label"> Email: </span>
                                         <span class="detail_info">
-                                        {% if element.comment is not null %}
-                                            <input type="text" name="comment" disabled value="{{ element.comment }}">
-                                        {% else %}
-                                            <input type="text" name="comment" disabled value="">
-                                        {% endif %}
-                                     </span>
+                                            <input type="text"  name="email" disabled value="{{ element.devisAuto.email }}">
+                                        </span>
                                     </p>
 
+                                    
                                     <p>
                                         <span class="detail_label">Prime HT: </span>
                                         <span class="detail_info">
@@ -86,14 +82,33 @@
                                      </span>
                                     </p>
 
+                                    <p>
+                                        <span class="detail_label">Commentaire : </span>
+                                        <span class="detail_info">
+                                        {% if element.comment is not null %}
+                                            <input type="text" name="comment" disabled value="{{ element.comment }}">
+                                        {% else %}
+                                            <input type="text" name="comment" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                    </p>
+
+
                                 </div>
 
                                 <div class="col-md-4">
-                                    <p><span class="detail_label"> Email: </span>
-                                        <span class="detail_info">
-                                            <input type="text"  name="email" disabled value="{{ element.devisAuto.email }}">
-                                        </span>
-                                    </p>
+
+                                 <p>
+                                    <span class="detail_label">Date mise en circulation : </span>
+                                    <span class="detail_info">
+                                        {% if element.devisAuto.datemec is not null %}
+                                            <input type="text" name="vg" disabled value="{{element.devisAuto.datemec | date('Y-m-d H:i:s')  }}">
+                                        {% else %}
+                                            <input type="text" name="vg" disabled value="">
+                                        {% endif %}
+                                     </span>
+                                  </p>
+                                    
                                     <p><span class="detail_label">Pack : </span>
                                         <span class="detail_info">
                                           {% if   element.devisAuto.pack is not null %}
@@ -125,6 +140,39 @@
                                      </span>
                                 </p>
 
+
+
+                            {% if  element.statut   %}
+
+                                 <p>
+                                    <span class="detail_label">Agence : </span>
+                                    <span class="detail_info">
+                                            {% if element.agence is not empty %}
+                                                 <input type="text"  name="agence" disabled value="{{ element.agence}}">
+                                            {% else %}
+                                                <input type="text" name="agence" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+
+                            {% else %}
+
+                                <p>
+                                    <span class="detail_label">Raison : </span>
+                                    <span class="detail_info">
+                                            {% if element.raison is not empty %}
+                                                 <input type="text"  name="comment" disabled value="{{ element.raison.title}}">
+                                            {% else %}
+                                                <input type="text" name="raison" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+
+
+                              
+                            {% endif %}
 
                                 
                             </div>
@@ -172,16 +220,7 @@
                                      </span>
                                 </p>
 
-                                <p>
-                                    <span class="detail_label">Date mise en circulation : </span>
-                                    <span class="detail_info">
-                                        {% if element.devisAuto.datemec is not null %}
-                                            <input type="text" name="vg" disabled value="{{element.devisAuto.datemec | date('Y-m-d H:i:s')  }}">
-                                        {% else %}
-                                            <input type="text" name="vg" disabled value="">
-                                        {% endif %}
-                                     </span>
-                                </p>
+                               
                             </div>
 
                             {% elseif element.auto=="DH" %}
