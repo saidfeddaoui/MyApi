@@ -293,7 +293,7 @@
                             {% if  element.statut   %}
 
                                 <p>
-                                    <span class="detail_label">Date Echeance : </span>
+                                    <span class="detail_label">Date d'échéance : </span>
                                     <span class="detail_info">
                                             {% if element.echeanceDate is not empty %}
                                                  <input type="text"  name="batiment" disabled value="{{ element.echeanceDate | date('Y-m-d H:i:s')}}">
@@ -315,7 +315,25 @@
                                 </p>
 
 
-                                 <p>
+                            {% else %}
+
+                                <p>
+                                    <span class="detail_label">Raison : </span>
+                                    <span class="detail_info">
+                                            {% if element.raison is not empty %}
+                                                 <input type="text"  name="comment" disabled value="{{ element.raison.title}}">
+                                            {% else %}
+                                                <input type="text" name="raison" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+
+
+                              
+                            {% endif %}
+
+                               <p>
                                     <span class="detail_label">Commentaire : </span>
                                     <span class="detail_info">
                                             {% if element.comment is not empty %}
@@ -325,16 +343,6 @@
                                             {% endif %}
                                      </span>
                                 </p>
-
-
-                            
-
-                            {% else %}
-
-
-
-                              
-                            {% endif %}
 
                                 
 
