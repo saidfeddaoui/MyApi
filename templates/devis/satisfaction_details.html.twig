@@ -303,6 +303,30 @@
                                      </span>
                                 </p>
 
+                                 <p>
+                                    <span class="detail_label">Agence : </span>
+                                    <span class="detail_info">
+                                            {% if element.agence is not empty %}
+                                                 <input type="text"  name="agence" disabled value="{{ element.agence}}">
+                                            {% else %}
+                                                <input type="text" name="agence" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+
+                                 <p>
+                                    <span class="detail_label">Commentaire : </span>
+                                    <span class="detail_info">
+                                            {% if element.comment is not empty %}
+                                                 <input type="text"  name="comment" disabled value="{{ element.comment}}">
+                                            {% else %}
+                                                <input type="text" name="comment" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+
                             
 
                             {% else %}
