@@ -160,38 +160,19 @@ class RegistrationController extends BaseController
         $token = $this->jwtEncoder->encode(['phone' => $client->getPhone()]);
         $role = $this->em->getRepository('App:Role')->findOneByRole(Role::MOBILE_CLIENT);
         $group = $this->em->getRepository('App:Group')->findOneByRole(Group::MOBILE_USER);
-      
-       
-       var_dump("expression");die();
+        $client
+            ->setEnabled(false)
+            ->setVerificationCode($this->codeGenerator->generate())
+            ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
+            ->addInsuranceType($insuranceType)
+            ->addRole($role)
+            ->setGroup($group)
+        ;
 
-        $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
-
-        if ($existeClient == null || $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
-
-             
-             $client
-                ->setEnabled(false)
-                ->setVerificationCode($this->codeGenerator->generate())
-                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-                ->addInsuranceType($insuranceType)
-                ->addRole($role)
-                ->setGroup($group)
-            ;
-
-            $this->em->persist($client);
-
-        }else{
-            $existeClient 
-                ->setEnabled(false)
-                ->setVerificationCode($this->codeGenerator->generate())
-                ->setStatus(Client::STATUS_UNVERIFIED_WITH_SMS)
-                ->addInsuranceType($insuranceType)
-                ->addRole($role)
-                ->setGroup($group)
-            ;
-        }
-
-       
+        // if (condition) {
+        //     # code...
+        // }
+        $this->em->persist($client);
         $this->em->flush();
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
@@ -268,9 +249,9 @@ class RegistrationController extends BaseController
      */
     public function phoneVerification(Client $client, string $code)
     {
-        // if (!$client->isUnverified()) {
-        //     return $this->respondWith(null, ApiResponse::CLIENT_ALREADY_VERIFIED_ERROR);
-        // }
+        if (!$client->isUnverified()) {
+            return $this->respondWith(null, ApiResponse::CLIENT_ALREADY_VERIFIED_ERROR);
+        }
         if ($code !== (string)$client->getVerificationCode()) {
             return $this->respondWith(null, ApiResponse::VERIFICATION_CODE_ERROR);
         }
