@@ -174,6 +174,9 @@ class RegistrationController extends BaseController
 
         if ($existeClient == null) {
 
+            var_dump($existeClient);
+            die();
+
             $this->em->persist($client);
 
         }else if($existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
