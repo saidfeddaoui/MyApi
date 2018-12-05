@@ -177,7 +177,9 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
             ;
 
-            $this->em->persist($client);
+        $this->em->persist($client);
+        $this->em->flush();
+        $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
 
         }else{
             $existeClient 
@@ -189,13 +191,12 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
             ;
 
+        $this->em->flush();
+        $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($existeClient));
 
-            var_dump("expression");
-            die();
         }
 
-        $this->em->flush();
-        $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
+       
         return $this->respondWith(['registration_token' => $token], ApiResponse::CREATED);
     }
 
