@@ -170,6 +170,9 @@ class RegistrationController extends BaseController
             $existeClient->getStatus() == Client::STATUS_UNCONFIRMED_ACCOUNT || 
             $existeClient->getStatus() == Client::STATUS_CONFIRMED_ACCOUNT) {
 
+             var_dump("expressionsss");
+             die();
+
              $client
                 ->setEnabled(false)
                 ->setVerificationCode($this->codeGenerator->generate())
