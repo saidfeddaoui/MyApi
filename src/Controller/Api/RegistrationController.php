@@ -188,6 +188,10 @@ class RegistrationController extends BaseController
                 ->setGroup($group)
             ;
 
+
+            var_dump($existeClient);
+            die();
+
         }
 
        
