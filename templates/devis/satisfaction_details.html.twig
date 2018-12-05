@@ -220,6 +220,23 @@
                                      </span>
                                 </p>
 
+
+
+                            {% if  element.statut   %}
+
+                                <p>
+                                    <span class="detail_label">Date d'échéance : </span>
+                                    <span class="detail_info">
+                                            {% if element.echeanceDate is not empty %}
+                                                 <input type="text"  name="batiment" disabled value="{{ element.echeanceDate | date('Y-m-d H:i:s')}}">
+                                            {% else %}
+                                                <input type="text" name="echeanceDate" disabled value="">
+                                            {% endif %}
+                                     </span>
+                                </p>
+
+                            {% endif %}
+
                                
                             </div>
 
@@ -278,6 +295,8 @@
                                         {% endif %}
                                      </span>
                                     </p>
+
+
 
                             </div>
 
