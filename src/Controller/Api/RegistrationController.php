@@ -169,18 +169,15 @@ class RegistrationController extends BaseController
             ->setGroup($group)
         ;
 
-        $existeClient = $this->em->getRepository('App:Client')->findOneBy(
-            array("phone"=>$client->getPhone(),
-                  "status"=>Client::STATUS_VERIFIED_WITH_SMS));
+        $existeClient = $this->em->getRepository('App:Client')->findOneByPhone($client->getPhone());
 
-       var_dump($existeClient);
-       die();
 
-        
+        var_dump($existeClient);
+        die();
 
         // if (condition) {
         //     # code...
-        // }
+        // }STATUS_UNCONFIRMED_ACCOUNT
         //$this->em->persist($client);
         $this->em->flush();
         $this->eventDispatcher->dispatch(ApplicationEvents::PHONE_REGISTRATION, new PhoneRegistrationEvent($client));
