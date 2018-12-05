@@ -33,8 +33,8 @@ class DevisController extends Controller
     public function index(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
-        $societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
+        //$insuranceType = $em->getRepository('App:insuranceType')->find($session->get('insuranceType'));
+        //$societaire = $em->getRepository('App:Societaire')->findOneBy(["CodeInsurance" => $insuranceType->getName(), "type" => "AUTO" ]);
         $devis = $em->getRepository('App:DevisAuto')->findAll();
 
         return $this->render('devis/index.html.twig', [
