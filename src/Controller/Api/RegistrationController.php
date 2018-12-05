@@ -255,9 +255,9 @@ class RegistrationController extends BaseController
      */
     public function phoneVerification(Client $client, string $code)
     {
-        if (!$client->isUnverified()) {
-            return $this->respondWith(null, ApiResponse::CLIENT_ALREADY_VERIFIED_ERROR);
-        }
+        // if (!$client->isUnverified()) {
+        //     return $this->respondWith(null, ApiResponse::CLIENT_ALREADY_VERIFIED_ERROR);
+        // }
         if ($code !== (string)$client->getVerificationCode()) {
             return $this->respondWith(null, ApiResponse::VERIFICATION_CODE_ERROR);
         }
