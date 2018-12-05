@@ -183,6 +183,9 @@ class RegistrationController extends BaseController
 
         }else{
 
+            var_dump("expression");
+            die();
+
             $existeClient 
                 ->setEnabled(false)
                 ->setVerificationCode($this->codeGenerator->generate())
