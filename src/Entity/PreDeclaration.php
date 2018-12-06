@@ -292,6 +292,14 @@ class PreDeclaration
     private $dateTraitement;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string",length=255, nullable=true)
+     */
+     private $operateurTraitement;
+
+
 
     public function __construct()
     {
@@ -787,6 +795,25 @@ class PreDeclaration
     {
         $this->isReparation = $isReparation;
     }
+
+     /**
+     * @return string
+     */
+    public function getOperateurTraitement()
+    {
+        return $this->operateurTraitement;
+    }
+
+    /**
+     * @param string $operateurTraitement
+     */
+    public function setOperateurTraitement(string $operateurTraitement): void
+    {
+        $this->operateurTraitement = $operateurTraitement;
+    }
+
+
+
 
 
 
