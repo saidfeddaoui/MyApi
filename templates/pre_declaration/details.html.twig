@@ -119,7 +119,7 @@
                                 </span>
                             </p>
 
-                            {% if preDeclaration.idModeReparation == 5 %}
+                        {% if preDeclaration.idModeReparation == 5 %}
  
 
                         <p><span class="detail_label">Garage : </span>
@@ -130,7 +130,7 @@
                         {% elseif preDeclaration.idModeReparation == 3 %} 
                           
                           <p><span class="detail_label">Expertise : </span>
-                                <span class="detail_info"
+                                <span class="detail_info">
                                 {%  if preDeclaration.expertise  %} 
                                     <input type="text" class="expertise" name="expertise" disabled value="OUI">
                                  {% else %} 
