@@ -178,6 +178,39 @@ class PreDeclaration
      */
     protected $preDeclaration_modeReparation_associations;
 
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     */
+    private $idVille;
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $idGarage;
+
+
+    /**
+     * @var integer
+     *
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $idModeReparation;
 
 
     /**
@@ -232,8 +265,6 @@ class PreDeclaration
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
      *
-     * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
-     *
      * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $commentaire;
@@ -249,6 +280,16 @@ class PreDeclaration
      * @ORM\Column(type="boolean",nullable=true)
      */
     private $isReparation = false;
+
+
+    /**
+     * @var \DateTime
+     * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     * @ORM\Column(type="datetime")
+     */
+    private $dateTraitement;
 
 
 
@@ -583,6 +624,72 @@ class PreDeclaration
     public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
+    }
+
+
+   /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDateTraitement(): ?\DateTimeInterface
+    {
+        return $this->dateTraitement;
+    }
+    /**
+     * @param \DateTimeInterface $dateTraitement
+     * @return static
+     */
+    public function setDateTraitement(\DateTimeInterface $dateTraitement): self
+    {
+        $this->dateTraitement = $dateTraitement;
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getIdVille()
+    {
+        return $this->idVille;
+    }
+
+    /**
+     * @param int $ville
+     */
+    public function setVille($idVille): void
+    {
+        $this->idVille = $idVille;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdGarage()
+    {
+        return $this->idGarage;
+    }
+
+    /**
+     * @param int $Garage
+     */
+    public function setGarage($idGarage): void
+    {
+        $this->idGarage = $idGarage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdModeReparation()
+    {
+        return $this->idModeReparation;
+    }
+
+    /**
+     * @param int $idModeReparation
+     */
+    public function setIdModeReparation(string $idModeReparation): void
+    {
+        $this->idModeReparation = $idModeReparation;
     }
 
     /**
