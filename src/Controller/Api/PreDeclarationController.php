@@ -358,18 +358,12 @@ class PreDeclarationController extends BaseController
     public function listPreDeclaration(Request $request, $client_id)
     {
 
-
-
         $token = $request->headers->get('Authorization');
         $client = $this->em->getRepository('App:Client')->findOneBy(array('token' => $token));
         if (!$client) {
             throw new NotFoundHttpException("Invalid Token");
         }
         $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findByClient($client_id);
-
-
-        var_dump("expression");
-        die();
         return $this->respondWith($listPredeclaration);
     }
 
