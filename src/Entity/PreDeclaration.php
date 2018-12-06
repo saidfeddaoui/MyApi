@@ -290,6 +290,11 @@ class PreDeclaration
     private $dateTraitement;
 
 
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User",cascade={"persist", "remove"})
+     */
+     private $operateurTraitement;
 
     /**
      * @var boolean
@@ -812,6 +817,23 @@ class PreDeclaration
     {
         $this->expertise = $expertise;
     }
+
+    /**
+     * @return string
+     */
+    public function getOperateurTraitement()
+    {
+        return $this->operateurTraitement;
+    }
+
+    /**
+     * @param string $operateurTraitement
+     */
+    public function setOperateurTraitement($operateurTraitement): void
+    {
+        $this->operateurTraitement = $operateurTraitement;
+    }
+
 
 
 
