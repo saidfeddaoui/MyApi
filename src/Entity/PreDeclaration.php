@@ -671,7 +671,7 @@ class PreDeclaration
     /**
      * @param int $Garage
      */
-    public function setGarage($idGarage): void
+    public function setIdGarage($idGarage): void
     {
         $this->idGarage = $idGarage;
     }
