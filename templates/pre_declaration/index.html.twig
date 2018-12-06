@@ -38,6 +38,9 @@
                             <th>Date de sinistre</th>
                             <th>Statut</th>
                             <th>Date de pré-déclaration</th>
+                            <th>Date traitement</th>
+                            <th>Operateur traitement</th>
+                            <th>Delai(heures)</th>
                             <th>Detail</th>
                         </tr>
                         </thead>
@@ -63,6 +66,12 @@
                                 {% endif %}
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
+
+
+                                <td>{{ preDeclaration.dateTraitement | date('Y-m-d H:i:s') }}</td>
+                                <td>{{ preDeclaration.operateurTraitement.username }}</td>
+                                {% set difference = date(preDeclaration.dateTraitement).diff(date(preDeclaration.createdAt)) %}
+                                <td>{{ difference.hours }}</td>
                                 <td>
                                       <a class="text-info bs-tooltip detail" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     {#   {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
