@@ -178,7 +178,7 @@ class PreDeclarationController extends Controller
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get($motif))
-            ->setOperateurTraitement(new \dateTime('now'))
+            ->setDateTraitement(new \dateTime('now'))
         ;
 
         // $idpredeclaration=$preDeclaration->getId();
@@ -258,7 +258,7 @@ class PreDeclarationController extends Controller
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
         }
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
-        $preDeclaration->setOperateurTraitement(new \dateTime('now'));
+        $preDeclaration->setDateTraitement(new \dateTime('now'));
 
         $idpredeclaration=$preDeclaration->getId();
         $preDeclarationInfo= array(
