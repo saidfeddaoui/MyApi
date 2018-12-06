@@ -67,16 +67,29 @@
 
                                 <td>{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</td>
 
-
-                                <td>{{ preDeclaration.dateTraitement | date('Y-m-d H:i:s') }}</td>
-                                {% if preDeclaration.operateurTraitement  %}
-                                <td>{{ preDeclaration.operateurTraitement.username }}</td>
-                                {% else  %}
+                                 {% if preDeclaration.dateTraitement  %}
+                                 <td>{{ preDeclaration.dateTraitement | date('Y-m-d H:i:s') }}</td>
+                                  {% else  %}
                                  <td></td>
                                 {% endif %}
 
-                                {% set difference = date(preDeclaration.dateTraitement).diff(date(preDeclaration.createdAt)) %}
-                                <td>{{ difference.days }}</td>
+                               
+                                {% if preDeclaration.operateurTraitement  %}
+                                    <td>{{ preDeclaration.operateurTraitement.username }}</td>
+                                  {% else  %}
+                                    <td></td>
+                                 {% endif %}
+                                 
+
+
+                                 {% if preDeclaration.dateTraitement  %}
+                                   {% set difference = date(preDeclaration.dateTraitement).diff(date(preDeclaration.createdAt)) %}
+                                   <td>{{ difference.days }}</td>
+                                 {% else  %}
+                                   <td></td>
+                                 {% endif %}
+
+
                                 <td>
                                       <a class="text-info bs-tooltip detail" data-id= "{{preDeclaration.id}}" data-placement="top" data-original-title="Details" title="Details"><span style="font-size:1.5em;" class="glyphicon glyphicon-menu-hamburger"></span></a>
                                     {#   {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
