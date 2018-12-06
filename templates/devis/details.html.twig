@@ -21,8 +21,8 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-settings font-red"></i>
-                          {% if element.societaire is not null %}
-                        <span class="caption-subject font-red sbold uppercase">Devis ({{ element.societaire.codeInsurance }})</span>
+                          {% if devisAuto.societaire is not null %}
+                        <span class="caption-subject font-red sbold uppercase">Devis ({{ devisAuto.societaire.codeInsurance }})</span>
                          {% else %}
 
                          <span class="caption-subject font-red sbold uppercase">Devis</span>
