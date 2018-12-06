@@ -291,9 +291,8 @@ class PreDeclaration
 
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string",length=255, nullable=true)
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="preDeclaration",cascade={"persist", "remove"})
      */
      private $operateurTraitement;
 
@@ -830,7 +829,7 @@ class PreDeclaration
     /**
      * @param string $operateurTraitement
      */
-    public function setOperateurTraitement(string $operateurTraitement): void
+    public function setOperateurTraitement($operateurTraitement): void
     {
         $this->operateurTraitement = $operateurTraitement;
     }
