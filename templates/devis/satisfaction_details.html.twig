@@ -60,6 +60,7 @@
                             {% if  element.auto=="DA" %}
                                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                                     {% if element.devisAuto is not null %}
+                                        
                                         {% if  element.statut   %}
                                           {{ element.devisAuto.civilite }}. {{ element.devisAuto.nom }} {{ element.devisAuto.prenom }}
                                           <i class="icon-like emoLike "></i>
@@ -69,7 +70,7 @@
                                           <i class="icon-dislike emodisLike"></i>
 
                                         {% endif %}
-                                        
+
                                     {% else %}
                                          inconnu
                                     {% endif %}
