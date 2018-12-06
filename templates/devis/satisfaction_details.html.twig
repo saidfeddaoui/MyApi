@@ -23,7 +23,31 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-settings font-red"></i>
-                        <span class="caption-subject font-red sbold uppercase">Devis satisfaction</span>
+
+                        {% if  element.auto=="DA" %}
+
+
+                         {% if element.devisAuto.societaire is not null %}
+                         <span class="caption-subject font-red sbold uppercase">Devis satisfaction ({{ element.devisAuto.societaire.codeInsurance }})</span>
+                         {% else %}
+
+                          <span class="caption-subject font-red sbold uppercase">Devis satisfaction</span>
+                        {% endif %}
+
+                        {% elseif element.auto=="DH" %}
+
+                        {% if element.devisHabitation.societaire is not null %}
+                         <span class="caption-subject font-red sbold uppercase">Devis satisfaction ({{ element.devisHabitation.societaire.codeInsurance }})</span>
+                         {% else %}
+
+                          <span class="caption-subject font-red sbold uppercase">Devis satisfaction</span>
+                        {% endif %}
+
+
+
+
+                        {% endif %}
+                       
                     </div>
                 </div>
                 <div class="portlet-body">

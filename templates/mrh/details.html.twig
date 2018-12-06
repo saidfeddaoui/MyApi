@@ -21,7 +21,14 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-settings font-red"></i>
-                        <span class="caption-subject font-red sbold uppercase">Devis</span>
+
+                        {% if devisHabitation.societaire is not null %}
+                         <span class="caption-subject font-red sbold uppercase">Devis ({{ devisHabitation.societaire.codeInsurance }})</span>
+                         {% else %}
+
+                         <span class="caption-subject font-red sbold uppercase">Devis</span>
+                        {% endif %}
+                        
                     </div>
                 </div>
                 <div class="portlet-body">
