@@ -176,7 +176,7 @@ class PreDeclarationController extends Controller
         }
         $motif=$request->request->get('description');
 
-        $user_name = $this->get('security.context')->getToken()->getUser()->getUsername();
+        $user_name = $this->tokenStorage->getToken()->getUser()->getUsername();
 
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
