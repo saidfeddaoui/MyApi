@@ -368,8 +368,8 @@ class PreDeclarationController extends BaseController
         $listPredeclaration = $this->em->getRepository("App:PreDeclaration")->findByClient($client_id);
 
 
-        // var_dump("expression");
-        // die();
+        var_dump("expression");
+        die();
         return $this->respondWith($listPredeclaration);
     }
 
