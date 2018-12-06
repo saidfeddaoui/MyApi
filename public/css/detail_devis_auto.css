@@ -69,3 +69,10 @@ span.detail_info input[disabled] {
     align-items: center;
 }
 
+
+.table-toolbar.general_details h4 {
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+}
