@@ -194,7 +194,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      * @ORM\Column(type="integer",nullable=true)
      */
@@ -205,7 +205,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      * @Assert\GreaterThanOrEqual(0 , groups={"client_pre_declaration"})
      *
      * @ORM\Column(type="integer",nullable=true)
@@ -217,7 +217,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      *
      * @ORM\Column(type="string",length=100, nullable=true)
@@ -229,7 +229,7 @@ class PreDeclaration
      * @var string
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\Column(type="string",length=250, nullable=true)
      */
@@ -240,7 +240,7 @@ class PreDeclaration
      * @var integer
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      *
      * @ORM\Column(type="string",length=250, nullable=true)
@@ -252,7 +252,7 @@ class PreDeclaration
      * @var string
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      *
      * @ORM\Column(type="string",length=10, nullable=true)
@@ -263,7 +263,7 @@ class PreDeclaration
      * @var string
      *
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\Column(type="string",length=255, nullable=true)
      */
@@ -300,7 +300,7 @@ class PreDeclaration
     /**
      * @var boolean
      * @Serializer\Expose()
-     * @Serializer\Groups({"client_pre_declaration"})
+     * @Serializer\Groups({"client_pre_declaration","listPreDeclaration"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */

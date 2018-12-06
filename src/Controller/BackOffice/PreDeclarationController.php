@@ -177,14 +177,15 @@ class PreDeclarationController extends Controller
         }
         $motif=$request->request->get('description');
 
-        $user_name = $tokenStorage->getToken()->getUser()->getUsername();
+        $userId = $tokenStorage->getToken()->getUser()->getId();
+
+        $user=$this->em->getRepository('App:User')->find($userId);
 
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get($motif))
             ->setDateTraitement(new \dateTime('now'))
-            ->setOperateurTraitement($user_name)
-
+            ->setOperateurTraitement($user)
 
         ;
 
