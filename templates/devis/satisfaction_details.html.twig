@@ -60,7 +60,7 @@
                             {% if  element.auto=="DA" %}
                                <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                                     {% if element.devisAuto is not null %}
-                                        
+
                                         {% if  element.statut   %}
                                           {{ element.devisAuto.civilite }}. {{ element.devisAuto.nom }} {{ element.devisAuto.prenom }}
                                           <i class="icon-like emoLike "></i>
@@ -277,11 +277,22 @@
                             {% elseif element.auto=="DH" %}
                                  <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
                                     {% if element.devisHabitation is not null %}
-                                      {{ element.devisHabitation.nom }} {{ element.devisHabitation.prenom }}
+                                        
+                                        {% if  element.statut   %}
+                                          {{ element.devisHabitation.civilite }}. {{ element.devisHabitation.nom }} {{ element.devisHabitation.prenom }}
+                                          <i class="icon-like emoLike "></i>
+
+                                        {% else %}
+                                          {{ element.devisHabitation.civilite }}. {{ element.devisHabitation.nom }} {{ element.devisHabitation.prenom }}
+                                          <i class="icon-dislike emodisLike"></i>
+
+                                        {% endif %}
+
                                     {% else %}
                                          inconnu
                                     {% endif %}
                                 </h4>
+
 
                                 <div class="col-md-4">
                                     <p><span class="detail_label"> Email: </span>
