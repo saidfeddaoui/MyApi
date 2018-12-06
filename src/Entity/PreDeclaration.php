@@ -655,7 +655,7 @@ class PreDeclaration
     /**
      * @param int $ville
      */
-    public function setVille($idVille): void
+    public function setIdVille($idVille): void
     {
         $this->idVille = $idVille;
     }
