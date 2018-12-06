@@ -166,7 +166,7 @@ class PreDeclarationController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function reject(PreDeclaration $preDeclaration, Request $request,PreDeclarationTriggerApiService $pdtas)
+    public function reject(PreDeclaration $preDeclaration, Request $request,PreDeclarationTriggerApiService $pdtas,TokenStorageInterface $tokenStorage)
     {
         if (PreDeclaration::STATUS_IN_PROGRESS !== $preDeclaration->getStatus()) {
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour la rejeter'], 400);
@@ -176,7 +176,7 @@ class PreDeclarationController extends Controller
         }
         $motif=$request->request->get('description');
 
-        $user_name = $this->tokenStorage->getToken()->getUser()->getUsername();
+        $user_name = $tokenStorage->getToken()->getUser()->getUsername();
 
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
