@@ -21,8 +21,14 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-settings font-red"></i>
-                        <span class="caption-subject font-red sbold uppercase">Devis</span>
+                          {% if element.societaire is not null %}
+                        <span class="caption-subject font-red sbold uppercase">Devis ({{ element.societaire.codeInsurance }})</span>
+                         {% else %}
+
+                         <span class="caption-subject font-red sbold uppercase">Devis</span>
+                        {% endif %}
                     </div>
+                          
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar general_details">
