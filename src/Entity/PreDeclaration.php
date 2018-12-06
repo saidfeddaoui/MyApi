@@ -287,7 +287,7 @@ class PreDeclaration
      * @Serializer\Type("DateTime<'Y-m-d H:i:s'>")
      * @Serializer\Expose()
      * @Serializer\Groups({"client_pre_declaration"})
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateTraitement;
 
