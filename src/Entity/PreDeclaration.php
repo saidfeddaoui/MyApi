@@ -297,6 +297,15 @@ class PreDeclaration
      */
      private $operateurTraitement;
 
+    /**
+     * @var boolean
+     * @Serializer\Expose()
+     * @Serializer\Groups({"client_pre_declaration"})
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+     private $expertise;
+
 
 
     public function __construct()
@@ -794,7 +803,23 @@ class PreDeclaration
         $this->isReparation = $isReparation;
     }
 
-     /**
+    /**
+     * @return boolean
+     */
+    public function getExpertise()
+    {
+        return $this->expertise;
+    }
+
+    /**
+     * @param boolean $expertise
+     */
+    public function setExpertise($expertise): void
+    {
+        $this->expertise = $expertise;
+    }
+
+    /**
      * @return string
      */
     public function getOperateurTraitement()
