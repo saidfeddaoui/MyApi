@@ -178,6 +178,7 @@ class PreDeclarationController extends Controller
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get($motif))
+            ->setOperateurTraitement(new \dateTime('now'))
         ;
 
         // $idpredeclaration=$preDeclaration->getId();
@@ -236,7 +237,7 @@ class PreDeclarationController extends Controller
         $event = new RejectPreDeclarationEvent($preDeclaration);
         $this->eventDispatcher->dispatch(ApplicationEvents::REJECT_PRE_DECLARATION, $event);
 
-        return  $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
+       return  $this->json(['code'=>'ok','message' => 'la pré-declaration a été rejetée avec succès']);
         // }else{
         //     return $this->json(['code'=>'ko','message' => $resp->message]);
         // }
@@ -257,6 +258,7 @@ class PreDeclarationController extends Controller
             return $this->json(['message' => 'la pré-declaration doit avoir le status en cours pour l\'accepter'], 400);
         }
         $preDeclaration->setStatus(PreDeclaration::STATUS_ACCEPTED);
+        $preDeclaration->setOperateurTraitement(new \dateTime('now');
 
         $idpredeclaration=$preDeclaration->getId();
         $preDeclarationInfo= array(
@@ -278,9 +280,6 @@ class PreDeclarationController extends Controller
             }
             $this->em->flush();
         }
-
-
-
 
         $dataPre=json_decode(json_encode($preDeclarationInfo),true);;
 
