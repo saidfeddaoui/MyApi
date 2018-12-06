@@ -175,10 +175,16 @@ class PreDeclarationController extends Controller
             return $this->json(['message' => 'la description est obligatoire pour rejeter une pré-declaration'], 400);
         }
         $motif=$request->request->get('description');
+
+        $user_name = $this->get('security.context')->getToken()->getUser()->getUsername();
+
         $preDeclaration
             ->setStatus(PreDeclaration::STATUS_REJECTED)
             ->setDescription($request->request->get($motif))
             ->setDateTraitement(new \dateTime('now'))
+            ->setOperateurTraitement($user_name)
+
+
         ;
 
         // $idpredeclaration=$preDeclaration->getId();
