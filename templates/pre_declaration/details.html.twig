@@ -119,16 +119,30 @@
                                 </span>
                             </p>
 
-                            <p><span class="detail_label">Code Mode reparation : </span>
-                                <span class="detail_info">
-                                    <input type="text" class="codeModeReparation" name="codeModeReparation" disabled value="{{ preDeclaration.codeModeReparation }}">
-                                </span>
-                            </p>
-                            <p><span class="detail_label">Garage : </span>
+                            {% if preDeclaration.idModeReparation == 5 %}
+ 
+
+                        <p><span class="detail_label">Garage : </span>
                                 <span class="detail_info">
                                     <input type="text" class="garage" name="garage" disabled value="{{ preDeclaration.garage }}">
                                 </span>
                             </p>
+                        {% else if preDeclaration.idModeReparation == 3 %} 
+                          
+                          <p><span class="detail_label">Expertise : </span>
+                                <span class="detail_info"
+                                {%  if preDeclaration.expertise  %} 
+                                    <input type="text" class="garage" name="garage" disabled value="OUI">
+                                 {% else %} 
+                                    <input type="text" class="garage" name="garage" disabled value="NON">
+
+                                {% endif %}
+                                    
+
+                                </span>
+                            </p>
+
+                        {% endif %}
 
                             <p><span class="detail_label">Ville reparation : </span>
                                 <span class="detail_info">
@@ -136,9 +150,15 @@
                                 </span>
                             </p>
 
+                            <p><span class="detail_label">Commentaire : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="commentaire" name="commentaire" disabled value="{{ preDeclaration.commentaire }}">
+                                </span>
+                            </p>
+
                         </div>
 
-                        {% endif%}
+                        {% endif %}
 
 
 
