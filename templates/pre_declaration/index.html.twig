@@ -69,7 +69,12 @@
 
 
                                 <td>{{ preDeclaration.dateTraitement | date('Y-m-d H:i:s') }}</td>
+                                {% if preDeclaration.operateurTraitement  %}
                                 <td>{{ preDeclaration.operateurTraitement.username }}</td>
+                                {% else  %}
+                                 <td></td>
+                                {% endif %}
+
                                 {% set difference = date(preDeclaration.dateTraitement).diff(date(preDeclaration.createdAt)) %}
                                 <td>{{ difference.hours }}</td>
                                 <td>
