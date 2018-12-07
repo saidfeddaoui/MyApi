@@ -229,6 +229,26 @@
                                               </div>
                                         </a>
 
+                                        <div class="form-group">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+
                                     </div>
                             {% endif %}
                         {% endfor %}
@@ -251,11 +271,9 @@
                                               </div>
 
                                         </a>
-                                         <div class="form-group">
+                                       <div class="form-group">
                                         <div class="col-md-9">
-
                                             <select class="select2 sinistretype" name="presinistretype">
-                                                
                                                 {% for nature in natureDoc %}
                                                   {% if nature.id == photo.nature %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
@@ -263,22 +281,15 @@
                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
                                                   {% endif %}
                                                 {% endfor %}
-
                                             </select>
                                            
                                         </div>
 
                                         <div class="col-md-3">
                                            <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
-
                                         </div>
 
                                         </div>
-
-
-
-
-
 
 
                                     </div>
@@ -302,6 +313,27 @@
                                               </div>
 
                                            </a>
+
+                                           <div class="form-group">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -322,6 +354,26 @@
                                                     <i class="icon-zoom-in-2"></i>
                                                 </div>
                                             </a>
+
+                                            <div class="form-group">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
