@@ -234,9 +234,13 @@ jQuery(document).ready(function() {
        $('body .loadWrapper').show();
 
          var idnature =$(this).closest('.natureDocs').find('.nature_doc').val();
+         var idtiers =$(this).data('id');
+
+         console.log(idtiers);
 
          $.ajax({
             url: Routing.generate("pre_declarations_nature", {id: idnature}),
+            data: idtiers,
             type: 'POST',
             error: function (request, status, error) {
                 console.log(request.responseText);
