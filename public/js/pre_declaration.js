@@ -237,7 +237,6 @@ jQuery(document).ready(function() {
 
          $.ajax({
             url: Routing.generate("pre_declarations_nature", {id: idnature}),
-            data: data,
             type: 'POST',
             error: function (request, status, error) {
                 console.log(request.responseText);
