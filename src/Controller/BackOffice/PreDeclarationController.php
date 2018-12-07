@@ -368,8 +368,7 @@ class PreDeclarationController extends Controller
         //$attachement->setNature($natureDoc);
 
         return  new JsonResponse([
-            'status'=> $attachement->getId(),
-            
+            'message' => $natureDoc->getId(),
         ]);
 
 
