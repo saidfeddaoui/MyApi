@@ -359,14 +359,14 @@ class PreDeclarationController extends Controller
      */
      public function natureDoc(Request $request,NatureDoc $natureDoc)
     {
-
-
         $tiersId = $request->request->get('id');
 
+        $attachement = $this->em->getRepository('App:TiersAttachment')->find($tiersId);
 
+        $attachement->setNature($natureDoc);
 
         return  new JsonResponse([
-            'status'=> $tiersId,
+            'status'=> "ok",
             'message' => 'pre_declarations modifiée avec succès',
         ]);
 
