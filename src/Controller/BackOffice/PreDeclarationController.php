@@ -93,6 +93,7 @@ class PreDeclarationController extends Controller
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
         $sinistres = $this->em->getRepository('App:Item')->findBy(['itemList'=>$sinistre->getId()]);
         $listMDR=$this->em->getRepository('App:ChoixMDR')->findByPreDeclaration($preDeclaration);
+        $natureDoc=$this->em->getRepository('App:NatureDoc')->findAll();
 
         return $this->render('pre_declaration/display_details.html.twig', [
             'page_title' => 'Gestion des pré-déclarations',
@@ -102,7 +103,7 @@ class PreDeclarationController extends Controller
             'attachements' => $attachements,
             'sinistres' => $sinistres,
             'list_mdr' => $listMDR,
-            'form'=>$form->createView()
+            'natureDoc'=>$natureDoc
         ]);
     }
     /**

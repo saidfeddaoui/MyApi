@@ -251,6 +251,35 @@
                                               </div>
 
                                         </a>
+                                         <div class="form-group">
+                                        <div class="col-md-9">
+
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                
+                                                {% for nature in natureDoc %}
+                                                  {% if natureDoc.id == photo.nature %}
+                                                   <option selected value="{{natureDoc.id}}">{{natureDoc.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{natureDoc.id}}">{{natureDoc.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+
+                                        </div>
+
+                                        </div>
+
+
+
+
+
+
 
                                     </div>
                                {% endif %}
