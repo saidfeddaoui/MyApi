@@ -348,4 +348,23 @@ class PreDeclarationController extends Controller
 
     }
 
+
+
+    /**
+     * @Route(path="/naturedoc/{id}", name="nature", requirements={"id":"\d+"}, options={"expose"=true})
+     *
+     * @param  PreDeclaration $preDeclaration
+     * @param  Request $request
+     * @return Response
+     */
+     public function natureDoc(NatureDoc $natureDoc)
+    {
+
+        return  new JsonResponse([
+            'status'=>'ok',
+            'message' => 'pre_declarations modifiée avec succès',
+        ]);
+
+
+    }
 }
