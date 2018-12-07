@@ -59,7 +59,7 @@ class TiersAttachment
     private $preDeclaration;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\NatureDoc", inversedBy="attachments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\NatureDoc",cascade={"persist", "remove"})
      */
     private $nature;
 
