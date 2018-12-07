@@ -225,8 +225,7 @@ jQuery(document).ready(function() {
             }
         });
     }
-
-
+            
 
    // add nature doc to tiers attachement
 
@@ -240,7 +239,7 @@ jQuery(document).ready(function() {
 
          $.ajax({
             url: Routing.generate("pre_declarations_nature", {id: idnature}),
-            data: idtiers,
+            data: {id :idtiers},
             type: 'POST',
             error: function (request, status, error) {
                 console.log(request.responseText);
