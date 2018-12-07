@@ -1,4 +1,4 @@
-<?php
+g<?php
 
 namespace App\Entity;
 
@@ -57,6 +57,11 @@ class TiersAttachment
      * @ORM\ManyToOne(targetEntity="App\Entity\PreDeclaration", inversedBy="attachments")
      */
     private $preDeclaration;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\NatureDoc", inversedBy="attachments")
+     */
+    private $nature;
 
     /**
      * TiersAttachment constructor.
@@ -121,6 +126,20 @@ class TiersAttachment
         $this->preDeclaration = $preDeclaration;
         return $this;
     }
+
+     public function getNature()
+    {
+        return $this->nature;
+    }
+
+    public function setNature(NatureDoc $nature)
+    {
+        $this->nature = $nature;
+        return $this;
+    }
+
+
+    
 
 
 
