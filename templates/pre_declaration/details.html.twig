@@ -233,7 +233,7 @@
                                         <div class="col-md-9">
                                             <select class="select2 sinistretype" name="presinistretype">
                                                 {% for nature in natureDoc %}
-                                                  {% if nature.id == photo.nature %}
+                                                  {% if nature.id == photo.nature.id %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
                                                   {% else %}
                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
@@ -275,7 +275,7 @@
                                         <div class="col-md-9">
                                             <select class="select2 sinistretype" name="presinistretype">
                                                 {% for nature in natureDoc %}
-                                                  {% if nature.id == photo.nature %}
+                                                  {% if nature.id == photo.nature.id %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
                                                   {% else %}
                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
@@ -318,7 +318,7 @@
                                         <div class="col-md-9">
                                             <select class="select2 sinistretype" name="presinistretype">
                                                 {% for nature in natureDoc %}
-                                                  {% if nature.id == photo.nature %}
+                                                  {% if nature.id == photo.nature.id %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
                                                   {% else %}
                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
@@ -359,7 +359,7 @@
                                         <div class="col-md-9">
                                             <select class="select2 sinistretype" name="presinistretype">
                                                 {% for nature in natureDoc %}
-                                                  {% if nature.id == photo.nature %}
+                                                  {% if nature.id == photo.nature.id %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
                                                   {% else %}
                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
