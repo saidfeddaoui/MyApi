@@ -361,7 +361,7 @@ class PreDeclarationController extends Controller
     {
 
 
-        $tiersId = $request->request->get('data');
+        $tiersId = $request->get('data');
 
 
 
