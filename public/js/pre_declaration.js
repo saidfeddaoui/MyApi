@@ -227,6 +227,54 @@ jQuery(document).ready(function() {
     }
 
 
+
+   // add nature doc to tiers attachement
+
+   $('body').on('click', '.save_nature', function () {
+       $('body .loadWrapper').show();
+
+         var idnature =$(this).closest('.natureDocs').find('.nature_doc').val();
+
+         $.ajax({
+            url: Routing.generate("pre_declarations_nature", {id: idnature}),
+            data: data,
+            type: 'POST',
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            },
+            complete: function () {
+            },
+            statusCode: {
+                200: function (response) {
+
+
+                    $('body .loadWrapper').hide();
+
+                    console.log(response);
+                    swal.close();
+                    setTimeout(function(){
+                        swal({
+                            title: "",
+                            text: response.message,
+                            timer: 3000,
+                            showConfirmButton: false,
+                            customClass: 'custom-swal',
+                        });
+                    }, 500);
+                },
+                400: function (response) {
+                    swal.close();
+                    $('body .loadWrapper').hide();
+                    setTimeout(function() {
+                        toastr.error(response.responseJSON.message);
+                    }, 500);
+                }
+            }
+        });
+
+       
+    });
+
     /*$('body').on('click', 'div.checker', function (e) {
         e.preventDefault();
 
