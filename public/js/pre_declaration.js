@@ -88,20 +88,12 @@ jQuery(document).ready(function() {
                 "orderable": true,
             },
             {
-                "searchable": true,
-                "orderable": true,
-            },
-            {
-                "searchable": true,
-                "orderable": true,
-            },
-            {
                 "searchable": false,
                 "orderable": false,
             }
         ],
         "order": [
-            [9, "desc"]
+            [6, "desc"]
         ] // set first column as a default sort by asc
     });
 
