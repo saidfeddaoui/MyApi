@@ -357,11 +357,16 @@ class PreDeclarationController extends Controller
      * @param  Request $request
      * @return Response
      */
-     public function natureDoc(NatureDoc $natureDoc)
+     public function natureDoc(Request $request,NatureDoc $natureDoc)
     {
 
+
+        $tiersId = $request->request->get('data');
+
+
+
         return  new JsonResponse([
-            'status'=>'ok',
+            'status'=> $tiersId,
             'message' => 'pre_declarations modifiée avec succès',
         ]);
 
