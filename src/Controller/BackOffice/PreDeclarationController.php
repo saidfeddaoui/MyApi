@@ -7,7 +7,7 @@ use App\Entity\InsuranceType;
 use App\Entity\Notification;
 use App\Entity\NotificationDetail;
 use App\Entity\PreDeclaration;
-use App\Form\TiersAttachmentType;
+use App\Entity\NatureDoc;
 use App\Event\AcceptPreDeclarationEvent;
 use App\Event\ApplicationEvents;
 use App\Event\RejectPreDeclarationEvent;
