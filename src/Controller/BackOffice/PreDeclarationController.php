@@ -7,6 +7,7 @@ use App\Entity\InsuranceType;
 use App\Entity\Notification;
 use App\Entity\NotificationDetail;
 use App\Entity\PreDeclaration;
+use App\Form\TiersAttachmentType;
 use App\Event\AcceptPreDeclarationEvent;
 use App\Event\ApplicationEvents;
 use App\Event\RejectPreDeclarationEvent;
@@ -82,8 +83,12 @@ class PreDeclarationController extends Controller
      * @param  PreDeclaration $preDeclaration
      * @return Response
      */
-    public function displayDetails(PreDeclaration $preDeclaration)
+    public function displayDetails(Request $request, PreDeclaration $preDeclaration)
     {
+
+
+        
+
         $attachements = $this->em->getRepository('App:TiersAttachment')->findByPreDeclaration($preDeclaration);
         $sinistre = $this->em->getRepository('App:ItemList')->findOneBy(['type' => 'sinistre']);
         $sinistres = $this->em->getRepository('App:Item')->findBy(['itemList'=>$sinistre->getId()]);
@@ -97,6 +102,7 @@ class PreDeclarationController extends Controller
             'attachements' => $attachements,
             'sinistres' => $sinistres,
             'list_mdr' => $listMDR,
+            'form'=>$form->createView()
         ]);
     }
     /**
