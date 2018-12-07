@@ -231,7 +231,7 @@
 
                                         <div class="form-group">
                                         <div class="col-md-9">
-                                            <select class="select2 sinistretype" name="presinistretype">
+                                            <select class="select2 nature_doc">
                                                 {% for nature in natureDoc %}
                                                   {% if nature.id == photo.nature.id %}
                                                    <option selected value="{{nature.id}}">{{nature.libelle}}</option>
@@ -244,7 +244,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                           <button type="button" class="btn btn-primary save_nature" data-href="{{ path('article_show', {'id': article.slug}) }}">Enregistrer</button>
                                         </div>
 
                                         </div>
