@@ -365,7 +365,7 @@ class PreDeclarationController extends Controller
         $this->em->flush();
         return  new JsonResponse([
             'status' => $attachement->getId(),
-            'message' => $natureDoc->getId(),
+            'message' => "Nature Doc a été ajouté avec succès",
         ]);
 
 
