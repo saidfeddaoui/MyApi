@@ -1,0 +1,438 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#informations_tab" data-toggle="tab">Informations Génarales</a>
+            </li>
+            <li>
+                <a href="#circonstances_tab" data-toggle="tab">Circonstances</a>
+            </li>
+
+            <li>
+                <a href="#dommages_tab" data-toggle="tab">Dommages au véhicule</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="informations_tab">
+                <div class="general_details" data-id="{{preDeclaration.id}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4> <i class="fa fa-user font-{{ app.session.get('insuranceType').themeColor }}"></i>
+                                {% if preDeclaration.client is not null %}
+                                    {{ preDeclaration.client.firstName }} {{ preDeclaration.client.familyName }}
+                                {% else %}
+                                    inconnu
+                                {% endif %}
+                                {% if preDeclaration.status == 0 %}
+                                    (En cours)</td>
+                                {% elseif preDeclaration.status == 1%}
+                                    (Acceptée)
+                                {% elseif preDeclaration.status == 2%}
+                                    (Rejetée)
+                                {% endif %}
+
+                            </h4>
+                        </div>
+                        <div class="col-md-6">
+                            {% if preDeclaration.status==1 %}
+                                {% for mdr in list_mdr %}
+                                    {% if preDeclaration.ModeReparation is not null %}
+                                        {% if  preDeclaration.ModeReparation==mdr.modeReparation.id %}
+                                            <h2 class="pull-right" style="border: 1px solid gainsboro;padding: 10px;background: #33495f;color: white;">{{ mdr.modeReparation.description }}</h2>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><span class="detail_label">Police : </span><span class="detail_info">
+                                    {% if preDeclaration.client is not null %}
+                                    <input type="text" class="police" name="prepolice" disabled value="{{ preDeclaration.contrat.police }}">
+                                    {% else %}
+                                      <input type="text" class="police" name="prepolice" disabled value="">
+                                    {% endif %}
+                                </span>
+                            <p><span class="detail_label">Téléphone: </span>
+                                <span class="detail_info">
+                                    <input type="text" class="phone" name="prephone" disabled value="{{ preDeclaration.client.phone  }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label"> adresse: </span>
+                                <span class="detail_info">
+                                    <input type="text" class="adress" name="preadress" value="{{ preDeclaration.circumstance.adress }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label">Nombre de véhicules : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="nbv" name="prnbv" value="{{ preDeclaration.nbVehicule }}">
+                                </span>
+                            </p>
+                            {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_REJECTED') %}
+                              <p><span class="detail_label">Raison de rejet : </span><span class="detail_info">
+                                      <input type="text" class="description" name="predescription" value="{{ preDeclaration.description }}"> </span></p>
+                            {% endif %}
+
+                            <p><span class="detail_label">Circonstance : </span>
+                                <span class="detail_info">
+                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.circonstanceSinistre.title}}"></span>
+                            </p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <p><span class="detail_label">Nombre de blessées :</span>
+                                <span class="detail_info">
+                                    <input type="text" class="nbi" name="prenbi" value="{{ preDeclaration.nbInjured }}">
+                                </span>
+                            </p>
+                            <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">
+                                    <select class="select2 sinistretype" name="presinistretype">
+                                    {% for sinistre in sinistres %}
+                                        {% if sinistre.id == preDeclaration.typeSinistre.id %}
+                                      <option selected value="{{sinistre.id }}">{{sinistre.title }}</option>
+                                        {% else %}
+                                      <option value="{{sinistre.id }}">{{sinistre.title }}</option>
+                                        {% endif %}
+                                     {% endfor %}
+                                    </select>
+                                </span></p>
+                            <p><span class="detail_label">Date de sinistre : </span>
+                                <span class="detail_info"><input type="text" name="predatesinistre" disabled value="{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}"></span></p>
+                            <p><span class="detail_label">Date de pré-déclaration : </span>
+                                <span class="detail_info">
+                                    <input type="text" name="precreatedat" disabled value="{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}"></span>
+                            </p>
+
+                        </div>
+
+                        {% if preDeclaration.isReparation %}
+
+                        <div class="col-md-4">
+
+                            <p><span class="detail_label">Mode reparation : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="modeReparation" name="modeReparation" disabled value="{{ preDeclaration.modeReparation }}">
+                                </span>
+                            </p>
+
+                        {% if preDeclaration.idModeReparation == 5 %}
+ 
+
+                        <p><span class="detail_label">Garage : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="garage" name="garage" disabled value="{{ preDeclaration.garage }}">
+                                </span>
+                            </p>
+                        {% elseif preDeclaration.idModeReparation == 3 %} 
+                          
+                          <p><span class="detail_label">Expertise : </span>
+                                <span class="detail_info">
+                                {%  if preDeclaration.expertise  %} 
+                                    <input type="text" class="expertise" name="expertise" disabled value="OUI">
+                                 {% else %} 
+                                    <input type="text" class="expertise" name="expertise" disabled value="NON">
+
+                                {% endif %}
+                                    
+
+                                </span>
+                            </p>
+
+                        {% endif %}
+
+                            <p><span class="detail_label">Ville reparation : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="ville" name="ville" disabled value="{{ preDeclaration.ville }}">
+                                </span>
+                            </p>
+
+                            <p><span class="detail_label">Commentaire : </span>
+                                <span class="detail_info">
+                                    <input type="text" class="commentaire" name="commentaire" disabled value="{{ preDeclaration.commentaire }}">
+                                </span>
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Choisir le mode de réparation:</p>
+                            {% for mdr in list_mdr %}
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="mdr" name="mdr[]" value="{{ mdr.modeReparation.id }}" {% if mdr.statut == 1 %} checked {% endif %}>{{ mdr.modeReparation.description }}
+                                    </label>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+
+
+                   {# <p><span class="detail_label"> adresse: </span> <span class="detail_info">{{ preDeclaration.circumstance.adress }}</span> </p>
+                    <p><span class="detail_label">Nombre de véhicules : </span><span class="detail_info">{{ preDeclaration.nbVehicule }}</span></p>
+                    <p><span class="detail_label">Nombre de blessées :</span> <span class="detail_info">{{ preDeclaration.nbInjured }}</span></p>
+                    <p><span class="detail_label">Type de sinistre : </span><span class="detail_info">{{ preDeclaration.typeSinistre.title }}</span></p>
+                    <p><span class="detail_label">Date de sinistre : </span><span class="detail_info">{{ preDeclaration.dateSinistre | date('Y-m-d H:i:s') }}</span></p>
+                    <p><span class="detail_label">Date de pré-déclaration : </span><span class="detail_info">{{ preDeclaration.createdAt | date('Y-m-d H:i:s') }}</span></p>
+                    #}
+
+
+                </div>
+
+            </div>
+
+            <div class="tab-pane" id="circonstances_tab">
+                <h4 style="margin-bottom: 15px">Circonstances .</h4>
+                <ul class="nav nav-tabs">
+                    {% if attachements %}
+                        <li class="active">
+                            <a href="#photo_sinistre_tab" data-toggle="tab"> Photo Sinistre </a>
+                        </li>
+                        <li >
+                            <a href="#pre_declaration_tab" data-toggle="tab"> Document de pré-déclaration </a>
+                        </li>
+                        <li >
+                            <a href="#attestation_assurance_adversaire_tab" data-toggle="tab"> Attestation de l'assurance de l'adversaire </a>
+                        </li>
+                        <li>
+                            <a href="#permis_conduire_adversaire_tab" data-toggle="tab"> Permis de conduire de l'adversaire </a>
+                        </li>
+
+                    {% endif %}
+                </ul>
+
+                <div class="tab-content">
+                    {% if attachements %}
+                    <div class="tab-pane active" id="photo_sinistre_tab">
+                        <div class="row">
+                        {% for photo in attachements %}
+                            {% if photo.type =="photo_sinistre" %}
+                                    <div class="col-md-3 responsive-1024 bloc_mgs">
+                                        <a rel="gallery" class="fancybox_sinistre" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                             <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
+                                        </a>
+
+                                        <div class="form-group natureDocs">
+                                        <div class="col-md-9">
+                                        <select class="select2 nature_doc">
+                                            {% for nature in natureDoc %}
+                                                 {% if  photo.nature %}
+                                                    {% if nature.id == photo.nature.id %}
+                                                     <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                   
+                                                     {% else %}
+
+                                                      <option value="{{nature.id}}">{{nature.libelle}}</option>
+
+                                                     {% endif %}
+
+                                                {% else %}
+                                                     <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                {% endif %}   
+
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature" data-id="{{photo.id}}">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+
+                                    </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {#--------------------- pre_declaration_tab ---------------------#}
+                    {% if attachements %}
+                        <div class="tab-pane" id="pre_declaration_tab">
+                            <div class="row">
+                            {% for photo in attachements %}
+                                {% if photo.type =="pre_declaration" %}
+
+                                    <div class="col-md-3 responsive-1024 bloc_mgs">
+                                        <a rel="gallery" class="fancybox_declaration" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                            <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
+
+                                        </a>
+                                       <div class="form-group natureDocs">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature.id %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+
+
+                                    </div>
+                               {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {#--------------------- attestation_assurance_adversaire_tab ---------------------#}
+                    {% if attachements %}
+                        <div class="tab-pane" id="attestation_assurance_adversaire_tab">
+                            <div class="row">
+                                {% for photo in attachements %}
+                                    {% if photo.type =="attestation_assurance_adversaire" %}
+                                        <div class="col-md-3 responsive-1024 bloc_mgs">
+                                           <a rel="gallery" class="fancybox_adversaire" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                            <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated"/>
+                                            <div class="image-hover">
+                                                <i class="icon-zoom-in-2"></i>
+                                              </div>
+
+                                           </a>
+
+                                           <div class="form-group natureDocs">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature.id %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {#--------------------- Permis_conduire_adversaire_tab ---------------------#}
+                    {% if attachements %}
+                        <div class="tab-pane" id="permis_conduire_adversaire_tab">
+                            <div class="row">
+                                {% for photo in attachements %}
+                                    {% if photo.type =="permis_conduire_adversaire" %}
+                                        <div class="col-md-3 responsive-1024 bloc_mgs">
+                                            <a rel="gallery" class="fancybox_conduire" href="{{ asset('img/tiers/' ~ photo.path) }}">
+                                                <img src="{{ asset('img/tiers/' ~ photo.path) }}" id="photo-attachment-circumstance-{{ loop.index }}" alt="Photo circonstance" class="animate scale animated" />
+                                                <div class="image-hover">
+                                                    <i class="icon-zoom-in-2"></i>
+                                                </div>
+                                            </a>
+
+                                            <div class="form-group natureDocs">
+                                        <div class="col-md-9">
+                                            <select class="select2 sinistretype" name="presinistretype">
+                                                {% for nature in natureDoc %}
+                                                  {% if nature.id == photo.nature.id %}
+                                                   <option selected value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% else %}
+                                                    <option value="{{nature.id}}">{{nature.libelle}}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                           
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <button type="button" class="btn btn-primary save_nature">Enregistrer</button>
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane" id="dommages_tab">
+                <h4>Dommages au véhicule</h4>
+                {% if preDeclaration.vehiculeDamage %}
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="bg_damages" style="background-image: url('{{ asset('img/vehicle_zones/0.png') }}'); background-repeat: no-repeat;">
+                            {% for part in preDeclaration.vehiculeDamage.damagedParts %}
+                                {% if part.code != "100" %}
+                                <img {% if not loop.first %} class="vehicle-zone" {% endif %}
+                                        src="{{ asset('img/vehicle_zones/' ~ part.code ~ '.png') }}"
+                                />
+                              {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+
+
+                {% endif %}
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right action_footer" >
+            <a href="{{ path('pre_declarations_in_progress') }}" class="btn dark btn-dark">Retour</a>
+            <a href="{{ path('pre_declarations_in_progress') }}" class="btn btn-warning update">Modifier</a>
+        {% if preDeclaration.status == constant('App\\Entity\\PreDeclaration::STATUS_IN_PROGRESS') %}
+            <button type="button" class="btn red reject" data-id= "{{ preDeclaration.id }}" >Rejeter</button>
+            <button type="button" class="btn green accept" data-id= "{{ preDeclaration.id }}" >Accepter</button>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+</div>
