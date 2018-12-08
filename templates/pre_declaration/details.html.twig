@@ -233,7 +233,7 @@
                                         <div class="col-md-9">
                                         <select class="select2 nature_doc">
                                             {% for nature in natureDoc %}
-                                                {% if  photo.nature %}
+                                                 {% if  photo.nature %}
                                                     {% if nature.id == photo.nature.id %}
                                                      <option selected value="{{nature.id}}">{{nature.libelle}}</option>
                                                    
